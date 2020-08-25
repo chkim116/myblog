@@ -1,0 +1,36 @@
+.article {
+  padding-top: 2em;
+  width: 100%;
+  display: grid;
+  margin: 0;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  a {
+    color: black;
+  }
+  .article__post {
+    min-height: 250px;
+    max-height: 400px;
+    padding: 1em;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align: center;
+    .post_thumbnail {
+      width: 250px;
+      height: 250px;
+    }
+    .post__title {
+      padding: 0.5em 0;
+    }
+    .post__desc {
+      font-size: 0.8rem;
+      display: block;
+      word-break: break-word;
+      line-height: 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
