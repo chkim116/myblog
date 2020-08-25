@@ -1,8 +1,7 @@
 import Post from "../models/post";
 
 export const getUser = async (ctx) => {
-  const post = await Post.find().exec();
-  ctx.body = post;
+  ctx.body = await "post";
 };
 
 export const postUser = async (ctx) => {
