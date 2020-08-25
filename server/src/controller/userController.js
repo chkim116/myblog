@@ -1,20 +1,21 @@
 import Post from "../models/post";
 
-export const getUser = (ctx) => {
-  ctx.body = "성공";
+export const getUser = async (ctx) => {
+  const post = await Post.find().exec();
+  ctx.body = post;
 };
 
 export const postUser = async (ctx) => {
-  ctx.body = await {
-    method: ctx.method,
-    path: ctx.path,
-    params: ctx.params,
-  };
-  console.log(ctx);
-  console.log("post~!!!");
+  const post = await Post.create({
+    title: "타이틀",
+    description: "설명",
+  });
+  ctx.body = post;
 };
 
-export const getText = (ctx) => {
-  const { id } = ctx.params;
-  ctx.body = `${id}의 api text`;
+export const userRegister = (ctx) => {
+  ctx.body = "회원가입스";
 };
+
+export const userLogin = (ctx) => {};
+export const userLogout = (ctx) => {};

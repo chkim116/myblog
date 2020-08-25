@@ -1,9 +1,22 @@
 import Router from "koa-router";
-import { getUser, getText, postUser } from "../controller/userController";
+import {
+  getUser,
+  postUser,
+  userRegister,
+  userLogin,
+  userLogout,
+} from "../controller/userController";
+import { adminRegister } from "../controller/adminController";
 
 const userRouter = new Router();
 
 userRouter.get("/", getUser);
-userRouter.post("/", postUser);
-userRouter.get("/:id", getText);
+userRouter.post("/:id", postUser);
+
+userRouter.post("/auth/register", userRegister);
+userRouter.post("/auth/login", userLogin);
+userRouter.post("/auth/logout", userLogout);
+
+userRouter.post("/auth/admin/register", adminRegister);
+
 export default userRouter;
