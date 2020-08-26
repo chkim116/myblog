@@ -1,23 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PostingForm from "../components/PostingForm";
-import { Redirect } from "react-router-dom";
-import routes from "../routes";
+import Axios from "axios";
 
 const PostWriting = () => {
   const initialState = {
     title: "",
     description: "",
-    redirect: false,
   };
 
   const [post, setPost] = useState(initialState);
-  const { title, description, redirect } = post;
+  const { title, description } = post;
 
-  function onSubmit(e) {
+  const onSubmit = (e) => {
     e.preventDefault();
-    setPost({ ...post, redirect: true });
-    console.log(post);
-  }
+    setPost({ ...post });
+
+    const axiosData = async () => {
+      try {
+        await Axios.post("/api/post", {
+          ...post,
+        }).then((response) => response);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    axiosData();
+  };
 
   function onChange(e) {
     const { value, name } = e.target;
@@ -25,14 +33,6 @@ const PostWriting = () => {
       ...post,
       [name]: value,
     });
-  }
-  useEffect(() => {
-    console.log(post);
-    return () => {};
-  }, [post]);
-
-  if (redirect) {
-    return <Redirect to={routes.postdetail} />;
   }
 
   return (

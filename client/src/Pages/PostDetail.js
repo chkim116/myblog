@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from "react";
-import Axios from "axios";
 import PostDetailForm from "../components/PostDetailForm";
+import Axios from "axios";
 
 const PostDetail = () => {
-  const [post, setPost] = useState({ title: "", description: "" });
+  const [posting, setPosting] = useState({
+    title: "",
+    description: "",
+  });
 
   useEffect(() => {
-    const posting = Axios.get("/postwriting");
-    setPost(posting);
-    console.log(post);
-  }, []);
+    const axiosGetData = async () => {
+      try {
+        const data = await Axios.get("/api/post").then((res) => res);
+        setPosting(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    axiosGetData();
+    return () => {};
+  }, [posting]);
+
   return (
     <>
       <PostDetailForm />

@@ -3,5 +3,7 @@ import { postPosting, getPost } from "../controller/userController";
 
 const postRouter = express.Router();
 
-postRouter.post("/postwriting", postPosting);
+postRouter.get("/", getPost);
+
+postRouter.post("/api/post", postPosting);
 export default postRouter;

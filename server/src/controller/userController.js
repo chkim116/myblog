@@ -1,30 +1,27 @@
 import Post from "../models/post";
-import { routes } from "../../routes";
 
 export const postPosting = async (req, res) => {
   const {
-    body: { title, description, image },
+    body: { title, description },
   } = req;
   try {
     const post = await Post.create({
       title: title,
       description: description,
-      image: image,
     });
     post.save();
+    res.json(post);
+    console.log("성공^^");
   } catch (err) {
-    console.log("에러", err);
+    console.log("에러nn", err);
   }
 };
 
-export const getPost = (req, res) => {
-  const {
-    body: { title, description },
-  } = req;
+export const getPost = async (req, res) => {
   try {
-    const post = title;
-    console.log(post);
-  } catch (err) {
-    console.log(err);
+    const post = await Post.find({}).sort({ _id: -1 });
+    res.render("index", { post });
+  } catch (error) {
+    console.log(error);
   }
 };
