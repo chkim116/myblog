@@ -1,20 +1,30 @@
 import Post from "../models/post";
+import { routes } from "../../routes";
 
-export const getUser = async (ctx) => {
-  ctx.body = await "post";
+export const postPosting = async (req, res) => {
+  const {
+    body: { title, description, image },
+  } = req;
+  try {
+    const post = await Post.create({
+      title: title,
+      description: description,
+      image: image,
+    });
+    post.save();
+  } catch (err) {
+    console.log("에러", err);
+  }
 };
 
-export const postUser = async (ctx) => {
-  const post = await Post.create({
-    title: "타이틀",
-    description: "설명",
-  });
-  ctx.body = post;
+export const getPost = (req, res) => {
+  const {
+    body: { title, description },
+  } = req;
+  try {
+    const post = title;
+    console.log(post);
+  } catch (err) {
+    console.log(err);
+  }
 };
-
-export const userRegister = (ctx) => {
-  ctx.body = "회원가입스";
-};
-
-export const userLogin = (ctx) => {};
-export const userLogout = (ctx) => {};

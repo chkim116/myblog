@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/scss/admin.scss";
+import "../assets/scss/partials/admin.scss";
 
 const AdminLoginForm = () => {
   return (

@@ -1,23 +1,20 @@
-import Koa from "koa";
-import Router from "koa-router";
-import userRouter from "./src/routers/userRouter";
-import bodyParser from "koa-body-parser";
+import express from "express";
+import bodyParser from "body-parser";
 import "./db";
 import dotenv from "dotenv";
+import postRouter from "./src/routers/postRouter";
 dotenv.config();
 
-const app = new Koa();
-const router = new Router();
-
-// router
-router.use("/api", userRouter.routes());
+const app = express();
 
 // middleware
-app.use(bodyParser()); // router전에 적용
-app.use(router.routes()).use(router.allowedMethods());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/", postRouter);
 
 // server
 const { PORT } = process.env;
+
 app.listen(PORT, () => {
-  console.log("http://localhost:4000");
+  console.log("http://localhost:4000, and http://localhost:3000");
 });

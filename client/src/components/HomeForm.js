@@ -1,22 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "../assets/scss/home.scss";
+import React from "react";
+import "../assets/scss/pages/home.scss";
 import img from "../assets/image/3.jpg";
-import Axios from "axios";
-
-const server = "/api";
 
 const HomeForm = () => {
-  const [state, setstate] = useState("");
-  const [loading, setLoading] = useState(false);
-  const onClick = (e) => {
-    setLoading(true);
-    console.log(loading);
-  };
-
-  useEffect(() => {
-    const servervalue = Axios.get(server);
-    servervalue.then((res) => setstate(res.data));
-  }, [state]);
   return (
     <>
       <div className="main">
@@ -34,7 +20,7 @@ const HomeForm = () => {
             View More My GitHub
           </a>
         </button>
-        <button onClick={onClick}>Send Me Together for Projects</button>
+        <button>Send Me Together for Projects</button>
       </div>
     </>
   );

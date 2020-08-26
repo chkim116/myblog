@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import routes from "../routes";
-import "../assets/scss/header.scss";
+import { GiHamburgerMenu } from "react-icons/gi";
+import "../assets/scss/partials/header.scss";
 
-const Nav = () => {
+const Nav = ({ width }) => {
   return (
     <>
       <header>
@@ -25,8 +26,9 @@ const Nav = () => {
           <li>
             <Link to={routes.about}>About Me</Link>
           </li>
-
-          <li className="header__hamburger">only media</li>
+          <li className="header__hamburger">
+            {width < 768 && <GiHamburgerMenu />}
+          </li>
         </div>
       </header>
     </>

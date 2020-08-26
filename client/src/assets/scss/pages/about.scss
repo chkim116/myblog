@@ -1,0 +1,53 @@
+.about {
+  padding: 3em;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 768px;
+  background-color: rgb(153, 194, 232);
+  width: 100%;
+  h1 {
+    padding: 1em;
+  }
+  h4 {
+    padding: 1em;
+  }
+}
+
+.about__desc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2em;
+  .about__icons {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 1em;
+    font-size: 2rem;
+    .about__stack {
+    }
+    .about__stack-library {
+    }
+    .about__stack-fram {
+    }
+    .about__stack-util {
+    }
+
+    .about__stack-icon {
+      margin: 0.3em;
+      width: 70px;
+      height: 70px;
+      border: 1px solid black;
+      padding: 10px;
+      border-radius: 25%;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.1);
+        transition: all 400ms;
+      }
+    }
+  }
+}

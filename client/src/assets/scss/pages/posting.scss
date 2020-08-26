@@ -1,0 +1,34 @@
+@import "../var";
+
+.posting__form {
+  width: 100%;
+  min-height: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  input {
+    padding: 0.8em 1em;
+    width: 500px;
+    margin-bottom: 1em;
+  }
+  input[type="file"] {
+    padding: 1em;
+  }
+  .form__submit {
+    padding: 1em;
+    cursor: pointer;
+    background-color: $bg-night;
+    color: $font-white;
+    cursor: pointer;
+    border-radius: 12px;
+    font-size: $font-Large;
+    border: none;
+    outline: none;
+  }
+  textarea {
+    width: 500px;
+    padding: 1em;
+    height: 550px;
+  }
+}

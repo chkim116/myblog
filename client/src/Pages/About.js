@@ -1,7 +1,14 @@
 import React from "react";
+import FooterForm from "../components/FooterForm";
+import AboutForm from "../components/AboutForm";
 
 const About = () => {
-  return <h3>About</h3>;
+  return (
+    <>
+      <AboutForm />
+      <FooterForm />
+    </>
+  );
 };
 
 export default About;

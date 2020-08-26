@@ -1,0 +1,44 @@
+.post__wrap {
+  min-height: 768px;
+  padding: 3em;
+}
+.post {
+  text-align: right;
+  padding: 2em;
+  min-height: 100px;
+  span {
+    margin: 0 0.5em;
+    cursor: pointer;
+    &:hover {
+      color: blue;
+    }
+  }
+}
+
+.post__form {
+  width: 75%;
+  margin: 0 auto;
+  margin-bottom: 2em;
+  .post__form-title {
+    padding-bottom: 1em;
+  }
+  .post__form-desc {
+    padding-bottom: 1em;
+    display: block;
+    max-height: 200px;
+    word-break: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .post__form-date {
+    padding-bottom: 1em;
+    display: block;
+  }
+}
+
+.post__form-page {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
