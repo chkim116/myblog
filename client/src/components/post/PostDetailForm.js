@@ -1,11 +1,11 @@
 import React from "react";
 import "./PostDetailForm.scss";
 
-const PostDetailForm = ({ postObj }) => {
+const PostDetailForm = ({ postObj, loading }) => {
   const { title, description, _id, createDate } = postObj;
   return (
     <>
-      {postObj ? (
+      {loading ? (
         <div className="post__detail" key={_id}>
           <h2 className="post__detail-title">{title}</h2>
           <p className="post__detail-desc">{description}</p>
@@ -14,7 +14,7 @@ const PostDetailForm = ({ postObj }) => {
           </p>
         </div>
       ) : (
-        <div>Not Found</div>
+        <div className="loading">Loading!</div>
       )}
     </>
   );

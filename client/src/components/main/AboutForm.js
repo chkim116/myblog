@@ -14,7 +14,7 @@ const AboutForm = () => {
     <>
       <div className="about">
         <h1>For Web & Mobile</h1>
-        <h3>Out mission is to Design and develop the Best!</h3>
+        <h3>Our mission is to Design and develop the Best!</h3>
       </div>
       <div className="about__desc">
         <h1>About Me </h1>
@@ -34,7 +34,7 @@ const AboutForm = () => {
           <div className="about__stack-frame">
             <FaSass className="about__stack-icon sass" />
           </div>
-          <h5>Utilites Stack</h5>
+          <h5>Utilities Stack</h5>
           <div className="about__stack-util">
             <SiBabel className="about__stack-icon babel" />
           </div>

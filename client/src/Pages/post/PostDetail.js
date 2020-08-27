@@ -25,13 +25,9 @@ const PostDetail = () => {
     axiosGetData();
   }, []);
 
-  if (!loading) {
-    return <h1>NOT!!</h1>;
-  }
-
   return (
     <>
-      <PostDetailForm postObj={post} />
+      <PostDetailForm postObj={post} loading={loading} />
     </>
   );
 };
