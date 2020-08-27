@@ -1,10 +1,15 @@
 import React from "react";
-import "../assets/scss/pages/post.scss";
+import "./PostForm.scss";
 import { Link } from "react-router-dom";
-import routes from "../routes";
+import routes from "../../routes";
 
-const PostForm = ({ postObj }) => {
+const PostForm = ({ postObj, loading }) => {
   const { post } = postObj;
+
+  if (loading) {
+    return <h1 className="just__loading">로디잉</h1>;
+  }
+
   return (
     <>
       <div className="post__wrap">

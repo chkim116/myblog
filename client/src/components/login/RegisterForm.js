@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/scss/partials/register.scss";
+import "./RegisterForm.scss";
 
 const RegisterForm = () => {
   return (

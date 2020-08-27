@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/scss/pages/postdetail.scss";
+import "./PostDetailForm.scss";
 
 const PostDetailForm = ({ postObj }) => {
   const { title, description, _id, createDate } = postObj;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import PostingForm from "../components/PostingForm";
 import Axios from "axios";
+import PostingForm from "../../components/FooterForm";
 
 const PostWriting = ({ history }) => {
   const initialState = {

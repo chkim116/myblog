@@ -1,6 +1,6 @@
 import React from "react";
-import "../assets/scss/pages/portfolio.scss";
-import img from "../assets/image/2.jpg";
+import "./PortfolioForm.scss";
+import img from "../../image/home.jpg";
 
 const PortfolioForm = () => {
   return (

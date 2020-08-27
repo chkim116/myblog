@@ -1,6 +1,6 @@
 import React from "react";
-import FooterForm from "../components/FooterForm";
-import AboutForm from "../components/AboutForm";
+import AboutForm from "../../components/main/AboutForm";
+import FooterForm from "../../components/FooterForm";
 
 const About = () => {
   return (

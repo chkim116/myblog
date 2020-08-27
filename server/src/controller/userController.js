@@ -1,13 +1,8 @@
 import Post from "../models/post";
 
 export const getPost = async (req, res) => {
-  paginations();
-  console.log(req);
   try {
-    const post = await Post.find({})
-      .sort({ _id: -1 })
-      .limit(10)
-      .skip((page - 1) * 10);
+    const post = await Post.find({}).sort({ _id: -1 });
     res.send(post);
   } catch (error) {
     console.log(error);

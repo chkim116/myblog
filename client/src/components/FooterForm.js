@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/scss/partials/footer.scss";
+import "./FooterForm.scss";
 
 const year = new Date().getFullYear();
 

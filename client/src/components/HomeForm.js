@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/scss/pages/home.scss";
+import "./HomeForm.scss";
 import img from "../assets/image/3.jpg";
 
 const HomeForm = () => {

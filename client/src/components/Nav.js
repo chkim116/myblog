@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import routes from "../routes";
 import { GiHamburgerMenu } from "react-icons/gi";
-import "../assets/scss/partials/header.scss";
+import "./Nav.scss";
 
 const Nav = ({ width }) => {
   return (

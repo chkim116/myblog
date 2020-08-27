@@ -1,6 +1,6 @@
 import React from "react";
-import PortfolioForm from "../components/PortfoiloForm";
-import FooterForm from "../components/FooterForm";
+import PortfolioForm from "../../components/main/PortfoiloForm";
+import FooterForm from "../../components/FooterForm";
 
 const Portfolio = () => {
   return (

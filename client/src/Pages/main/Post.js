@@ -1,32 +1,27 @@
 import React, { useState, useEffect } from "react";
-import PostForm from "../components/PostForm";
-import FooterForm from "../components/FooterForm";
 import Axios from "axios";
+import FooterForm from "../../components/FooterForm";
+import PostForm from "../../components/main/PostForm";
 
 const Post = () => {
   const [post, setPost] = useState({
     title: "",
     description: "",
   });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadData = async () => {
       await Axios.get("/api")
         .then((res) => res.data)
         .then((data) => setPost(data));
-      setLoading(true);
     };
-    loadData();
+    loadData().then(() => setLoading(false));
   }, []);
-
-  if (!loading) {
-    return <div>loading</div>;
-  }
 
   return (
     <>
-      <PostForm postObj={{ post }} />
+      <PostForm postObj={{ post }} loading={loading} />
       <FooterForm />
     </>
   );

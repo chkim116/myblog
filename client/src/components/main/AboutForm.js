@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/scss/pages/about.scss";
+import "./AboutForm.scss";
 import {
   SiHtml5,
   SiCss3,

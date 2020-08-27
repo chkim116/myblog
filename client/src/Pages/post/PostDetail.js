@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import PostDetailForm from "../components/PostDetailForm";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
+import PostDetailForm from "../../components/post/PostDetailForm";
 
 const PostDetail = () => {
   const [post, setPosting] = useState({
@@ -10,17 +10,17 @@ const PostDetail = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  let { id } = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     const axiosGetData = async () => {
       try {
         const data = await Axios.get(`/${id}`).then((res) => res.data);
-        setLoading(true);
         setPosting(data);
       } catch (err) {
         console.log(err);
       }
+      setLoading(true);
     };
     axiosGetData();
   }, []);
