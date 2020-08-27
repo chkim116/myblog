@@ -1,7 +1,7 @@
 import Post from "../models/post";
 
 export const getPost = async (req, res) => {
-  const page = parseInt(req.query.page);
+  paginations();
   console.log(req);
   try {
     const post = await Post.find({})
