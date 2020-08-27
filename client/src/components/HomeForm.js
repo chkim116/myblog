@@ -1,6 +1,6 @@
 import React from "react";
 import "./HomeForm.scss";
-import img from "../assets/image/3.jpg";
+import img from "../image/3.jpg";
 
 const HomeForm = () => {
   return (

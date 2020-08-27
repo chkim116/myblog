@@ -7,30 +7,37 @@ header {
   width: 100%;
   height: 45px;
   font-size: 14px;
-  background: $bg-white;
-  color: $font-black;
+  background: $blackShadow;
+
   .header__menu {
     display: flex;
+    @media #{$phone} {
+      display: none;
+    }
   }
   .header__logo {
-    width: 250px;
-    height: 250px;
     font-size: 16px;
     //  color change
+    @media #{$phone} {
+      position: absolute;
+      left: 15px;
+    }
   }
   li {
     margin: 1em;
   }
   a {
-    color: $font-black;
+    color: white;
+    font-weight: bold;
   }
   a:hover {
-    color: #238b12;
+    color: $pink;
   }
 }
 .header__hamburger {
   font-size: 1.5rem;
-  position: relative;
-  top: -15px;
   cursor: pointer;
+  right: 0;
+  top: -15px;
+  position: absolute;
 }

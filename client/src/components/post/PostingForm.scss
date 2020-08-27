@@ -1,4 +1,4 @@
-@import "../var";
+@import "../../var";
 
 .posting__form {
   width: 100%;
@@ -29,6 +29,6 @@
   textarea {
     width: 500px;
     padding: 1em;
-    height: 550px;
+    min-height: 550px;
   }
 }

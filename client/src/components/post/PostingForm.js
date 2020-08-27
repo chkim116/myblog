@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/scss/pages/posting.scss";
+import "./PostingForm.scss";
 
 const PostingForm = ({ onSubmit, onChange, title, description }) => {
   return (

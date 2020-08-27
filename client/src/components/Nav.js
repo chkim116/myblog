@@ -26,10 +26,10 @@ const Nav = ({ width }) => {
           <li>
             <Link to={routes.about}>About Me</Link>
           </li>
-          <li className="header__hamburger">
-            {width < 768 && <GiHamburgerMenu />}
-          </li>
         </div>
+        <li className="header__hamburger">
+          {width < 768 && <GiHamburgerMenu />}
+        </li>
       </header>
     </>
   );

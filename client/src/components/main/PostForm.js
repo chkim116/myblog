@@ -14,20 +14,14 @@ const PostForm = ({ postObj, loading }) => {
     <>
       <div className="post__wrap">
         <div className="post">
-          <span>
-            <small>
-              <Link to={routes.postwriting}>Post</Link>
-            </small>
+          <span className="btn post-btn">
+            <Link to={routes.postwriting}>Post</Link>
           </span>
-          <span>
-            <small>
-              <Link to={routes.postwriting}>Edit</Link>
-            </small>
+          <span className="btn edit-btn">
+            <Link to={routes.postwriting}>Edit</Link>
           </span>
-          <span>
-            <small>
-              <Link to={routes.postwriting}>Del</Link>
-            </small>
+          <span className="btn del-btn">
+            <Link to={routes.postwriting}>Del</Link>
           </span>
         </div>
         <div className="post__form">
@@ -35,8 +29,14 @@ const PostForm = ({ postObj, loading }) => {
             <div className="post_form-type" key={p._id}>
               <Link to={`/postdetail/${p._id}`}>
                 <h2 className="post__form-title">{p.title}</h2>
-                <p className="post__form-desc">{p.description}</p>
-                <p className="post__form-date">{p.createDate}</p>
+                <p className="post__form-desc">
+                  {p.description.length > 300
+                    ? p.description.slice(0, 150).concat("  ...더보기")
+                    : p.description}
+                </p>
+                <p className="post__form-date">
+                  <small>{p.createDate}</small>
+                </p>
               </Link>
             </div>
           ))}

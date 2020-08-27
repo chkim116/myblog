@@ -1,3 +1,5 @@
+@import "../var";
+
 .main {
   display: flex;
   justify-content: center;
@@ -24,11 +26,14 @@
   button {
     width: 300px;
     padding: 1em;
+    font-weight: bold;
     text-align: center;
-    background-color: #7f8fa6;
+    background-color: #74b9ff;
     border-radius: 12px;
-    box-shadow: 0.5px 0.3px 1.2px 1px white;
     cursor: pointer;
+    a {
+      color: white;
+    }
     &:nth-child(4) {
       margin-bottom: 1.25em;
       background-color: #0097e6;

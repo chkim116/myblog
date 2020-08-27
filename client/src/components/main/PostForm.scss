@@ -1,3 +1,5 @@
+@import "../../var";
+
 .post__wrap {
   min-height: 768px;
   padding: 3em;
@@ -12,28 +14,55 @@
     &:hover {
       color: blue;
     }
+    a {
+      color: $tur;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
   }
 }
 
 .post__form {
-  width: 75%;
+  width: 80%;
   margin: 0 auto;
   margin-bottom: 2em;
+  display: grid;
+  gap: 2em;
+  grid-template-columns: repeat(3, 1fr);
+  @media #{$medium} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media #{$phone} {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
   .post__form-title {
-    padding-bottom: 1em;
+    border-bottom: 1px solid $blackShadow;
+    margin-bottom: 1em;
+    padding-bottom: 0.4em;
+    color: $font-black;
   }
   .post__form-desc {
     padding-bottom: 1em;
     display: block;
-    max-height: 200px;
+    padding: 1em;
+    height: 300px;
+    max-height: 300px;
     word-break: break-word;
-    white-space: nowrap;
+    white-space: pre-wrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    color: $font-black;
+    &:hover {
+      text-decoration: underline;
+    }
   }
   .post__form-date {
+    border-bottom: 1px solid $blackShadow;
     padding-bottom: 1em;
-    display: block;
+    text-align: right;
+    margin-bottom: 2em;
+    color: $dark-grey;
   }
 }
 
@@ -46,4 +75,9 @@
 .just__loading {
   font-size: 2rem;
   color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
 }

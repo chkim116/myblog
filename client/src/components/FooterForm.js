@@ -8,7 +8,7 @@ const FooterForm = () => {
     <footer>
       <div>
         <h2> Think_Tank </h2>
-        <p>Copyright ©{year}</p>
+        <small>Copyright ©{year}</small>
       </div>
     </footer>
   );
