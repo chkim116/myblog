@@ -26,3 +26,13 @@ export const postPosting = async (req, res) => {
     console.log("에러nn", err);
   }
 };
+
+export const getPostById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const postById = await Post.findById(id);
+    res.status(200).send(postById);
+  } catch (err) {
+    console.log(err);
+  }
+};

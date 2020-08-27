@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import PostDetailForm from "../components/PostDetailForm";
 import Axios from "axios";
+import { useParams } from "react-router-dom";
 
 const PostDetail = () => {
-  const [posting, setPosting] = useState({
+  const [post, setPosting] = useState({
     title: "",
     description: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  let { id } = useParams();
+
   useEffect(() => {
     const axiosGetData = async () => {
       try {
-        const data = await Axios.get("/api").then((res) => res.data);
+        const data = await Axios.get(`/${id}`).then((res) => res.data);
+        setLoading(true);
         setPosting(data);
-        console.log(data);
       } catch (err) {
         console.log(err);
       }
@@ -21,11 +25,13 @@ const PostDetail = () => {
     axiosGetData();
   }, []);
 
-  const { post } = posting;
+  if (!loading) {
+    return <h1>NOT!!</h1>;
+  }
 
   return (
     <>
-      <PostDetailForm post={post} />
+      <PostDetailForm postObj={post} />
     </>
   );
 };
