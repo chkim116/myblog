@@ -35,10 +35,7 @@ function App() {
           <Route path={routes.admin} component={Admin}></Route>
           <Route path={routes.register} component={Register}></Route>
           <Route path={routes.postwriting} component={PostWriting}></Route>
-          <Route
-            path={`${routes.postdetail}/:id`}
-            component={PostDetail}
-          ></Route>
+          <Route path={"/postdetail/:id"} component={PostDetail}></Route>
         </Switch>
       </div>
     </Fragment>

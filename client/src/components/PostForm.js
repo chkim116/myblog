@@ -3,7 +3,8 @@ import "../assets/scss/pages/post.scss";
 import { Link } from "react-router-dom";
 import routes from "../routes";
 
-const PostForm = () => {
+const PostForm = ({ postObj }) => {
+  const { post } = postObj;
   return (
     <>
       <div className="post__wrap">
@@ -25,15 +26,16 @@ const PostForm = () => {
           </span>
         </div>
         <div className="post__form">
-          <div className="post_form-type">
-            <h2 className="post__form-title">제목</h2>
-            <p className="post__form-desc">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever sincook a galley of type and scrambled it to make a type spec
-            </p>
-            <p className="post__form-date">시간</p>
-          </div>
+          {post.map((p) => (
+            <div className="post_form-type" key={p._id}>
+              <Link to={`/postdetail/${p._id}`}>
+                <h2 className="post__form-title">{p.title}</h2>
+                <p className="post__form-desc">{p.description}</p>
+                <p className="post__form-date">{p.createDate}</p>
+              </Link>
+            </div>
+          ))}
+          ;
         </div>
         <div className="post__form-page">페이지 넘기기</div>
       </div>

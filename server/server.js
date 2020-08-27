@@ -4,9 +4,11 @@ import "./db";
 import dotenv from "dotenv";
 import postRouter from "./src/routers/postRouter";
 dotenv.config();
+import cors from "cors";
+
+// ssr
 import fs from "fs";
 import path from "path";
-
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import App from "../client/src/App";
@@ -37,7 +39,7 @@ app.use("^/$", (req, res, next) => {
 });
 
 app.use(express.static(path.resolve(__dirname, "..", "build")));
-
+app.use(cors());
 // server
 const { PORT } = process.env;
 

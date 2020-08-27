@@ -11,19 +11,21 @@ const PostDetail = () => {
   useEffect(() => {
     const axiosGetData = async () => {
       try {
-        const data = await Axios.get("/api/post").then((res) => res);
+        const data = await Axios.get("/api").then((res) => res.data);
         setPosting(data);
+        console.log(data);
       } catch (err) {
         console.log(err);
       }
     };
     axiosGetData();
-    return () => {};
-  }, [posting]);
+  }, []);
+
+  const { post } = posting;
 
   return (
     <>
-      <PostDetailForm />
+      <PostDetailForm post={post} />
     </>
   );
 };
