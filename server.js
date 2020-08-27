@@ -19,9 +19,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", postRouter);
+
 app.use("^/$", (req, res, next) => {
   fs.readFile(
-    path.resolve("../client/build/index.html"),
+    path.resolve("./client/build/index.html"),
     "utf-8",
     (err, data) => {
       if (err) {
@@ -38,11 +39,18 @@ app.use("^/$", (req, res, next) => {
   );
 });
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
+}
+
 app.use(express.static(path.resolve(__dirname, "..", "build")));
 app.use(cors());
 // server
 const { PORT } = process.env;
 
 app.listen(PORT, () => {
-  console.log("http://localhost:4000, and http://localhost:3000");
+  console.log(`ON ${PORT}`);
 });
