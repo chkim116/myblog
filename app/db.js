@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const { MONGO_ATLAS } = process.env;
 const { MONGO_URL } = process.env;
-import "../src/models/Post";
+import "../src/models/Post.js";
 
 mongoose.connect(MONGO_ATLAS || MONGO_URL, {
   useNewUrlParser: true,
