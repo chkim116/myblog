@@ -2,9 +2,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 const { MONGO_ATLAS } = process.env;
-const { MONGO_URL } = process.env;
 
-mongoose.connect(MONGO_ATLAS || MONGO_URL, {
+mongoose.connect(MONGO_ATLAS, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true,
