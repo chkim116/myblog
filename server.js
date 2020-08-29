@@ -11,9 +11,7 @@ import path from "path";
 import React, { useState, useCallback } from "react";
 import { Route, Switch } from "react-router-dom";
 import ReactDOMServer from "react-dom/server";
-import App from "./client/src/App";
-
-import "./src/models/Post.js";
+import App from "./client/src/App.js";
 
 const app = express();
 
