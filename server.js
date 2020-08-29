@@ -13,7 +13,7 @@ import { Route, Switch } from "react-router-dom";
 import ReactDOMServer from "react-dom/server";
 import App from "./client/src/App.js";
 
-import "./src/models";
+import "./src/models/Post.js";
 
 const app = express();
 
