@@ -1,4 +1,4 @@
-require("ignore-styles");
+import "ignore-styles";
 
 require("@babel/register")({
   ignore: [/(node_module)/],
@@ -6,4 +6,4 @@ require("@babel/register")({
   plugins: ["@babel/plugin-transform-runtime"],
 });
 
-require("./server");
+require("./server.js");
