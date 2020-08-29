@@ -27,7 +27,6 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: "description is required",
   },
-  tags: [String],
   createDate: {
     type: String,
     default: allDate,
