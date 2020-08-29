@@ -4,6 +4,7 @@ import "./db";
 import dotenv from "dotenv";
 import postRouter from "./src/routers/postRouter";
 dotenv.config();
+import "./src/models/Post";
 import cors from "cors";
 // ssr
 import fs from "fs";
