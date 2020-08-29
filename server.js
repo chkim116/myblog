@@ -9,6 +9,7 @@ import cors from "cors";
 import fs from "fs";
 import path from "path";
 import React, { useState, useCallback } from "react";
+import { Route, Switch } from "react-router-dom";
 import ReactDOMServer from "react-dom/server";
 import App from "./client/src/App";
 
