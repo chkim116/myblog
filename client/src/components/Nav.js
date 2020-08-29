@@ -13,7 +13,7 @@ const Nav = ({ width }) => {
             Think_Tank
           </Link>
         </li>
-        <div className="header__menu">
+        <nav className="header__menu">
           <li>
             <Link to={routes.home}>Home</Link>
           </li>
@@ -26,7 +26,7 @@ const Nav = ({ width }) => {
           <li>
             <Link to={routes.about}>About Me</Link>
           </li>
-        </div>
+        </nav>
         <li className="header__hamburger">
           {width < 768 && <GiHamburgerMenu />}
         </li>

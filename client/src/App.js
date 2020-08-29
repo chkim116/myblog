@@ -23,17 +23,15 @@ function App() {
 
   return (
     <>
-      <div onChange={onChange}>
-        <Nav width={width}></Nav>
-        <Route path={routes.home} exact={true} component={Home}></Route>
-        <Switch>
-          <Route path={routes.portfolio} component={Portfolio}></Route>
-          <Route path={routes.post} component={Post}></Route>
-          <Route path={routes.about} component={About}></Route>
-          <Route path={routes.postwriting} component={PostWriting}></Route>
-          <Route path="/postdetail/:id" component={PostDetail}></Route>
-        </Switch>
-      </div>
+      <Nav width={width} onChange={onChange}></Nav>
+      <Route path={routes.home} exact={true} component={Home}></Route>
+      <Switch>
+        <Route path={routes.portfolio} component={Portfolio}></Route>
+        <Route path={routes.post} component={Post}></Route>
+        <Route path={routes.about} component={About}></Route>
+        <Route path={routes.postwriting} component={PostWriting}></Route>
+        <Route path="/postdetail/:id" component={PostDetail}></Route>
+      </Switch>
     </>
   );
 }
