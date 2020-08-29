@@ -11,6 +11,6 @@ postRouter.get("/api", getPost);
 
 postRouter.post("/api/post", postPosting);
 
-postRouter.get(`/:id`, getPostById);
+postRouter.get("/:id", getPostById);
 
 export default postRouter;

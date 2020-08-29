@@ -11,7 +11,7 @@ import reducer from "./modules/reducer";
 
 const store = createStore(reducer);
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <Provider store={store}>
     <BrowserRouter>
       <App />

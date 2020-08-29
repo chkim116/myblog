@@ -1,4 +1,4 @@
-import React, { useState, useCallback, Fragment } from "react";
+import React, { useState, useCallback } from "react";
 import { Route, Switch } from "react-router-dom";
 import routes from "./routes";
 
@@ -22,7 +22,7 @@ function App() {
   const onChange = window.addEventListener("resize", handleWidth);
 
   return (
-    <Fragment>
+    <>
       <div onChange={onChange}>
         <Nav width={width}></Nav>
         <Route path={routes.home} exact={true} component={Home}></Route>
@@ -34,7 +34,7 @@ function App() {
           <Route path="/postdetail/:id" component={PostDetail}></Route>
         </Switch>
       </div>
-    </Fragment>
+    </>
   );
 }
 

@@ -18,7 +18,6 @@ export const postPosting = async (req, res) => {
       title,
       description,
     });
-    console.log(post);
     post.save().then((post) => res.send(post));
     console.log("성공^^");
   } catch (err) {
