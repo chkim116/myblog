@@ -2,9 +2,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import "./db";
 import dotenv from "dotenv";
-import postRouter from "../src/routers/postRouter";
+import postRouter from "./src/routers/postRouter";
 dotenv.config();
-import "../src/models/Post.js";
 import cors from "cors";
 // ssr
 import fs from "fs";
@@ -12,7 +11,9 @@ import path from "path";
 import React, { useState, useCallback } from "react";
 import { Route, Switch } from "react-router-dom";
 import ReactDOMServer from "react-dom/server";
-import App from "../client/src/App";
+import App from "./client/src/App";
+
+import "./src/models/Post.js";
 
 const app = express();
 
