@@ -5,11 +5,10 @@ import dotenv from "dotenv";
 import postRouter from "./src/routers/postRouter";
 dotenv.config();
 import cors from "cors";
-import "./src/models/post";
 // ssr
 import fs from "fs";
 import path from "path";
-import React from "react";
+import React, { useState, useCallback } from "react";
 import ReactDOMServer from "react-dom/server";
 import App from "./client/src/App";
 
