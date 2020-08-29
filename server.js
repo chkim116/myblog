@@ -24,7 +24,7 @@ app.use(cors());
 app.use("/", postRouter);
 app.use("^/$", (req, res, next) => {
   fs.readFile(
-    path.resolve("../client/build/index.html"),
+    path.resolve("./client/build/index.html"),
     "utf-8",
     (err, data) => {
       if (err) {
@@ -41,7 +41,7 @@ app.use("^/$", (req, res, next) => {
   );
 });
 
-app.use(express.static(path.join("..", "client", "build")));
+app.use(express.static(path.join(__dirname + "/client/build")));
 
 if (
   process.env.NODE_ENV === "production" ||
@@ -49,7 +49,7 @@ if (
 ) {
   app.use(express.static("client/build"));
   app.get("*", (req, res) => {
-    res.sendFile(path.join("..", "client", "build", "index.html"));
+    res.sendFile(path.join(__dirname + "/client/build/index.html"));
   });
 }
 // server
