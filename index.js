@@ -18,7 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/", postRouter);
 
-app.use(express.static(path.join(__dirname + "/client/build")));
+// set static folder
+app.use(express.static(path.join(__dirname, "client", "build")));
 
 if (
   process.env.NODE_ENV === "production" ||
