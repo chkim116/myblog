@@ -1,9 +1,37 @@
-require("ignore-styles");
+import express from "express";
+import bodyParser from "body-parser";
+import "./db";
+import dotenv from "dotenv";
+import postRouter from "./src/routers/postRouter";
+dotenv.config();
+import cors from "cors";
+// heroku
+import path from "path";
 
-require("@babel/register")({
-  ignore: [/(node_module)/],
-  presets: ["@babel/preset-env", "@babel/preset-react"],
-  plugins: ["@babel/plugin-transform-runtime"],
+import "./src/models/post.js";
+
+const app = express();
+
+// middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+app.use("/", postRouter);
+
+app.use(express.static(path.join(__dirname + "/client/build")));
+
+if (
+  process.env.NODE_ENV === "production" ||
+  process.env.NODE_ENV === "staging"
+) {
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname + "/client/build/index.html"));
+  });
+}
+// server
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, () => {
+  console.log(`Hello, http://localhost:${PORT}`);
 });
-
-require("./server.js");
