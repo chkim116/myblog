@@ -1,3 +1,5 @@
+import Post from "../models/post.js";
+
 export const getPost = async (req, res) => {
   try {
     const post = await Post.find({}).sort({ _id: -1 });
