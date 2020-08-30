@@ -44,6 +44,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:4000",
-  "homepage": "https://chkim116.github.io/myblog/"
+  "proxy": "http://localhost:4000"
 }
