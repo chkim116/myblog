@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "14.5.0",
-    "npm": "6.14.5"
+    "node": "12.18.3",
+    "npm": "6.14.6"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node index.js",
+    "start": "nodemon --exec node index.js",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "",
@@ -17,23 +17,30 @@
   "dependencies": {
     "@babel/core": "^7.11.4",
     "@babel/node": "^7.10.5",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-transform-runtime": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
-    "@babel/preset-react": "^7.10.4",
     "@babel/register": "^7.10.5",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-paginate": "^1.0.2",
     "fs": "0.0.1-security",
     "ignore-styles": "^5.0.1",
+    "is-promise": "^4.0.0",
     "mongoose": "^5.10.0",
+    "node": "^12.18.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "babel-preset-react-app": "^9.1.2",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/plugin-syntax-jsx": "^7.10.4"
   }
 }

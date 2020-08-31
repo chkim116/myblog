@@ -10,7 +10,10 @@ import Post from "./Pages/main/Post";
 import Portfolio from "./Pages/main/Portfolio";
 import PostWriting from "./Pages/post/PostWriting";
 import PostDetail from "./Pages/post/PostDetail";
-
+import Register from "./Pages/login/Register";
+import dotenv from "dotenv";
+dotenv.config();
+const { ADMIN_URL } = process.env;
 function App() {
   const [width, setWidth] = useState(768);
 
@@ -22,7 +25,7 @@ function App() {
   const onChange = window.addEventListener("resize", handleWidth);
 
   return (
-    <>
+    <React.Fragment>
       <Nav width={width} onChange={onChange}></Nav>
       <Route path={routes.home} exact={true} component={Home}></Route>
       <Switch>
@@ -31,8 +34,9 @@ function App() {
         <Route path={routes.about} component={About}></Route>
         <Route path={routes.postwriting} component={PostWriting}></Route>
         <Route path="/postdetail/:id" component={PostDetail}></Route>
+        <Route path={ADMIN_URL} component={Register} />
       </Switch>
-    </>
+    </React.Fragment>
   );
 }
 
