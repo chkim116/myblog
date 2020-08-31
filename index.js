@@ -8,6 +8,11 @@ import cors from "cors";
 // heroku
 import path from "path";
 
+// ssr
+import fs from "fs";
+import ReactDOMServer from "react-dom/server";
+import React from "react";
+
 import "./src/models/post.js";
 
 const app = express();
@@ -20,6 +25,25 @@ app.use("/", postRouter);
 
 // set static folder
 app.use(express.static(path.join(__dirname, "client", "build")));
+
+app.use("^/$", (req, res, next) => {
+  fs.readFile(
+    path.join(__dirname + "/client/build/index.html"),
+    "utf-8",
+    (err, data) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).send("Some Error");
+      }
+      return res.send(
+        data.replace(
+          '<div id="root></div>',
+          `<div id="root>${ReactDOMServer.renderToString(<App />)}</div>`
+        )
+      );
+    }
+  );
+});
 
 if (
   process.env.NODE_ENV === "production" ||

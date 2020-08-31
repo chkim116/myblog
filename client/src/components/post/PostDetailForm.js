@@ -8,7 +8,16 @@ const PostDetailForm = ({ postObj, loading }) => {
       {loading ? (
         <div className="post__detail" key={_id}>
           <h2 className="post__detail-title">{title}</h2>
-          <p className="post__detail-desc">{description}</p>
+          <p className="post__detail-desc">
+            {description.split("\n").map((text, key) => {
+              return (
+                <span key={key}>
+                  {text}
+                  <br />
+                </span>
+              );
+            })}
+          </p>
           <p className="post__detail-date">
             <small>Upload By: {createDate}</small>
           </p>
