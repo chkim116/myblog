@@ -23,7 +23,7 @@ const PostDetail = () => {
       setLoading(true);
     };
     axiosGetData();
-  }, [id]);
+  }, [setPosting]);
 
   return (
     <>
