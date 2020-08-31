@@ -29,7 +29,7 @@ const Register = ({ history, location }) => {
       e.preventDefault();
       setRegister({ ...register });
       const adminRegister = async () => {
-        await Axios.post("/api/admin/register", {
+        await Axios.post("/auth/register", {
           username,
           password,
           email,

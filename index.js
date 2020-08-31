@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(morgan("dev"));
 app.use("/api", postRouter);
-app.use("/api", adminRouter);
+app.use("/auth", adminRouter);
 
 if (
   process.env.NODE_ENV === "production" ||

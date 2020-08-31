@@ -17,7 +17,7 @@ const Admin = ({ history }) => {
     setLogin({ ...login });
     const postLogin = async () => {
       try {
-        await Axios.post("/api/login", {
+        await Axios.post("/auth/login", {
           username,
           password,
         });
