@@ -15,7 +15,7 @@ const PostDetail = () => {
   useEffect(() => {
     const axiosGetData = async () => {
       try {
-        const data = await Axios.get(`/${id}`).then((res) => res.data);
+        const data = await Axios.get(`/api/${id}`).then((res) => res.data);
         setPosting(data);
       } catch (err) {
         console.log(err);

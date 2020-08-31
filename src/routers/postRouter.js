@@ -3,13 +3,13 @@ import {
   postPosting,
   getPost,
   getPostById,
-} from "../controller/userController";
+} from "../controller/postController";
 
 const postRouter = express.Router();
 
-postRouter.get("/api", getPost);
+postRouter.get("/", getPost);
 
-postRouter.post("/api/post", postPosting);
+postRouter.post("/post", postPosting);
 
 postRouter.get("/:id", getPostById);
 

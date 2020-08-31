@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { Route, Switch } from "react-router-dom";
 import routes from "./routes";
-
 // page
 import Nav from "./components/Nav";
 import Home from "./Pages/main/Home";
@@ -12,11 +11,12 @@ import PostWriting from "./Pages/post/PostWriting";
 import PostDetail from "./Pages/post/PostDetail";
 import Register from "./Pages/login/Register";
 import dotenv from "dotenv";
+import NotFound from "./Pages/main/NotFound";
+import Admin from "./Pages/login/Admin";
 dotenv.config();
-const { ADMIN_URL } = process.env;
+
 function App() {
   const [width, setWidth] = useState(768);
-
   const handleWidth = useCallback(() => {
     const innerWidth = window.innerWidth;
     setWidth(innerWidth);
@@ -25,18 +25,20 @@ function App() {
   const onChange = window.addEventListener("resize", handleWidth);
 
   return (
-    <React.Fragment>
+    <>
       <Nav width={width} onChange={onChange}></Nav>
-      <Route path={routes.home} exact={true} component={Home}></Route>
       <Switch>
+        <Route exact path={routes.home} component={Home}></Route>
+        <Route path={routes.admin} component={Register}></Route>
+        <Route path={routes.login} component={Admin}></Route>
         <Route path={routes.portfolio} component={Portfolio}></Route>
         <Route path={routes.post} component={Post}></Route>
         <Route path={routes.about} component={About}></Route>
         <Route path={routes.postwriting} component={PostWriting}></Route>
         <Route path="/postdetail/:id" component={PostDetail}></Route>
-        <Route path={ADMIN_URL} component={Register} />
+        <Route component={NotFound} />
       </Switch>
-    </React.Fragment>
+    </>
   );
 }
 

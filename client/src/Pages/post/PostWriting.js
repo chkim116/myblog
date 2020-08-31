@@ -27,19 +27,22 @@ const PostWriting = ({ history }) => {
     setLoading(true);
   };
 
-  useEffect(() => {
-    if (loading) {
-      history.push("/post");
-    }
-  });
-
-  function onChange(e) {
+  const onChange = (e) => {
     const { value, name } = e.target;
     setPost({
       ...post,
       [name]: value,
     });
-  }
+  };
+
+  useEffect(() => {
+    if (loading) {
+      history.push("/post");
+    }
+    return () => {
+      setLoading(false);
+    };
+  });
 
   return (
     <PostingForm
