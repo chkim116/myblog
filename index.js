@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import "./db";
 import postRouter from "./src/routers/postRouter";
-import adminRouter from "./src/routers/AdminRouter";
+import adminRouter from "./src/routers/adminRouter";
 import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
