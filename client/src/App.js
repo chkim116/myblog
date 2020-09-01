@@ -53,6 +53,9 @@ function App() {
 
   useEffect(() => {
     axiosUser();
+    return () => {
+      setUser(...user);
+    };
   }, [user]);
 
   const onClick = () => {

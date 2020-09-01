@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "babel-node index.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "dev:start": "nodemon --exec babel-node index.js"
+    "dev": "nodemon --exec babel-node index.js"
   },
   "author": "",
   "license": "ISC",
