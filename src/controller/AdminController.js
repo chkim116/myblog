@@ -39,7 +39,7 @@ export const postlogin = (req, res, next) => {
         if (err) {
           return next(err);
         } else {
-          return res.send(user._id);
+          return res.send(true);
         }
       });
     }
@@ -47,7 +47,8 @@ export const postlogin = (req, res, next) => {
 };
 
 export const auth = (req, res, next) => {
-  if (!req.user) {
+  const loggedUser = req.user || null;
+  if (!loggedUser) {
     res.send(false);
   } else {
     res.send(true);

@@ -35,8 +35,8 @@ const Register = ({ history }) => {
             username,
             password,
             email,
-          });
-          setUser(true);
+          }).then((res) => setUser(res.data));
+          console.log(user);
         } catch (err) {
           const ADMIN = "admin";
           registerCheck(err, ADMIN, { history });
