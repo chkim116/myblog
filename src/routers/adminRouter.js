@@ -1,9 +1,18 @@
 import express from "express";
-import { postRegisterAdmin, getLogin } from "../controller/AdminController";
+import {
+  postRegister,
+  postlogin,
+  auth,
+  logout,
+} from "../controller/AdminController";
 
 const adminRouter = express.Router();
 
-adminRouter.post("/register", postRegisterAdmin, getLogin);
-adminRouter.get("/login", getLogin);
+adminRouter.post("/register", postRegister, postlogin);
 
+adminRouter.post("/login", postlogin);
+
+adminRouter.get("/", auth);
+
+adminRouter.post("/logout", logout);
 export default adminRouter;

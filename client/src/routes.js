@@ -9,7 +9,6 @@ const LOGIN = "/login";
 
 // 관리자
 const ADMIN = "/admin";
-
 // posting
 const POSTWRITING = "/postwriting";
 const POSTDETAIL = "/postdetail";

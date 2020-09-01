@@ -1,10 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, Redirect } from "react-router-dom";
 import routes from "../routes";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Nav.scss";
+import Axios from "axios";
 
-const Nav = ({ width }) => {
+const Nav = ({ width, user, onClick }) => {
   return (
     <>
       <header>
@@ -25,6 +26,15 @@ const Nav = ({ width }) => {
           </li>
           <li>
             <Link to={routes.about}>About Me</Link>
+          </li>
+          <li>
+            {!user ? (
+              <Link to={routes.login}>Login</Link>
+            ) : (
+              <Link to={"/"} onClick={onClick}>
+                Logout
+              </Link>
+            )}
           </li>
         </nav>
         <li className="header__hamburger">

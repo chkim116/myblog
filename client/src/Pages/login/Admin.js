@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AdminLoginForm from "../../components/login/AdminLoginForm";
 import Axios from "axios";
 import { registerCheck } from "../../middleware";
 
-const Admin = ({ history }) => {
+const Admin = ({ history, location }) => {
   const initialState = {
     username: "",
     password: "",
@@ -30,19 +30,21 @@ const Admin = ({ history }) => {
     postLogin();
   };
 
-  if (user) {
-    alert("get");
-  }
+  useEffect(() => {
+    if (user) window.location.href = "/";
+  }, [user]);
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setLogin({ ...login, [name]: value });
   };
 
-  console.log(login);
-
   return (
-    <AdminLoginForm onSubmit={onSubmit} onChange={onChange}></AdminLoginForm>
+    <AdminLoginForm
+      user={user}
+      onSubmit={onSubmit}
+      onChange={onChange}
+    ></AdminLoginForm>
   );
 };
 

@@ -1,27 +1,50 @@
 import express from "express";
+import session from "express-session";
+import passport from "passport";
+import mongoose from "mongoose";
+import mongoStore from "connect-mongo";
+
+import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import morgan from "morgan";
+import cors from "cors";
+import dotenv from "dotenv";
 import "./db";
+dotenv.config();
+
+// Router
+
 import postRouter from "./src/routers/postRouter";
 import adminRouter from "./src/routers/adminRouter";
-import cors from "cors";
-import morgan from "morgan";
-import dotenv from "dotenv";
 
-dotenv.config();
+// Schema
+
 import "./src/models/post.js";
+import "./src/models/User.js";
+import "./passport";
 
 // heroku
 import path from "path";
 
 const app = express();
+const cookieStore = mongoStore(session);
 
 // middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(morgan("dev"));
-app.use("/api", postRouter);
-app.use("/auth", adminRouter);
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  session({
+    secret: "dasdasdasdsadasdqqwkd",
+    resave: true,
+    saveUninitialized: false,
+    store: new cookieStore({ mongooseConnection: mongoose.connection }),
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 if (
   process.env.NODE_ENV === "production" ||
@@ -32,6 +55,10 @@ if (
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
   });
 }
+
+app.use("/api", postRouter);
+app.use("/auth", adminRouter);
+
 // server
 const PORT = process.env.PORT || 4000;
 

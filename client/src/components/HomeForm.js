@@ -6,7 +6,7 @@ const HomeForm = () => {
   return (
     <>
       <div className="main">
-        <img src={img} alt="hoem"></img>
+        <img src={img} alt="home"></img>
         <h2 className="home__title">Create New EveryDay!</h2>
         <h4 className="home__desc">
           There have to be reasons that you get up in the morning and you want

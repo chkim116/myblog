@@ -1,7 +1,12 @@
+import Axios from "axios";
+import { useState, useEffect } from "react";
+
 export function registerCheck(err, url, { history }) {
-  const { data } = err.response;
-  if (data !== undefined) {
+  const {
+    data: { message },
+  } = err.response;
+  if (message !== undefined) {
     history.push(`/${url}`);
-    alert("Exist. return go back.");
+    alert(`${message}`);
   }
 }

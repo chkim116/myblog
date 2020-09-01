@@ -3,13 +3,14 @@ import RegisterForm from "../../components/login/RegisterForm";
 import Axios from "axios";
 import { registerCheck } from "../../middleware";
 
-const Register = ({ history, location }) => {
+const Register = ({ history }) => {
   const initialState = {
     username: "",
     password: "",
     password2: "",
     email: "",
   };
+
   const [register, setRegister] = useState(initialState);
   const [message, setMessage] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -43,12 +44,6 @@ const Register = ({ history, location }) => {
     }
   };
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setRegister({ ...register, [name]: value });
-    setMessage(false);
-  };
-
   useEffect(() => {
     if (loading) {
       history.push("/");
@@ -58,13 +53,17 @@ const Register = ({ history, location }) => {
     };
   });
 
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setRegister({ ...register, [name]: value });
+    setMessage(false);
+  };
+
   return (
     <RegisterForm
       message={message}
       onChange={onChange}
       onSubmit={onSubmit}
-      history={history}
-      location={location}
     ></RegisterForm>
   );
 };
