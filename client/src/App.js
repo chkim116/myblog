@@ -42,10 +42,6 @@ function App() {
     });
   };
 
-  useEffect(() => {
-    axiosUser();
-  }, [user]);
-
   // 유저 확인 이벤트 (true면 유저임)
   const userLogged = async () => {
     try {
@@ -54,6 +50,10 @@ function App() {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    axiosUser();
+  }, [user]);
 
   const onClick = () => {
     userLogged();
