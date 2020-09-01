@@ -20,7 +20,7 @@ import NotFound from "./Pages/main/NotFound";
 import Admin from "./Pages/login/Admin";
 dotenv.config();
 
-function App({ history }) {
+function App() {
   // 모바일 resize 이벤트
 
   const [width, setWidth] = useState(768);
@@ -50,7 +50,6 @@ function App({ history }) {
   const userLogged = async () => {
     try {
       await Axios.post("/auth/logout").then((res) => setUser(res.data));
-      history.push("/");
     } catch (err) {
       console.log(err);
     }
