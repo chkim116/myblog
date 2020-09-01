@@ -1,6 +1,3 @@
-import Axios from "axios";
-import { useState, useEffect } from "react";
-
 export function registerCheck(err, url, { history }) {
   const {
     data: { message },

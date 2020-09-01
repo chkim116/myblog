@@ -11,13 +11,11 @@ export const postRegister = async (req, res, next) => {
   // check User
   if (req.user) {
     const {
-      user: { email: existEmail, username: existUser },
+      user: { email: existEmail },
     } = req;
+
     if (existEmail === email) {
       return res.status(400).send({ message: "같은 이메일이 존재합니다." });
-    }
-    if (existUser === username) {
-      return res.status(400).send({ message: "같은 아이디가 존재합니다" });
     }
   } else {
     try {
@@ -26,7 +24,7 @@ export const postRegister = async (req, res, next) => {
       next();
     } catch (err) {
       console.log(err);
-      res.status(400).send("error");
+      res.status(400).send({ message: "이미 같은 아이디가 존재합니다" });
     }
   }
 };

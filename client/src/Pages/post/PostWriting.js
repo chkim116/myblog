@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PostingForm from "../../components/post/PostingForm";
 import Axios from "axios";
 
-const PostWriting = ({ history }) => {
+const PostWriting = ({ history }, { user }) => {
   const initialState = {
     title: "",
     description: "",

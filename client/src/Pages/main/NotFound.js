@@ -1,7 +1,8 @@
 import React from "react";
+import "../../ErrorPage.scss";
 
 const NotFound = () => {
-  return <div>하하하하하난ㅅ파운드</div>;
+  return <h3 className="error__title">Not Found!</h3>;
 };
 
 export default NotFound;

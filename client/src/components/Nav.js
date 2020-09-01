@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Link, Redirect } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import routes from "../routes";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Nav.scss";
-import Axios from "axios";
 
 const Nav = ({ width, user, onClick }) => {
   return (
@@ -27,15 +26,22 @@ const Nav = ({ width, user, onClick }) => {
           <li>
             <Link to={routes.about}>About Me</Link>
           </li>
-          <li>
-            {!user ? (
-              <Link to={routes.login}>Login</Link>
-            ) : (
+          {!user ? (
+            <>
+              <li>
+                <Link to={routes.login}>Login</Link>
+              </li>
+              <li>
+                <Link to={"/admin"}>Register</Link>
+              </li>
+            </>
+          ) : (
+            <li>
               <Link to={"/"} onClick={onClick}>
                 Logout
               </Link>
-            )}
-          </li>
+            </li>
+          )}
         </nav>
         <li className="header__hamburger">
           {width < 768 && <GiHamburgerMenu />}

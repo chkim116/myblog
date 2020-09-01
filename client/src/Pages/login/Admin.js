@@ -32,6 +32,9 @@ const Admin = ({ history, location }) => {
 
   useEffect(() => {
     if (user) window.location.href = "/";
+    return () => {
+      setUser(false);
+    };
   }, [user]);
 
   const onChange = (e) => {

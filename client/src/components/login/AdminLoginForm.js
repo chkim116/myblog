@@ -5,7 +5,7 @@ const AdminLoginForm = ({ onChange, onSubmit }) => {
   return (
     <>
       <form className="admin__form" onSubmit={onSubmit} onChange={onChange}>
-        <h2>관리자 로그인</h2>
+        <h2>로그인</h2>
         <input type="text" name="username" placeholder="아이디" />
         <input
           type="password"

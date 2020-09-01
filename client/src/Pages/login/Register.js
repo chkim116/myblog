@@ -13,7 +13,7 @@ const Register = ({ history }) => {
 
   const [register, setRegister] = useState(initialState);
   const [message, setMessage] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(false);
   const { username, password, password2, email } = register;
 
   const showMessage = (e) => {
@@ -30,28 +30,28 @@ const Register = ({ history }) => {
       e.preventDefault();
       setRegister({ ...register });
       const adminRegister = async () => {
-        await Axios.post("/auth/register", {
-          username,
-          password,
-          email,
-        }).catch((err) => {
+        try {
+          await Axios.post("/auth/register", {
+            username,
+            password,
+            email,
+          });
+          setUser(true);
+        } catch (err) {
           const ADMIN = "admin";
           registerCheck(err, ADMIN, { history });
-        });
+        }
       };
       adminRegister();
-      setLoading(true);
     }
   };
 
   useEffect(() => {
-    if (loading) {
-      history.push("/");
-    }
+    if (user) window.location.href = "/";
     return () => {
-      setLoading(false);
+      setUser(false);
     };
-  });
+  }, [user]);
 
   const onChange = (e) => {
     const { name, value } = e.target;

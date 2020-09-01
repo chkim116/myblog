@@ -3,7 +3,7 @@ import "./PostForm.scss";
 import { Link } from "react-router-dom";
 import routes from "../../routes";
 
-const PostForm = ({ postObj, loading }) => {
+const PostForm = ({ postObj, loading, onClick }) => {
   const { post } = postObj;
 
   if (loading) {
@@ -14,7 +14,7 @@ const PostForm = ({ postObj, loading }) => {
     <>
       <div className="post__wrap">
         <div className="post">
-          <span className="btn post-btn">
+          <span className="btn post-btn" onClick={onClick}>
             <Link to={routes.postwriting}>Post</Link>
           </span>
           <span className="btn edit-btn">
