@@ -5,7 +5,6 @@ import routes from "../../routes";
 
 const PostForm = ({ postObj, loading, onClick }) => {
   const { post } = postObj;
-
   if (loading) {
     return <h1 className="just__loading">로디잉</h1>;
   }
@@ -40,7 +39,6 @@ const PostForm = ({ postObj, loading, onClick }) => {
               </Link>
             </div>
           ))}
-          ;
         </div>
         <div className="post__form-page">페이지 넘기기</div>
       </div>

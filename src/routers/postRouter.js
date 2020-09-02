@@ -7,6 +7,7 @@ import {
 
 const postRouter = express.Router();
 
+// /api/
 postRouter.get("/", getPost);
 
 postRouter.post("/post", postPosting);

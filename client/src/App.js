@@ -53,7 +53,7 @@ function App() {
 
   useEffect(() => {
     axiosUser();
-  }, [user]);
+  }, []);
 
   const onClick = () => {
     userLogged();

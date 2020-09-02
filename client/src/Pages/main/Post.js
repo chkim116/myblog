@@ -12,9 +12,7 @@ const Post = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      await Axios.get("/api")
-        .then((res) => res.data)
-        .then((data) => setPost(data));
+      await Axios.get("/api").then((res) => setPost(res.data));
     };
     loadData().then(() => setLoading(false));
   }, []);

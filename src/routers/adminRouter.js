@@ -8,6 +8,8 @@ import {
 
 const adminRouter = express.Router();
 
+// /auth/
+
 adminRouter.post("/register", postRegister, postlogin);
 
 adminRouter.post("/login", postlogin);
