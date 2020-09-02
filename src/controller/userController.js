@@ -50,20 +50,6 @@ export const auth = async (req, res, next) => {
   }
 };
 
-export const authId = async (req, res, next) => {
-  const loggedUser = (await req.user) || null;
-  if (!loggedUser) {
-    res.send("Not Found");
-  } else {
-    const { _id, username } = loggedUser;
-    const user = {
-      id: _id,
-      username,
-    };
-    res.send(user);
-  }
-};
-
 export const logout = (req, res) => {
   try {
     req.logout();

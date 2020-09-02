@@ -4,7 +4,6 @@ import {
   postlogin,
   auth,
   logout,
-  authId,
 } from "../controller/userController";
 
 const userRouter = express.Router();
@@ -18,6 +17,5 @@ userRouter.post("/logout", logout);
 
 // user auth
 userRouter.get("/", auth);
-userRouter.get("/id", authId);
 
 export default userRouter;
