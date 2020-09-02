@@ -11,13 +11,13 @@ const PostDetail = ({ history, user }) => {
     creator: "",
   });
 
+  const [userId, setUserId] = useState();
   const [loading, setLoading] = useState(false);
   const [del, setDel] = useState(false);
+
   const { id } = useParams();
 
   // get Id
-
-  const [userId, setUserId] = useState();
 
   useEffect(() => {
     const getUserId = async () => {
@@ -45,6 +45,8 @@ const PostDetail = ({ history, user }) => {
     };
     axiosGetData();
   }, [id]);
+
+  //  del post
 
   const onClick = () => {
     const deletePost = async () => {

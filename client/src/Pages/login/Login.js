@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import AdminLoginForm from "../../components/login/AdminLoginForm";
+import LoginForm from "../../components/login/LoginForm";
 import Axios from "axios";
 import { registerCheck } from "../../middleware";
 
-const Admin = ({ history, location }) => {
+const Login = ({ history, location }) => {
   const initialState = {
     username: "",
     password: "",
@@ -43,12 +43,8 @@ const Admin = ({ history, location }) => {
   };
 
   return (
-    <AdminLoginForm
-      user={user}
-      onSubmit={onSubmit}
-      onChange={onChange}
-    ></AdminLoginForm>
+    <LoginForm user={user} onSubmit={onSubmit} onChange={onChange}></LoginForm>
   );
 };
 
-export default Admin;
+export default Login;

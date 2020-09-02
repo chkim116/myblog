@@ -17,7 +17,7 @@ import PostDetail from "./Pages/post/PostDetail";
 import Register from "./Pages/login/Register";
 import dotenv from "dotenv";
 import NotFound from "./Pages/main/NotFound";
-import Admin from "./Pages/login/Admin";
+import Login from "./Pages/login/Login";
 import PostEdit from "./Pages/post/PostEdit";
 dotenv.config();
 
@@ -47,6 +47,10 @@ function App() {
     setLoading(true);
   };
 
+  useEffect(() => {
+    axiosUser();
+  }, []);
+
   // 유저 확인 이벤트 (true면 유저임)
   const userLogged = async () => {
     try {
@@ -56,12 +60,9 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    axiosUser();
-  }, [user]);
-
   const onClick = () => {
     userLogged();
+    window.location.href = "/";
   };
 
   return (
@@ -76,22 +77,22 @@ function App() {
           ></Nav>
           <Switch>
             <Route exact path={routes.home} component={Home}></Route>
-            <Route path={routes.admin} component={Register}></Route>
-            <Route path={routes.login} component={Admin}></Route>
+            <Route path={routes.register} component={Register}></Route>
+            <Route path={routes.login} component={Login}></Route>
             <Route path={routes.portfolio} component={Portfolio}></Route>
             <Route path={routes.post} component={Post}></Route>
             <Route path={routes.about} component={About}></Route>
+            <Route path="/postdetail/:id" component={PostDetail}></Route>
+            <Route path={"/edit/:id"} component={PostEdit} />
             {user ? (
               <Route path={routes.postwriting} component={PostWriting}></Route>
             ) : (
-              <>
+              <Route path={routes.postwriting}>
                 <h3 className="error__title">
                   로그인을 하셔야 포스팅을 하실 수 있습니다.
                 </h3>
-              </>
+              </Route>
             )}
-            <Route path="/postdetail/:id" component={PostDetail}></Route>
-            <Route path={"/edit/:id"} component={PostEdit} />
             <Route component={NotFound} />
           </Switch>
         </>

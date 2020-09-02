@@ -32,14 +32,12 @@ const Nav = ({ width, user, onClick }) => {
                 <Link to={routes.login}>Login</Link>
               </li>
               <li>
-                <Link to={"/admin"}>Register</Link>
+                <Link to={routes.register}>Register</Link>
               </li>
             </>
           ) : (
-            <li>
-              <Link to={"/"} onClick={onClick}>
-                Logout
-              </Link>
+            <li className="logout" onClick={onClick}>
+              Logout
             </li>
           )}
         </nav>

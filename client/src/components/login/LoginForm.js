@@ -1,5 +1,5 @@
 import React from "react";
-import "./AdminLoginForm.scss";
+import "./LoginForm.scss";
 
 const AdminLoginForm = ({ onChange, onSubmit }) => {
   return (

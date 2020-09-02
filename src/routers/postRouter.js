@@ -5,7 +5,6 @@ import {
   getPostById,
   postEditing,
   postDeleting,
-  getCreatorId,
 } from "../controller/postController";
 
 const postRouter = express.Router();

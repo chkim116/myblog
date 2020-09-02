@@ -11,13 +11,13 @@ const adminRouter = express.Router();
 
 // /auth/
 
+// user login
 adminRouter.post("/register", postRegister, postlogin);
-
 adminRouter.post("/login", postlogin);
+adminRouter.post("/logout", logout);
 
+// user auth
 adminRouter.get("/", auth);
-
 adminRouter.get("/id", authId);
 
-adminRouter.post("/logout", logout);
 export default adminRouter;

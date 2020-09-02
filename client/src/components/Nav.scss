@@ -25,13 +25,14 @@ header {
   }
   li {
     margin: 1em;
-  }
-  a {
-    color: white;
-    font-weight: bold;
-  }
-  a:hover {
-    color: $pink;
+
+    a {
+      color: white;
+      font-weight: bold;
+      &:hover {
+        color: $pink;
+      }
+    }
   }
 }
 .header__hamburger {
@@ -40,4 +41,13 @@ header {
   right: 0;
   top: -15px;
   position: absolute;
+}
+
+.logout {
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  &:hover {
+    color: $pink;
+  }
 }
