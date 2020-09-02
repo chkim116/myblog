@@ -21,6 +21,7 @@ import Login from "./Pages/login/Login";
 import PostEdit from "./Pages/post/PostEdit";
 dotenv.config();
 
+// id와 username 찾는 hook
 const useUserId = () => {
   const [userId, setUserId] = useState({
     id: "",

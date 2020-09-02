@@ -5,8 +5,10 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import "./Nav.scss";
 
 const Nav = ({ width, user, onClick, useUserId }) => {
-  const id = useUserId();
-  console.log(id, useUserId());
+  const userId = useUserId();
+  const {
+    userId: { username },
+  } = userId;
   return (
     <>
       <header>
@@ -42,7 +44,7 @@ const Nav = ({ width, user, onClick, useUserId }) => {
               <li className="logout" onClick={onClick}>
                 Logout
               </li>
-              <li>님 어서오세요</li>
+              <li>{username}님 어서오세요</li>
             </>
           )}
         </nav>
