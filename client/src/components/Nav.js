@@ -4,7 +4,9 @@ import routes from "../routes";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Nav.scss";
 
-const Nav = ({ width, user, onClick }) => {
+const Nav = ({ width, user, onClick, useUserId }) => {
+  const id = useUserId();
+  console.log(id, useUserId());
   return (
     <>
       <header>
@@ -36,14 +38,19 @@ const Nav = ({ width, user, onClick }) => {
               </li>
             </>
           ) : (
-            <li className="logout" onClick={onClick}>
-              Logout
-            </li>
+            <>
+              <li className="logout" onClick={onClick}>
+                Logout
+              </li>
+              <li>님 어서오세요</li>
+            </>
           )}
         </nav>
-        <li className="header__hamburger">
-          {width < 768 && <GiHamburgerMenu />}
-        </li>
+        {width < 768 && (
+          <li className="header__hamburger">
+            <GiHamburgerMenu />
+          </li>
+        )}
       </header>
     </>
   );

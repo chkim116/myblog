@@ -21,9 +21,28 @@ import Login from "./Pages/login/Login";
 import PostEdit from "./Pages/post/PostEdit";
 dotenv.config();
 
+const useUserId = () => {
+  const [userId, setUserId] = useState({
+    id: "",
+    username: "",
+  });
+
+  const getUserId = async () => {
+    try {
+      await Axios.get("/auth/id").then((res) => setUserId(res.data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    getUserId();
+  }, []);
+
+  return { userId };
+};
+
 function App() {
   // 모바일 resize 이벤트
-
   const [width, setWidth] = useState(768);
   const handleWidth = useCallback(() => {
     const innerWidth = window.innerWidth;
@@ -40,11 +59,11 @@ function App() {
     try {
       await Axios.get("/auth").then((res) => {
         setUser(res.data);
+        setLoading(true);
       });
     } catch (err) {
       setUser(false);
     }
-    setLoading(true);
   };
 
   useEffect(() => {
@@ -74,6 +93,7 @@ function App() {
             user={user}
             onChange={onChange}
             onClick={onClick}
+            useUserId={useUserId}
           ></Nav>
           <Switch>
             <Route exact path={routes.home} component={Home}></Route>

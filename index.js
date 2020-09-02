@@ -15,7 +15,7 @@ dotenv.config();
 // Router
 
 import postRouter from "./src/routers/postRouter";
-import adminRouter from "./src/routers/adminRouter";
+import userRouter from "./src/routers/userRouter";
 
 // Schema
 
@@ -57,7 +57,7 @@ app.use(express.static("client/build"));
 // }
 
 app.use("/api", postRouter);
-app.use("/auth", adminRouter);
+app.use("/auth", userRouter);
 
 // server
 const PORT = process.env.PORT || 4000;

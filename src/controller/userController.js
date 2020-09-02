@@ -51,7 +51,12 @@ export const authId = async (req, res, next) => {
   if (!loggedUser) {
     res.send("Not Found");
   } else {
-    res.send(loggedUser._id);
+    const { _id, username } = loggedUser;
+    const user = {
+      id: _id,
+      username,
+    };
+    res.send(user);
   }
 };
 

@@ -22,7 +22,7 @@ const PostDetail = ({ history, user }) => {
   useEffect(() => {
     const getUserId = async () => {
       try {
-        const Id = await Axios.get("/auth/id").then((res) => res.data);
+        const Id = await Axios.get("/auth/id").then((res) => res.data.id);
         setUserId(Id);
       } catch (err) {
         console.log(err);
