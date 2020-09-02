@@ -4,11 +4,8 @@ import routes from "../routes";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Nav.scss";
 
-const Nav = ({ width, user, onClick, useUserId }) => {
-  const userId = useUserId();
-  const {
-    userId: { username },
-  } = userId;
+const Nav = ({ width, user, onClick }) => {
+  const { username } = user;
   return (
     <>
       <header>

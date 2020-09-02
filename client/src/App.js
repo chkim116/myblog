@@ -21,26 +21,26 @@ import Login from "./Pages/login/Login";
 import PostEdit from "./Pages/post/PostEdit";
 dotenv.config();
 
-// id와 username 찾는 hook
-const useUserId = () => {
-  const [userId, setUserId] = useState({
-    id: "",
-    username: "",
-  });
+// id와 username
+// const useUserId = () => {
+//   const [userId, setUserId] = useState({
+//     id: "",
+//     username: "",
+//   });
 
-  const getUserId = async () => {
-    try {
-      await Axios.get("/auth/id").then((res) => setUserId(res.data));
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  useEffect(() => {
-    getUserId();
-  }, []);
+//   const getUserId = async () => {
+//     try {
+//       await Axios.get("/auth/id").then((res) => setUserId(res.data));
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   };
+//   useEffect(() => {
+//     getUserId();
+//   }, []);
 
-  return { userId };
-};
+//   return { userId };
+// };
 
 function App() {
   // 모바일 resize 이벤트
@@ -94,7 +94,6 @@ function App() {
             user={user}
             onChange={onChange}
             onClick={onClick}
-            useUserId={useUserId}
           ></Nav>
           <Switch>
             <Route exact path={routes.home} component={Home}></Route>

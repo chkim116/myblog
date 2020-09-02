@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import PostDetailForm from "../../components/post/PostDetailForm";
+import { useUserId } from "../../middleware";
 
-const PostDetail = ({ history, user }) => {
+const PostDetail = ({ history }) => {
   const [post, setPosting] = useState({
     title: "",
     description: "",
@@ -18,6 +19,8 @@ const PostDetail = ({ history, user }) => {
   const { id } = useParams();
 
   // get Id
+
+  console.log(useUserId());
 
   useEffect(() => {
     const getUserId = async () => {

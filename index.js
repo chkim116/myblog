@@ -23,9 +23,6 @@ import "./src/models/post.js";
 import "./src/models/User.js";
 import "./passport";
 
-// heroku
-import path from "path";
-
 const app = express();
 const cookieStore = mongoStore(session);
 

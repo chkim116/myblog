@@ -42,7 +42,12 @@ export const auth = async (req, res, next) => {
   if (!loggedUser) {
     res.send(false);
   } else {
-    res.send(true);
+    const { _id, username } = loggedUser;
+    const user = {
+      id: _id,
+      username,
+    };
+    res.send(user);
   }
 };
 
