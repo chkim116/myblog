@@ -67,7 +67,7 @@ export const authId = async (req, res, next) => {
 export const logout = (req, res) => {
   try {
     req.logout();
-    res.status(200).send(false);
+    res.status(200).send(true);
   } catch (err) {
     console.log(err);
     res.status(400);

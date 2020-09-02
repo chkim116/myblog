@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Route, Switch } from "react-router-dom";
 import routes from "./routes";
 import Axios from "axios";
@@ -23,12 +23,16 @@ import { useUserId } from "./middleware";
 dotenv.config();
 
 function App() {
-  // 모바일 resize 이벤트
+  // 미디어 쿼리 조절
   const [width, setWidth] = useState(768);
   const handleWidth = useCallback(() => {
     const innerWidth = window.innerWidth;
     setWidth(innerWidth);
   }, []);
+
+  useEffect(() => {
+    handleWidth();
+  }, [width]);
 
   const onChange = window.addEventListener("resize", handleWidth);
 
@@ -36,27 +40,37 @@ function App() {
   const getUser = useUserId("/auth");
   const { userId, loading } = getUser;
 
+  // userLogout
+  const [logout, setLogout] = useState(false);
+
   const onClick = () => {
     const userLogout = async () => {
       try {
         await Axios.post("/auth/logout");
+        setLogout(true);
       } catch (err) {
         console.log(err);
       }
     };
     userLogout();
-    window.location.href = "/";
   };
+
+  useEffect(() => {
+    if (logout) {
+      window.location.href = "/";
+    }
+  }, [logout]);
 
   return (
     <>
       {loading ? (
         <>
           <Nav
-            width={width}
             userId={userId}
-            onChange={onChange}
+            logout={logout}
             onClick={onClick}
+            width={width}
+            onChange={onChange}
           ></Nav>
           <Switch>
             <Route exact path={routes.home} component={Home}></Route>
