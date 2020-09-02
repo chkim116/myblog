@@ -3,6 +3,9 @@ import {
   postPosting,
   getPost,
   getPostById,
+  postEditing,
+  postDeleting,
+  getCreatorId,
 } from "../controller/postController";
 
 const postRouter = express.Router();
@@ -10,8 +13,16 @@ const postRouter = express.Router();
 // /api/
 postRouter.get("/", getPost);
 
+// post get by ID
+postRouter.get("/:id", getPostById);
+
+// post Upload
 postRouter.post("/post", postPosting);
 
-postRouter.get("/:id", getPostById);
+// post Updata
+postRouter.post("/edit/:id", postEditing);
+
+// post delete
+postRouter.get("/del/:id", postDeleting);
 
 export default postRouter;

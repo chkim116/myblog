@@ -4,6 +4,7 @@ import {
   postlogin,
   auth,
   logout,
+  authId,
 } from "../controller/AdminController";
 
 const adminRouter = express.Router();
@@ -15,6 +16,8 @@ adminRouter.post("/register", postRegister, postlogin);
 adminRouter.post("/login", postlogin);
 
 adminRouter.get("/", auth);
+
+adminRouter.get("/id", authId);
 
 adminRouter.post("/logout", logout);
 export default adminRouter;

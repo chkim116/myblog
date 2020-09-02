@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import PostingForm from "../../components/post/PostingForm";
 import Axios from "axios";
 
-const PostWriting = ({ history }, { user }) => {
+const PostWriting = ({ history, user }) => {
   const initialState = {
     title: "",
     description: "",
+    updated: "",
   };
 
   const [post, setPost] = useState(initialState);
   const [loading, setLoading] = useState(false);
-  const { title, description } = post;
+  const { title, description, updated } = post;
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -19,6 +20,7 @@ const PostWriting = ({ history }, { user }) => {
       await Axios.post("/api/post", {
         title,
         description,
+        updated,
       }).catch((err) => {
         console.log(err);
       });

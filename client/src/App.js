@@ -18,6 +18,7 @@ import Register from "./Pages/login/Register";
 import dotenv from "dotenv";
 import NotFound from "./Pages/main/NotFound";
 import Admin from "./Pages/login/Admin";
+import PostEdit from "./Pages/post/PostEdit";
 dotenv.config();
 
 function App() {
@@ -36,10 +37,14 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   const axiosUser = async () => {
-    await Axios.get("/auth").then((res) => {
-      setUser(res.data);
-      setLoading(true);
-    });
+    try {
+      await Axios.get("/auth").then((res) => {
+        setUser(res.data);
+      });
+    } catch (err) {
+      setUser(false);
+    }
+    setLoading(true);
   };
 
   // 유저 확인 이벤트 (true면 유저임)
@@ -53,7 +58,7 @@ function App() {
 
   useEffect(() => {
     axiosUser();
-  }, []);
+  }, [user]);
 
   const onClick = () => {
     userLogged();
@@ -86,6 +91,7 @@ function App() {
               </>
             )}
             <Route path="/postdetail/:id" component={PostDetail}></Route>
+            <Route path={"/edit/:id"} component={PostEdit} />
             <Route component={NotFound} />
           </Switch>
         </>

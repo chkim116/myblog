@@ -1,28 +1,20 @@
 import User from "../models/User";
 import passport from "passport";
+import Post from "../models/post";
 
 export const postRegister = async (req, res, next) => {
   const {
     body: { username, email, password },
   } = req;
-  // check User
-  if (req.user) {
-    const {
-      user: { email: existEmail },
-    } = req;
-
-    if (existEmail === email) {
-      return res.status(400).send({ message: "같은 이메일이 존재합니다." });
-    }
-  } else {
-    try {
-      const user = await User({ username, email, password });
-      await User.register(user, password);
-      next();
-    } catch (err) {
-      console.log(err);
-      res.status(400).send({ message: "이미 같은 아이디가 존재합니다" });
-    }
+  try {
+    const user = await User({ username, email, password });
+    await User.register(user, password);
+    next();
+  } catch (err) {
+    console.log(err);
+    res
+      .status(400)
+      .send({ message: "이미 같은 아이디 혹은 이메일이 존재합니다" });
   }
 };
 
@@ -30,7 +22,9 @@ export const postlogin = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) return next(err);
     if (!user) {
-      res.status(400).send({ message: "유저 정보가 없습니다." });
+      res
+        .status(400)
+        .send({ message: "아이디나 비밀번호를 다시 입력해 주세요." });
     } else {
       req.logIn(user, (err) => {
         if (err) {
@@ -43,12 +37,21 @@ export const postlogin = (req, res, next) => {
   })(req, res, next);
 };
 
-export const auth = (req, res, next) => {
-  const loggedUser = req.user || null;
+export const auth = async (req, res, next) => {
+  const loggedUser = (await req.user) || null;
   if (!loggedUser) {
     res.send(false);
   } else {
     res.send(true);
+  }
+};
+
+export const authId = async (req, res, next) => {
+  const loggedUser = (await req.user) || null;
+  if (!loggedUser) {
+    res.send("Not Found");
+  } else {
+    res.send(loggedUser._id);
   }
 };
 
