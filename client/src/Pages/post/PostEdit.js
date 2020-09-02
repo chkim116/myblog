@@ -2,31 +2,31 @@ import React, { useState, useEffect } from "react";
 import PostEditForm from "../../components/post/PostEditForm";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
+import { useGetPost } from "../../middleware";
 
 const PostEdit = ({ history }) => {
   const { id } = useParams();
-  const initialState = {
-    title: "",
-    description: "",
-    updated: "",
-  };
-  const [post, setPost] = useState(initialState);
-  const [loading, setLoading] = useState(false);
-  const [update, setUpdate] = useState(false);
-  const { title, description, updated } = post;
+
   //   get post
+  const getPost = useGetPost(`/api/${id}`);
+  const { post, loading } = getPost;
+
+  // update Post
+  const [updatePost, setUpdatePost] = useState("");
+  const [update, setUpdate] = useState(false);
+
+  const { title, description, updated } = updatePost;
+
+  //   if update go post page
   useEffect(() => {
-    const getPost = async () => {
-      await Axios.get(`/api/${id}`)
-        .then((res) => setPost(res.data))
-        .then(() => setLoading(true));
-    };
-    getPost();
-  }, [id]);
+    if (update) {
+      history.push("/post");
+    }
+  });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setPost({ ...post });
+    setUpdatePost({ ...post });
     const axiosData = async () => {
       try {
         await Axios.post(`/api/edit/${id}`, {
@@ -43,19 +43,12 @@ const PostEdit = ({ history }) => {
 
   const onChange = (e) => {
     const { value, name } = e.target;
-    setPost({
+    setUpdatePost({
       ...post,
       [name]: value,
       updated: "(수정됨)",
     });
   };
-
-  //   if update go post page
-  useEffect(() => {
-    if (update) {
-      history.push("/post");
-    }
-  });
 
   return (
     <PostEditForm

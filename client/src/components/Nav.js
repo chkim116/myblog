@@ -4,8 +4,8 @@ import routes from "../routes";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Nav.scss";
 
-const Nav = ({ width, user, onClick }) => {
-  const { username } = user;
+const Nav = ({ width, userId, onClick }) => {
+  const { username } = userId;
   return (
     <>
       <header>
@@ -27,7 +27,7 @@ const Nav = ({ width, user, onClick }) => {
           <li>
             <Link to={routes.about}>About Me</Link>
           </li>
-          {!user ? (
+          {!userId ? (
             <>
               <li>
                 <Link to={routes.login}>Login</Link>

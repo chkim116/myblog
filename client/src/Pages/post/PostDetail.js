@@ -2,54 +2,25 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import PostDetailForm from "../../components/post/PostDetailForm";
-import { useUserId } from "../../middleware";
+import { useUserId, useGetPost } from "../../middleware";
 
 const PostDetail = ({ history }) => {
-  const [post, setPosting] = useState({
-    title: "",
-    description: "",
-    updated: "",
-    creator: "",
-  });
-
-  const [userId, setUserId] = useState();
-  const [loading, setLoading] = useState(false);
-  const [del, setDel] = useState(false);
-
   const { id } = useParams();
 
   // get Id
 
-  console.log(useUserId());
+  const usersId = useUserId("/auth");
+  const {
+    userId: { id: userId },
+  } = usersId;
 
-  useEffect(() => {
-    const getUserId = async () => {
-      try {
-        const Id = await Axios.get("/auth/id").then((res) => res.data.id);
-        setUserId(Id);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getUserId();
-  }, [id]);
-
-  // get post
-
-  useEffect(() => {
-    const axiosGetData = async () => {
-      try {
-        const data = await Axios.get(`/api/${id}`).then((res) => res.data);
-        setPosting(data);
-      } catch (err) {
-        console.log(err);
-      }
-      setLoading(true);
-    };
-    axiosGetData();
-  }, [id]);
+  // get Post Detail
+  const getPost = useGetPost(`/api/${id}`);
+  const { post, loading } = getPost;
 
   //  del post
+
+  const [del, setDel] = useState(false);
 
   const onClick = () => {
     const deletePost = async () => {

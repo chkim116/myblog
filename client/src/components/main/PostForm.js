@@ -9,8 +9,6 @@ const PostForm = ({ postObj, loading, onClick }) => {
   return (
     <>
       {loading ? (
-        <h1 className="loading__title">글을 불러오는 중입니다.</h1>
-      ) : (
         <div className="post__wrap">
           <div className="post">
             <span className="btn post-btn" onClick={onClick}>
@@ -39,6 +37,8 @@ const PostForm = ({ postObj, loading, onClick }) => {
           </div>
           <div className="post__form-page">페이지 넘기기</div>
         </div>
+      ) : (
+        <h1 className="loading__title">글을 불러오는 중입니다.</h1>
       )}
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { Route, Switch } from "react-router-dom";
 import routes from "./routes";
 import Axios from "axios";
@@ -19,28 +19,8 @@ import dotenv from "dotenv";
 import NotFound from "./Pages/main/NotFound";
 import Login from "./Pages/login/Login";
 import PostEdit from "./Pages/post/PostEdit";
+import { useUserId } from "./middleware";
 dotenv.config();
-
-// id와 username
-// const useUserId = () => {
-//   const [userId, setUserId] = useState({
-//     id: "",
-//     username: "",
-//   });
-
-//   const getUserId = async () => {
-//     try {
-//       await Axios.get("/auth/id").then((res) => setUserId(res.data));
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-//   useEffect(() => {
-//     getUserId();
-//   }, []);
-
-//   return { userId };
-// };
 
 function App() {
   // 모바일 resize 이벤트
@@ -53,35 +33,18 @@ function App() {
   const onChange = window.addEventListener("resize", handleWidth);
 
   // user 확인
-  const [user, setUser] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const axiosUser = async () => {
-    try {
-      await Axios.get("/auth").then((res) => {
-        setUser(res.data);
-        setLoading(true);
-      });
-    } catch (err) {
-      setUser(false);
-    }
-  };
-
-  useEffect(() => {
-    axiosUser();
-  }, []);
-
-  // 유저 확인 이벤트 (true면 유저임)
-  const userLogged = async () => {
-    try {
-      await Axios.post("/auth/logout").then((res) => setUser(res.data));
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const getUser = useUserId("/auth");
+  const { userId, loading } = getUser;
 
   const onClick = () => {
-    userLogged();
+    const userLogout = async () => {
+      try {
+        await Axios.post("/auth/logout");
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    userLogout();
     window.location.href = "/";
   };
 
@@ -91,7 +54,7 @@ function App() {
         <>
           <Nav
             width={width}
-            user={user}
+            userId={userId}
             onChange={onChange}
             onClick={onClick}
           ></Nav>
@@ -104,7 +67,7 @@ function App() {
             <Route path={routes.about} component={About}></Route>
             <Route path="/postdetail/:id" component={PostDetail}></Route>
             <Route path={"/edit/:id"} component={PostEdit} />
-            {user ? (
+            {userId ? (
               <Route path={routes.postwriting} component={PostWriting}></Route>
             ) : (
               <Route path={routes.postwriting}>

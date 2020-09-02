@@ -1,21 +1,11 @@
-import React, { useState, useEffect } from "react";
-import Axios from "axios";
+import React from "react";
 import FooterForm from "../../components/FooterForm";
 import PostForm from "../../components/main/PostForm";
+import { useGetPost } from "../../middleware";
 
 const Post = () => {
-  const [post, setPost] = useState({
-    title: "",
-    description: "",
-  });
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadData = async () => {
-      await Axios.get("/api").then((res) => setPost(res.data));
-    };
-    loadData().then(() => setLoading(false));
-  }, []);
+  const posting = useGetPost("/api");
+  const { post, loading } = posting;
 
   return (
     <>

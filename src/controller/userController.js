@@ -1,6 +1,5 @@
 import User from "../models/User";
 import passport from "passport";
-import Post from "../models/post";
 
 export const postRegister = async (req, res, next) => {
   const {
@@ -68,7 +67,7 @@ export const authId = async (req, res, next) => {
 export const logout = (req, res) => {
   try {
     req.logout();
-    res.send(false);
+    res.status(200).send(false);
   } catch (err) {
     console.log(err);
     res.status(400);
