@@ -20,6 +20,9 @@ import NotFound from "./Pages/main/NotFound";
 import Login from "./Pages/login/Login";
 import PostEdit from "./Pages/post/PostEdit";
 import { useUserId } from "./middleware";
+import { PortWriting } from "./Pages/portfolio/PortWriting";
+import { PortDetail } from "./Pages/portfolio/PortDetail";
+import { PortEdit } from "./Pages/portfolio/PortEdit";
 dotenv.config();
 
 function App() {
@@ -32,6 +35,7 @@ function App() {
 
   useEffect(() => {
     handleWidth();
+    // eslint-disable-next-line
   }, [width]);
 
   const onChange = window.addEventListener("resize", handleWidth);
@@ -90,6 +94,9 @@ function App() {
                 </h3>
               </Route>
             )}
+            <Route path="/portdetail/:id" component={PortDetail} />
+            <Route path="/portedit/:id" component={PortEdit} />
+            <Route path={routes.portwriting} component={PortWriting} />
             <Route component={NotFound} />
           </Switch>
         </>

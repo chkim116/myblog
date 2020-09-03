@@ -22,6 +22,7 @@ import userRouter from "./src/routers/userRouter";
 import "./src/models/post.js";
 import "./src/models/User.js";
 import "./passport";
+import portfolioRouter from "./src/routers/portfolioRouter";
 
 const app = express();
 const cookieStore = mongoStore(session);
@@ -54,6 +55,7 @@ app.use(express.static("client/build"));
 // }
 
 app.use("/api", postRouter);
+app.use("/port", portfolioRouter);
 app.use("/auth", userRouter);
 
 // server

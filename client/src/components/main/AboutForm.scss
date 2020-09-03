@@ -1,20 +1,38 @@
 @import "../../var";
 
 .about {
-  padding: 3em;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  min-height: 700px;
-  background-color: $tur;
+  z-index: -1;
+  pointer-events: none;
   width: 100%;
-  h1 {
-    padding: 1em;
-    color: white;
-  }
-  h3 {
-    padding: 1em;
-    color: $yellow;
+  div {
+    width: 100%;
+    min-height: 700px;
+    &.slide__one {
+      background: url("../../image/1.jpg") no-repeat center;
+      background-size: cover;
+      width: 100%;
+    }
+    &.slide__two {
+      width: 100%;
+      background: url("../../image/2.jpg") no-repeat center;
+      background-size: cover;
+    }
+    &.slide__three {
+      width: 100%;
+      background: url("../../image/3.jpg") no-repeat center;
+      background-size: cover;
+    }
+
+    h1 {
+      line-height: 200px;
+      margin-left: 5em;
+      padding-top: 4em;
+      color: white;
+    }
+    h3 {
+      margin-left: 8em;
+      color: $yellow;
+    }
   }
 }
 

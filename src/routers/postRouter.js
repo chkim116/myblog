@@ -10,6 +10,8 @@ import {
 const postRouter = express.Router();
 
 // /api/
+
+// post get ALL!
 postRouter.get("/", getPost);
 
 // post get by ID
@@ -18,7 +20,7 @@ postRouter.get("/:id", getPostById);
 // post Upload
 postRouter.post("/post", postPosting);
 
-// post Updata
+// post Update
 postRouter.post("/edit/:id", postEditing);
 
 // post delete

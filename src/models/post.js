@@ -6,7 +6,7 @@ const currentDate = `${dateNow.getFullYear()}-${
   dateNow.getMonth() + 1
 }-${dateNow.getDate()}`;
 
-const allDate = `${currentDate}-${
+export const allDate = `${currentDate}-${
   dateNow.getHours() < 10 ? `0${dateNow.getHours()}` : `${dateNow.getHours()}`
 }시${
   dateNow.getMinutes() < 10

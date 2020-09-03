@@ -11,7 +11,6 @@ const PostingForm = ({ onSubmit, onChange }) => {
           name="description"
           placeholder="description"
         ></textarea>
-        <input type="file" name="image" placeholder="image "></input>
         <input className="form__submit" type="submit" value="submit"></input>
       </form>
     </>

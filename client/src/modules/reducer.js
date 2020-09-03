@@ -1,15 +1,27 @@
 import { createAction, handleActions } from "redux-actions";
 
-export const increase = createAction("increase");
-export const decrease = createAction("decrease");
+export const green = createAction("green");
+export const red = createAction("red");
+export const blue = createAction("blue");
 
-const counter = { number: 0 };
+const initialState = { backgroundColor: "" };
+
 const reducer = handleActions(
   {
-    [increase]: (state, action) => ({ number: state.number + 1 }),
-    [decrease]: (state, action) => ({ number: state.number - 1 }),
+    [green]: (state, action) => ({
+      ...state,
+      backgroundColor: "#00b894",
+    }),
+    [red]: (state, action) => ({
+      ...state,
+      backgroundColor: "#d63031",
+    }),
+    [blue]: (state, action) => ({
+      ...state,
+      backgroundColor: "#0984e3",
+    }),
   },
-  counter
+  initialState
 );
 
 export default reducer;

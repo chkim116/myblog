@@ -1,0 +1,44 @@
+.port__detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 768px;
+  padding-top: 4em;
+  .port__btn {
+    display: flex;
+    a {
+      color: black;
+    }
+    .btn {
+      margin: 0 0.3em;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  h2 {
+    border: 1px solid black;
+    text-align: center;
+    width: 60%;
+    min-width: 450px;
+    margin-bottom: 0.8em;
+    padding: 0.3em;
+  }
+  .port__detail-desc {
+    padding: 2em;
+    width: 60%;
+    min-width: 450px;
+    min-height: 600px;
+    border: 1px solid black;
+    white-space: normal;
+    line-height: 30px;
+    // 보더 테두리 꾸미기
+  }
+  .port__detail-date {
+    margin-top: 0.3em;
+    color: rgba(0, 0, 0, 0.5);
+  }
+}

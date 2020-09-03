@@ -29,6 +29,7 @@ export const useUserId = (url) => {
   };
   useEffect(() => {
     getUserId();
+    // eslint-disable-next-line
   }, []);
 
   return { userId, loading };
@@ -55,7 +56,36 @@ export const useGetPost = (url) => {
 
   useEffect(() => {
     getPost();
+    // eslint-disable-next-line
   }, []);
 
   return { post, loading };
+};
+
+export const useGetPort = (url) => {
+  const [port, setport] = useState({
+    title: "",
+    description: "",
+    imgUrl: "",
+    createDate: "",
+    category: "",
+    creator: "",
+  });
+  const [loading, setLoading] = useState(false);
+
+  const getPort = async () => {
+    try {
+      await Axios.get(url).then((res) => setport(res.data));
+      setLoading(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getPort();
+    // eslint-disable-next-line
+  }, []);
+
+  return { port, loading };
 };

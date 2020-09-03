@@ -6,9 +6,7 @@ import { useUserId, useGetPost } from "../../middleware";
 
 const PostDetail = ({ history }) => {
   const { id } = useParams();
-
   // get Id
-
   const usersId = useUserId("/auth");
   const {
     userId: { id: userId },

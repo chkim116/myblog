@@ -9,16 +9,15 @@ const PostEditForm = ({ post, loading, onChange, onSubmit }) => {
           <input
             type="text"
             name="title"
-            placeholder="title"
             defaultValue={title}
+            placeholder="title"
           ></input>
           <textarea
             type="text"
             name="description"
-            placeholder="description"
             defaultValue={description}
+            placeholder="description"
           ></textarea>
-          <input type="file" name="image" placeholder="image "></input>
           <input className="form__submit" type="submit" value="update"></input>
         </form>
       ) : (

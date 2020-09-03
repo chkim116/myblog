@@ -13,6 +13,9 @@ const ADMIN = "/admin";
 const POSTWRITING = "/postwriting";
 const POSTDETAIL = "/postdetail";
 
+// port
+const PORTWRITING = "/portwriting";
+const PORTDETAIL = "/portdetail";
 const routes = {
   home: HOME,
   portfolio: PORTFOLIO,
@@ -24,6 +27,8 @@ const routes = {
   login: LOGIN,
   postwriting: POSTWRITING,
   postdetail: POSTDETAIL,
+  portwriting: PORTWRITING,
+  portdetail: PORTDETAIL,
 };
 
 export default routes;

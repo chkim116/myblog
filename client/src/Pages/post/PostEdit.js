@@ -12,12 +12,13 @@ const PostEdit = ({ history }) => {
   const { post, loading } = getPost;
 
   // update Post
-  const [updatePost, setUpdatePost] = useState("");
+  const [updatePost, setUpdatePost] = useState({
+    ...post,
+  });
   const [update, setUpdate] = useState(false);
 
   const { title, description, updated } = updatePost;
-
-  //   if update go post page
+  // if update go post page
   useEffect(() => {
     if (update) {
       history.push("/post");
@@ -26,7 +27,7 @@ const PostEdit = ({ history }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setUpdatePost({ ...post });
+    setUpdatePost({ ...updatePost });
     const axiosData = async () => {
       try {
         await Axios.post(`/api/edit/${id}`, {
@@ -42,7 +43,7 @@ const PostEdit = ({ history }) => {
   };
 
   const onChange = (e) => {
-    const { value, name } = e.target;
+    const { name, value } = e.target;
     setUpdatePost({
       ...post,
       [name]: value,
