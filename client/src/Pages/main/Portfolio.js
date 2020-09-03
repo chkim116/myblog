@@ -1,17 +1,19 @@
 import React from "react";
 import PortfolioForm from "../../components/main/PortfoiloForm";
 import FooterForm from "../../components/FooterForm";
-import { useGetPort } from "../../middleware";
+import { useGetPort, useUserId } from "../../middleware";
 
 const Portfolio = () => {
   const ports = useGetPort("/port");
   const { port, loading } = ports;
-
+  const getUser = useUserId("/auth");
+  const { userId } = getUser;
+  const { admin } = userId;
   return (
     <>
       {loading ? (
         <>
-          <PortfolioForm port={port}></PortfolioForm>
+          <PortfolioForm port={port} admin={admin}></PortfolioForm>
           <FooterForm />
         </>
       ) : (

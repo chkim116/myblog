@@ -6,7 +6,7 @@ export const postRegister = async (req, res, next) => {
     body: { username, email, password },
   } = req;
   try {
-    const user = await User({ username, email, password });
+    const user = await User({ username, email, password, admin: false });
     await User.register(user, password);
     next();
   } catch (err) {
@@ -41,10 +41,11 @@ export const auth = async (req, res, next) => {
   if (!loggedUser) {
     res.send(false);
   } else {
-    const { _id, username } = loggedUser;
+    const { _id, username, admin } = loggedUser;
     const user = {
       id: _id,
       username,
+      admin,
     };
     res.send(user);
   }

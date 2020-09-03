@@ -1,3 +1,5 @@
+@import "../../var";
+
 .post__detail {
   display: flex;
   flex-direction: column;
@@ -23,19 +25,23 @@
     border: 1px solid black;
     text-align: center;
     width: 60%;
-    min-width: 450px;
     margin-bottom: 0.8em;
     padding: 0.3em;
+    @media #{$phone} {
+      width: 90%;
+    }
   }
   .post__detail-desc {
     padding: 2em;
-    width: 60%;
-    min-width: 450px;
+    width: 70%;
     min-height: 600px;
     border: 1px solid black;
     white-space: normal;
     line-height: 30px;
     // 보더 테두리 꾸미기
+    @media #{$phone} {
+      width: 90%;
+    }
   }
   .post__detail-date {
     margin-top: 0.3em;

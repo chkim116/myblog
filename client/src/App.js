@@ -43,7 +43,7 @@ function App() {
   // user 확인
   const getUser = useUserId("/auth");
   const { userId, loading } = getUser;
-
+  const { admin } = userId;
   // userLogout
   const [logout, setLogout] = useState(false);
 
@@ -75,6 +75,7 @@ function App() {
             onClick={onClick}
             width={width}
             onChange={onChange}
+            admin={admin}
           ></Nav>
           <Switch>
             <Route exact path={routes.home} component={Home}></Route>
@@ -95,8 +96,17 @@ function App() {
               </Route>
             )}
             <Route path="/portdetail/:id" component={PortDetail} />
-            <Route path="/portedit/:id" component={PortEdit} />
-            <Route path={routes.portwriting} component={PortWriting} />
+            {admin ? (
+              <Route path="/portedit/:id" component={PortEdit} />
+            ) : (
+              <div className="error_title">관리자가 아닙니다.</div>
+            )}
+
+            {admin ? (
+              <Route path={routes.portwriting} component={PortWriting} />
+            ) : (
+              <div className="error_title">관리자가 아닙니다. </div>
+            )}
             <Route component={NotFound} />
           </Switch>
         </>

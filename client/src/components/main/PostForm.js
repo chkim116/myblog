@@ -19,10 +19,10 @@ const PostForm = ({ postObj, loading, onClick }) => {
             {post.map((p) => (
               <div className="post_form-type" key={p._id}>
                 <Link to={`/postdetail/${p._id}`}>
-                  <h2 className="post__form-title">
+                  <h3 className="post__form-title">
                     {p.title}
                     <small className="updated">{p.updated}</small>
-                  </h2>
+                  </h3>
                   <p className="post__form-desc">
                     {p.description.length > 300
                       ? p.description.slice(0, 150).concat("  ...더보기")

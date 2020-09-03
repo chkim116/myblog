@@ -1,5 +1,17 @@
 @import "../../var";
 
+.post {
+  text-align: right;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  min-height: 100px;
+  color: $tur;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .contents {
   padding-top: 3em;
   width: 100%;
@@ -31,8 +43,9 @@
       text-decoration: underline;
     }
     .post_thumbnail {
-      width: 250px;
-      height: 250px;
+      width: 100%;
+      height: auto;
+      max-height: 500px;
     }
     .post__title {
       padding: 0.5em 0;

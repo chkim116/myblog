@@ -4,7 +4,7 @@ import routes from "../routes";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Nav.scss";
 
-const Nav = ({ userId, onClick, width, onChange }) => {
+const Nav = ({ userId, onClick, width, onChange, admin }) => {
   const { username } = userId;
   const onClickNav = () => {
     const menu = document.querySelector(".header__menu");
@@ -46,7 +46,13 @@ const Nav = ({ userId, onClick, width, onChange }) => {
               <li className="menu__items" onClick={onClick}>
                 Logout
               </li>
-              <li className="username">{username}님 어서오세요</li>
+              {!admin ? (
+                <li className="username">{username}님 어서오세요</li>
+              ) : (
+                <li className="username">
+                  관리자님 어서오세요 아이디는 {username}입니다.
+                </li>
+              )}
             </>
           )}
         </nav>

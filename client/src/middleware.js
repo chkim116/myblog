@@ -16,6 +16,7 @@ export const useUserId = (url) => {
   const [userId, setUserId] = useState({
     id: "",
     username: "",
+    admin: false,
   });
   const [loading, setLoading] = useState(false);
 

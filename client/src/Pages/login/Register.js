@@ -24,7 +24,8 @@ const Register = ({ history }) => {
   };
 
   const onSubmit = (e) => {
-    if (password !== password2 || (username.length && password < 6)) {
+    // 하나씩 다 유효성 검사하기
+    if (password !== password2 || username.length < 6 || password < 6) {
       showMessage(e);
     } else {
       e.preventDefault();
@@ -38,8 +39,8 @@ const Register = ({ history }) => {
           }).then((res) => setUser(res.data));
           console.log(user);
         } catch (err) {
-          const ADMIN = "admin";
-          registerCheck(err, ADMIN, { history });
+          const REGISTER = "register";
+          registerCheck(err, REGISTER, { history });
         }
       };
       adminRegister();

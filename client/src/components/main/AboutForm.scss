@@ -10,27 +10,26 @@
     &.slide__one {
       background: url("../../image/1.jpg") no-repeat center;
       background-size: cover;
-      width: 100%;
     }
     &.slide__two {
-      width: 100%;
       background: url("../../image/2.jpg") no-repeat center;
       background-size: cover;
     }
     &.slide__three {
-      width: 100%;
       background: url("../../image/3.jpg") no-repeat center;
       background-size: cover;
     }
 
     h1 {
       line-height: 200px;
-      margin-left: 5em;
+      text-align: left;
+      margin-left: 3%;
       padding-top: 4em;
       color: white;
     }
     h3 {
-      margin-left: 8em;
+      margin-left: 3%;
+      text-align: left;
       color: $yellow;
     }
   }

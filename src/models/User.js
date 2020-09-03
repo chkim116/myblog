@@ -17,6 +17,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
     min: 6,
   },
+  admin: Boolean,
 });
 
 UserSchema.plugin(passportLocalMongoose, {

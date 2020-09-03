@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useGetPort } from "../../middleware";
-import { PostDetailForm } from "../../components/port/PostDetailForm";
+import { useGetPort, useUserId } from "../../middleware";
+import { PortDetailForm } from "../../components/port/PortDetailForm";
 import Axios from "axios";
 
 export const PortDetail = ({ history }) => {
   const { id } = useParams();
   const ports = useGetPort(`/port/${id}`);
   const { port, loading } = ports;
-
+  const loggedUser = useUserId("/auth");
+  const {
+    userId: { admin },
+  } = loggedUser;
   const [del, setDel] = useState(false);
   const onClick = () => {
     const deletePost = async () => {
@@ -29,7 +32,7 @@ export const PortDetail = ({ history }) => {
   return (
     <>
       {loading ? (
-        <PostDetailForm port={port} onClick={onClick} />
+        <PortDetailForm port={port} onClick={onClick} admin={admin} />
       ) : (
         <div className="loading__title">글을 불러오는 중입니다.</div>
       )}
