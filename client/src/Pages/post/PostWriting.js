@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PostingForm from "../../components/post/PostingForm";
 import Axios from "axios";
 
-const PostWriting = () => {
+const PostWriting = ({ history }) => {
   const initialState = {
     title: "",
     description: "",
@@ -49,7 +49,7 @@ const PostWriting = () => {
 
   useEffect(() => {
     if (loading) {
-      window.location.href = "/post";
+      history.push("/post");
     }
   });
 
