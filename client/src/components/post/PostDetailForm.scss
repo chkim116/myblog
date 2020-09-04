@@ -38,6 +38,7 @@
     border: 1px solid black;
     white-space: normal;
     line-height: 30px;
+    word-break: break-all;
     // 보더 테두리 꾸미기
     @media #{$phone} {
       width: 90%;

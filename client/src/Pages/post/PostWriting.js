@@ -37,6 +37,14 @@ const PostWriting = () => {
     });
   };
 
+  const onValue = (content, delta, source, editor) => {
+    const text = editor.getHTML();
+    setPost({
+      ...post,
+      description: text,
+    });
+  };
+
   useEffect(() => {
     if (loading) {
       window.location.href = "/post";
@@ -48,6 +56,7 @@ const PostWriting = () => {
       onSubmit={onSubmit}
       onChange={onChange}
       title={title}
+      onValue={onValue}
       description={description}
     ></PostingForm>
   );

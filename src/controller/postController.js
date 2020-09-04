@@ -42,8 +42,11 @@ export const postEditing = async (req, res) => {
   const { id } = req.params;
   const { title, description, updated } = req.body;
   try {
-    await Post.findOneAndUpdate({ _id: id }, { title, description, updated });
-    res.status(200).send(true);
+    const post = await Post.findOneAndUpdate(
+      { _id: id },
+      { title, description, updated }
+    );
+    res.status(200).send(post);
   } catch (err) {
     res.status(400).send(false);
     console.log(err);

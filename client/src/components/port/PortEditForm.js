@@ -26,7 +26,7 @@ export const PortEditForm = ({ port, onChange, onSubmit }) => {
           placeholder="태그"
           defaultValue={category}
         />
-        <input className="form__submit" type="submit" value="submit"></input>
+        <input className="form__submit" type="submit" value="UPDATE"></input>
       </form>
     </>
   );

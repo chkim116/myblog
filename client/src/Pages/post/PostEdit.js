@@ -9,16 +9,26 @@ const PostEdit = ({ history }) => {
 
   //   get post
   const getPost = useGetPost(`/api/${id}`);
-  const { post, loading } = getPost;
+  const { post } = getPost;
+
+  const [updatePost, setUpdatePost] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const getPost = async () => {
+      try {
+        await Axios.get(`/api/${id}`).then((res) => setUpdatePost(res.data));
+        setLoading(true);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getPost();
+  }, []);
 
   // update Post
-  const [updatePost, setUpdatePost] = useState({
-    ...post,
-  });
   const [update, setUpdate] = useState(false);
-
   const { title, description, updated } = updatePost;
-
   const onSubmit = (e) => {
     e.preventDefault();
     setUpdatePost({ ...updatePost });
@@ -28,19 +38,30 @@ const PostEdit = ({ history }) => {
           title,
           description,
           updated,
-        }).then((res) => setUpdate(res.data));
+        }).then((res) => setUpdatePost({ ...updatePost, updated: "(수정됨)" }));
       } catch (err) {
         console.log(err);
       }
+      setUpdate(true);
     };
     axiosData();
+    console.log(updatePost);
   };
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setUpdatePost({
-      ...post,
+      ...updatePost,
       [name]: value,
+      updated: "(수정됨)",
+    });
+  };
+
+  const onValue = (content, delta, source, editor) => {
+    const text = editor.getHTML();
+    setUpdatePost({
+      ...updatePost,
+      description: text,
       updated: "(수정됨)",
     });
   };
@@ -58,6 +79,7 @@ const PostEdit = ({ history }) => {
       loading={loading}
       onSubmit={onSubmit}
       onChange={onChange}
+      onValue={onValue}
     ></PostEditForm>
   );
 };

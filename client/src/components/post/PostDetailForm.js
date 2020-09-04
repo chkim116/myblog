@@ -24,18 +24,21 @@ const PostDetailForm = ({ postObj, loading, onClick, userId }) => {
           )}
         </div>
         <h2 className="post__detail-title">{title}</h2>
-        <p className="post__detail-desc">
-          {description.split("\n").map((text, key) => {
+        <p
+          className="post__detail-desc"
+          dangerouslySetInnerHTML={{ __html: description }}
+        >
+          {/* {description.split("\n").map((text, key) => {
             return (
               <span key={key}>
                 {text}
                 <br />
               </span>
             );
-          })}
+          })} */}
         </p>
         <p className="post__detail-date">
-          <small>Upload By: {createDate}</small>
+          <small>Uploaded: {createDate}</small>
         </p>
       </div>
     </>

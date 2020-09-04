@@ -7,14 +7,28 @@ import Axios from "axios";
 export const PortEdit = ({ history }) => {
   const { id } = useParams();
   const ports = useGetPort(`/port/${id}`);
-  const { port, loading } = ports;
+  const { port } = ports;
 
-  const [updated, setUpdated] = useState({ ...port, update: "" });
+  const [updated, setUpdated] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const getPort = async () => {
+      try {
+        await Axios.get(`/port/${id}`).then((res) => setUpdated(res.data));
+        setLoading(true);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getPort();
+  }, []);
+
   const { title, description, imgUrl, category, createDate, update } = updated;
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setUpdated({ ...setUpdated });
+    setUpdated({ ...updated });
     const updatePort = async () => {
       await Axios.post(`/port/edit/${id}`, {
         title,
@@ -29,8 +43,7 @@ export const PortEdit = ({ history }) => {
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    setUpdated({ ...port, [name]: value });
-    console.log(updated);
+    setUpdated({ ...updated, [name]: value });
   };
 
   useEffect(() => {

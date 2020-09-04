@@ -19,6 +19,13 @@ export const PortWriting = ({ history }) => {
     const { name, value } = e.target;
     setPort({ ...port, [name]: value });
   };
+  const onValue = (content, delta, source, editor) => {
+    const text = editor.getHTML();
+    setPort({
+      ...port,
+      description: text,
+    });
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -47,7 +54,11 @@ export const PortWriting = ({ history }) => {
 
   return (
     <>
-      <PortWritingForm onChange={onChange} onSubmit={onSubmit} />
+      <PortWritingForm
+        onChange={onChange}
+        onSubmit={onSubmit}
+        onValue={onValue}
+      />
     </>
   );
 };

@@ -5,6 +5,7 @@ import "./PortDetailForm.scss";
 
 export const PortDetailForm = ({ port, onClick, admin }) => {
   const { title, description, imgUrl, createDate, category, _id } = port;
+
   return (
     <>
       <div className="port__detail" key={_id}>
@@ -38,7 +39,7 @@ export const PortDetailForm = ({ port, onClick, admin }) => {
           <BsHammer />
           {createDate}
         </p>
-        <small>categories: {category}</small>
+        <small>Categories: {category}</small>
         <p className="port__detail-date">
           <small>Upload By: Kim</small>
         </p>

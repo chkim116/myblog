@@ -2,10 +2,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Route, Switch } from "react-router-dom";
 import routes from "./routes";
 import Axios from "axios";
-
+import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.bubble.css";
 // scss
 import "./loading.scss";
-
 // page
 import Nav from "./components/Nav";
 import Home from "./Pages/main/Home";
