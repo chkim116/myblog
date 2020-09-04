@@ -5,6 +5,7 @@ import {
   getPostById,
   postEditing,
   postDeleting,
+  getAllPost,
 } from "../controller/postController";
 
 const postRouter = express.Router();
@@ -12,11 +13,11 @@ const postRouter = express.Router();
 // /api/
 
 // post get ALL!
-postRouter.get("/", getPost);
+postRouter.get("/" || "?page", getPost);
 
+postRouter.get("/all", getAllPost);
 // post get by ID
 postRouter.get("/:id", getPostById);
-
 // post Upload
 postRouter.post("/post", postPosting);
 

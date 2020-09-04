@@ -1,6 +1,25 @@
 import Post from "../models/post.js";
 
 export const getPost = async (req, res) => {
+  const page = parseInt(req.query.page || "1");
+  if (page < 1) {
+    res.status(400).send("페이지 에러");
+    return;
+  }
+  try {
+    const post = await Post.find({})
+      .sort({ _id: -1 })
+      .limit(3)
+      .skip((page - 1) * 3)
+      .exec();
+    const postCount = await Post.countDocuments().exec();
+    res.set("Last-Page", Math.ceil(postCount / 3)).send(post);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllPost = async (req, res) => {
   try {
     const post = await Post.find({}).sort({ _id: -1 });
     res.send(post);

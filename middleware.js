@@ -1,5 +1,5 @@
-export async function paginations(model) {
-  return (req, res, next) => {
+export function paginations(model) {
+  return async (req, res, next) => {
     const page = parseInt(req.query.page);
     const limit = parseInt(req.query.limit);
 
@@ -7,7 +7,7 @@ export async function paginations(model) {
     const endIndex = page * limit;
     const results = {};
 
-    if (endIndex < await model.countDocuments().exec()) {
+    if (endIndex < (await model.countDocuments().exec())) {
       results.next = {
         page: page + 1,
         limit: limit,
@@ -21,11 +21,10 @@ export async function paginations(model) {
     }
 
     try {
-        results.results = await model.find().limit(limit).skip(startIndex).exec();
-        res.paginations = results;
-        next();
+      results.results = await model.find().limit(limit).skip(startIndex).exec();
+      res.paginations = results;
     } catch (err) {
-        console.log(err)
+      console.log(err).send("err");
     }
   };
 }

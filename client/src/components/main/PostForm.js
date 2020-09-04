@@ -2,10 +2,17 @@ import React from "react";
 import "./PostForm.scss";
 import { Link } from "react-router-dom";
 import routes from "../../routes";
+import { PostPagination } from "../post/PostPagination";
 
-const PostForm = ({ postObj, loading, onClick }) => {
+const PostForm = ({
+  postObj,
+  loading,
+  onClick,
+  handleChange,
+  page,
+  postLength,
+}) => {
   const { post } = postObj;
-
   return (
     <>
       {loading ? (
@@ -38,7 +45,13 @@ const PostForm = ({ postObj, loading, onClick }) => {
               </div>
             ))}
           </div>
-          <div className="post__form-page">페이지 넘기기</div>
+          <div className="post__form-page">
+            <PostPagination
+              handleChange={handleChange}
+              page={page}
+              postLength={postLength}
+            ></PostPagination>
+          </div>
         </div>
       ) : (
         <h1 className="loading__title">글을 불러오는 중입니다.</h1>
