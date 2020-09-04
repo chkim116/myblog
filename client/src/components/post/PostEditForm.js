@@ -1,4 +1,5 @@
 import React from "react";
+import "./PostingForm.scss";
 
 const PostEditForm = ({ post, loading, onChange, onSubmit }) => {
   const { title, description } = post;

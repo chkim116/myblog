@@ -31,9 +31,6 @@ const PostDetail = ({ history }) => {
     if (del) {
       history.push("/post");
     }
-    return () => {
-      setDel(false);
-    };
   });
 
   return (

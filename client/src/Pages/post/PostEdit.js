@@ -18,12 +18,6 @@ const PostEdit = ({ history }) => {
   const [update, setUpdate] = useState(false);
 
   const { title, description, updated } = updatePost;
-  // if update go post page
-  useEffect(() => {
-    if (update) {
-      history.push("/post");
-    }
-  });
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -50,6 +44,13 @@ const PostEdit = ({ history }) => {
       updated: "(수정됨)",
     });
   };
+
+  // if update go post page
+  useEffect(() => {
+    if (update) {
+      history.push("/post");
+    }
+  });
 
   return (
     <PostEditForm

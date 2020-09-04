@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./PortWritingForm.scss";
 export const PortEditForm = ({ port, onChange, onSubmit }) => {
   const { title, description, category, createDate } = port;
   return (

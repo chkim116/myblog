@@ -20,26 +20,38 @@ const Nav = ({ userId, onClick, width, onChange, admin }) => {
           </Link>
         </li>
         <nav className="header__menu">
-          <li className="menu__items" onClick={onClickNav}>
-            <Link to={routes.home}>Home</Link>
-          </li>
-          <li className="menu__items" onClick={onClickNav}>
-            <Link to={routes.portfolio}>Portfolio</Link>
-          </li>
-          <li className="menu__items" onClick={onClickNav}>
-            <Link to={routes.post}>Post</Link>
-          </li>
-          <li className="menu__items" onClick={onClickNav}>
-            <Link to={routes.about}>About Me</Link>
-          </li>
+          <Link to={routes.home} className="menu__items" onClick={onClickNav}>
+            <li>Home</li>
+          </Link>
+          <Link
+            to={routes.portfolio}
+            className="menu__items"
+            onClick={onClickNav}
+          >
+            <li>Portfolio</li>
+          </Link>
+          <Link to={routes.post} className="menu__items" onClick={onClickNav}>
+            <li>Post</li>
+          </Link>
+          <Link to={routes.about} className="menu__items" onClick={onClickNav}>
+            <li>About Me</li>
+          </Link>
           {!username ? (
             <>
-              <li className="menu__items" onClick={onClickNav}>
-                <Link to={routes.login}>Login</Link>
-              </li>
-              <li className="menu__items" onClick={onClickNav}>
-                <Link to={routes.register}>Register</Link>
-              </li>
+              <Link
+                to={routes.login}
+                className="menu__items"
+                onClick={onClickNav}
+              >
+                <li>Login</li>
+              </Link>
+              <Link
+                to={routes.register}
+                className="menu__items"
+                onClick={onClickNav}
+              >
+                <li>Register</li>
+              </Link>
             </>
           ) : (
             <>

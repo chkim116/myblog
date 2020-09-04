@@ -24,9 +24,6 @@ export const PortDetail = ({ history }) => {
     if (del) {
       history.push("/portfolio");
     }
-    return () => {
-      setDel(false);
-    };
   });
 
   return (

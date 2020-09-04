@@ -27,18 +27,18 @@ export const PortEdit = ({ history }) => {
     updatePort();
   };
 
-  useEffect(() => {
-    if (update) {
-      history.push("/portfolio");
-    }
-    // eslint-disable-next-line
-  }, [update]);
-
   const onChange = (e) => {
     const { name, value } = e.target;
     setUpdated({ ...port, [name]: value });
     console.log(updated);
   };
+
+  useEffect(() => {
+    if (update) {
+      history.push("/portfolio");
+    }
+    // eslint-disable-next-line
+  });
 
   return (
     <>

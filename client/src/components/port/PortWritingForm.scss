@@ -16,6 +16,9 @@
     padding: 0.8em 1em;
     width: 500px;
     margin-bottom: 1em;
+    @media #{$phone} {
+      width: 80%;
+    }
   }
   input[type="file"] {
     padding: 1em;
@@ -35,5 +38,8 @@
     width: 500px;
     padding: 1em;
     min-height: 550px;
+    @media #{$phone} {
+      width: 80%;
+    }
   }
 }

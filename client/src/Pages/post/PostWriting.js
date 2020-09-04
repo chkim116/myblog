@@ -41,9 +41,6 @@ const PostWriting = () => {
     if (loading) {
       window.location.href = "/post";
     }
-    return () => {
-      setLoading(false);
-    };
   });
 
   return (

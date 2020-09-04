@@ -8,6 +8,7 @@ header {
   height: 45px;
   font-size: 14px;
   background: $blackShadow;
+  z-index: 4;
   .header__menu {
     display: flex;
     .menu__items {
@@ -15,14 +16,6 @@ header {
       cursor: pointer;
       color: white;
       font-weight: bold;
-      a {
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        &:hover {
-          color: $pink;
-        }
-      }
       &:hover {
         color: $pink;
       }
@@ -40,23 +33,18 @@ header {
         display: block;
       }
       .menu__items {
-        margin: 1em 0;
         color: white;
         width: 100%;
         text-align: center;
         font-weight: bold;
-        padding: 1em;
         cursor: pointer;
-        a {
-          color: white;
-          font-weight: bold;
+
+        li {
+          padding: 1em;
+          width: 100%;
           &:hover {
-            color: $pink;
+            background: $tur;
           }
-        }
-        &:hover {
-          color: $pink;
-          background: $tur;
         }
       }
     }
