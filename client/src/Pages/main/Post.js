@@ -22,7 +22,7 @@ const Post = ({ location, history }) => {
   const getPost = (url) => {
     const pagePost = async () => {
       try {
-        const getPagePost = await Axios.get(`/api${url}`).then(
+        const getPagePost = await Axios.get(url ? `/api${url}` : "/api").then(
           (res) => res.data
         );
         setPost(getPagePost);
@@ -59,14 +59,7 @@ const Post = ({ location, history }) => {
     const { selected } = e;
     setPage({ query: `?page=${selected + 1}` });
     history.push(`/post?page=${selected + 1}`);
-    console.log(`누른 버튼은 ${selected + 1}`);
   };
-
-  console.log(
-    `page : ${page.query}`,
-    `post : ${post.length}`,
-    `페이지 넘버 ${postLength}`
-  );
 
   return (
     <>

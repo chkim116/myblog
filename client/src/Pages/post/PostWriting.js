@@ -17,16 +17,18 @@ const PostWriting = () => {
     e.preventDefault();
     setPost({ ...post });
     const axiosData = async () => {
-      await Axios.post("/api/post", {
-        title,
-        description,
-        updated,
-      }).catch((err) => {
+      try {
+        await Axios.post("/api/post", {
+          title,
+          description,
+          updated,
+        });
+        setLoading(true);
+      } catch (err) {
         console.log(err);
-      });
+      }
     };
     axiosData();
-    setLoading(true);
   };
 
   const onChange = (e) => {
