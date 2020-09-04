@@ -3,7 +3,7 @@ import session from "express-session";
 import passport from "passport";
 import mongoose from "mongoose";
 import mongoStore from "connect-mongo";
-
+import path from "path";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import morgan from "morgan";
@@ -16,9 +16,7 @@ dotenv.config();
 
 import postRouter from "./src/routers/postRouter";
 import userRouter from "./src/routers/userRouter";
-
 // Schema
-
 import "./src/models/post.js";
 import "./src/models/User.js";
 import "./passport";
@@ -48,10 +46,11 @@ app.use(passport.session());
 //   process.env.NODE_ENV === "production" ||
 //   process.env.NODE_ENV === "staging"
 // ) {
-app.use(express.static("client/build"));
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname + "/client/build/index.html"));
-//   });
+app.use(express.static("./client/public"));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client", "build", "index.html"));
+});
 // }
 
 app.use("/api", postRouter);

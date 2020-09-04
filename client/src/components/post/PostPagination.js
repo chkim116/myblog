@@ -16,6 +16,7 @@ export const PostPagination = ({ handleChange, page, postLength }) => {
         containerClassName={"pagination"}
         subContainerClassName={"pages pagination"}
         activeClassName={"active"}
+        // forcePage={}
       ></ReactPaginate>
     </>
   );

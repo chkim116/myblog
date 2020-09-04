@@ -59,6 +59,7 @@ const Post = ({ location, history }) => {
     const { selected } = e;
     setPage({ query: `?page=${selected + 1}` });
     history.push(`/post?page=${selected + 1}`);
+    // forcepage 활용해서 선택한 값 저장해놓기
   };
 
   return (
