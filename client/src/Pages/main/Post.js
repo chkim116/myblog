@@ -6,8 +6,10 @@ import Axios from "axios";
 const Post = ({ location, history }) => {
   // url에 따른 포스트 호출
   const [page, setPage] = useState({ query: location.search });
-  const [select, setSelect] = useState({ selecting: 1 });
   const { query } = page;
+
+  // 눌렀던 번호를 쿼리에 맞춰 설정
+  const [select, setSelect] = useState({ selecting: 0 });
   const { selecting } = select;
   // query url에 따른 보여주는 포스트
   const [post, setPost] = useState({
@@ -22,12 +24,12 @@ const Post = ({ location, history }) => {
   const [loading, setLoading] = useState(false);
 
   // get post query 부분만
-  const getPost = (url) => {
+  const getPost = (query) => {
     const pagePost = async () => {
       try {
-        const getPagePost = await Axios.get(url ? `/api${url}` : "/api").then(
-          (res) => res.data
-        );
+        const getPagePost = await Axios.get(
+          query ? `/api${query}` : "/api"
+        ).then((res) => res.data);
         setPost(getPagePost);
         setLoading(true);
         document.getElementById("root").scrollIntoView({ behavior: "smooth" });
@@ -64,7 +66,6 @@ const Post = ({ location, history }) => {
     const { selected } = e;
     setPage({ query: `?page=${selected + 1}` });
     history.push(`/post?page=${selected + 1}`);
-    // forcepage 활용해서 선택한 값 저장해놓기
   };
 
   return (

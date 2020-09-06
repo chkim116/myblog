@@ -6,12 +6,19 @@ import Axios from "axios";
 
 export const PortDetail = ({ history }) => {
   const { id } = useParams();
+
+  // get portfolio
   const ports = useGetPort(`/port/${id}`);
   const { port, loading } = ports;
+
+  // admin auth
   const loggedUser = useUserId("/auth");
   const {
     userId: { admin },
   } = loggedUser;
+
+  //  delete auth
+
   const [del, setDel] = useState(false);
   const onClick = () => {
     const deletePost = async () => {

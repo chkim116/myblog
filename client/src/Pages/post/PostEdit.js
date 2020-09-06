@@ -15,6 +15,7 @@ const PostEdit = ({ history }) => {
   const [update, setUpdate] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // get previous post value
   useEffect(() => {
     const getPost = async () => {
       try {

@@ -10,7 +10,6 @@ const PostForm = ({
   loading,
   onClick,
   handleChange,
-  page,
   postLength,
 }) => {
   const { post } = postObj;
@@ -49,7 +48,6 @@ const PostForm = ({
           <div className="post__form-page">
             <PostPagination
               handleChange={handleChange}
-              page={page}
               postLength={postLength}
               select={select}
             ></PostPagination>

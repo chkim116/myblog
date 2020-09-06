@@ -52,6 +52,29 @@
 
 // pagination
 
-.active {
-  border: 1px solid black;
+.pagination {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  a {
+    outline: none;
+  }
+  .previous,
+  .next {
+    cursor: pointer;
+    margin: 0 0.25em;
+  }
+  .page-btn {
+    padding: 0.15em;
+    cursor: pointer;
+    a {
+      padding: 0.35em;
+    }
+  }
+
+  .active {
+    border: 1px solid black;
+    background: $blackShadow;
+  }
 }

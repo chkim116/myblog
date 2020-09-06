@@ -24,7 +24,7 @@ const PortfolioForm = ({ port, admin }) => {
                 <BsHammer />
                 {p.createDate}
               </h4>
-              <small>Categories{p.category}</small>
+              <small>Categories: {p.category}</small>
             </Link>
           </div>
         ))}

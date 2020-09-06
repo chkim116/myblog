@@ -5,8 +5,8 @@ export const PostPagination = ({ handleChange, postLength, select }) => {
   return (
     <>
       <ReactPaginate
-        previousLabel={"previous"}
-        nextLabel={"next"}
+        previousLabel={"이전"}
+        nextLabel={"다음"}
         breakLabel={"..."}
         breakClassName={"break-me"}
         pageCount={postLength}
@@ -15,6 +15,7 @@ export const PostPagination = ({ handleChange, postLength, select }) => {
         onPageChange={handleChange}
         containerClassName={"pagination"}
         subContainerClassName={"pages pagination"}
+        pageClassName={"page-btn"}
         activeClassName={"active"}
         forcePage={select}
       ></ReactPaginate>

@@ -11,6 +11,15 @@ const PostDetailForm = ({ postObj, loading, onClick, userId }) => {
   return (
     <>
       <div className="post__detail" key={_id}>
+        <div
+          className="previous"
+          onClick={() => {
+            window.history.back();
+          }}
+        >
+          뒤로가기
+        </div>
+
         <div className="post__btn">
           {userId === creator && (
             <>
