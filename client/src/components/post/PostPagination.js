@@ -1,7 +1,7 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 
-export const PostPagination = ({ handleChange, page, postLength }) => {
+export const PostPagination = ({ handleChange, postLength, select }) => {
   return (
     <>
       <ReactPaginate
@@ -16,7 +16,7 @@ export const PostPagination = ({ handleChange, page, postLength }) => {
         containerClassName={"pagination"}
         subContainerClassName={"pages pagination"}
         activeClassName={"active"}
-        // forcePage={}
+        forcePage={select}
       ></ReactPaginate>
     </>
   );

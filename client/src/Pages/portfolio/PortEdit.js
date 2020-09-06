@@ -6,12 +6,15 @@ import Axios from "axios";
 
 export const PortEdit = ({ history }) => {
   const { id } = useParams();
+
+  // get portfolio
   const ports = useGetPort(`/port/${id}`);
   const { port } = ports;
 
   const [updated, setUpdated] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // get previous portfolio value
   useEffect(() => {
     const getPort = async () => {
       try {
@@ -24,8 +27,8 @@ export const PortEdit = ({ history }) => {
     getPort();
   }, []);
 
+  // updated portfolio
   const { title, description, imgUrl, category, createDate, update } = updated;
-
   const onSubmit = (e) => {
     e.preventDefault();
     setUpdated({ ...updated });
@@ -53,15 +56,15 @@ export const PortEdit = ({ history }) => {
     // eslint-disable-next-line
   });
 
+  if (!loading) {
+    return (
+      <div className="loading__title">디테일 화면 페이지로 이동 중입니다.</div>
+    );
+  }
+
   return (
     <>
-      {loading ? (
-        <PortEditForm port={port} onChange={onChange} onSubmit={onSubmit} />
-      ) : (
-        <div className="loading__title">
-          디테일 화면 페이지로 이동 중입니다.
-        </div>
-      )}
+      <PortEditForm port={port} onChange={onChange} onSubmit={onSubmit} />
     </>
   );
 };

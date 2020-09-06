@@ -44,6 +44,7 @@ function App() {
   const getUser = useUserId("/auth");
   const { userId, loading } = getUser;
   const { admin } = userId;
+
   // userLogout
   const [logout, setLogout] = useState(false);
 

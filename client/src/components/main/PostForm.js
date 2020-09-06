@@ -5,6 +5,7 @@ import routes from "../../routes";
 import { PostPagination } from "../post/PostPagination";
 
 const PostForm = ({
+  select,
   postObj,
   loading,
   onClick,
@@ -50,6 +51,7 @@ const PostForm = ({
               handleChange={handleChange}
               page={page}
               postLength={postLength}
+              select={select}
             ></PostPagination>
           </div>
         </div>

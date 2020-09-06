@@ -4,21 +4,24 @@ import PostForm from "../../components/main/PostForm";
 import Axios from "axios";
 
 const Post = ({ location, history }) => {
-  // 포스트의 총 개수
-  // url에 따른 포스트 호출 (인자는 이게 필요하다.)
+  // url에 따른 포스트 호출
   const [page, setPage] = useState({ query: location.search });
-
+  const [select, setSelect] = useState({ selecting: 1 });
   const { query } = page;
-
+  const { selecting } = select;
+  // query url에 따른 보여주는 포스트
   const [post, setPost] = useState({
     title: "",
     description: "",
     updated: "",
     creator: "",
   });
+
+  // 등록된 포스트의 총 길이 ( limit 5 )
   const [postLength, setPostLenght] = useState();
   const [loading, setLoading] = useState(false);
 
+  // get post query 부분만
   const getPost = (url) => {
     const pagePost = async () => {
       try {
@@ -35,6 +38,7 @@ const Post = ({ location, history }) => {
     pagePost();
   };
 
+  // get all post / 5, 페이지의 수를 파악하기 위해 불러옴
   const getAllPost = () => {
     const AllPost = async () => {
       try {
@@ -49,6 +53,7 @@ const Post = ({ location, history }) => {
 
   useEffect(() => {
     getPost(query);
+    setSelect({ selecting: query ? parseInt(query.split("=")[1] - 1) : 0 });
   }, [query]);
 
   useEffect(() => {
@@ -70,6 +75,7 @@ const Post = ({ location, history }) => {
         postLength={postLength}
         page={page}
         handleChange={handleChange}
+        select={selecting}
       />
       <FooterForm />
     </>

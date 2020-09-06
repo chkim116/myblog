@@ -12,6 +12,7 @@ const PostEdit = ({ history }) => {
   const { post } = getPost;
 
   const [updatePost, setUpdatePost] = useState("");
+  const [update, setUpdate] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -27,7 +28,6 @@ const PostEdit = ({ history }) => {
   }, []);
 
   // update Post
-  const [update, setUpdate] = useState(false);
   const { title, description, updated } = updatePost;
   const onSubmit = (e) => {
     e.preventDefault();
@@ -38,14 +38,13 @@ const PostEdit = ({ history }) => {
           title,
           description,
           updated,
-        }).then((res) => setUpdatePost({ ...updatePost, updated: "(수정됨)" }));
+        }).then((res) => setUpdatePost({ ...updatePost }));
       } catch (err) {
         console.log(err);
       }
       setUpdate(true);
     };
     axiosData();
-    console.log(updatePost);
   };
 
   const onChange = (e) => {
