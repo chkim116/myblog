@@ -60,3 +60,5 @@
 - [x] @hapi/joi를 이용한 회원가입 유효성 검사 구현
 - [x] Bcrypt를 이용한 비밀번호 해쉬화
 - [x] React-tooltip으로 스택 설명 구현
+- [x] viewPort 수정
+- [x] 로딩 기능
