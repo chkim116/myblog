@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useGetPort, useUserId } from "../../middleware";
 import { PortDetailForm } from "../../components/port/PortDetailForm";
 import Axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 export const PortDetail = ({ history }) => {
   const { id } = useParams();
@@ -35,6 +36,9 @@ export const PortDetail = ({ history }) => {
 
   return (
     <>
+      <Helmet>
+        <title>My Blog | {port.title}</title>
+      </Helmet>
       {loading ? (
         <PortDetailForm port={port} onClick={onClick} admin={admin} />
       ) : (

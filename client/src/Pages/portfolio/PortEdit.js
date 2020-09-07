@@ -3,6 +3,7 @@ import { PortEditForm } from "../../components/port/PortEditForm";
 import { useGetPort } from "../../middleware";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 export const PortEdit = ({ history }) => {
   const { id } = useParams();
@@ -64,6 +65,9 @@ export const PortEdit = ({ history }) => {
 
   return (
     <>
+      <Helmet>
+        <title>My Blog | 수정 {port.title}</title>
+      </Helmet>
       <PortEditForm port={port} onChange={onChange} onSubmit={onSubmit} />
     </>
   );

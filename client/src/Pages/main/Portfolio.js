@@ -2,6 +2,7 @@ import React from "react";
 import PortfolioForm from "../../components/main/PortfoiloForm";
 import FooterForm from "../../components/FooterForm";
 import { useGetPort, useUserId } from "../../middleware";
+import { Helmet } from "react-helmet-async";
 
 const Portfolio = () => {
   const ports = useGetPort("/port");
@@ -11,6 +12,9 @@ const Portfolio = () => {
   const { admin } = userId;
   return (
     <>
+      <Helmet>
+        <title>My Blog | PortFolio</title>
+      </Helmet>
       {loading ? (
         <>
           <PortfolioForm port={port} admin={admin}></PortfolioForm>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Route, Switch } from "react-router-dom";
 import routes from "./routes";
 import Axios from "axios";
+import { Helmet } from "react-helmet-async";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
 // scss
@@ -23,6 +24,7 @@ import { useUserId } from "./middleware";
 import { PortWriting } from "./Pages/portfolio/PortWriting";
 import { PortDetail } from "./Pages/portfolio/PortDetail";
 import { PortEdit } from "./Pages/portfolio/PortEdit";
+import { Contact } from "./Pages/main/Contact";
 dotenv.config();
 
 function App() {
@@ -70,48 +72,51 @@ function App() {
   }
   return (
     <>
-      <>
-        <Nav
-          userId={userId}
-          logout={logout}
-          onClick={onClick}
-          width={width}
-          onChange={onChange}
-          admin={admin}
-        ></Nav>
-        <Switch>
-          <Route exact path={routes.home} component={Home}></Route>
-          <Route path={routes.register} component={Register}></Route>
-          <Route path={routes.login} component={Login}></Route>
-          <Route path={routes.portfolio} component={Portfolio}></Route>
-          <Route path={routes.post} component={Post}></Route>
-          <Route path={routes.about} component={About}></Route>
-          <Route path="/postdetail/:id" component={PostDetail}></Route>
-          <Route path={"/edit/:id"} component={PostEdit} />
-          {userId ? (
-            <Route path={routes.postwriting} component={PostWriting}></Route>
-          ) : (
-            <Route path={routes.postwriting}>
-              <h3 className="error__title">
-                로그인을 하셔야 포스팅을 하실 수 있습니다.
-              </h3>
-            </Route>
-          )}
-          <Route path="/portdetail/:id" component={PortDetail} />
-          {admin ? (
-            <Route path="/portedit/:id" component={PortEdit} />
-          ) : (
-            <div className="error_title">관리자가 아닙니다.</div>
-          )}
+      <Helmet>
+        <title>My Blog | Home</title>
+      </Helmet>
+      <Nav
+        userId={userId}
+        logout={logout}
+        onClick={onClick}
+        width={width}
+        onChange={onChange}
+        admin={admin}
+      ></Nav>
+      <Switch>
+        <Route exact path={routes.home} component={Home}></Route>
+        <Route path={routes.register} component={Register}></Route>
+        <Route path={routes.login} component={Login}></Route>
+        <Route path={routes.portfolio} component={Portfolio}></Route>
+        <Route path={routes.post} component={Post}></Route>
+        <Route path={routes.about} component={About}></Route>
+        <Route path="/postdetail/:id" component={PostDetail}></Route>
+        <Route path={"/edit/:id"} component={PostEdit} />
+        {userId ? (
+          <Route path={routes.postwriting} component={PostWriting}></Route>
+        ) : (
+          <Route path={routes.postwriting}>
+            <h3 className="error__title">
+              로그인을 하셔야 포스팅을 하실 수 있습니다.
+            </h3>
+          </Route>
+        )}
+        <Route path="/portdetail/:id" component={PortDetail} />
+        {admin ? (
+          <Route path="/portedit/:id" component={PortEdit} />
+        ) : (
+          <div className="error_title">관리자가 아닙니다.</div>
+        )}
 
-          {admin ? (
-            <Route path={routes.portwriting} component={PortWriting} />
-          ) : (
-            <div className="error_title">관리자가 아닙니다. </div>
-          )}
-          <Route component={NotFound} />
-        </Switch>
-      </>
+        {admin ? (
+          <Route path={routes.portwriting} component={PortWriting} />
+        ) : (
+          <div className="error_title">관리자가 아닙니다. </div>
+        )}
+
+        <Route path={"/contact"} component={Contact} />
+        <Route component={NotFound} />
+      </Switch>
     </>
   );
 }

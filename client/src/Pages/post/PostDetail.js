@@ -3,6 +3,7 @@ import Axios from "axios";
 import { useParams } from "react-router-dom";
 import PostDetailForm from "../../components/post/PostDetailForm";
 import { useUserId, useGetPost } from "../../middleware";
+import { Helmet } from "react-helmet-async";
 
 const PostDetail = ({ history }) => {
   const { id } = useParams();
@@ -35,6 +36,9 @@ const PostDetail = ({ history }) => {
 
   return (
     <>
+      <Helmet>
+        <title>My Blog | {post.title}</title>
+      </Helmet>
       <PostDetailForm
         postObj={post}
         loading={loading}

@@ -1,6 +1,7 @@
 import React from "react";
 import "./HomeForm.scss";
 import img from "../image/3.jpg";
+import { Link } from "react-router-dom";
 
 const HomeForm = () => {
   return (
@@ -17,7 +18,9 @@ const HomeForm = () => {
             View More My GitHub
           </a>
         </button>
-        <button>Send Me Together for Projects</button>
+        <button>
+          <Link to="/contact">Contact Me</Link>
+        </button>
       </div>
     </>
   );

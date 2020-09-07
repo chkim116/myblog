@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PortWritingForm } from "../../components/port/PortWritingForm";
 import Axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 export const PortWriting = ({ history }) => {
   const initialState = {
@@ -54,6 +55,9 @@ export const PortWriting = ({ history }) => {
 
   return (
     <>
+      <Helmet>
+        <title>My Blog | 글 작성</title>
+      </Helmet>
       <PortWritingForm
         onChange={onChange}
         onSubmit={onSubmit}

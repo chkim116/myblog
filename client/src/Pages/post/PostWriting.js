@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PostingForm from "../../components/post/PostingForm";
 import Axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const PostWriting = ({ history }) => {
   const initialState = {
@@ -54,13 +55,18 @@ const PostWriting = ({ history }) => {
   });
 
   return (
-    <PostingForm
-      onSubmit={onSubmit}
-      onChange={onChange}
-      title={title}
-      onValue={onValue}
-      description={description}
-    ></PostingForm>
+    <>
+      <Helmet>
+        <title>My Blog | 글 작성</title>
+      </Helmet>
+      <PostingForm
+        onSubmit={onSubmit}
+        onChange={onChange}
+        title={title}
+        onValue={onValue}
+        description={description}
+      ></PostingForm>
+    </>
   );
 };
 

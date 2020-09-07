@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import FooterForm from "../../components/FooterForm";
 import PostForm from "../../components/main/PostForm";
 import Axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const Post = ({ location, history }) => {
   // url에 따른 포스트 호출
@@ -70,6 +71,9 @@ const Post = ({ location, history }) => {
 
   return (
     <>
+      <Helmet>
+        <title>My Blog | Post</title>
+      </Helmet>
       <PostForm
         postObj={{ post }}
         loading={loading}

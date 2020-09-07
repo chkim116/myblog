@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import LoginForm from "../../components/login/LoginForm";
 import Axios from "axios";
 import { registerCheck } from "../../middleware";
+import { Helmet } from "react-helmet-async";
 
 const Login = ({ history, location }) => {
   const initialState = {
@@ -43,7 +44,16 @@ const Login = ({ history, location }) => {
   };
 
   return (
-    <LoginForm user={user} onSubmit={onSubmit} onChange={onChange}></LoginForm>
+    <>
+      <Helmet>
+        <title>My Blog | Login</title>
+      </Helmet>
+      <LoginForm
+        user={user}
+        onSubmit={onSubmit}
+        onChange={onChange}
+      ></LoginForm>
+    </>
   );
 };
 

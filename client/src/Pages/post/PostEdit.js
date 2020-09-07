@@ -3,6 +3,7 @@ import PostEditForm from "../../components/post/PostEditForm";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import { useGetPost } from "../../middleware";
+import { Helmet } from "react-helmet-async";
 
 const PostEdit = ({ history }) => {
   const { id } = useParams();
@@ -74,13 +75,18 @@ const PostEdit = ({ history }) => {
   });
 
   return (
-    <PostEditForm
-      post={post}
-      loading={loading}
-      onSubmit={onSubmit}
-      onChange={onChange}
-      onValue={onValue}
-    ></PostEditForm>
+    <>
+      <Helmet>
+        <title>My Blog | 수정 {post.title}</title>
+      </Helmet>
+      <PostEditForm
+        post={post}
+        loading={loading}
+        onSubmit={onSubmit}
+        onChange={onChange}
+        onValue={onValue}
+      ></PostEditForm>
+    </>
   );
 };
 

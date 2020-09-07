@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import RegisterForm from "../../components/login/RegisterForm";
 import Axios from "axios";
 import { registerCheck } from "../../middleware";
+import { Helmet } from "react-helmet-async";
 
 const Register = ({ history }) => {
   const initialState = {
@@ -48,7 +49,14 @@ const Register = ({ history }) => {
     setRegister({ ...register, [name]: value });
   };
 
-  return <RegisterForm onChange={onChange} onSubmit={onSubmit}></RegisterForm>;
+  return (
+    <>
+      <Helmet>
+        <title>My Blog | Register</title>
+      </Helmet>
+      <RegisterForm onChange={onChange} onSubmit={onSubmit}></RegisterForm>
+    </>
+  );
 };
 
 export default Register;
