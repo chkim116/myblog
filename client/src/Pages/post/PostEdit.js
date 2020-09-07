@@ -27,6 +27,7 @@ const PostEdit = ({ history }) => {
       }
     };
     getPost();
+    // eslint-disable-next-line
   }, []);
 
   // update Post

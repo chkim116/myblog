@@ -13,10 +13,12 @@ const Register = ({ history }) => {
   };
 
   const [register, setRegister] = useState(initialState);
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(false);
   const { username, password, password2, email } = register;
 
   const onSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
     setRegister({ ...register });
     const adminRegister = async () => {
@@ -27,18 +29,22 @@ const Register = ({ history }) => {
           password2,
           email,
         }).then((res) => setUser(res.data));
-        console.log(user);
       } catch (err) {
         console.log(err);
         const REGISTER = "register";
         registerCheck(err, REGISTER, { history });
+        setLoading(false);
       }
     };
     adminRegister();
   };
 
   useEffect(() => {
-    if (user) window.location.href = "/";
+    if (user) {
+      setLoading(false);
+      window.location.href = "/";
+    }
+
     return () => {
       setUser(false);
     };
@@ -54,6 +60,8 @@ const Register = ({ history }) => {
       <Helmet>
         <title>My Blog | Register</title>
       </Helmet>
+
+      {loading && <div className="loading__bar">회원가입 중 입니다.</div>}
       <RegisterForm onChange={onChange} onSubmit={onSubmit}></RegisterForm>
     </>
   );

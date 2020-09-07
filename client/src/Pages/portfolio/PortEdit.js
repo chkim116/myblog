@@ -26,6 +26,7 @@ export const PortEdit = ({ history }) => {
       }
     };
     getPort();
+    // eslint-disable-next-line
   }, []);
 
   // updated portfolio

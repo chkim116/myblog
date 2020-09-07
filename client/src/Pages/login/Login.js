@@ -4,16 +4,18 @@ import Axios from "axios";
 import { registerCheck } from "../../middleware";
 import { Helmet } from "react-helmet-async";
 
-const Login = ({ history, location }) => {
+const Login = ({ history }) => {
   const initialState = {
     username: "",
     password: "",
   };
   const [login, setLogin] = useState(initialState);
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(false);
   const { username, password } = login;
 
   const onSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
     setLogin({ ...login });
     const postLogin = async () => {
@@ -26,16 +28,17 @@ const Login = ({ history, location }) => {
       } catch (err) {
         const LOGIN = "login";
         registerCheck(err, LOGIN, { history });
+        setLoading(false);
       }
     };
     postLogin();
   };
 
   useEffect(() => {
-    if (user) window.location.href = "/";
-    return () => {
-      setUser(false);
-    };
+    if (user) {
+      window.location.href = "/";
+      setLoading(false);
+    }
   }, [user]);
 
   const onChange = (e) => {
@@ -48,6 +51,8 @@ const Login = ({ history, location }) => {
       <Helmet>
         <title>My Blog | Login</title>
       </Helmet>
+
+      {loading && <div className="loading__bar">로그인 중입니다.</div>}
       <LoginForm
         user={user}
         onSubmit={onSubmit}

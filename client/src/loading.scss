@@ -11,3 +11,21 @@
   font-size: 12px;
   margin-left: 1em;
 }
+
+.loading__bar {
+  font-weight: bold;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  line-height: 100vh;
+  animation: loading 2s infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: translateY(50px);
+  }
+  100% {
+    transform: translateY(-50px);
+  }
+}

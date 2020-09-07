@@ -58,7 +58,6 @@ export const postlogin = (req, res, next) => {
         if (err) {
           return next(err);
         } else {
-          console.log(user);
           return res.send(true);
         }
       });

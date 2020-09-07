@@ -137,8 +137,8 @@ const AboutForm = () => {
             <ReactTooltip id="babel" place="top" effect="float">
               <h2>BABEL</h2>
               <ul>
-                <li>최신 문법 사용</li>
                 <li>바벨 설정</li>
+                <li>최신 문법 사용</li>
               </ul>
             </ReactTooltip>
           </div>
