@@ -74,7 +74,8 @@
   }
 
   .active {
-    border: 1px solid black;
+    border: 1px solid $blackShadow;
+    color: white;
     background: $blackShadow;
   }
 }

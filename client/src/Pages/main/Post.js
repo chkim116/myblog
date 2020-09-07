@@ -26,6 +26,7 @@ const Post = ({ location, history }) => {
 
   // get post query 부분만
   const getPost = (query) => {
+    setLoading(false);
     const pagePost = async () => {
       try {
         const getPagePost = await Axios.get(

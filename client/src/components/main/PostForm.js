@@ -24,7 +24,7 @@ const PostForm = ({
           </div>
           <div className="post__form">
             {post.map((p) => (
-              <div className="post_form-type" key={p._id}>
+              <div className="post__form-type" key={p._id}>
                 <Link to={`/postdetail/${p._id}`}>
                   <h3 className="post__form-title">
                     {p.title}

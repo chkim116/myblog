@@ -21,12 +21,14 @@ import "./src/models/post.js";
 import "./src/models/User.js";
 import "./passport";
 import portfolioRouter from "./src/routers/portfolioRouter";
+import helmet from "helmet";
 
 const app = express();
 const cookieStore = mongoStore(session);
 
 // middleware
 app.use(cors());
+app.use(helmet());
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(bodyParser.json());

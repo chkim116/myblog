@@ -26,7 +26,6 @@
 .post__form {
   width: 80%;
   margin: 3em auto;
-
   display: grid;
   gap: 2em;
   grid-template-columns: repeat(3, 1fr);
@@ -37,32 +36,36 @@
     grid-template-columns: repeat(1, 1fr);
   }
 
-  .post__form-title {
-    border-bottom: 1px solid $blackShadow;
-    margin-bottom: 1em;
-    padding-bottom: 0.4em;
-    color: $font-black;
-  }
-  .post__form-desc {
-    padding-bottom: 1em;
-    display: block;
+  .post__form-type {
+    box-shadow: 1px 1px 5px 2px $blackShadow;
     padding: 1em;
-    height: 300px;
-    max-height: 300px;
-    word-break: break-word;
-    white-space: pre-wrap;
-    overflow: hidden;
-    color: $font-black;
-    &:hover {
-      text-decoration: underline;
+    .post__form-title {
+      border-bottom: 1px solid $blackShadow;
+      margin-bottom: 1em;
+      padding-bottom: 0.4em;
+      color: $font-black;
     }
-  }
-  .post__form-date {
-    border-bottom: 1px solid $blackShadow;
-    padding-bottom: 1em;
-    text-align: right;
-    margin-bottom: 2em;
-    color: $dark-grey;
+    .post__form-desc {
+      padding-bottom: 1em;
+      display: block;
+      padding: 1em;
+      height: 300px;
+      max-height: 300px;
+      word-break: break-word;
+      white-space: pre-wrap;
+      overflow: hidden;
+      color: $font-black;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .post__form-date {
+      border-bottom: 1px solid $blackShadow;
+      padding-bottom: 1em;
+      text-align: right;
+      margin-bottom: 2em;
+      color: $dark-grey;
+    }
   }
 }
 
