@@ -3,7 +3,7 @@ import Port from "../models/PortFolio";
 export const getPort = async (req, res) => {
   try {
     const port = await Port.find({}).sort({ _id: -1 });
-    res.status(200).send(port);
+    res.status(200).json(port);
   } catch (err) {
     console.log(err);
     res.status(400).send(err);
@@ -13,7 +13,7 @@ export const getPortById = async (req, res) => {
   const { id } = req.params;
   try {
     const port = await Port.findById(id);
-    res.status(200).send(port);
+    res.status(200).json(port);
   } catch (err) {
     console.log(err);
     res.status(400).send(err);

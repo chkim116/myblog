@@ -12,39 +12,28 @@ const Register = ({ history }) => {
   };
 
   const [register, setRegister] = useState(initialState);
-  const [message, setMessage] = useState(false);
   const [user, setUser] = useState(false);
   const { username, password, password2, email } = register;
 
-  const showMessage = (e) => {
-    e.preventDefault();
-    if (!message) {
-      setMessage(true);
-    }
-  };
-
   const onSubmit = (e) => {
-    // 하나씩 다 유효성 검사하기
-    if (password !== password2 || username.length < 6 || password < 6) {
-      showMessage(e);
-    } else {
-      e.preventDefault();
-      setRegister({ ...register });
-      const adminRegister = async () => {
-        try {
-          await Axios.post("/auth/register", {
-            username,
-            password,
-            email,
-          }).then((res) => setUser(res.data));
-          console.log(user);
-        } catch (err) {
-          const REGISTER = "register";
-          registerCheck(err, REGISTER, { history });
-        }
-      };
-      adminRegister();
-    }
+    e.preventDefault();
+    setRegister({ ...register });
+    const adminRegister = async () => {
+      try {
+        await Axios.post("/auth/register", {
+          username,
+          password,
+          password2,
+          email,
+        }).then((res) => setUser(res.data));
+        console.log(user);
+      } catch (err) {
+        console.log(err);
+        const REGISTER = "register";
+        registerCheck(err, REGISTER, { history });
+      }
+    };
+    adminRegister();
   };
 
   useEffect(() => {
@@ -57,16 +46,9 @@ const Register = ({ history }) => {
   const onChange = (e) => {
     const { name, value } = e.target;
     setRegister({ ...register, [name]: value });
-    setMessage(false);
   };
 
-  return (
-    <RegisterForm
-      message={message}
-      onChange={onChange}
-      onSubmit={onSubmit}
-    ></RegisterForm>
-  );
+  return <RegisterForm onChange={onChange} onSubmit={onSubmit}></RegisterForm>;
 };
 
 export default Register;

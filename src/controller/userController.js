@@ -1,19 +1,46 @@
 import User from "../models/User";
 import passport from "passport";
+import bcrypt from "bcrypt";
+import Joi from "@hapi/joi";
 
 export const postRegister = async (req, res, next) => {
   const {
-    body: { username, email, password },
+    body: { username, email, password, password2 },
   } = req;
+  const schema = Joi.object().keys({
+    username: Joi.string().alphanum().min(6).required().messages({
+      "string.min": "아이디는 6자 이상입니다.",
+    }),
+    password: Joi.string().min(6).alphanum().required().messages({
+      "string.min": "비밀번호는 6자 이상입니다.",
+    }),
+    password2: Joi.string().min(6).alphanum().required().messages({
+      "string.min": "비밀번호는 6자 이상입니다.",
+    }),
+    email: Joi.string().required().email(),
+  });
+
+  if (password !== password2) {
+    return res.status(400).send({ message: "비밀번호의 정보가 다릅니다." });
+  }
+  const result = schema.validate(req.body);
+  if (result.error) {
+    return res.status(400).send(result.error.details[0]);
+  }
+  const salt = await bcrypt.genSalt(10); // hash
+  const hashPassword = await bcrypt.hash(password, salt);
   try {
-    const user = await User({ username, email, password, admin: false });
+    const user = await User({
+      username,
+      email,
+      password: hashPassword,
+      admin: false,
+    });
     await User.register(user, password);
     next();
   } catch (err) {
     console.log(err);
-    res
-      .status(400)
-      .send({ message: "이미 같은 아이디 혹은 이메일이 존재합니다" });
+    res.status(400).send(err);
   }
 };
 
@@ -29,6 +56,7 @@ export const postlogin = (req, res, next) => {
         if (err) {
           return next(err);
         } else {
+          console.log(user);
           return res.send(true);
         }
       });
@@ -61,17 +89,7 @@ export const logout = (req, res) => {
   }
 };
 
-// export const getLogin = async (req, res) => {
-//   const { error } = loginValidation(req.body);
-//   if (error) return res.status(400).send(error.details[0].message);
-
-//   const { password, username } = req.body;
-
-//   // ID체크
-//   const user = await User.findOne({ username });
-//   if (!user) return res.status(400).send("ID or Password is wrong");
-
-//   // 해쉬 비밀번호 체크
+// 해쉬 비밀번호 체크
 //   const validPass = await bcrypt.compare(password, user.password);
 //   if (!validPass) return res.status(400).send("invalid password");
 
@@ -103,6 +121,7 @@ export const logout = (req, res) => {
 // if (exist) {
 //   return res.status(400).send("Already Exist E-Mail");
 // }
+
 // // 해쉬 패스워드
 // const salt = await bcrypt.genSalt(10); // hash
 // const hashPassword = await bcrypt.hash(password, salt);
