@@ -48,15 +48,18 @@
     .post__form-desc {
       padding-bottom: 1em;
       display: block;
-      padding: 1em;
       height: 300px;
       max-height: 300px;
       word-break: break-word;
       white-space: pre-wrap;
-      overflow: hidden;
       color: $font-black;
-      &:hover {
-        text-decoration: underline;
+      .ql-editor {
+        & > * {
+          cursor: pointer;
+        }
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
     .post__form-date {

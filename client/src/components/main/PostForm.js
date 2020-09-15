@@ -30,14 +30,15 @@ const PostForm = ({
                     {p.title}
                     <small className="updated">{p.updated}</small>
                   </h3>
-                  <p
-                    className="post__form-desc"
-                    dangerouslySetInnerHTML={{ __html: p.description }}
-                  >
+                  <div className="post__form-desc">
+                    <div
+                      className="ql-editor"
+                      dangerouslySetInnerHTML={{ __html: p.description }}
+                    ></div>
                     {/* {p.description.length > 300
                       ? p.description.slice(0, 150).concat("  ...더보기")
                       : p.description} */}
-                  </p>
+                  </div>
                   <p className="post__form-date">
                     <small>{p.createDate}</small>
                   </p>

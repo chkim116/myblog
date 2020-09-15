@@ -5,7 +5,8 @@ import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import * as serviceWorker from "./serviceWorker";
 import "./reset.scss";
-
+import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.bubble.css";
 // reducer
 import { Provider } from "react-redux";
 import { createStore } from "redux";

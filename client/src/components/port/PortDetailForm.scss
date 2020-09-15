@@ -38,9 +38,32 @@
     border: 1px solid black;
     white-space: normal;
     line-height: 30px;
+    .slick-slider {
+      padding-bottom: 3em;
+      .slick-prev {
+        left: 0px;
+        z-index: 2;
+        font-size: 20px;
+      }
+      .slick-next {
+        right: 0;
+        z-index: 2;
+      }
+      .slick-dots {
+        bottom: 0;
+        li {
+          width: 70px;
+          height: 50px;
+        }
+      }
+    }
+
     // 보더 테두리 꾸미기
     @media #{$phone} {
       width: 90%;
+    }
+    img {
+      width: 100%;
     }
   }
   .port__detail-date {

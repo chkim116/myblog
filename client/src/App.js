@@ -3,8 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import routes from "./routes";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";
-import "react-quill/dist/quill.snow.css";
-import "react-quill/dist/quill.bubble.css";
+
 // scss
 import "./loading.scss";
 // page

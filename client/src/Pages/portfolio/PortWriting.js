@@ -20,13 +20,6 @@ export const PortWriting = ({ history }) => {
     const { name, value } = e.target;
     setPort({ ...port, [name]: value });
   };
-  const onValue = (content, delta, source, editor) => {
-    const text = editor.getHTML();
-    setPort({
-      ...port,
-      description: text,
-    });
-  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -58,11 +51,7 @@ export const PortWriting = ({ history }) => {
       <Helmet>
         <title>My Blog | 글 작성</title>
       </Helmet>
-      <PortWritingForm
-        onChange={onChange}
-        onSubmit={onSubmit}
-        onValue={onValue}
-      />
+      <PortWritingForm onChange={onChange} onSubmit={onSubmit} />
     </>
   );
 };

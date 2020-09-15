@@ -14,6 +14,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ReactTooltip from "react-tooltip";
 
+const Arrow = () => {
+  return <> </>;
+};
+
 const AboutForm = () => {
   const settings = {
     dots: false,
@@ -23,6 +27,8 @@ const AboutForm = () => {
     autoplaySpeed: 3500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    nextArrow: <Arrow />,
+    prevArrow: <Arrow />,
   };
 
   return (
@@ -76,7 +82,7 @@ const AboutForm = () => {
               <SiJavascript className="about__stack-icon js" />
             </a>
             <ReactTooltip id="js" place="top" effect="float">
-              <h2>JAVA SCRIPT</h2>
+              <h2>JAVASCRIPT</h2>
               <ul>
                 <li>Vanila JS 활용</li>
                 <li>DOM 요소</li>

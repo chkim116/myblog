@@ -60,6 +60,7 @@ export const getPostById = async (req, res) => {
 export const postEditing = async (req, res) => {
   const { id } = req.params;
   const { title, description, updated } = req.body;
+  console.log(description);
   try {
     const post = await Post.findOneAndUpdate(
       { _id: id },

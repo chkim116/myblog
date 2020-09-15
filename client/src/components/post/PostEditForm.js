@@ -5,6 +5,7 @@ import { modules, formats } from "../../middleware";
 
 const PostEditForm = ({ post, loading, onChange, onSubmit, onValue }) => {
   const { title, description } = post;
+
   return (
     <>
       {loading ? (

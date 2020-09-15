@@ -32,6 +32,7 @@ export const postPortFolio = async (req, res) => {
       creator: req.user._id,
     });
     post.save();
+    console.log(post);
     res.status(200).send(true);
   } catch (err) {
     console.log(err);

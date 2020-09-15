@@ -33,10 +33,11 @@ const PostDetailForm = ({ postObj, loading, onClick, userId }) => {
           )}
         </div>
         <h2 className="post__detail-title">{title}</h2>
-        <p
-          className="post__detail-desc"
-          dangerouslySetInnerHTML={{ __html: description }}
-        >
+        <div className="post__detail-desc">
+          <div
+            className="ql-editor"
+            dangerouslySetInnerHTML={{ __html: description }}
+          ></div>
           {/* {description.split("\n").map((text, key) => {
             return (
               <span key={key}>
@@ -45,7 +46,7 @@ const PostDetailForm = ({ postObj, loading, onClick, userId }) => {
               </span>
             );
           })} */}
-        </p>
+        </div>
         <p className="post__detail-date">
           <small>Uploaded: {createDate}</small>
         </p>
