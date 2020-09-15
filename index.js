@@ -20,6 +20,7 @@ import userRouter from "./src/routers/userRouter";
 import "./src/models/post.js";
 import "./src/models/User.js";
 import "./passport";
+import "./multer";
 import portfolioRouter from "./src/routers/portfolioRouter";
 import helmet from "helmet";
 

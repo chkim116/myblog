@@ -1,4 +1,5 @@
 import express from "express";
+import { uploadImage } from "../../multer";
 import {
   getPort,
   getPortById,
@@ -6,6 +7,7 @@ import {
   portEditing,
   portDeleting,
 } from "../controller/portfolioController";
+
 const portfolioRouter = express.Router();
 
 //  /port/
@@ -17,7 +19,7 @@ portfolioRouter.get("/", getPort);
 portfolioRouter.get("/:id", getPortById);
 
 // port Upload
-portfolioRouter.post("/post", postPortFolio);
+portfolioRouter.post("/post", uploadImage, postPortFolio);
 
 // port Update
 portfolioRouter.post("/edit/:id", portEditing);

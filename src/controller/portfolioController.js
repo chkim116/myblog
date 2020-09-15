@@ -3,6 +3,7 @@ import Port from "../models/PortFolio";
 export const getPort = async (req, res) => {
   try {
     const port = await Port.find({}).sort({ _id: -1 });
+    console.log(port);
     res.status(200).json(port);
   } catch (err) {
     console.log(err);
@@ -21,19 +22,21 @@ export const getPortById = async (req, res) => {
 };
 
 export const postPortFolio = async (req, res) => {
-  const { title, description, imgUrl, createDate, category } = req.body;
+  const { title, description, createDate, category } = JSON.parse(
+    req.body.value
+  );
+  const location = req.files.map((f) => f.location);
   try {
     const post = await Port.create({
+      imgUrl: location,
       title,
       description,
-      imgUrl,
       createDate,
       category,
       creator: req.user._id,
     });
     post.save();
-    console.log(post);
-    res.status(200).send(true);
+    res.status(200).send(post);
   } catch (err) {
     console.log(err);
     res.status(400).send("error");

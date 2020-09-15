@@ -67,7 +67,7 @@ export const useGetPort = (url) => {
   const [port, setport] = useState({
     title: "",
     description: "",
-    imgUrl: "",
+    imgUrl: [],
     createDate: "",
     category: "",
     creator: "",

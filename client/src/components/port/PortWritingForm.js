@@ -1,14 +1,20 @@
 import React from "react";
 import "./PortWritingForm.scss";
 
-export const PortWritingForm = ({ onSubmit, onChange }) => {
+export const PortWritingForm = ({ onSubmit, onChange, onImage }) => {
   return (
     <>
       <form className="port__form" onChange={onChange} onSubmit={onSubmit}>
         <input type="date" name="createDate"></input>
         <input type="text" name="title" placeholder="title"></input>
         <textarea type="text" name="description" placeholder="description" />
-        <input type="file" name="imgUrl" placeholder="image "></input>
+        <input
+          type="file"
+          name="imgUrl"
+          id="imgUrl"
+          multiple
+          onChange={onImage}
+        ></input>
         <input
           className="tags"
           type="text"

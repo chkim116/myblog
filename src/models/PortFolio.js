@@ -9,7 +9,11 @@ const PortSchema = new mongoose.Schema({
     type: String,
     required: "description is required",
   },
-  imgUrl: String,
+  imgUrl: [
+    {
+      type: String,
+    },
+  ],
   createDate: {
     type: String,
     required: "lunching day",
