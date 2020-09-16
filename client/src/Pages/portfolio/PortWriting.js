@@ -55,7 +55,7 @@ export const PortWriting = ({ history }) => {
 
   useEffect(() => {
     if (loading) {
-      window.location.href = "/portfolio";
+      history.push("/portfolio");
     }
   });
 
