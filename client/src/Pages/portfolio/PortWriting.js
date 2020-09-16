@@ -18,7 +18,7 @@ export const PortWriting = ({ history }) => {
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    setPort({ ...port, [name]: value, image: image });
+    setPort({ ...port, [name]: value, imgUrl: image });
   };
 
   const onSubmit = (e) => {
