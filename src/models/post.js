@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
 
 const dateNow = new Date();
-
 const currentDate = `${dateNow.getFullYear()}-${
   dateNow.getMonth() + 1
 }-${dateNow.getDate()}`;
-
 export const allDate = `${currentDate}-${
   dateNow.getHours() < 10 ? `0${dateNow.getHours()}` : `${dateNow.getHours()}`
 }시${
@@ -29,7 +27,7 @@ const PostSchema = new mongoose.Schema({
   },
   createDate: {
     type: String,
-    default: allDate,
+    default: dateNow.toLocaleString("ko-KR", { hour12: false }),
   },
   updated: String,
   creator: {
