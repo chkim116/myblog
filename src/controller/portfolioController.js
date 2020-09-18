@@ -26,7 +26,7 @@ export const postPortFolio = async (req, res) => {
   );
   const location = req.files.map((f) => f.location);
   try {
-    const post = await Port.create({
+    const port = await Port.create({
       imgUrl: location,
       title,
       description,
@@ -34,8 +34,8 @@ export const postPortFolio = async (req, res) => {
       category,
       creator: req.user._id,
     });
-    post.save();
-    res.status(200).send(post);
+    port.save();
+    res.status(200).send(port);
   } catch (err) {
     console.log(err);
     res.status(400).send("error");

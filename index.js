@@ -28,7 +28,12 @@ const app = express();
 const cookieStore = mongoStore(session);
 
 // middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    optionsSuccessStatus: 200,
+  })
+);
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(cookieParser());

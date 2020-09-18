@@ -16,4 +16,6 @@ const multerImg = multer({
   }),
 });
 
+// const multerImg = multer({ dest: "uploads/" });
+
 export const uploadImage = multerImg.array("imgUrl");
