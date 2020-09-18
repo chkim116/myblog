@@ -8,7 +8,9 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import cors from "cors";
+import csp from "helmet-csp";
 import dotenv from "dotenv";
+
 import "./db";
 dotenv.config();
 
@@ -35,6 +37,17 @@ app.use(
   })
 );
 app.use(helmet());
+app.use(
+  csp({
+    directives: {
+      defaultSrc: ["'self'", "default.example"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: [],
+    },
+    reportOnly: true,
+  })
+);
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(bodyParser.json());
