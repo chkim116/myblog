@@ -40,7 +40,10 @@ app.use(helmet());
 app.use(
   csp({
     directives: {
-      defaultSrc: ["*"],
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "https://s3.amazonaws.com"],
+      upgradeInsecureRequests: [],
     },
     reportOnly: false,
   })
