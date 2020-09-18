@@ -40,12 +40,9 @@ app.use(helmet());
 app.use(
   csp({
     directives: {
-      defaultSrc: ["'self'", "default.example"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
-      objectSrc: ["'none'"],
-      upgradeInsecureRequests: [],
+      defaultSrc: ["*"],
     },
-    reportOnly: true,
+    reportOnly: false,
   })
 );
 app.use(morgan("dev"));
