@@ -39,6 +39,9 @@ app.use(
 app.use(helmet());
 app.use(
   csp({
+    directives: {
+      imgSrc: ["*"],
+    },
     reportOnly: false,
   })
 );
