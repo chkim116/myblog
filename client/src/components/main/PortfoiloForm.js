@@ -16,7 +16,13 @@ const PortfolioForm = ({ port, admin }) => {
         {port.map((p, key) => (
           <div className="article__post" key={key}>
             <Link to={`/portdetail/${p._id}`}>
-              <img className="post_thumbnail" src={p.imgUrl[0]} alt="img"></img>
+              <div className="post__thumbnail-wrap">
+                <img
+                  className="post__thumbnail"
+                  src={p.imgUrl[0]}
+                  alt="img"
+                ></img>
+              </div>
               <h3 className="post__title">{p.title}</h3>
               <p className="post__desc">{p.description}</p>
               <h4>
