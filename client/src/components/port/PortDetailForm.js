@@ -27,6 +27,14 @@ export const PortDetailForm = ({ port, onClick, admin }) => {
   return (
     <>
       <div className="port__detail" key={_id}>
+        <div
+          className="previous"
+          onClick={() => {
+            window.history.back();
+          }}
+        >
+          뒤로가기
+        </div>
         <div className="port__btn">
           {admin ? (
             <>

@@ -38,14 +38,6 @@ const PostDetailForm = ({ postObj, loading, onClick, userId }) => {
             className="ql-editor"
             dangerouslySetInnerHTML={{ __html: description }}
           ></div>
-          {/* {description.split("\n").map((text, key) => {
-            return (
-              <span key={key}>
-                {text}
-                <br />
-              </span>
-            );
-          })} */}
         </div>
         <p className="post__detail-date">
           <small>Uploaded: {createDate}</small>
@@ -55,5 +47,4 @@ const PostDetailForm = ({ postObj, loading, onClick, userId }) => {
   );
 };
 
-// axios get ('/postdetail/(id))
 export default PostDetailForm;
