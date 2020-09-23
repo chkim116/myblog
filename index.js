@@ -41,6 +41,7 @@ app.use(
   csp({
     directives: {
       defaultSrc: ["'self'", "*"],
+      styleSrc: ["'self'", "unsafe-inline"],
     },
     reportOnly: false,
   })
