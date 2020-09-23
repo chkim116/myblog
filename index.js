@@ -40,9 +40,7 @@ app.use(helmet());
 app.use(
   csp({
     directives: {
-      defaultSrc: ["'self'"],
-      styleSrc: ["'self'"],
-      imgSrc: ["https:"],
+      defaultSrc: ["*"],
     },
     reportOnly: false,
   })
