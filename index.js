@@ -40,7 +40,7 @@ app.use(helmet());
 app.use(
   csp({
     directives: {
-      defaultSrc: ["https:"],
+      defaultSrc: ["*"],
     },
     reportOnly: false,
   })
