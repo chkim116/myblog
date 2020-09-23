@@ -40,7 +40,7 @@ app.use(helmet());
 app.use(
   csp({
     directives: {
-      defaultSrc: ["'self'", "*"],
+      defaultSrc: ["'self'"],
       styleSrc: ["'self'", "unsafe-inline"],
     },
     reportOnly: false,
