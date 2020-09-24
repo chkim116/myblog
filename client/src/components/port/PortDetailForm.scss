@@ -61,20 +61,32 @@
         }
       }
       .slick-prev {
-        left: 0px;
+        position: absolute;
+        top: 40%;
+        transform: translateY(-40%) scale(1.7);
+        left: 0;
         z-index: 2;
+        @media #{$phone} {
+          left: -12px;
+          transform: scale(1.5);
+        }
         &::before {
           color: $blue;
-          font-size: 2rem;
           font-weight: bold;
         }
       }
       .slick-next {
-        right: 13px;
+        position: absolute;
+        transform: translateY(-40%) scale(1.7);
+        top: 40%;
+        right: 0;
         z-index: 2;
+        @media #{$phone} {
+          right: -12px;
+          transform: scale(1.5);
+        }
         &::before {
           color: $blue;
-          font-size: 2rem;
           font-weight: bold;
         }
       }
