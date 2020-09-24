@@ -23,6 +23,10 @@ const PostWriting = ({ history }) => {
           title,
           description,
           updated,
+          createDate: new Date().toLocaleString("ko-KR", {
+            timeZone: "Asia/Seoul",
+            hour12: false,
+          }),
         });
         setLoading(true);
       } catch (err) {

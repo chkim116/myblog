@@ -18,6 +18,7 @@ const Post = ({ location, history }) => {
     description: "",
     updated: "",
     creator: "",
+    createDate: "",
   });
 
   // 등록된 포스트의 총 길이 ( limit 5 )

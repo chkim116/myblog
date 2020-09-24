@@ -30,13 +30,14 @@ export const getAllPost = async (req, res) => {
 
 export const postPosting = async (req, res) => {
   const {
-    body: { title, description, updated },
+    body: { title, description, updated, createDate },
   } = req;
   try {
     const post = await Post.create({
       title,
       description,
       updated,
+      createDate,
       creator: req.user._id,
     });
     post.save().then((post) => res.json(post));

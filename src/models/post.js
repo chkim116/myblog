@@ -9,13 +9,7 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: "description is required",
   },
-  createDate: {
-    type: String,
-    default: new Date().toLocaleString("ko-KR", {
-      timeZone: "Asia/Seoul",
-      hour12: false,
-    }),
-  },
+  createDate: String,
   updated: String,
   creator: {
     type: mongoose.Schema.Types.ObjectId,
