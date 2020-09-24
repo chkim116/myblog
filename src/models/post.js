@@ -13,7 +13,10 @@ const PostSchema = new mongoose.Schema({
   },
   createDate: {
     type: String,
-    default: dateNow.toLocaleString("ko-KR", { hour12: false }),
+    default: dateNow.toLocaleString("ko-KR", {
+      timeZone: "Asia/Seoul",
+      hour12: false,
+    }),
   },
   updated: String,
   creator: {
