@@ -44,7 +44,8 @@ app.use(
       styleSrc: [
         "'self'",
         "'unsafe-inline'",
-        "'sha256-TMIFk5ZjGNpczjRE6YVaBrPXVNzANj9JRK+w2bh9TX8='",
+        // "'unsafe-hashes'",
+        // "'sha256-TMIFk5ZjGNpczjRE6YVaBrPXVNzANj9JRK+w2bh9TX8='",
       ],
     },
     reportOnly: false,
