@@ -39,10 +39,10 @@ app.use(
 app.use(helmet());
 app.use(
   csp({
-    // directives: {
-    //   defaultSrc: ["*"],
-    //   styleSrc: ["*"],
-    // },
+    directives: {
+      defaultSrc: ["*"],
+      styleSrc: ["unsafe-inline"],
+    },
     reportOnly: false,
   })
 );
