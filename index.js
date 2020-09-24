@@ -41,7 +41,11 @@ app.use(
   csp({
     directives: {
       defaultSrc: ["*"],
-      styleSrc: ["unsafe-inline"],
+      styleSrc: [
+        "'self'",
+        "unsafe-hashes",
+        "sha256-TMIFk5ZjGNpczjRE6YVaBrPXVNzANj9JRK+w2bh9TX8=",
+      ],
     },
     reportOnly: false,
   })
