@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-const dateNow = new Date();
-
 const PostSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -13,7 +11,7 @@ const PostSchema = new mongoose.Schema({
   },
   createDate: {
     type: String,
-    default: dateNow.toLocaleString("ko-KR", {
+    default: new Date().toLocaleString("ko-KR", {
       timeZone: "Asia/Seoul",
       hour12: false,
     }),
