@@ -43,6 +43,7 @@ app.use(
       defaultSrc: ["*"],
       styleSrc: [
         "'self'",
+        "unsafe-inline",
         "unsafe-hashes",
         "sha256-TMIFk5ZjGNpczjRE6YVaBrPXVNzANj9JRK+w2bh9TX8=",
       ],
