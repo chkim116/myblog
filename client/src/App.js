@@ -112,8 +112,6 @@ function App() {
         ) : (
           <div className="error_title">관리자가 아닙니다. </div>
         )}
-
-        <Route path={"/contact"} component={Contact} />
         <Route component={NotFound} />
       </Switch>
     </>

@@ -21,7 +21,7 @@ const HomeForm = () => {
           </a>
         </button>
         <button>
-          <Link to="/contact">Contact Me</Link>
+          <a href="https://blog.naver.com/dudnqnfqlc">Blog</a>
         </button>
         <h4>이 사이트는</h4>
         <div>
