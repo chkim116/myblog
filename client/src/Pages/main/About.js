@@ -1,6 +1,6 @@
 import React from "react";
 import AboutForm from "../../components/main/AboutForm";
-import FooterForm from "../../components/FooterForm";
+import FooterForm from "../../components/Layouts/FooterForm";
 import { Helmet } from "react-helmet-async";
 
 const About = () => {

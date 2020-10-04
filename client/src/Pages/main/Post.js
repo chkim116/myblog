@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import FooterForm from "../../components/FooterForm";
+import FooterForm from "../../components/Layouts/FooterForm";
 import PostForm from "../../components/main/PostForm";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";

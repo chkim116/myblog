@@ -1,6 +1,6 @@
 import React from "react";
 import PortfolioForm from "../../components/main/PortfoiloForm";
-import FooterForm from "../../components/FooterForm";
+import FooterForm from "../../components/Layouts/FooterForm";
 import { useGetPort, useUserId } from "../../middleware";
 import { Helmet } from "react-helmet-async";
 

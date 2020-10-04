@@ -1,5 +1,4 @@
 import React from "react";
-import "../../ErrorPage.scss";
 import { Helmet } from "react-helmet-async";
 
 const NotFound = () => {

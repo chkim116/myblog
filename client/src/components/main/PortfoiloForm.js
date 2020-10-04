@@ -24,7 +24,6 @@ const PortfolioForm = ({ port, admin }) => {
                 ></img>
               </div>
               <h3 className="post__title">{p.title}</h3>
-              <p className="post__desc">{p.description}</p>
               <h4>
                 <BsHammer />
                 {p.createDate}
