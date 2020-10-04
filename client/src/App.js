@@ -23,7 +23,6 @@ import { useUserId } from "./middleware";
 import { PortWriting } from "./Pages/portfolio/PortWriting";
 import { PortDetail } from "./Pages/portfolio/PortDetail";
 import { PortEdit } from "./Pages/portfolio/PortEdit";
-import { Contact } from "./Pages/main/Contact";
 dotenv.config();
 
 function App() {
