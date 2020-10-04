@@ -39,6 +39,13 @@
     border: 1px solid black;
     white-space: normal;
     line-height: 30px;
+    .link {
+      cursor: pointer;
+      color: black;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
     .slick-slider {
       max-width: 1200px;
       max-height: 760px;

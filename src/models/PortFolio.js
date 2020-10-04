@@ -27,6 +27,7 @@ const PortSchema = new mongoose.Schema({
     ref: "User",
   },
   updated: String,
+  link: String,
 });
 
 const model = mongoose.model("Port", PortSchema);

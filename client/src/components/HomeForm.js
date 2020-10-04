@@ -2,6 +2,8 @@ import React from "react";
 import "./HomeForm.scss";
 import img from "../image/1.jpg";
 import { Link } from "react-router-dom";
+import { SiReact } from "react-icons/si";
+import { FaNodeJs, FaSass } from "react-icons/fa";
 
 const HomeForm = () => {
   return (
@@ -21,6 +23,13 @@ const HomeForm = () => {
         <button>
           <Link to="/contact">Contact Me</Link>
         </button>
+        <h4>이 사이트는</h4>
+        <div>
+          <SiReact className="about__stack-icon react" />
+          <FaNodeJs className="about__stack-icon node" />
+          <FaSass className="about__stack-icon sass" />
+        </div>
+        <h4>로 만들어졌습니다.</h4>
       </div>
     </>
   );

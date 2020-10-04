@@ -2,7 +2,7 @@ import Port from "../models/PortFolio";
 
 export const getPort = async (req, res) => {
   try {
-    const port = await Port.find({}).sort({ _id: -1 });
+    const port = await Port.find({}).sort({ createDate: -1 });
     res.status(200).json(port);
   } catch (err) {
     console.log(err);
@@ -21,7 +21,7 @@ export const getPortById = async (req, res) => {
 };
 
 export const postPortFolio = async (req, res) => {
-  const { title, description, createDate, category } = JSON.parse(
+  const { title, description, createDate, category, link } = JSON.parse(
     req.body.value
   );
   const location = req.files.map((f) => f.location);
@@ -32,6 +32,7 @@ export const postPortFolio = async (req, res) => {
       description,
       createDate,
       category,
+      link,
       creator: req.user._id,
     });
     port.save();
@@ -44,7 +45,7 @@ export const postPortFolio = async (req, res) => {
 
 export const portEditing = async (req, res) => {
   const { id } = req.params;
-  const { title, description, createDate, imgUrl, category } = req.body;
+  const { title, description, createDate, imgUrl, category, link } = req.body;
   try {
     await Port.findOneAndUpdate(
       { _id: id },
@@ -54,6 +55,7 @@ export const portEditing = async (req, res) => {
         createDate,
         imgUrl,
         category,
+        link,
       }
     );
     res.status(200).send(true);

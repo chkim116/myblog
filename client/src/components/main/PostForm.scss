@@ -3,6 +3,9 @@
 .post__wrap {
   min-height: 768px;
   padding: 3em;
+  @media #{$phone} {
+    padding: 3em 1em;
+  }
 }
 .post {
   text-align: right;

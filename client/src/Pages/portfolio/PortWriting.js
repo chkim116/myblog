@@ -15,7 +15,7 @@ export const PortWriting = ({ history }) => {
   const [image, setImage] = useState([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(false);
-  const { title, description, createDate, category } = port;
+  const { title, description, createDate, category, link } = port;
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +32,7 @@ export const PortWriting = ({ history }) => {
       }
       formData.append(
         "value",
-        JSON.stringify({ title, description, createDate, category })
+        JSON.stringify({ title, description, createDate, category, link })
       );
       try {
         await Axios.post("/port/post", formData, {

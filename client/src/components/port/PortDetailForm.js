@@ -5,7 +5,7 @@ import "./PortDetailForm.scss";
 import Slider from "react-slick";
 
 export const PortDetailForm = ({ port, onClick, admin }) => {
-  const { title, description, imgUrl, createDate, category, _id } = port;
+  const { title, description, imgUrl, createDate, category, _id, link } = port;
   const settings = {
     dots: true,
     infinite: true,
@@ -60,12 +60,17 @@ export const PortDetailForm = ({ port, onClick, admin }) => {
           </Slider>
           {description.split("\n").map((text, key) => {
             return (
-              <span key={key}>
-                {text}
-                <br />
-              </span>
+              <>
+                <span key={key}>
+                  {text}
+                  <br />
+                </span>
+              </>
             );
           })}
+          <a className="link" href={link} target="_blank">
+            눌러서 이동
+          </a>
         </div>
         <p>
           <BsHammer />

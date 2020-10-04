@@ -30,7 +30,15 @@ export const PortEdit = ({ history }) => {
   }, []);
 
   // updated portfolio
-  const { title, description, imgUrl, category, createDate, update } = updated;
+  const {
+    title,
+    description,
+    imgUrl,
+    category,
+    createDate,
+    update,
+    link,
+  } = updated;
   const onSubmit = (e) => {
     e.preventDefault();
     setUpdated({ ...updated });
@@ -40,6 +48,7 @@ export const PortEdit = ({ history }) => {
         description,
         createDate,
         category,
+        link,
         imgUrl,
       }).then((res) => setUpdated({ ...updated, update: true }));
     };

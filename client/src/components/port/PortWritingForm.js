@@ -21,6 +21,12 @@ export const PortWritingForm = ({ onSubmit, onChange, onImage }) => {
           name="category"
           placeholder="태그"
         ></input>
+        <input
+          className="tags"
+          type="text"
+          name="link"
+          placeholder="링크"
+        ></input>
         <input className="form__submit" type="submit" value="UPLOAD"></input>
       </form>
     </>
