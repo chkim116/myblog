@@ -12,7 +12,7 @@ const multerImg = multer({
   storage: multerS3({
     s3,
     acl: "public-read",
-    bucket: "meblog/portfolio",
+    bucket: "meblog/posting",
   }),
 });
 

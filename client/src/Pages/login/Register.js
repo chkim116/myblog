@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import RegisterForm from "../../components/login/RegisterForm";
+import RegisterForm from "../../components/Login/RegisterForm";
 import Axios from "axios";
 import { registerCheck } from "../../middleware";
 import { Helmet } from "react-helmet-async";
+import { Loading } from "../Etc/Loading";
 
 const Register = ({ history }) => {
   const initialState = {
@@ -58,10 +59,10 @@ const Register = ({ history }) => {
   return (
     <>
       <Helmet>
-        <title>My Blog | Register</title>
+        <title>My Blog | 회원가입</title>
       </Helmet>
 
-      {loading && <div className="loading__bar">회원가입 중 입니다.</div>}
+      {loading && <Loading />}
       <RegisterForm onChange={onChange} onSubmit={onSubmit}></RegisterForm>
     </>
   );

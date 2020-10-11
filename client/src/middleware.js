@@ -64,19 +64,18 @@ export const useGetPost = (url) => {
 };
 
 export const useGetPort = (url) => {
-  const [port, setport] = useState({
+  const [guest, setGuest] = useState({
     title: "",
     description: "",
-    imgUrl: [],
     createDate: "",
-    category: "",
     creator: "",
+    username: "",
   });
   const [loading, setLoading] = useState(false);
 
-  const getPort = async () => {
+  const getGuest = async () => {
     try {
-      await Axios.get(url).then((res) => setport(res.data));
+      await Axios.get(url).then((res) => setGuest(res.data));
       setLoading(true);
     } catch (err) {
       console.log(err);
@@ -84,11 +83,11 @@ export const useGetPort = (url) => {
   };
 
   useEffect(() => {
-    getPort();
+    getGuest();
     // eslint-disable-next-line
   }, []);
 
-  return { port, loading };
+  return { guest, loading };
 };
 
 // react-quill

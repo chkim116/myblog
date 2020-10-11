@@ -16,14 +16,15 @@ dotenv.config();
 
 // Router
 
+import guestRouter from "./src/routers/guestRouter";
 import postRouter from "./src/routers/postRouter";
 import userRouter from "./src/routers/userRouter";
+
 // Schema
 import "./src/models/post.js";
 import "./src/models/User.js";
 import "./passport";
 import "./multer";
-import portfolioRouter from "./src/routers/portfolioRouter";
 import helmet from "helmet";
 
 const app = express();
@@ -73,7 +74,7 @@ app.get("/", (req, res) => {
 // }
 
 app.use("/api", postRouter);
-app.use("/port", portfolioRouter);
+app.use("/port", guestRouter);
 app.use("/auth", userRouter);
 
 // server

@@ -1,0 +1,80 @@
+@import "../../Styles/var";
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  color: white;
+  img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+    min-width: 768px;
+    position: fixed;
+    z-index: -1;
+  }
+  .home__title {
+    margin-bottom: 1em;
+  }
+  .home__desc {
+    line-height: 3rem;
+    padding: 0 6em;
+    text-align: center;
+    margin-bottom: 1em;
+    @media #{$phone} {
+      padding: 1em;
+    }
+  }
+  button {
+    width: 300px;
+    padding: 1em;
+    font-weight: bold;
+    text-align: center;
+    background-color: #74b9ff;
+    border-radius: 12px;
+    margin-bottom: 1em;
+    cursor: pointer;
+    a {
+      color: white;
+    }
+    &:nth-child(4) {
+      margin-bottom: 1.25em;
+      background-color: #0097e6;
+      &:hover > a {
+        color: black;
+      }
+    }
+    &:hover {
+      background-color: #dcdde1;
+      color: black;
+    }
+  }
+}
+
+.about__stack-icon {
+  margin: 0.3em;
+  margin-top: 1em;
+  width: 70px;
+  height: 70px;
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 25%;
+  cursor: pointer;
+  span {
+    font-size: $font-Large;
+  }
+}
+
+.node {
+  color: $green;
+}
+
+.react {
+  color: $tur;
+}
+
+.sass {
+  color: $red;
+}

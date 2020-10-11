@@ -1,6 +1,6 @@
 //  basic path
 const HOME = "/";
-const PORTFOLIO = "/portfolio";
+const GUESTBOOK = "/guestbook";
 const POST = "/post";
 const ABOUT = "/about";
 const ME = "/me";
@@ -14,11 +14,12 @@ const POSTWRITING = "/postwriting";
 const POSTDETAIL = "/postdetail";
 
 // port
-const PORTWRITING = "/portwriting";
-const PORTDETAIL = "/portdetail";
+const GUESTBOOKING = "/guestbooking";
+const GUESTBOOKDETAIL = "/guestbookdetail";
+
 const routes = {
   home: HOME,
-  portfolio: PORTFOLIO,
+  guestbook: GUESTBOOK,
   post: POST,
   about: ABOUT,
   me: ME,
@@ -27,8 +28,8 @@ const routes = {
   login: LOGIN,
   postwriting: POSTWRITING,
   postdetail: POSTDETAIL,
-  portwriting: PORTWRITING,
-  portdetail: PORTDETAIL,
+  guestbooking: GUESTBOOKING,
+  guestbookdetail: GUESTBOOKDETAIL,
 };
 
 export default routes;

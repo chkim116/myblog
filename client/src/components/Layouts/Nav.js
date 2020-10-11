@@ -4,7 +4,15 @@ import routes from "../../routes";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Nav.scss";
 
-const Nav = ({ userId, onClick, width, onChange, admin }) => {
+const NavList = ({ link, onClicknav, menu }) => {
+  return (
+    <Link to={link} className='menu__items' onClick={onClicknav}>
+      <li>{menu}</li>
+    </Link>
+  );
+};
+
+const Nav = ({ userId, onClick, onChange, admin }) => {
   const { username } = userId;
   const onClickNav = () => {
     const menu = document.querySelector(".header__menu");
@@ -15,66 +23,49 @@ const Nav = ({ userId, onClick, width, onChange, admin }) => {
     <>
       <header onChange={onChange}>
         <li>
-          <Link to={routes.home} className="header__logo">
+          <Link to={routes.home} className='header__logo'>
             Think_Tank
           </Link>
         </li>
-        <nav className="header__menu">
-          <Link to={routes.home} className="menu__items" onClick={onClickNav}>
-            <li>Home</li>
-          </Link>
-          <Link
-            to={routes.portfolio}
-            className="menu__items"
-            onClick={onClickNav}
-          >
-            <li>Portfolio</li>
-          </Link>
-          <Link to={routes.post} className="menu__items" onClick={onClickNav}>
-            <li>Post</li>
-          </Link>
-          <Link to={routes.about} className="menu__items" onClick={onClickNav}>
-            <li>About Me</li>
-          </Link>
+        <nav className='header__menu'>
+          <NavList link={routes.home} onClickNav={onClickNav} menu='홈' />
+          <NavList link={routes.post} onClickNav={onClickNav} menu='포스트' />
+          <NavList
+            link={routes.guestbook}
+            onClickNav={onClickNav}
+            menu='방명록'
+          />
+          <NavList link={routes.about} onClickNav={onClickNav} menu='어바웃' />
+
           {!username ? (
             <>
-              <Link
-                to={routes.login}
-                className="menu__items"
-                onClick={onClickNav}
-              >
-                <li>Login</li>
-              </Link>
-              <Link
-                to={routes.register}
-                className="menu__items"
-                onClick={onClickNav}
-              >
-                <li>Register</li>
-              </Link>
+              <NavList
+                link={routes.login}
+                onClickNav={onClickNav}
+                menu='로그인'
+              />
+              <NavList
+                link={routes.register}
+                onClickNav={onClickNav}
+                menu='회원가입'
+              />
             </>
           ) : (
             <>
-              <li className="menu__items" onClick={onClick}>
-                Logout
+              <li className='menu__items' onClick={onClick}>
+                로그아웃
               </li>
               {!admin ? (
-                <li className="username">{username}님 어서오세요</li>
+                <li className='username'>{username}</li>
               ) : (
-                <li className="username">
-                  관리자님 어서오세요 아이디는 {username}입니다.
-                </li>
+                <li className='username'>{username} 관리자님 어서오세요</li>
               )}
             </>
           )}
         </nav>
-        {768 >= width ? (
-          <li className="header__hamburger" onClick={onClickNav}>
-            <GiHamburgerMenu />
-          </li>
-        ) : (
-          <> </>
-        )}
+        <li className='header__hamburger' onClick={onClickNav}>
+          <GiHamburgerMenu />
+        </li>
       </header>
     </>
   );

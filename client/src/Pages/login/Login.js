@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import LoginForm from "../../components/login/LoginForm";
+import LoginForm from "../../components/Login/LoginForm";
 import Axios from "axios";
 import { registerCheck } from "../../middleware";
 import { Helmet } from "react-helmet-async";
+import { Loading } from "../Etc/Loading";
 
 const Login = ({ history }) => {
   const initialState = {
@@ -49,15 +50,14 @@ const Login = ({ history }) => {
   return (
     <>
       <Helmet>
-        <title>My Blog | Login</title>
+        <title>My Blog | 로그인</title>
       </Helmet>
 
-      {loading && <div className="loading__bar">로그인 중입니다.</div>}
+      {loading && <Loading />}
       <LoginForm
         user={user}
         onSubmit={onSubmit}
-        onChange={onChange}
-      ></LoginForm>
+        onChange={onChange}></LoginForm>
     </>
   );
 };

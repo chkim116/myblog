@@ -1,0 +1,72 @@
+@import "../../Styles/var";
+
+.post {
+  text-align: right;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  min-height: 100px;
+  color: $tur;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.contents {
+  width: 100%;
+  padding: 3em;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  min-height: 760px;
+  gap: 1em;
+
+  @media #{$medium} {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  @media #{$phone} {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    padding-top: 3em 1em 2em 1em;
+  }
+
+  a {
+    color: black;
+  }
+
+  .article__post {
+    width: 100%;
+    margin-top: 4em;
+    overflow: hidden;
+    min-height: 350px;
+    border: 1px solid black;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    .post__title {
+      padding: 0.5em 0;
+    }
+
+    .post__desc {
+      font-size: 0.8rem;
+      display: block;
+      word-break: break-word;
+      line-height: 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .post__info {
+    }
+  }
+}
