@@ -4,10 +4,10 @@ import routes from "../../routes";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Nav.scss";
 
-const NavList = ({ link, onClicknav, menu }) => {
+const NavList = ({ link, onClickNav, menu }) => {
   return (
-    <Link to={link} className='menu__items' onClick={onClicknav}>
-      <li>{menu}</li>
+    <Link to={link} className='menu__items'>
+      <li onClick={onClickNav}>{menu}</li>
     </Link>
   );
 };

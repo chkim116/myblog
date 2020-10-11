@@ -1,21 +1,46 @@
-$font-black: black;
-$font-white: white;
-$bg-night: black;
-$bg-white: white;
-$font-Large: 1.3rem;
+$black: #333333;
+$white: #fdfdfd;
+$Large: 24px;
+$medium: 18px;
+$small: 12px;
 
 $yellow: rgb(251, 188, 31);
 $pink: rgb(243, 129, 127);
-$dark-grey: rgb(123, 124, 129);
+$darkgrey: rgb(123, 124, 129);
 $tur: rgb(76, 168, 208);
-$light-blue: rgb(153, 194, 232);
+$lightblue: rgb(153, 194, 232);
 $blackShadow: rgba(0, 0, 0, 0.2);
 $blue: rgb(153, 194, 232);
-$dark-blue: rgb(115, 170, 206);
+$darkblue: rgb(115, 170, 206);
 $red: #d63031;
 $green: #00b894;
-$deep-green: #238b12;
+$deepgreen: #238b12;
 
 $phone: "all and (max-width: 768px)";
 $medium: "all and (max-width: 1000px)";
 $desktop: "all and (min-width:769px)";
+
+@mixin button($bgColor: $tur, $hoverColor: $lightblue) {
+  padding: 0.5em 1em;
+  cursor: pointer;
+  background-color: $bgColor;
+  color: $white;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  width: 250px;
+  text-align: center;
+  margin-top: 0.6em;
+
+  &:hover {
+    background-color: $hoverColor;
+  }
+}
+
+@mixin padding($padding: 0.5em 1em) {
+  padding: $padding;
+}
+
+@mixin border($border: 1px solid $blackShadow) {
+  border: $border;
+}

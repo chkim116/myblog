@@ -28,12 +28,7 @@ export const GuestBookDetailForm = ({ port, onClick, userId }) => {
         <div className='port__detail-title'>{title}</div>
         <div className='port__detail-desc'>
           {description.split("\n").map((text, key) => {
-            return (
-              <span key={key}>
-                {text}
-                <br />
-              </span>
-            );
+            return <p key={key}>{text}</p>;
           })}
         </div>
         <p>time: {createDate}</p>

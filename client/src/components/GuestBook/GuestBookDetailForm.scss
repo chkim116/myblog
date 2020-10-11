@@ -7,13 +7,12 @@
   align-items: center;
   width: 100%;
   min-height: 768px;
-  padding-top: 4em;
   margin-bottom: 3em;
 
   .port__btn {
     display: flex;
     a {
-      color: black;
+      color: $black;
     }
 
     .btn {
@@ -28,11 +27,14 @@
 
   .port__detail-title {
     font-size: 1.25rem;
-    border: 1px solid black;
     text-align: center;
     width: 70%;
     margin-bottom: 0.8em;
     padding: 0.3em;
+    @include border;
+    word-break: break-word;
+    text-overflow: ellipsis;
+    white-space: pre-line;
 
     @media #{$phone} {
       width: 90%;
@@ -43,9 +45,11 @@
     padding: 2em;
     width: 70%;
     min-height: 600px;
-    border: 1px solid black;
-    white-space: normal;
     line-height: 30px;
+    @include border;
+    white-space: pre-line;
+    word-break: break-word;
+    text-overflow: ellipsis;
   }
   // 보더 테두리 꾸미기
   @media #{$phone} {

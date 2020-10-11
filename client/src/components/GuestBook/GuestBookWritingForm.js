@@ -5,9 +5,15 @@ export const GuestBookWritingForm = ({ onSubmit, onChange }) => {
   return (
     <>
       <form className='port__form' onChange={onChange} onSubmit={onSubmit}>
-        <input type='text' name='title' placeholder='title'></input>
+        <input
+          maxLength='15'
+          type='text'
+          name='title'
+          placeholder='title'></input>
         <textarea type='text' name='description' placeholder='description' />
-        <input className='form__submit' type='submit' value='UPLOAD'></input>
+        <button className='form__submit' type='submit'>
+          UPLOAD
+        </button>
       </form>
     </>
   );

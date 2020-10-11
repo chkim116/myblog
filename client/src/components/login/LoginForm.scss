@@ -6,17 +6,18 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100vh;
-  color: $font-black;
+  min-height: 480px;
+  color: $black;
+
   input {
     padding: 1em 1em;
     margin: 1em 0;
     width: 25%;
     min-width: 300px;
+    border-radius: 12px;
   }
+
   .form__submit {
-    cursor: pointer;
-    background-color: $bg-night;
-    color: $font-white;
+    @include button;
   }
 }

@@ -1,3 +1,5 @@
+@import "./var";
+
 .loading__title {
   position: fixed;
   left: 50%;
@@ -5,8 +7,8 @@
   transform: translate(-50%, -50%);
   width: 40px;
   height: 40px;
-  border: 10px solid #aad4da;
-  border-top: 10px solid #b9dedf;
+  border: 10px solid $white;
+  border-top: 10px solid $blackShadow;
   border-radius: 50em;
   animation-name: loading;
   animation-duration: 0.8s;

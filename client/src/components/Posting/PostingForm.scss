@@ -21,11 +21,11 @@
   .form__submit {
     padding: 1em;
     cursor: pointer;
-    background-color: $bg-night;
-    color: $font-white;
+    background-color: $black;
+    color: $white;
     cursor: pointer;
     border-radius: 12px;
-    font-size: $font-Large;
+    font-size: $Large;
     border: none;
     outline: none;
   }
@@ -75,7 +75,7 @@
 
   .active {
     border: 1px solid $blackShadow;
-    color: white;
+    color: $white;
     background: $blackShadow;
   }
 }

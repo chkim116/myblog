@@ -8,8 +8,20 @@
 
 body {
   margin: 0 auto;
-  background-color: $bg-white;
+  padding-top: 45px;
+  background-color: $white;
   font-family: "NEXON Lv1 Gothic OTF";
+}
+
+input,
+textarea,
+button {
+  outline: none;
+}
+
+input,
+textarea {
+  border: 1px solid $blackShadow;
 }
 
 h1,
@@ -35,6 +47,7 @@ li {
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 @font-face {
@@ -51,8 +64,4 @@ a {
     format("woff");
   font-weight: normal;
   font-style: normal;
-}
-
-.previous {
-  cursor: pointer;
 }

@@ -10,11 +10,19 @@ export const GuestBookEdit = ({ history }) => {
   const { id } = useParams();
 
   // get portfolio
-  const ports = useGetPort(`/port/${id}`);
-  const { port } = ports;
+  const guests = useGetPort(`/port/${id}`);
+  const { guest } = guests;
 
-  const [updated, setUpdated] = useState("");
+  const [updated, setUpdated] = useState({
+    title: "",
+    description: "",
+    creator: "",
+    createDate: "",
+    updata: "",
+  });
   const [loading, setLoading] = useState(false);
+  const [upGuest, setUpGuest] = useState(false);
+  const { title, description, creator, createDate, updata } = updated;
 
   // get previous portfolio value
   useEffect(() => {
@@ -31,27 +39,25 @@ export const GuestBookEdit = ({ history }) => {
   }, []);
 
   // updated portfolio
-  const {
-    title,
-    description,
-    imgUrl,
-    category,
-    createDate,
-    update,
-    link,
-  } = updated;
+
   const onSubmit = (e) => {
     e.preventDefault();
     setUpdated({ ...updated });
+    setUpGuest(true);
     const updatePort = async () => {
-      await Axios.post(`/port/edit/${id}`, {
-        title,
-        description,
-        createDate,
-        category,
-        link,
-        imgUrl,
-      }).then((res) => setUpdated({ ...updated, update: true }));
+      try {
+        await Axios.post(`/port/edit/${id}`, {
+          title,
+          description,
+          creator,
+          createDate,
+          updata: true,
+        });
+      } catch (err) {
+        console.log(err);
+        alert("업데이트 실패");
+        setUpGuest(false);
+      }
     };
     updatePort();
   };
@@ -62,7 +68,7 @@ export const GuestBookEdit = ({ history }) => {
   };
 
   useEffect(() => {
-    if (update) {
+    if (upGuest) {
       history.push("/guestbook");
     }
     // eslint-disable-next-line
@@ -75,9 +81,10 @@ export const GuestBookEdit = ({ history }) => {
   return (
     <>
       <Helmet>
-        <title>My Blog | 방명록 수정 {port.title}</title>
+        <title>My Blog | 방명록 수정 {guest.title}</title>
       </Helmet>
-      <GuestBookEditForm port={port} onChange={onChange} onSubmit={onSubmit} />
+      {upGuest && <Loading />}
+      <GuestBookEditForm port={guest} onChange={onChange} onSubmit={onSubmit} />
     </>
   );
 };

@@ -83,7 +83,7 @@
 myblog 리뉴얼 계획 중입니다.
 
 1. home -> 배너, 포스팅 글 목록
-2. post -> 방명록 (id)
+2. post -> 방명록 (id) + infinite scroll
 3. port -> 글 포스팅 (관리자, 태그, 댓글, 조회수)
 4. about me -> 블로그링크, 메일, 전화번호, 포트폴리오 사이트
 

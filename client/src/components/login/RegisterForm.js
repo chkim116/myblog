@@ -4,35 +4,37 @@ import "./RegisterForm.scss";
 const RegisterForm = ({ onChange, onSubmit }) => {
   return (
     <>
-      <form className="register__form" onChange={onChange} onSubmit={onSubmit}>
-        <h2 className="register__title">회원 가입</h2>
+      <form className='register__form' onChange={onChange} onSubmit={onSubmit}>
+        <h2 className='register__title'>회원 가입</h2>
         <input
-          type="text"
-          name="username"
-          placeholder="아이디 또는 이름"
-          min="3"
+          type='text'
+          name='username'
+          placeholder='아이디 또는 이름'
+          min='3'
           required
         />
         <input
-          type="password"
-          name="password"
+          type='password'
+          name='password'
           required
-          min="6"
-          placeholder="6자리 이상의 비밀번호"
+          min='6'
+          placeholder='6자리 이상의 비밀번호'
         />
         <input
-          type="password"
-          name="password2"
+          type='password'
+          name='password2'
           required
-          placeholder="비밀번호 확인"
+          placeholder='비밀번호 확인'
         />
         <input
-          type="email"
-          name="email"
-          placeholder="ex) xxxxxxx@xxxx.com"
+          type='email'
+          name='email'
+          placeholder='ex) xxxxxxx@xxxx.com'
           required
         />
-        <input className="form__submit" type="submit" value="가입완료" />
+        <button className='form__submit' type='submit'>
+          가입완료
+        </button>
       </form>
     </>
   );

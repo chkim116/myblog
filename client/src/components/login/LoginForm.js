@@ -13,7 +13,9 @@ const LoginForm = ({ onChange, onSubmit }) => {
           min='6'
           placeholder='6자리 이상의 비밀번호'
         />
-        <input className='form__submit' type='submit' value='로그인' />
+        <button className='form__submit' type='submit'>
+          로그인
+        </button>
       </form>
     </>
   );

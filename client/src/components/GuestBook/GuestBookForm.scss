@@ -1,72 +1,92 @@
 @import "../../Styles/var";
 
-.post {
-  text-align: right;
-  position: absolute;
-  top: 5%;
-  right: 5%;
-  min-height: 100px;
-  color: $tur;
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
 .contents {
   width: 100%;
   padding: 3em;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   min-height: 760px;
-  gap: 1em;
 
-  @media #{$medium} {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-  }
-
-  @media #{$phone} {
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(1, 1fr);
-    padding-top: 3em 1em 2em 1em;
-  }
-
-  a {
-    color: black;
-  }
-
-  .article__post {
-    width: 100%;
-    margin-top: 4em;
-    overflow: hidden;
-    min-height: 350px;
-    border: 1px solid black;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  .guest {
+    position: absolute;
+    color: $tur;
+    top: 62px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0;
+    width: fit-content;
 
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  .article__post {
+    max-width: 800px;
+    width: 100%;
+    overflow: hidden;
+    padding: 1em;
+    margin: 0.8em auto;
+    border: 1px solid $blackShadow;
+    display: flex;
+    position: relative;
+
+    .post__view {
+      position: absolute;
+      right: 16px;
+      top: 18px;
+      font-size: $small;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    @media #{$medium} {
+      margin: 0.8em 0;
+    }
+
+    & > a {
+      color: black;
+    }
 
     .post__title {
       padding: 0.5em 0;
+      margin-bottom: 1.2em;
+      position: relative;
+      width: fit-content;
+      min-width: 60px;
+      word-break: break-word;
+      text-overflow: ellipsis;
+      white-space: pre-line;
+      &::before {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60%;
+        height: 2px;
+        background: $blackShadow;
+        content: "";
+      }
     }
 
     .post__desc {
-      font-size: 0.8rem;
+      font-size: $medium;
       display: block;
-      word-break: break-word;
       line-height: 20px;
-      white-space: nowrap;
       overflow: hidden;
-      text-overflow: ellipsis;
+
+      p {
+        word-break: break-word;
+        white-space: pre-line;
+        text-overflow: ellipsis;
+      }
     }
 
     .post__info {
+      margin-top: 1em;
+      font-size: $small;
     }
   }
 }

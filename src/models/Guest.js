@@ -15,6 +15,7 @@ const GuestSchema = new mongoose.Schema({
   },
   createDate: String,
   username: String,
+  updata: Boolean,
 });
 
 const model = mongoose.model("Guest", GuestSchema);

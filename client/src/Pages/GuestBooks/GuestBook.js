@@ -1,6 +1,6 @@
 import React from "react";
 import FooterForm from "../../components/Layouts/FooterForm";
-import { useGetPort, useUserId } from "../../middleware";
+import { useGetPort } from "../../middleware";
 import { Helmet } from "react-helmet-async";
 import GuestBookForm from "../../components/GuestBook/GuestBookForm";
 import { Loading } from "../Etc/Loading";

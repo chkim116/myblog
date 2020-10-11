@@ -2,15 +2,12 @@
 
 .port__form {
   width: 100%;
-  min-height: 1000px;
+  min-height: 760px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   display: flex;
-  .tags {
-    width: 250px;
-  }
 
   input {
     padding: 0.8em 1em;
@@ -20,24 +17,17 @@
       width: 80%;
     }
   }
-  input[type="file"] {
-    padding: 1em;
-  }
+
   .form__submit {
-    padding: 1em;
-    cursor: pointer;
-    background-color: $bg-night;
-    color: $font-white;
-    cursor: pointer;
-    border-radius: 12px;
-    font-size: $font-Large;
-    border: none;
-    outline: none;
+    @include button;
   }
+
   textarea {
     width: 500px;
     padding: 1em;
     min-height: 550px;
+    resize: none;
+
     @media #{$phone} {
       width: 80%;
     }

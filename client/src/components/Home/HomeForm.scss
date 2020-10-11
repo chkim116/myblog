@@ -6,7 +6,7 @@
   align-items: center;
   height: 100vh;
   flex-direction: column;
-  color: white;
+  color: $white;
   img {
     width: 100%;
     object-fit: cover;
@@ -37,7 +37,7 @@
     margin-bottom: 1em;
     cursor: pointer;
     a {
-      color: white;
+      color: $white;
     }
     &:nth-child(4) {
       margin-bottom: 1.25em;
@@ -58,12 +58,12 @@
   margin-top: 1em;
   width: 70px;
   height: 70px;
-  border: 1px solid white;
+  border: 1px solid $white;
   padding: 10px;
   border-radius: 25%;
   cursor: pointer;
   span {
-    font-size: $font-Large;
+    font-size: $Large;
   }
 }
 

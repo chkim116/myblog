@@ -27,9 +27,9 @@ export const postGuest = async (req, res) => {
     const guest = await Guest.create({
       title,
       description,
-      creator: req.user._id,
+      creator: req.user._id || "",
       createDate,
-      username: req.user.username,
+      username: req.user.username || "",
     });
     guest.save();
     res.status(200).send(guest);
@@ -41,7 +41,7 @@ export const postGuest = async (req, res) => {
 
 export const guestEditing = async (req, res) => {
   const { id } = req.params;
-  const { title, description, createDate, creator } = req.body;
+  const { title, description, createDate, creator, updata } = req.body;
   try {
     await Guest.findOneAndUpdate(
       { _id: id },
@@ -49,7 +49,7 @@ export const guestEditing = async (req, res) => {
         title,
         description,
         creator,
-        updated,
+        updata,
         createDate,
       }
     );

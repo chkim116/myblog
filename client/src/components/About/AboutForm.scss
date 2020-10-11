@@ -25,7 +25,7 @@
       text-align: left;
       margin-left: 3%;
       padding-top: 4em;
-      color: white;
+      color: $white;
     }
     h3 {
       margin-left: 3%;
@@ -57,7 +57,7 @@
       border-radius: 25%;
       cursor: pointer;
       span {
-        font-size: $font-Large;
+        font-size: $Large;
       }
     }
   }
