@@ -20,9 +20,13 @@ export const GuestBookWriting = ({ history }) => {
     setGuest({
       ...guest,
       [name]: value,
-      createDate: new Date().toLocaleString("ko-KR", {
-        timeZone: "Asia/Seoul",
-        hour12: false,
+      createDate: new Date().toLocaleTimeString("ko-KR", {
+        weekday: "long",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
       }),
     });
   };

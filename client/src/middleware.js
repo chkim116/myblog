@@ -70,6 +70,7 @@ export const useGetPort = (url) => {
     createDate: "",
     creator: "",
     username: "",
+    updata: false,
   });
   const [loading, setLoading] = useState(false);
 

@@ -81,8 +81,10 @@ function App() {
         )}
         <Route path='/guestbookdetail/:id' component={GuestBookDetail} />
         <Route path='/guestbookedit/:id' component={GuestBookEdit} />
-        {userId.id && (
+        {userId.id ? (
           <Route path={routes.guestbooking} component={GuestBookWriting} />
+        ) : (
+          <Login />
         )}
         <Route component={NotFound} />
       </Switch>

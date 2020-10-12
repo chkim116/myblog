@@ -22,7 +22,7 @@ export const GuestBookEdit = ({ history }) => {
   });
   const [loading, setLoading] = useState(false);
   const [upGuest, setUpGuest] = useState(false);
-  const { title, description, creator, createDate, updata } = updated;
+  const { title, description, creator, createDate } = updated;
 
   // get previous portfolio value
   useEffect(() => {

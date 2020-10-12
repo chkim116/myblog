@@ -1,22 +1,23 @@
 @import "../../Styles/var";
 
 .post__wrap {
-  min-height: 768px;
+  min-height: 480px;
   padding: 3em;
   @media #{$phone} {
     padding: 3em 1em;
   }
 }
 .post {
-  text-align: right;
-  padding: 2em;
-  min-height: 100px;
+  margin: 0 auto;
+  width: fit-content;
   span {
     margin: 0 0.5em;
     cursor: pointer;
+
     &:hover {
-      color: blue;
+      color: $blue;
     }
+
     a {
       color: $tur;
     }
@@ -56,15 +57,18 @@
       word-break: break-word;
       white-space: pre-wrap;
       color: $black;
+
       .ql-editor {
         & > * {
           cursor: pointer;
         }
+
         &:hover {
           text-decoration: underline;
         }
       }
     }
+
     .post__form-date {
       border-bottom: 1px solid $blackShadow;
       padding-bottom: 1em;

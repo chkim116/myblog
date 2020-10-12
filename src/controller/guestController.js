@@ -30,6 +30,7 @@ export const postGuest = async (req, res) => {
       creator: req.user._id || "",
       createDate,
       username: req.user.username || "",
+      updata: false,
     });
     guest.save();
     res.status(200).send(guest);
@@ -49,7 +50,7 @@ export const guestEditing = async (req, res) => {
         title,
         description,
         creator,
-        updata,
+        updata: true,
         createDate,
       }
     );

@@ -31,7 +31,7 @@ export const GuestBookDetailForm = ({ port, onClick, userId }) => {
             return <p key={key}>{text}</p>;
           })}
         </div>
-        <p>time: {createDate}</p>
+        <p className='port__detail-user'>{createDate}</p>
         <p className='port__detail-user'>
           <small>Upload By: {username}</small>
         </p>

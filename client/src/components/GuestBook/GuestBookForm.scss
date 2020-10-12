@@ -7,13 +7,27 @@
   flex-direction: column;
   min-height: 760px;
 
+  .post__del {
+    position: absolute;
+    width: fit-content;
+    top: -15px;
+    left: 50%;
+    right: 50%;
+    font-size: $small;
+    cursor: pointer;
+    &:hover {
+      color: $blackShadow;
+    }
+  }
+
   .guest {
     position: absolute;
+    text-align: center;
     color: $tur;
     top: 62px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 0;
+    margin-left: 0.5em;
     width: fit-content;
 
     &:hover {
@@ -24,7 +38,6 @@
   .article__post {
     max-width: 800px;
     width: 100%;
-    overflow: hidden;
     padding: 1em;
     margin: 0.8em auto;
     border: 1px solid $blackShadow;
