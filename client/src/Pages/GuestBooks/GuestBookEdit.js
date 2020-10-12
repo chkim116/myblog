@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { GuestBookEditForm } from "../../components/GuestBook/GuestBookEditForm";
-import { useGetPort } from "../../middleware";
+import { useGetPort, useUserId } from "../../middleware";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";
@@ -9,7 +9,12 @@ import { Loading } from "../Etc/Loading";
 export const GuestBookEdit = ({ history }) => {
   const { id } = useParams();
 
-  // get portfolio
+  // user
+  const {
+    userId: { id: userId },
+  } = useUserId("/auth");
+
+  // get GuestBook
   const guests = useGetPort(`/port/${id}`);
   const { guest } = guests;
 
@@ -24,7 +29,7 @@ export const GuestBookEdit = ({ history }) => {
   const [upGuest, setUpGuest] = useState(false);
   const { title, description, creator, createDate } = updated;
 
-  // get previous portfolio value
+  // get previous GuestBook value
   useEffect(() => {
     const getPort = async () => {
       try {
@@ -38,7 +43,7 @@ export const GuestBookEdit = ({ history }) => {
     // eslint-disable-next-line
   }, []);
 
-  // updated portfolio
+  // updated GuestBook
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -84,7 +89,17 @@ export const GuestBookEdit = ({ history }) => {
         <title>My Blog | 방명록 수정 {guest.title}</title>
       </Helmet>
       {upGuest && <Loading />}
-      <GuestBookEditForm port={guest} onChange={onChange} onSubmit={onSubmit} />
+      {userId === guest.creator ? (
+        <GuestBookEditForm
+          port={guest}
+          onChange={onChange}
+          onSubmit={onSubmit}
+        />
+      ) : (
+        <>
+          {alert("잘못된 접근입니다.")} {history.push("/")}
+        </>
+      )}
     </>
   );
 };

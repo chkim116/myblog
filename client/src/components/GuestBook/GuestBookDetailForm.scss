@@ -7,6 +7,7 @@
   align-items: center;
   width: 100%;
   margin: 0 auto;
+  max-width: 1200px;
   min-height: 600px;
   margin-bottom: 3em;
 
@@ -33,7 +34,7 @@
     width: 70%;
     margin-bottom: 0.8em;
     padding: 0.3em;
-    @include border;
+    border-bottom: 2px solid $blackShadow;
     word-break: break-word;
     text-overflow: ellipsis;
     white-space: pre-line;
@@ -48,10 +49,9 @@
     width: 70%;
     min-height: 450px;
     line-height: 30px;
-    @include border;
     white-space: pre-line;
     word-break: break-word;
-    text-overflow: ellipsis;
+    border-bottom: 2px solid $blackShadow;
 
     @media #{$phone} {
       width: 90%;
@@ -69,7 +69,6 @@
 
 .previous {
   cursor: pointer;
-
   &:hover {
     text-decoration: underline;
   }

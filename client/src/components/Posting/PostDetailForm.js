@@ -3,8 +3,8 @@ import "./PostDetailForm.scss";
 import { Link } from "react-router-dom";
 import { Loading } from "../../Pages/Etc/Loading";
 
-const PostDetailForm = ({ postObj, loading, onClick, userId }) => {
-  const { title, description, _id, createDate, creator } = postObj;
+const PostDetailForm = ({ postObj, loading, onClick, admin }) => {
+  const { title, description, _id, createDate } = postObj;
   if (!loading) {
     return <Loading />;
   }
@@ -19,9 +19,8 @@ const PostDetailForm = ({ postObj, loading, onClick, userId }) => {
           }}>
           뒤로가기
         </div>
-
         <div className='post__btn'>
-          {userId === creator && (
+          {admin && (
             <>
               <span className='btn'>
                 <Link to={`/edit/${_id}`}>Edit</Link>

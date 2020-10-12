@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import PostingForm from "../../components/Posting/PostingForm";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";
@@ -61,10 +61,6 @@ const PostWriting = ({ history }) => {
     }
   });
 
-  const reactQuillRef = useRef();
-  const quillRef = reactQuillRef;
-  console.log(quillRef);
-
   return (
     <>
       <Helmet>
@@ -72,8 +68,6 @@ const PostWriting = ({ history }) => {
       </Helmet>
       <PostingForm
         onSubmit={onSubmit}
-        quillRef={quillRef}
-        reactQuillRef={reactQuillRef}
         onChange={onChange}
         title={title}
         onValue={onValue}

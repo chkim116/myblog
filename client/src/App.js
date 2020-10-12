@@ -70,12 +70,19 @@ function App() {
         <Route path={routes.guestbook} component={GuestBook}></Route>
         <Route path={routes.post} component={Post}></Route>
         <Route path={routes.about} component={About}></Route>
-        <Route path='/postdetail/:id' component={PostDetail}></Route>
-        <Route path={"/edit/:id"} component={PostEdit} />
         {admin ? (
           <Route path={routes.postwriting} component={PostWriting}></Route>
         ) : (
           <Route path={routes.postwriting}>
+            <h3 className='error__title'>관리자가 아닙니다.</h3>
+          </Route>
+        )}
+
+        <Route path='/postdetail/:id' component={PostDetail}></Route>
+        {admin ? (
+          <Route path={"/edit/:id"} component={PostEdit} />
+        ) : (
+          <Route path={"/edit/:id"}>
             <h3 className='error__title'>관리자가 아닙니다.</h3>
           </Route>
         )}

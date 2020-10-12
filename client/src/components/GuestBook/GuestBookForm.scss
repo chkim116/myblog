@@ -7,12 +7,25 @@
   flex-direction: column;
   min-height: 760px;
 
+  .post__edit {
+    position: absolute;
+    width: fit-content;
+    top: 3px;
+    left: 45%;
+    right: 55%;
+    font-size: $small;
+    cursor: pointer;
+    &:hover {
+      color: $blackShadow;
+    }
+  }
+
   .post__del {
     position: absolute;
     width: fit-content;
-    top: -15px;
-    left: 50%;
-    right: 50%;
+    top: 3px;
+    left: 55%;
+    right: 45%;
     font-size: $small;
     cursor: pointer;
     &:hover {

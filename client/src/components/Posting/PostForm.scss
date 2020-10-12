@@ -44,13 +44,28 @@
     padding: 1em;
     position: relative;
 
+    .post__edit {
+      position: absolute;
+      width: fit-content;
+      top: 3px;
+      left: 45%;
+      right: 55%;
+      font-size: $small;
+      cursor: pointer;
+      color: $black;
+      &:hover {
+        color: $blackShadow;
+      }
+    }
+
     .post__form-del {
       position: absolute;
-      right: 10px;
-      top: 10px;
-      color: $black;
+      width: fit-content;
+      top: 3px;
+      left: 55%;
+      right: 45%;
+      font-size: $small;
       cursor: pointer;
-
       &:hover {
         color: $blackShadow;
       }

@@ -11,7 +11,7 @@ const PostDetail = ({ history }) => {
   // get Id
   const usersId = useUserId("/auth");
   const {
-    userId: { id: userId },
+    userId: { admin },
   } = usersId;
 
   // get Post Detail
@@ -44,9 +44,9 @@ const PostDetail = ({ history }) => {
       {del && <Loading />}
       <PostDetailForm
         postObj={post}
+        admin={admin}
         loading={loading}
         onClick={onClick}
-        userId={userId}
       />
     </>
   );

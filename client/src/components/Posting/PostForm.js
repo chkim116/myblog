@@ -28,12 +28,17 @@ const PostForm = ({
             {post.map((p) => (
               <div className='post__form-type' key={p._id}>
                 {admin && (
-                  <span
-                    className='post__form-del'
-                    onClick={onClick}
-                    data-id={p._id}>
-                    X
-                  </span>
+                  <>
+                    <Link to={`/edit/${p._id}`}>
+                      <span className='post__edit'>Edit</span>
+                    </Link>
+                    <span
+                      className='post__form-del'
+                      onClick={onClick}
+                      data-id={p._id}>
+                      X
+                    </span>
+                  </>
                 )}
                 <Link to={`/postdetail/${p._id}`}>
                   <h3 className='post__form-title'>

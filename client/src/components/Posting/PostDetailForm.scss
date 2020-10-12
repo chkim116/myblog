@@ -6,7 +6,8 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 1em auto 3em auto;
+  max-width: 1200px;
+  margin: 0em auto 3em auto;
   min-height: 600px;
 
   .post__btn {
@@ -30,9 +31,8 @@
     width: 70%;
     margin-bottom: 0.8em;
     padding: 0.3em;
-    @include border;
+    border-bottom: 2px solid $blackShadow;
     word-break: break-word;
-    text-overflow: ellipsis;
     white-space: pre-line;
 
     @media #{$phone} {
@@ -45,10 +45,9 @@
     width: 70%;
     min-height: 450px;
     line-height: 30px;
-    @include border;
+    border-bottom: 2px solid $blackShadow;
     white-space: pre-line;
     word-break: break-word;
-    text-overflow: ellipsis;
 
     @media #{$phone} {
       width: 90%;

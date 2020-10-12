@@ -10,11 +10,11 @@ export const postRegister = async (req, res, next) => {
   const schema = Joi.object().keys({
     username: Joi.string().alphanum().min(6).required().messages({
       "string.min": "아이디는 6자 이상입니다.",
-      "string.alphanum": "문자와 숫자로 구성해 주세요.",
+      "string.alphanum": "아이디는 문자와 숫자로 구성해 주세요.",
     }),
     password: Joi.string().min(6).alphanum().required().messages({
       "string.min": "비밀번호는 6자 이상입니다.",
-      "string.alphanum": "문자와 숫자로 구성해 주세요.",
+      "string.alphanum": "비밀번호는 문자와 숫자로 구성해 주세요.",
     }),
     password2: Joi.string().min(6).alphanum().required().messages({
       "string.min": "비밀번호는 6자 이상입니다.",

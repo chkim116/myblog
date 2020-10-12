@@ -6,7 +6,6 @@ import { HelmetProvider } from "react-helmet-async";
 import "./Styles/reset.scss";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
-// reducer
 
 ReactDOM.render(
   <BrowserRouter>

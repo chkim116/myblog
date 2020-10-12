@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import routes from "../../routes";
 
 const GuestBookForm = ({ port, id, onClick }) => {
+  console.log(id);
   return (
     <>
       <div className='contents'>
@@ -14,13 +15,18 @@ const GuestBookForm = ({ port, id, onClick }) => {
           <>
             <div className='article__post' key={key}>
               {id === p.creator && (
-                <span
-                  key={id.length}
-                  data-id={p._id}
-                  className='post__del'
-                  onClick={onClick}>
-                  DEL
-                </span>
+                <>
+                  <Link to={`/guestbookedit/${p._id}`}>
+                    <span className='post__edit'>EDIT</span>
+                  </Link>
+                  <span
+                    key={id.length}
+                    data-id={p._id}
+                    className='post__del'
+                    onClick={onClick}>
+                    DEL
+                  </span>
+                </>
               )}
               <Link to={`/guestbookdetail/${p._id}`}>
                 <span className='post__view'>-view more</span>

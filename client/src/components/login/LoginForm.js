@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./LoginForm.scss";
 
 const LoginForm = ({ onChange, onSubmit }) => {
@@ -16,6 +17,11 @@ const LoginForm = ({ onChange, onSubmit }) => {
         <button className='form__submit' type='submit'>
           로그인
         </button>
+        <Link to='/register'>
+          <button className='form__submit' type='submit'>
+            회원가입
+          </button>
+        </Link>
       </form>
     </>
   );
