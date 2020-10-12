@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";
 import PostForm from "../../components/Posting/PostForm";
+import { Loading } from "../Etc/Loading";
+import { useUserId } from "../../middleware";
 
 const Post = ({ location, history }) => {
   // url에 따른 포스트 호출
@@ -47,7 +49,7 @@ const Post = ({ location, history }) => {
     const AllPost = async () => {
       try {
         const posting = await Axios.get("/api/all").then((res) => res.data);
-        setPostLenght(Math.ceil(posting.length / 3));
+        setPostLenght(Math.ceil(posting.length / 6));
       } catch (err) {
         console.log(err);
       }
@@ -70,14 +72,45 @@ const Post = ({ location, history }) => {
     history.push(`/post?page=${selected + 1}`);
   };
 
+  // 게시글 삭제
+
+  // del
+  const [del, setDel] = useState(false);
+
+  const onClick = (e) => {
+    const boardId = e.target.dataset.id;
+    console.log(boardId);
+    const deletePost = async () => {
+      setDel(true);
+      try {
+        await Axios.get(`/api/del/${boardId}`);
+        window.location.reload();
+      } catch (err) {
+        console.log(err);
+        setDel(false);
+        alert("삭제에 실패했습니다.");
+      }
+    };
+    deletePost();
+  };
+
+  // 관리자 확인
+  const userId = useUserId("/auth");
+  const {
+    userId: { admin },
+  } = userId;
+
   return (
     <>
       <Helmet>
         <title>My Blog | 포스트</title>
       </Helmet>
+      {del && <Loading />}
       <PostForm
+        onClick={onClick}
         postObj={{ post }}
         loading={loading}
+        admin={admin}
         postLength={postLength}
         page={page}
         handleChange={handleChange}

@@ -9,11 +9,11 @@ export const getPost = async (req, res) => {
   try {
     const post = await Post.find({})
       .sort({ _id: -1 })
-      .limit(3)
-      .skip((page - 1) * 3)
+      .limit(6)
+      .skip((page - 1) * 6)
       .exec();
     const postCount = await Post.countDocuments().exec();
-    res.set("Last-Page", Math.ceil(postCount / 3)).json(post);
+    res.set("Last-Page", Math.ceil(postCount / 6)).json(post);
   } catch (error) {
     console.log(error);
   }

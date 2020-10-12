@@ -2,9 +2,9 @@
 
 .post__wrap {
   min-height: 480px;
-  padding: 3em;
+  padding: 1em;
   @media #{$phone} {
-    padding: 3em 1em;
+    padding-bottom: 3em;
   }
 }
 .post {
@@ -29,7 +29,7 @@
 
 .post__form {
   width: 80%;
-  margin: 3em auto;
+  margin: 1.5em auto;
   display: grid;
   gap: 2em;
   grid-template-columns: repeat(3, 1fr);
@@ -41,30 +41,45 @@
   }
 
   .post__form-type {
-    box-shadow: 1px 1px 5px 2px $blackShadow;
     padding: 1em;
+    position: relative;
+
+    .post__form-del {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      color: $black;
+      cursor: pointer;
+
+      &:hover {
+        color: $blackShadow;
+      }
+    }
+
     .post__form-title {
       border-bottom: 1px solid $blackShadow;
       margin-bottom: 1em;
       padding-bottom: 0.4em;
       color: $black;
     }
+
     .post__form-desc {
       padding-bottom: 1em;
       display: block;
       height: 300px;
       max-height: 300px;
-      word-break: break-word;
-      white-space: pre-wrap;
       color: $black;
 
       .ql-editor {
-        & > * {
-          cursor: pointer;
+        word-break: break-word;
+        overflow: scroll;
+
+        &::-webkit-scrollbar {
+          display: none;
         }
 
-        &:hover {
-          text-decoration: underline;
+        & > * {
+          cursor: pointer;
         }
       }
     }
@@ -75,6 +90,7 @@
       text-align: right;
       margin-bottom: 2em;
       color: $darkgrey;
+      letter-spacing: -1px;
     }
   }
 }

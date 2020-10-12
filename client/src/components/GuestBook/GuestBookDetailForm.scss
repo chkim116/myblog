@@ -7,7 +7,7 @@
   align-items: center;
   width: 100%;
   margin: 0 auto;
-  min-height: 640px;
+  min-height: 600px;
   margin-bottom: 3em;
 
   .port__btn {
@@ -63,10 +63,8 @@
 .port__detail-user {
   margin-top: 0.3em;
   color: rgba(0, 0, 0, 0.5);
-
-  &:nth-child(1) {
-    font-size: $medium;
-  }
+  font-size: $medium;
+  letter-spacing: -1px;
 }
 
 .previous {

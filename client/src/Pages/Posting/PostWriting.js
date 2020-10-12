@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PostingForm from "../../components/Posting/PostingForm";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";
 
 const PostWriting = ({ history }) => {
-  const initialState = {
+  const [post, setPost] = useState({
     title: "",
     description: "",
     updated: "",
-  };
-
-  const [post, setPost] = useState(initialState);
+  });
   const [loading, setLoading] = useState(false);
   const { title, description, updated } = post;
 
@@ -23,9 +21,13 @@ const PostWriting = ({ history }) => {
           title,
           description,
           updated,
-          createDate: new Date().toLocaleString("ko-KR", {
-            timeZone: "Asia/Seoul",
-            hour12: false,
+          createDate: new Date().toLocaleTimeString("ko-KR", {
+            weekday: "long",
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
           }),
         });
         setLoading(true);
@@ -46,6 +48,7 @@ const PostWriting = ({ history }) => {
 
   const onValue = (content, delta, source, editor) => {
     const text = editor.getHTML();
+    console.log(editor.getHTML());
     setPost({
       ...post,
       description: text,
@@ -58,6 +61,10 @@ const PostWriting = ({ history }) => {
     }
   });
 
+  const reactQuillRef = useRef();
+  const quillRef = reactQuillRef;
+  console.log(quillRef);
+
   return (
     <>
       <Helmet>
@@ -65,6 +72,8 @@ const PostWriting = ({ history }) => {
       </Helmet>
       <PostingForm
         onSubmit={onSubmit}
+        quillRef={quillRef}
+        reactQuillRef={reactQuillRef}
         onChange={onChange}
         title={title}
         onValue={onValue}

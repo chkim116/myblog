@@ -6,14 +6,16 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 768px;
-  padding-top: 4em;
+  margin: 1em auto 3em auto;
+  min-height: 600px;
 
   .post__btn {
     display: flex;
+
     a {
       color: black;
     }
+
     .btn {
       margin: 0 0.3em;
       cursor: pointer;
@@ -23,24 +25,31 @@
     }
   }
   h2 {
-    border: 1px solid black;
+    font-size: 1.25rem;
     text-align: center;
     width: 70%;
     margin-bottom: 0.8em;
     padding: 0.3em;
+    @include border;
+    word-break: break-word;
+    text-overflow: ellipsis;
+    white-space: pre-line;
+
     @media #{$phone} {
       width: 90%;
     }
   }
+
   .post__detail-desc {
-    padding: 1em;
+    padding: 2em;
     width: 70%;
-    min-height: 600px;
-    border: 1px solid black;
-    white-space: normal;
+    min-height: 450px;
     line-height: 30px;
-    word-break: break-all;
-    // 보더 테두리 꾸미기
+    @include border;
+    white-space: pre-line;
+    word-break: break-word;
+    text-overflow: ellipsis;
+
     @media #{$phone} {
       width: 90%;
     }
@@ -48,5 +57,6 @@
   .post__detail-date {
     margin-top: 0.3em;
     color: rgba(0, 0, 0, 0.5);
+    letter-spacing: -1px;
   }
 }

@@ -32,9 +32,7 @@ export const GuestBookDetailForm = ({ port, onClick, userId }) => {
           })}
         </div>
         <p className='port__detail-user'>{createDate}</p>
-        <p className='port__detail-user'>
-          <small>Upload By: {username}</small>
-        </p>
+        <p className='port__detail-user'>Upload By: {username}</p>
       </div>
     </>
   );

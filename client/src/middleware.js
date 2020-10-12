@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Axios from "axios";
 
 export function registerCheck(err, url, { history }) {
@@ -93,17 +93,32 @@ export const useGetPort = (url) => {
 
 // react-quill
 
+const quillImage = () => {
+  const input = document.createElement("input");
+  input.setAttribute("type", "file");
+  input.setAttribute("accept", "image/*");
+  input.click();
+
+  input.onchange = (e) => {
+    console.log(e.target);
+  };
+};
+
 export const modules = {
-  toolbar: [
-    [{ font: [] }],
-    [{ size: ["small", false, "large", "huge"] }],
-    ["bold", "italic", "underline"],
-    [{ list: "ordered" }, { list: "bullet" }],
-    [{ align: [] }],
-    [{ color: [] }, { background: [] }],
-    ["link", "image", "video"],
-    ["clean"],
-  ],
+  toolbar: {
+    container: [
+      [{ font: [] }],
+      [{ size: ["small", false, "large", "huge"] }],
+      ["bold", "italic", "underline"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ align: [] }],
+      [{ color: [] }, { background: [] }],
+      ["link", "image", "video"],
+    ],
+    handlers: {
+      image: quillImage,
+    },
+  },
 };
 
 export const formats = [

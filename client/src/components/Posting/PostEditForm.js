@@ -2,6 +2,7 @@ import React from "react";
 import "./PostingForm.scss";
 import ReactQuill from "react-quill";
 import { modules, formats } from "../../middleware";
+import { Loading } from "../../Pages/Etc/Loading";
 
 const PostEditForm = ({ post, loading, onChange, onSubmit, onValue }) => {
   const { title, description } = post;
@@ -9,26 +10,26 @@ const PostEditForm = ({ post, loading, onChange, onSubmit, onValue }) => {
   return (
     <>
       {loading ? (
-        <form className="posting__form" onSubmit={onSubmit} onChange={onChange}>
+        <form className='posting__form' onSubmit={onSubmit} onChange={onChange}>
           <input
-            type="text"
-            name="title"
+            type='text'
+            name='title'
             defaultValue={title}
-            placeholder="title"
-          ></input>
+            placeholder='title'></input>
           <ReactQuill
-            theme="snow"
+            theme='snow'
             modules={modules}
             formats={formats}
-            name="description"
+            name='description'
             defaultValue={description}
-            placeholder="description"
-            onChange={onValue}
-          ></ReactQuill>
-          <input className="form__submit" type="submit" value="UPDATE"></input>
+            placeholder='description'
+            onChange={onValue}></ReactQuill>
+          <button className='form__submit' type='submit'>
+            UPDATE
+          </button>
         </form>
       ) : (
-        <div className="loading__title">디테일 수정화면으로 가는 중</div>
+        <Loading />
       )}
     </>
   );

@@ -5,7 +5,13 @@ import ReactQuill from "react-quill";
 import { modules, formats } from "../../middleware";
 import { Loading } from "../../Pages/Etc/Loading";
 
-const PostingForm = ({ onSubmit, onChange, onValue }) => {
+const PostingForm = ({
+  onSubmit,
+  onChange,
+  onValue,
+  quillRef,
+  reactQuillRef,
+}) => {
   const [loading, setLoading] = useState("");
   useEffect(() => {
     setLoading(true);
@@ -21,16 +27,20 @@ const PostingForm = ({ onSubmit, onChange, onValue }) => {
         <input
           type='text'
           name='title'
+          maxLength='12'
           placeholder='title'
           onChange={onChange}></input>
         <ReactQuill
+          ref={reactQuillRef}
           theme='snow'
           modules={modules}
           formats={formats}
           name='description'
           placeholder='description'
           onChange={onValue}></ReactQuill>
-        <input className='form__submit' type='submit' value='UPLOAD'></input>
+        <button className='form__submit' type='submit'>
+          UPLOAD
+        </button>
       </form>
     </>
   );

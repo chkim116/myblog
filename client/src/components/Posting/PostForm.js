@@ -12,6 +12,7 @@ const PostForm = ({
   onClick,
   handleChange,
   postLength,
+  admin,
 }) => {
   const { post } = postObj;
   return (
@@ -19,13 +20,21 @@ const PostForm = ({
       {loading ? (
         <div className='post__wrap'>
           <div className='post'>
-            <span className='btn post-btn' onClick={onClick}>
-              <Link to={routes.postwriting}>Post</Link>
+            <span className='btn post-btn'>
+              {admin && <Link to={routes.postwriting}>Post</Link>}
             </span>
           </div>
           <div className='post__form'>
             {post.map((p) => (
               <div className='post__form-type' key={p._id}>
+                {admin && (
+                  <span
+                    className='post__form-del'
+                    onClick={onClick}
+                    data-id={p._id}>
+                    X
+                  </span>
+                )}
                 <Link to={`/postdetail/${p._id}`}>
                   <h3 className='post__form-title'>
                     {p.title}
