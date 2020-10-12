@@ -7,6 +7,10 @@
   flex-direction: column;
   min-height: 760px;
 
+  @media #{$phone} {
+    padding: 3em 1em 3em 1em;
+  }
+
   .post__edit {
     position: absolute;
     width: fit-content;

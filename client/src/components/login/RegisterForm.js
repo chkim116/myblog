@@ -5,7 +5,7 @@ const RegisterForm = ({ onChange, onSubmit }) => {
   return (
     <>
       <form className='register__form' onChange={onChange} onSubmit={onSubmit}>
-        <h2 className='register__title'>회원 가입</h2>
+        <h1 className='register__title'>회원 가입</h1>
         <input
           type='text'
           name='username'

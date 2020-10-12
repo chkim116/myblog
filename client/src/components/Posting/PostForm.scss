@@ -33,7 +33,8 @@
   display: grid;
   gap: 2em;
   grid-template-columns: repeat(3, 1fr);
-  @media #{$medium} {
+
+  @media #{$large} {
     grid-template-columns: repeat(2, 1fr);
   }
   @media #{$phone} {
@@ -41,7 +42,6 @@
   }
 
   .post__form-type {
-    padding: 1em;
     position: relative;
 
     .post__edit {
