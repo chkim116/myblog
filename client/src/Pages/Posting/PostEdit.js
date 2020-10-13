@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PostEditForm from "../../components/Posting/PostEditForm";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
-import { useGetPost, useUserId } from "../../middleware";
+import { useGetPost } from "../../middleware";
 import { Helmet } from "react-helmet-async";
 
 const PostEdit = ({ history }) => {

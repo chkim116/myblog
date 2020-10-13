@@ -7,14 +7,13 @@ import { Loading } from "../../Pages/Etc/Loading";
 
 const PostForm = ({
   select,
-  postObj,
+  post,
   loading,
   onClick,
   handleChange,
   postLength,
   admin,
 }) => {
-  const { post } = postObj;
   return (
     <>
       {loading ? (
@@ -44,12 +43,19 @@ const PostForm = ({
                   <h3 className='post__form-title'>
                     {p.title}
                     <small className='updated'>{p.updated}</small>
+                    <span className='post__tags'>
+                      {p.tags}
+                      {/* {p.tags.map((tag) => (
+                        <span> #{tag}</span>
+                      ))} */}
+                    </span>
                   </h3>
                   <div className='post__form-desc'>
                     <div
                       className='ql-editor'
                       dangerouslySetInnerHTML={{ __html: p.description }}></div>
                   </div>
+
                   <p className='post__form-date'>
                     <small>{p.createDate}</small>
                   </p>

@@ -1,9 +1,13 @@
 import mongoose from "mongoose";
 
 const tagsSchema = new mongoose.Schema({
-  text: String,
+  tags: [
+    {
+      type: String,
+    },
+  ],
 });
 
-const model = mongoose.model("tags", tagsSchema);
+const model = mongoose.model("Tags", tagsSchema);
 
 export default model;

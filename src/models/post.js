@@ -15,6 +15,10 @@ const PostSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  tags: {
+    type: mongoose.Schema.Types.Array,
+    ref: "Tags",
+  },
 });
 
 const model = mongoose.model("Post", PostSchema);

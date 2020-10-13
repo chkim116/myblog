@@ -43,6 +43,7 @@ export const useGetPost = (url) => {
     description: "",
     updated: "",
     creator: "",
+    tags: [],
   });
   const [loading, setLoading] = useState(false);
 
@@ -91,19 +92,6 @@ export const useGetPort = (url) => {
   return { guest, loading };
 };
 
-// react-quill
-
-const quillImage = () => {
-  const input = document.createElement("input");
-  input.setAttribute("type", "file");
-  input.setAttribute("accept", "image/*");
-  input.click();
-
-  input.onchange = (e) => {
-    console.log(e.target);
-  };
-};
-
 export const modules = {
   toolbar: {
     container: [
@@ -115,9 +103,6 @@ export const modules = {
       [{ color: [] }, { background: [] }],
       ["link", "image", "video"],
     ],
-    handlers: {
-      image: quillImage,
-    },
   },
 };
 

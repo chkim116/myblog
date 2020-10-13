@@ -20,6 +20,7 @@ const Post = ({ location, history }) => {
     updated: "",
     creator: "",
     createDate: "",
+    tags: [],
   });
 
   // 등록된 포스트의 총 길이 ( limit 5 )
@@ -108,7 +109,7 @@ const Post = ({ location, history }) => {
       {del && <Loading />}
       <PostForm
         onClick={onClick}
-        postObj={{ post }}
+        post={post}
         loading={loading}
         admin={admin}
         postLength={postLength}

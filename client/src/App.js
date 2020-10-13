@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet-async";
 import "./Styles/loading.scss";
 // page
 import Nav from "./components/Layouts/Nav";
-import Home from "./Pages/Home/Home";
+import Home from "./Pages/Homes/Home";
 import About from "./Pages/About/About";
 import Post from "./Pages/Posting/Post";
 import GuestBook from "./Pages/GuestBooks/GuestBook";

@@ -1,36 +1,56 @@
 import React from "react";
-import "./HomeForm.scss";
-import img from "../../image/1.jpg";
 import { Link } from "react-router-dom";
-import { SiReact } from "react-icons/si";
-import { FaNodeJs, FaSass } from "react-icons/fa";
+import "./HomeForm.scss";
+
+const HashTag = ({ hash }) => {
+  const color = `#${Math.round(Math.random() * 0xffffff).toString(16)}`;
+  return (
+    <Link to='/'>
+      <div className='main__hash-tag' style={{ color }}>
+        {hash}
+      </div>
+    </Link>
+  );
+};
 
 const HomeForm = () => {
   return (
     <>
-      <div className='main'>
-        <img src={img} alt='home' />
-        <h1 className='home__title'>Create New EveryDay</h1>
-        <p className='home__desc'>
-          There have to be reasons that you get up in the morning and you want
-          to live.
-        </p>
-        <button>
-          <Link to='https://github.com/chkim116' target='blank'>
-            View More My GitHub
-          </Link>
-        </button>
-        <button>
-          <Link to='https://blog.naver.com/dudnqnfqlc'>Blog</Link>
-        </button>
-        <div>이 사이트는</div>
-        <div>
-          <SiReact className='about__stack-icon react' />
-          <FaNodeJs className='about__stack-icon node' />
-          <FaSass className='about__stack-icon sass' />
+      <main className='main'>
+        <div className='main__hash'>
+          <div className='tags__keyword'>Keywords Tags</div>
+          <div className='main__hash-box'>
+            <HashTag hash='#hash' />
+            <HashTag hash='#hash' />
+            <HashTag hash='#hash' /> <HashTag hash='#hash' />
+            <HashTag hash='#hash' /> <HashTag hash='#hash' />
+            <HashTag hash='#hash' /> <HashTag hash='#hash' />
+            <HashTag hash='#hash' /> <HashTag hash='#hash' />
+            <HashTag hash='#hash' /> <HashTag hash='#hash' />
+            <HashTag hash='#hash' />
+            <HashTag hash='#hash' />
+            <HashTag hash='#hash' />
+            <HashTag hash='#hash' />
+            <HashTag hash='#hash' />
+            <HashTag hash='#hash' />
+            <HashTag hash='#hash' />
+            <HashTag hash='#hash' /> <HashTag hash='#hash' />
+            <HashTag hash='#hash' />
+            <HashTag hash='#hash' />
+            <HashTag hash='#hash' />
+            <HashTag hash='#hash' />
+            <HashTag hash='#hash' />
+            <HashTag hash='#hash' />
+            <HashTag hash='#hash' />
+          </div>
         </div>
-        <div>로 만들어졌습니다.</div>
-      </div>
+
+        <div className='main__hello'>
+          <h1 className='main__title'>생각창고</h1>
+          <div>Welcome to My Blog!</div>
+          <div>Thanks for your Visit</div>
+        </div>
+      </main>
     </>
   );
 };

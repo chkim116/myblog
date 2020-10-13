@@ -53,6 +53,12 @@
       width: 90%;
     }
   }
+
+  .post__detail-tags {
+    font-size: $small;
+    color: $darkgrey;
+  }
+
   .post__detail-date {
     margin-top: 0.3em;
     color: rgba(0, 0, 0, 0.5);

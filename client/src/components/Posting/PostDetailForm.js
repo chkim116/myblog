@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Loading } from "../../Pages/Etc/Loading";
 
 const PostDetailForm = ({ postObj, loading, onClick, admin }) => {
-  const { title, description, _id, createDate } = postObj;
+  const { title, description, _id, createDate, tags } = postObj;
   if (!loading) {
     return <Loading />;
   }
@@ -37,6 +37,11 @@ const PostDetailForm = ({ postObj, loading, onClick, admin }) => {
             className='ql-editor'
             dangerouslySetInnerHTML={{ __html: description }}></div>
         </div>
+        <span className='post__detail-tags'>
+          {tags.map((tag) => (
+            <span> #{tag}</span>
+          ))}
+        </span>
         <p className='post__detail-date'>
           <small>Uploaded: {createDate}</small>
         </p>

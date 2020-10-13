@@ -47,9 +47,8 @@
     .post__edit {
       position: absolute;
       width: fit-content;
-      top: 3px;
-      left: 45%;
-      right: 55%;
+      bottom: 0;
+      left: 0;
       font-size: $small;
       cursor: pointer;
       color: $black;
@@ -61,9 +60,8 @@
     .post__form-del {
       position: absolute;
       width: fit-content;
-      top: 3px;
-      left: 55%;
-      right: 45%;
+      bottom: 0px;
+      right: 0;
       font-size: $small;
       cursor: pointer;
       &:hover {
@@ -76,6 +74,14 @@
       margin-bottom: 1em;
       padding-bottom: 0.4em;
       color: $black;
+      position: relative;
+      .post__tags {
+        position: absolute;
+        bottom: -100%;
+        right: 0;
+        color: $darkgrey;
+        font-size: $small;
+      }
     }
 
     .post__form-desc {

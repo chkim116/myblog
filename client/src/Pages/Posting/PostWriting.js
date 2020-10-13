@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PostingForm from "../../components/Posting/PostingForm";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";
@@ -11,6 +11,8 @@ const PostWriting = ({ history }) => {
   });
   const [loading, setLoading] = useState(false);
   const { title, description, updated } = post;
+  const [tags, setTags] = useState("");
+  const [showTags, setShowTags] = useState([]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ const PostWriting = ({ history }) => {
           title,
           description,
           updated,
+          tags: showTags,
           createDate: new Date().toLocaleTimeString("ko-KR", {
             weekday: "long",
             year: "numeric",
@@ -44,9 +47,11 @@ const PostWriting = ({ history }) => {
       ...post,
       [name]: value,
     });
+    console.log(post);
   };
 
   const onValue = (content, delta, source, editor) => {
+    console.log(content, delta, source, editor);
     const text = editor.getHTML();
     console.log(editor.getHTML());
     setPost({
@@ -61,6 +66,23 @@ const PostWriting = ({ history }) => {
     }
   });
 
+  const onTags = useCallback(
+    (e) => {
+      setTags(e.target.value);
+    },
+    [tags]
+  );
+
+  const onTagsSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      setShowTags([...showTags.concat(tags)]);
+      setTags("");
+      console.log(showTags);
+    },
+    [showTags, tags]
+  );
+
   return (
     <>
       <Helmet>
@@ -70,7 +92,11 @@ const PostWriting = ({ history }) => {
         onSubmit={onSubmit}
         onChange={onChange}
         title={title}
+        onTagsSubmit={onTagsSubmit}
         onValue={onValue}
+        tags={tags}
+        showTags={showTags}
+        onTags={onTags}
         description={description}></PostingForm>
     </>
   );

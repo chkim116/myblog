@@ -1,4 +1,16 @@
 import Post from "../models/post.js";
+import Tags from "../models/tags.js";
+
+export const getTags = async (req, res) => {
+  try {
+    const {
+      tags: { tags: tag },
+    } = Tags.find({});
+    res.json(tag);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const getPost = async (req, res) => {
   const page = parseInt(req.query.page || "1");
@@ -30,16 +42,19 @@ export const getAllPost = async (req, res) => {
 
 export const postPosting = async (req, res) => {
   const {
-    body: { title, description, updated, createDate },
+    body: { title, description, updated, createDate, tags },
   } = req;
+
   try {
     const post = await Post.create({
       title,
       description,
       updated,
       createDate,
+      tags,
       creator: req.user._id,
     });
+    console.log(post);
     post.save().then((post) => res.json(post));
     console.log("성공^^");
   } catch (err) {
@@ -60,12 +75,11 @@ export const getPostById = async (req, res) => {
 
 export const postEditing = async (req, res) => {
   const { id } = req.params;
-  const { title, description, updated } = req.body;
-  console.log(description);
+  const { title, description, tags, updated } = req.body;
   try {
     const post = await Post.findOneAndUpdate(
       { _id: id },
-      { title, description, updated }
+      { title, description, updated, tags }
     );
     res.status(200).json(post);
   } catch (err) {

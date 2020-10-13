@@ -20,7 +20,7 @@
 
   .form__submit {
     @include button;
-    margin-bottom: 3em;
+    margin-bottom: 1em;
   }
 
   .quill {
@@ -75,7 +75,31 @@
 
   .active {
     border: 1px solid $blackShadow;
-    color: $white;
-    background: $blackShadow;
+    color: $black;
+    background: $white;
   }
+}
+
+.tag__form {
+  @include padding;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .tag__input {
+    width: 250px;
+    @include padding;
+  }
+  .tag__input-btn {
+    @include border;
+    @include padding;
+    cursor: pointer;
+  }
+}
+.tags__text {
+  font-size: $small;
+  margin-bottom: 2em;
+  width: 100%;
+  text-align: center;
 }
