@@ -1,5 +1,5 @@
 import Tags from "../models/tags";
-import Post from "../models/post";
+
 export const getTags = async (req, res) => {
   try {
     const tags = await Tags.find({});

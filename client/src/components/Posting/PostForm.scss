@@ -2,6 +2,8 @@
 
 .post__wrap {
   min-height: 480px;
+  max-width: 1440px;
+  margin: 0 auto;
   padding: 1em;
   @media #{$phone} {
     padding-bottom: 3em;
@@ -28,17 +30,13 @@
 }
 
 .post__form {
-  width: 80%;
+  width: 70%;
   margin: 1.5em auto;
-  display: grid;
-  gap: 2em;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
 
-  @media #{$large} {
-    grid-template-columns: repeat(2, 1fr);
-  }
   @media #{$phone} {
-    grid-template-columns: repeat(1, 1fr);
+    width: 90%;
   }
 
   .post__form-type {
@@ -47,11 +45,14 @@
     .post__edit {
       position: absolute;
       width: fit-content;
-      bottom: 0;
-      left: 0;
+      bottom: 10%;
+      left: 25px;
       font-size: $small;
+      padding: 0.3em;
       cursor: pointer;
       color: $black;
+      @include border;
+
       &:hover {
         color: $blackShadow;
       }
@@ -60,10 +61,13 @@
     .post__form-del {
       position: absolute;
       width: fit-content;
-      bottom: 0px;
-      right: 0;
+      bottom: 10%;
+      left: 65px;
+      @include border;
+      padding: 0.3em;
       font-size: $small;
       cursor: pointer;
+
       &:hover {
         color: $blackShadow;
       }

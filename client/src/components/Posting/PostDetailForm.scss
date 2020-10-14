@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0em auto 3em auto;
   min-height: 600px;
 
@@ -28,7 +28,7 @@
   h2 {
     font-size: 1.25rem;
     text-align: center;
-    width: 70%;
+    width: 80%;
     margin-bottom: 0.8em;
     padding: 0.3em;
     border-bottom: 2px solid $blackShadow;
@@ -42,7 +42,7 @@
 
   .post__detail-desc {
     padding: 2em;
-    width: 70%;
+    width: 80%;
     min-height: 450px;
     line-height: 30px;
     border-bottom: 2px solid $blackShadow;
@@ -51,6 +51,7 @@
 
     @media #{$phone} {
       width: 90%;
+      padding: 0.5em;
     }
   }
 
