@@ -8,7 +8,7 @@ const PostDetailForm = ({ postObj, loading, onClick, admin }) => {
   if (!loading) {
     return <Loading />;
   }
-
+  const tag = tags[0].tags;
   return (
     <>
       <div className='post__detail' key={_id}>
@@ -37,11 +37,13 @@ const PostDetailForm = ({ postObj, loading, onClick, admin }) => {
             className='ql-editor'
             dangerouslySetInnerHTML={{ __html: description }}></div>
         </div>
+
         <span className='post__detail-tags'>
-          {tags.map((tag) => (
-            <span> #{tag}</span>
+          {tag.map((tg, index) => (
+            <span key={index}> #{tg}</span>
           ))}
         </span>
+        <span className='post__detail-tags'></span>
         <p className='post__detail-date'>
           <small>Uploaded: {createDate}</small>
         </p>

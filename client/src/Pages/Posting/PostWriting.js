@@ -78,7 +78,6 @@ const PostWriting = ({ history }) => {
       e.preventDefault();
       setShowTags([...showTags.concat(tags)]);
       setTags("");
-      console.log(showTags);
     },
     [showTags, tags]
   );

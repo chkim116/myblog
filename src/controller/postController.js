@@ -1,17 +1,6 @@
 import Post from "../models/post.js";
 import Tags from "../models/tags.js";
 
-export const getTags = async (req, res) => {
-  try {
-    const {
-      tags: { tags: tag },
-    } = Tags.find({});
-    res.json(tag);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 export const getPost = async (req, res) => {
   const page = parseInt(req.query.page || "1");
   if (page < 1) {
@@ -20,6 +9,7 @@ export const getPost = async (req, res) => {
   }
   try {
     const post = await Post.find({})
+      .populate("tags")
       .sort({ _id: -1 })
       .limit(6)
       .skip((page - 1) * 6)
@@ -51,10 +41,14 @@ export const postPosting = async (req, res) => {
       description,
       updated,
       createDate,
-      tags,
       creator: req.user._id,
     });
-    console.log(post);
+    const newTags = await Tags.create({
+      tags: [...tags],
+      creator: req.user._id,
+    });
+    post.tags.push(newTags._id);
+    console.log(newTags);
     post.save().then((post) => res.json(post));
     console.log("성공^^");
   } catch (err) {
@@ -66,7 +60,7 @@ export const postPosting = async (req, res) => {
 export const getPostById = async (req, res) => {
   const { id } = req.params;
   try {
-    const postById = await Post.findById(id);
+    const postById = await Post.findById(id).populate("tags");
     res.status(200).json(postById);
   } catch (err) {
     console.log(err);
@@ -75,12 +69,13 @@ export const getPostById = async (req, res) => {
 
 export const postEditing = async (req, res) => {
   const { id } = req.params;
-  const { title, description, tags, updated } = req.body;
+  const { title, description, updated } = req.body;
   try {
     const post = await Post.findOneAndUpdate(
       { _id: id },
-      { title, description, updated, tags }
+      { title, description, updated }
     );
+    const tags = await Tags.findByIdAndUpdate({ _id: id }, { tags });
     res.status(200).json(post);
   } catch (err) {
     res.status(400).send(false);
@@ -92,20 +87,10 @@ export const postDeleting = async (req, res) => {
   const { id } = req.params;
   try {
     await Post.findOneAndDelete({ _id: id });
+    await Tags.findOneAndDelete({ _id: id });
     res.status(200).send(true);
   } catch (err) {
     res.status(400).send(false);
     console.log(err);
-  }
-};
-
-export const getCreatorId = async (req, res) => {
-  const { _id } = req.user || null;
-  try {
-    const post = await Post.findById(_id);
-    res.status(200).json(post);
-  } catch (err) {
-    console.log(err);
-    res.status(400).send(err);
   }
 };

@@ -13,35 +13,18 @@ const HashTag = ({ hash }) => {
   );
 };
 
-const HomeForm = () => {
+const HomeForm = ({ tag }) => {
   return (
     <>
       <main className='main'>
         <div className='main__hash'>
           <div className='tags__keyword'>Keywords Tags</div>
           <div className='main__hash-box'>
-            <HashTag hash='#hash' />
-            <HashTag hash='#hash' />
-            <HashTag hash='#hash' /> <HashTag hash='#hash' />
-            <HashTag hash='#hash' /> <HashTag hash='#hash' />
-            <HashTag hash='#hash' /> <HashTag hash='#hash' />
-            <HashTag hash='#hash' /> <HashTag hash='#hash' />
-            <HashTag hash='#hash' /> <HashTag hash='#hash' />
-            <HashTag hash='#hash' />
-            <HashTag hash='#hash' />
-            <HashTag hash='#hash' />
-            <HashTag hash='#hash' />
-            <HashTag hash='#hash' />
-            <HashTag hash='#hash' />
-            <HashTag hash='#hash' />
-            <HashTag hash='#hash' /> <HashTag hash='#hash' />
-            <HashTag hash='#hash' />
-            <HashTag hash='#hash' />
-            <HashTag hash='#hash' />
-            <HashTag hash='#hash' />
-            <HashTag hash='#hash' />
-            <HashTag hash='#hash' />
-            <HashTag hash='#hash' />
+            {tag.map((t) => (
+              <div key={t}>
+                <HashTag hash={t} />
+              </div>
+            ))}
           </div>
         </div>
 

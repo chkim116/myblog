@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
 
 const tagsSchema = new mongoose.Schema({
-  tags: [
-    {
-      type: String,
-    },
-  ],
+  tags: {
+    type: Array,
+  },
+  creator: {
+    type: String,
+  },
 });
 
 const model = mongoose.model("Tags", tagsSchema);

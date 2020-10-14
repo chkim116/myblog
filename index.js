@@ -10,6 +10,7 @@ import morgan from "morgan";
 import cors from "cors";
 import csp from "helmet-csp";
 import dotenv from "dotenv";
+import helmet from "helmet";
 
 import "./db";
 dotenv.config();
@@ -19,13 +20,13 @@ dotenv.config();
 import guestRouter from "./src/routers/guestRouter";
 import postRouter from "./src/routers/postRouter";
 import userRouter from "./src/routers/userRouter";
+import tagRouter from "./src/routers/tagRouter";
 
 // Schema
 import "./src/models/post.js";
 import "./src/models/User.js";
 import "./passport";
 import "./multer";
-import helmet from "helmet";
 
 const app = express();
 const cookieStore = mongoStore(session);
@@ -76,6 +77,7 @@ app.get("/", (req, res) => {
 app.use("/api", postRouter);
 app.use("/port", guestRouter);
 app.use("/auth", userRouter);
+app.use("/tag", tagRouter);
 
 // server
 const PORT = process.env.PORT || 4000;
