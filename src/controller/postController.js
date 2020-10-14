@@ -46,9 +46,9 @@ export const postPosting = async (req, res) => {
     const newTags = await Tags.create({
       tags: [...tags],
       creator: req.user._id,
+      _id: post._id,
     });
     post.tags.push(newTags._id);
-    console.log(newTags);
     post.save().then((post) => res.json(post));
     console.log("성공^^");
   } catch (err) {
@@ -69,13 +69,20 @@ export const getPostById = async (req, res) => {
 
 export const postEditing = async (req, res) => {
   const { id } = req.params;
-  const { title, description, updated } = req.body;
+  const { title, description, updated, tags } = req.body;
+  console.log(tags);
   try {
     const post = await Post.findOneAndUpdate(
       { _id: id },
       { title, description, updated }
     );
-    const tags = await Tags.findByIdAndUpdate({ _id: id }, { tags });
+    const newTags = await Tags.findOneAndUpdate(
+      {
+        _id: id,
+      },
+      { tags }
+    );
+    post.tags.push(newTags._id);
     res.status(200).json(post);
   } catch (err) {
     res.status(400).send(false);

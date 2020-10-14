@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
+import React from "react";
 import "./PostingForm.scss";
 import ReactQuill from "react-quill";
 import { formats, modules } from "../../middleware";
+import { TagBox } from "../lib/TagBox";
 
 const PostingForm = ({
   onSubmit,
@@ -12,7 +13,6 @@ const PostingForm = ({
   tags,
   showTags,
 }) => {
-  const quill = useRef();
   return (
     <>
       <form className='posting__form' onSubmit={onSubmit}>
@@ -23,7 +23,6 @@ const PostingForm = ({
           placeholder='title'
           onChange={onChange}></input>
         <ReactQuill
-          ref={quill}
           theme='snow'
           modules={modules}
           formats={formats}
@@ -34,24 +33,12 @@ const PostingForm = ({
           UPLOAD
         </button>
       </form>
-      <form className='tag__form' onChange={onTags} onSubmit={onTagsSubmit}>
-        <input
-          className='tag__input'
-          type='text'
-          placeholder='태그입력'
-          name='tag'
-          value={tags}
-        />
-        <button className='tag__input-btn' type='submit'>
-          태그입력
-        </button>
-      </form>
-      <div className='tags__text'>
-        TAG :
-        {showTags.map((tag, index) => (
-          <span key={index}> #{tag}</span>
-        ))}
-      </div>
+      <TagBox
+        onTags={onTags}
+        onTagsSubmit={onTagsSubmit}
+        tags={tags}
+        showTags={showTags}
+      />
     </>
   );
 };

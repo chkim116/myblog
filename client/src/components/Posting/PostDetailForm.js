@@ -1,13 +1,10 @@
 import React from "react";
 import "./PostDetailForm.scss";
 import { Link } from "react-router-dom";
-import { Loading } from "../../Pages/Etc/Loading";
 
-const PostDetailForm = ({ postObj, loading, onClick, admin }) => {
+const PostDetailForm = ({ postObj, onClick, admin }) => {
   const { title, description, _id, createDate, tags } = postObj;
-  if (!loading) {
-    return <Loading />;
-  }
+
   const tag = tags[0].tags;
   return (
     <>

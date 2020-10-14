@@ -14,32 +14,29 @@ const PostWriting = ({ history }) => {
   const [tags, setTags] = useState("");
   const [showTags, setShowTags] = useState([]);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setPost({ ...post });
-    const axiosData = async () => {
-      try {
-        await Axios.post("/api/post", {
-          title,
-          description,
-          updated,
-          tags: showTags,
-          createDate: new Date().toLocaleTimeString("ko-KR", {
-            weekday: "long",
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
-        });
-        setLoading(true);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    axiosData();
+  const axiosData = async () => {
+    try {
+      await Axios.post("/api/post", {
+        title,
+        description,
+        updated,
+        tags: showTags,
+        createDate: new Date().toLocaleTimeString("ko-KR", {
+          weekday: "long",
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      });
+      setLoading(true);
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  // text event
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -60,11 +57,13 @@ const PostWriting = ({ history }) => {
     });
   };
 
-  useEffect(() => {
-    if (loading) {
-      history.push("/post");
-    }
-  });
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setPost({ ...post });
+    axiosData();
+  };
+
+  // tag event
 
   const onTags = useCallback(
     (e) => {
@@ -81,6 +80,12 @@ const PostWriting = ({ history }) => {
     },
     [showTags, tags]
   );
+
+  useEffect(() => {
+    if (loading) {
+      history.push("/post");
+    }
+  });
 
   return (
     <>

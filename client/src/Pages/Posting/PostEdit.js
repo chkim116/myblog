@@ -1,26 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PostEditForm from "../../components/Posting/PostEditForm";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
-import { useGetPost } from "../../middleware";
 import { Helmet } from "react-helmet-async";
+import { Loading } from "../Etc/Loading";
 
 const PostEdit = ({ history }) => {
   const { id } = useParams();
 
   //   get post
-  const getPost = useGetPost(`/api/${id}`);
-  const { post } = getPost;
+  const [loading, setLoading] = useState(false);
+  const [update, setUpdate] = useState(false);
 
   const [updatePost, setUpdatePost] = useState("");
-  const [update, setUpdate] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [prevTags, setPrevTags] = useState("");
+  const [tags, setTags] = useState("");
+  const [showTags, setShowTags] = useState([]);
 
-  // get previous post value
+  // get previous value
   useEffect(() => {
     const getPost = async () => {
       try {
-        await Axios.get(`/api/${id}`).then((res) => setUpdatePost(res.data));
+        const prevPost = await Axios.get(`/api/${id}`).then((res) => res.data);
+        setUpdatePost(prevPost);
+        setPrevTags(prevPost.tags[0].tags.map((list) => list));
         setLoading(true);
       } catch (err) {
         console.log(err);
@@ -30,25 +33,9 @@ const PostEdit = ({ history }) => {
     // eslint-disable-next-line
   }, []);
 
-  // update Post
   const { title, description, updated } = updatePost;
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setUpdatePost({ ...updatePost });
-    const axiosData = async () => {
-      try {
-        await Axios.post(`/api/edit/${id}`, {
-          title,
-          description,
-          updated,
-        }).then((res) => setUpdatePost({ ...updatePost }));
-      } catch (err) {
-        console.log(err);
-      }
-      setUpdate(true);
-    };
-    axiosData();
-  };
+
+  // text event
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -68,6 +55,42 @@ const PostEdit = ({ history }) => {
     });
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setUpdatePost({ ...updatePost });
+    const axiosData = async () => {
+      setUpdate(true);
+      try {
+        await Axios.post(`/api/edit/${id}`, {
+          title,
+          description,
+          updated,
+          tags: prevTags.concat(showTags),
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    axiosData();
+  };
+
+  // tag event
+  const onTags = useCallback(
+    async (e) => {
+      setTags(e.target.value);
+    },
+    [tags]
+  );
+
+  const onTagsSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      setShowTags([...showTags.concat(tags)]);
+      setTags("");
+    },
+    [showTags, tags]
+  );
+
   // if update go post page
   useEffect(() => {
     if (update) {
@@ -78,14 +101,22 @@ const PostEdit = ({ history }) => {
   return (
     <>
       <Helmet>
-        <title>My Blog | 포스트 수정 {post.title}</title>
+        <title>My Blog | 포스트 수정</title>
       </Helmet>
-      <PostEditForm
-        post={post}
-        loading={loading}
-        onSubmit={onSubmit}
-        onChange={onChange}
-        onValue={onValue}></PostEditForm>
+      {loading ? (
+        <PostEditForm
+          post={updatePost}
+          loading={loading}
+          onSubmit={onSubmit}
+          onChange={onChange}
+          tags={tags}
+          onTags={onTags}
+          showTags={showTags}
+          onTagsSubmit={onTagsSubmit}
+          onValue={onValue}></PostEditForm>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 };

@@ -7,7 +7,7 @@ const HashTag = ({ hash }) => {
   return (
     <Link to='/'>
       <div className='main__hash-tag' style={{ color }}>
-        {hash}
+        #{hash}
       </div>
     </Link>
   );
@@ -20,8 +20,8 @@ const HomeForm = ({ tag }) => {
         <div className='main__hash'>
           <div className='tags__keyword'>Keywords Tags</div>
           <div className='main__hash-box'>
-            {tag.map((t) => (
-              <div key={t}>
+            {tag.map((t, index) => (
+              <div key={index}>
                 <HashTag hash={t} />
               </div>
             ))}

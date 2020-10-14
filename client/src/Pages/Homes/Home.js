@@ -6,22 +6,22 @@ import { Loading } from "../Etc/Loading";
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const [tagList, setTagList] = useState([]);
+  let tag = [];
+
+  const getTags = async () => {
+    setLoading(true);
+    try {
+      const tags = await Axios.get("/tag").then((res) => res.data);
+      setTagList(tags.map((list) => list.tags));
+    } catch (err) {
+      console.log(err);
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-    const getTags = async () => {
-      setLoading(true);
-      try {
-        const tags = await Axios.get("/tag").then((res) => res.data);
-        setTagList(tags.map((list) => list.tags));
-      } catch (err) {
-        console.log(err);
-      }
-      setLoading(false);
-    };
     getTags();
   }, []);
-
-  let tag = [];
 
   tagList.forEach((list) => {
     list.map((list) => tag.push(list));

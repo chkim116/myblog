@@ -36,18 +36,17 @@ const PostDetail = ({ history }) => {
     deletePost();
   };
 
+  if (!loading) {
+    return <Loading />;
+  }
+
   return (
     <>
       <Helmet>
         <title>My Blog | {post.title}</title>
       </Helmet>
       {del && <Loading />}
-      <PostDetailForm
-        postObj={post}
-        admin={admin}
-        loading={loading}
-        onClick={onClick}
-      />
+      <PostDetailForm postObj={post} admin={admin} onClick={onClick} />
     </>
   );
 };

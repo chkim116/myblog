@@ -6,6 +6,12 @@ import { Loading } from "../Etc/Loading";
 import { useUserId } from "../../middleware";
 
 const Post = ({ location, history }) => {
+  // 관리자 확인
+  const userId = useUserId("/auth");
+  const {
+    userId: { admin },
+  } = userId;
+
   // url에 따른 포스트 호출
   const [page, setPage] = useState({ query: location.search });
   const { query } = page;
@@ -13,6 +19,7 @@ const Post = ({ location, history }) => {
   // 눌렀던 번호를 쿼리에 맞춰 설정
   const [select, setSelect] = useState({ selecting: 0 });
   const { selecting } = select;
+
   // query url에 따른 보여주는 포스트
   const [post, setPost] = useState({
     title: "",
@@ -80,7 +87,6 @@ const Post = ({ location, history }) => {
 
   const onClick = (e) => {
     const boardId = e.target.dataset.id;
-    console.log(boardId);
     const deletePost = async () => {
       setDel(true);
       try {
@@ -94,12 +100,6 @@ const Post = ({ location, history }) => {
     };
     deletePost();
   };
-
-  // 관리자 확인
-  const userId = useUserId("/auth");
-  const {
-    userId: { admin },
-  } = userId;
 
   return (
     <>
