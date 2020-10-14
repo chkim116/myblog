@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./HomeForm.scss";
 
-const HashTag = ({ hash }) => {
+const HashTag = ({ hash, length }) => {
   const color = `#${Math.round(Math.random() * 0xffffff).toString(16)}`;
   return (
     <Link to='/'>
       <div className='main__hash-tag' style={{ color }}>
-        #{hash}
+        #{hash}({length})
       </div>
     </Link>
   );
@@ -22,7 +22,10 @@ const HomeForm = ({ tag }) => {
           <div className='main__hash-box'>
             {tag.map((t, index) => (
               <div key={index}>
-                <HashTag hash={t} />
+                <HashTag
+                  hash={t}
+                  length={tag.filter((tags) => tags === t).length}
+                />
               </div>
             ))}
           </div>
