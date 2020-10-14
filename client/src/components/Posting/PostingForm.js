@@ -5,6 +5,7 @@ import { formats, modules } from "../../middleware";
 import { TagBox } from "../lib/TagBox";
 
 const PostingForm = ({
+  onTagDel,
   onSubmit,
   onChange,
   onValue,
@@ -35,6 +36,7 @@ const PostingForm = ({
       </form>
       <TagBox
         onTags={onTags}
+        onTagDel={onTagDel}
         onTagsSubmit={onTagsSubmit}
         tags={tags}
         showTags={showTags}

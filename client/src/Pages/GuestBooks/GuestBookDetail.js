@@ -11,7 +11,7 @@ export const GuestBookDetail = ({ history }) => {
 
   // get portfolio
   const guests = useGetPort(`/port/${id}`);
-  const { guest, loading } = guests;
+  const { guest, loading: pageLoading } = guests;
 
   // admin auth
   const loggedUser = useUserId("/auth");
@@ -21,16 +21,18 @@ export const GuestBookDetail = ({ history }) => {
 
   //  delete auth
 
-  const [del, setDel] = useState(false);
+  const [loading, setLoding] = useState(false);
+
   const onClick = () => {
     const deletePost = async () => {
-      await Axios.get(`/port/del/${id}`).then((res) => setDel(res.data));
+      await Axios.get(`/port/del/${id}`);
+      setLoding(true);
     };
     deletePost();
   };
 
   useEffect(() => {
-    if (del) {
+    if (loading) {
       history.push("/guestbook");
     }
   });
@@ -40,7 +42,7 @@ export const GuestBookDetail = ({ history }) => {
       <Helmet>
         <title>My Blog | {guest.title}</title>
       </Helmet>
-      {loading ? (
+      {pageLoading ? (
         <GuestBookDetailForm port={guest} onClick={onClick} userId={userId} />
       ) : (
         <Loading />

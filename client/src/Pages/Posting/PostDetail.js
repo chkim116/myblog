@@ -23,8 +23,8 @@ const PostDetail = ({ history }) => {
   const [del, setDel] = useState(false);
 
   const onClick = () => {
+    setDel(true);
     const deletePost = async () => {
-      setDel(true);
       try {
         await Axios.get(`/api/del/${id}`).then((res) => setDel(res.data));
         history.push("/post");

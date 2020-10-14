@@ -23,7 +23,7 @@ export const getPost = async (req, res) => {
 
 export const getAllPost = async (req, res) => {
   try {
-    const post = await Post.find({}).sort({ _id: -1 });
+    const post = await Post.find({}).populate("tags").sort({ _id: -1 });
     res.json(post);
   } catch (error) {
     console.log(error);
@@ -70,7 +70,6 @@ export const getPostById = async (req, res) => {
 export const postEditing = async (req, res) => {
   const { id } = req.params;
   const { title, description, updated, tags } = req.body;
-  console.log(tags);
   try {
     const post = await Post.findOneAndUpdate(
       { _id: id },

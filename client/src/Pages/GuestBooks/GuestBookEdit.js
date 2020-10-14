@@ -32,12 +32,13 @@ export const GuestBookEdit = ({ history }) => {
   // get previous GuestBook value
   useEffect(() => {
     const getPort = async () => {
+      setUpGuest(true);
       try {
         await Axios.get(`/port/${id}`).then((res) => setUpdated(res.data));
-        setLoading(true);
       } catch (err) {
         console.log(err);
       }
+      setUpGuest(false);
     };
     getPort();
     // eslint-disable-next-line
@@ -48,8 +49,8 @@ export const GuestBookEdit = ({ history }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     setUpdated({ ...updated });
-    setUpGuest(true);
     const updatePort = async () => {
+      setUpGuest(true);
       try {
         await Axios.post(`/port/edit/${id}`, {
           title,
@@ -58,10 +59,10 @@ export const GuestBookEdit = ({ history }) => {
           createDate,
           updata: true,
         });
+        setLoading(true);
       } catch (err) {
         console.log(err);
         alert("업데이트 실패");
-        setUpGuest(false);
       }
     };
     updatePort();
@@ -73,13 +74,13 @@ export const GuestBookEdit = ({ history }) => {
   };
 
   useEffect(() => {
-    if (upGuest) {
+    if (loading) {
       history.push("/guestbook");
     }
     // eslint-disable-next-line
   });
 
-  if (!loading) {
+  if (upGuest) {
     return <Loading />;
   }
 
@@ -88,7 +89,6 @@ export const GuestBookEdit = ({ history }) => {
       <Helmet>
         <title>My Blog | 방명록 수정 {guest.title}</title>
       </Helmet>
-      {upGuest && <Loading />}
       {userId === guest.creator ? (
         <GuestBookEditForm
           port={guest}

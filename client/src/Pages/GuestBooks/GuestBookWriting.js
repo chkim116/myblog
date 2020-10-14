@@ -42,8 +42,8 @@ export const GuestBookWriting = ({ history }) => {
         console.log(err);
         alert("업로드 실패");
         setMessage(false);
-        setLoading(false);
       }
+      setLoading(false);
     };
     postGuestBook();
   };

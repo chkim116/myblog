@@ -13,7 +13,6 @@ const PostEdit = ({ history }) => {
   const [update, setUpdate] = useState(false);
 
   const [updatePost, setUpdatePost] = useState("");
-  const [prevTags, setPrevTags] = useState("");
   const [tags, setTags] = useState("");
   const [showTags, setShowTags] = useState([]);
 
@@ -23,7 +22,7 @@ const PostEdit = ({ history }) => {
       try {
         const prevPost = await Axios.get(`/api/${id}`).then((res) => res.data);
         setUpdatePost(prevPost);
-        setPrevTags(prevPost.tags[0].tags.map((list) => list));
+        setShowTags(prevPost.tags[0].tags.map((list) => list));
         setLoading(true);
       } catch (err) {
         console.log(err);
@@ -59,14 +58,14 @@ const PostEdit = ({ history }) => {
     e.preventDefault();
     setUpdatePost({ ...updatePost });
     const axiosData = async () => {
-      setUpdate(true);
       try {
         await Axios.post(`/api/edit/${id}`, {
           title,
           description,
           updated,
-          tags: prevTags.concat(showTags),
+          tags: showTags,
         });
+        setUpdate(true);
       } catch (err) {
         console.log(err);
       }
@@ -76,7 +75,7 @@ const PostEdit = ({ history }) => {
 
   // tag event
   const onTags = useCallback(
-    async (e) => {
+    (e) => {
       setTags(e.target.value);
     },
     [tags]
@@ -90,6 +89,14 @@ const PostEdit = ({ history }) => {
     },
     [showTags, tags]
   );
+
+  // tag del
+
+  const onTagDel = (e) => {
+    const tagId = e.target.dataset.tag;
+    const filterTags = showTags.filter((tags) => tags !== tagId);
+    setShowTags(filterTags);
+  };
 
   // if update go post page
   useEffect(() => {
@@ -113,6 +120,7 @@ const PostEdit = ({ history }) => {
           onTags={onTags}
           showTags={showTags}
           onTagsSubmit={onTagsSubmit}
+          onTagDel={onTagDel}
           onValue={onValue}></PostEditForm>
       ) : (
         <Loading />

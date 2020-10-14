@@ -1,6 +1,6 @@
 import React from "react";
 
-export const TagBox = ({ onTags, onTagsSubmit, showTags, tags, prevTag }) => {
+export const TagBox = ({ onTags, onTagsSubmit, showTags, tags, onTagDel }) => {
   return (
     <div>
       <form className='tag__form' onSubmit={onTagsSubmit}>
@@ -19,14 +19,13 @@ export const TagBox = ({ onTags, onTagsSubmit, showTags, tags, prevTag }) => {
       </form>
       <div className='tags__text'>
         TAG :
-        <span>
-          {prevTag &&
-            prevTag[0].tags.map((tag, index) => (
-              <span key={index}> #{tag}</span>
-            ))}
-        </span>
         {showTags.map((tag, index) => (
-          <span key={index}> #{tag}</span>
+          <span key={index}>
+            <span>#{tag}</span>
+            <button data-tag={tag} type='button' onClick={onTagDel}>
+              X
+            </button>
+          </span>
         ))}
       </div>
     </div>

@@ -81,6 +81,14 @@ const PostWriting = ({ history }) => {
     [showTags, tags]
   );
 
+  // tag del
+
+  const onTagDel = (e) => {
+    const tagId = e.target.dataset.tag;
+    const filterTags = showTags.filter((tags) => tags !== tagId);
+    setShowTags(filterTags);
+  };
+
   useEffect(() => {
     if (loading) {
       history.push("/post");
@@ -93,6 +101,7 @@ const PostWriting = ({ history }) => {
         <title>My Blog | 포스트 작성</title>
       </Helmet>
       <PostingForm
+        onTagDel={onTagDel}
         onSubmit={onSubmit}
         onChange={onChange}
         title={title}

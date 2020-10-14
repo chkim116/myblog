@@ -16,7 +16,7 @@ const Login = ({ history }) => {
   const { username, password } = login;
 
   const onSubmit = (e) => {
-    setLoading(true);
+    setUser(true);
     e.preventDefault();
     setLogin({ ...login });
     const postLogin = async () => {
@@ -25,22 +25,21 @@ const Login = ({ history }) => {
           username,
           password,
         });
-        setUser(true);
+        setLoading(true);
       } catch (err) {
         const LOGIN = "login";
         registerCheck(err, LOGIN, { history });
-        setLoading(false);
       }
+      setUser(false);
     };
     postLogin();
   };
 
   useEffect(() => {
-    if (user) {
+    if (loading) {
       window.location.href = "/";
-      setLoading(false);
     }
-  }, [user]);
+  }, [loading]);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -53,7 +52,7 @@ const Login = ({ history }) => {
         <title>My Blog | 로그인</title>
       </Helmet>
 
-      {loading && <Loading />}
+      {user && <Loading />}
       <LoginForm
         user={user}
         onSubmit={onSubmit}

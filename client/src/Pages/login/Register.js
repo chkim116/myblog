@@ -19,7 +19,7 @@ const Register = ({ history }) => {
   const { username, password, password2, email } = register;
 
   const onSubmit = (e) => {
-    setLoading(true);
+    setUser(true);
     e.preventDefault();
     setRegister({ ...register });
     const adminRegister = async () => {
@@ -30,26 +30,22 @@ const Register = ({ history }) => {
           password2,
           email,
         }).then((res) => setUser(res.data));
+        setLoading(true);
       } catch (err) {
         console.log(err);
         const REGISTER = "register";
         registerCheck(err, REGISTER, { history });
-        setLoading(false);
       }
+      setUser(false);
     };
     adminRegister();
   };
 
   useEffect(() => {
-    if (user) {
-      setLoading(false);
+    if (loading) {
       window.location.href = "/";
     }
-
-    return () => {
-      setUser(false);
-    };
-  }, [user]);
+  }, [loading]);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -62,7 +58,7 @@ const Register = ({ history }) => {
         <title>My Blog | 회원가입</title>
       </Helmet>
 
-      {loading && <Loading />}
+      {user && <Loading />}
       <RegisterForm onChange={onChange} onSubmit={onSubmit}></RegisterForm>
     </>
   );

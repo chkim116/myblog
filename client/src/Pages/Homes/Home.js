@@ -4,19 +4,19 @@ import HomeForm from "../../components/Home/HomeForm";
 import { Loading } from "../Etc/Loading";
 
 const Home = () => {
-  const [loading, setLoading] = useState(false);
+  const [loadingHome, setLoadingHome] = useState(false);
   const [tagList, setTagList] = useState([]);
   let tag = [];
 
   const getTags = async () => {
-    setLoading(true);
+    setLoadingHome(true);
     try {
       const tags = await Axios.get("/tag").then((res) => res.data);
       setTagList(tags.map((list) => list.tags));
     } catch (err) {
       console.log(err);
     }
-    setLoading(false);
+    setLoadingHome(false);
   };
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Home = () => {
     list.map((list) => tag.push(list));
   });
 
-  if (loading) {
+  if (loadingHome) {
     return <Loading />;
   }
 

@@ -13,8 +13,9 @@ const PostEditForm = ({
   onTagsSubmit,
   tags,
   showTags,
+  onTagDel,
 }) => {
-  const { title, description, tags: prevTag } = post;
+  const { title, description } = post;
   return (
     <>
       <form className='posting__form' onSubmit={onSubmit} onChange={onChange}>
@@ -36,10 +37,10 @@ const PostEditForm = ({
         </button>
       </form>
       <TagBox
+        onTagDel={onTagDel}
         onTags={onTags}
         onTagsSubmit={onTagsSubmit}
         tags={tags}
-        prevTag={prevTag}
         showTags={showTags}
       />
     </>
