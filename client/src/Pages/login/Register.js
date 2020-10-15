@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import RegisterForm from "../../components/Login/RegisterForm";
+import RegisterForm from "../../components/login/RegisterForm";
 import Axios from "axios";
 import { registerCheck } from "../../middleware";
 import { Helmet } from "react-helmet-async";
