@@ -6,7 +6,7 @@ import {
   postGuest,
   guestEditing,
   guestDeleting,
-} from "../controller/GuestController";
+} from "../controller/guestController";
 
 const guestRouter = express.Router();
 
