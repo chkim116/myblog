@@ -2,7 +2,6 @@ import React from "react";
 import "./GuestBookForm.scss";
 import { Link } from "react-router-dom";
 import routes from "../../routes";
-
 const GuestBookForm = ({ port, id, onClick }) => {
   return (
     <>

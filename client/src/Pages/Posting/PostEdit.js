@@ -22,7 +22,7 @@ const PostEdit = ({ history }) => {
       try {
         const prevPost = await Axios.get(`/api/${id}`).then((res) => res.data);
         setUpdatePost(prevPost);
-        setShowTags(prevPost.tags[0].tags.map((list) => list));
+        setShowTags(prevPost.tags.map((list) => list));
         setLoading(true);
       } catch (err) {
         console.log(err);

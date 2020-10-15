@@ -1,4 +1,5 @@
 @import "../../Styles/var";
+@import "../../Styles/Animation/boardAni.scss";
 
 .post__wrap {
   min-height: 480px;
@@ -41,6 +42,7 @@
 
   .post__form-type {
     position: relative;
+    animation: upAnimation 1s;
 
     .post__edit {
       position: absolute;
@@ -94,6 +96,7 @@
       height: 300px;
       max-height: 300px;
       color: $black;
+      font-size: 13px;
 
       .ql-editor {
         word-break: break-word;
@@ -125,3 +128,5 @@
   margin: 0 auto;
   text-align: center;
 }
+
+@include animation-mixin(upAnimation, 500%, 0%);

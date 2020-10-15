@@ -44,6 +44,10 @@
     border-radius: 12px;
   }
 
+  a {
+    color: $white;
+  }
+
   .form__submit {
     @include button;
   }

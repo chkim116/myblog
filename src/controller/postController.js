@@ -9,7 +9,6 @@ export const getPost = async (req, res) => {
   }
   try {
     const post = await Post.find({})
-      .populate("tags")
       .sort({ _id: -1 })
       .limit(6)
       .skip((page - 1) * 6)
@@ -23,7 +22,7 @@ export const getPost = async (req, res) => {
 
 export const getAllPost = async (req, res) => {
   try {
-    const post = await Post.find({}).populate("tags").sort({ _id: -1 });
+    const post = await Post.find({}).sort({ _id: -1 });
     res.json(post);
   } catch (error) {
     console.log(error);
@@ -42,13 +41,8 @@ export const postPosting = async (req, res) => {
       updated,
       createDate,
       creator: req.user._id,
+      tags: tags,
     });
-    const newTags = await Tags.create({
-      tags: [...tags],
-      creator: req.user._id,
-      _id: post._id,
-    });
-    post.tags.push(newTags._id);
     post.save().then((post) => res.json(post));
     console.log("성공^^");
   } catch (err) {
@@ -60,7 +54,7 @@ export const postPosting = async (req, res) => {
 export const getPostById = async (req, res) => {
   const { id } = req.params;
   try {
-    const postById = await Post.findById(id).populate("tags");
+    const postById = await Post.findById(id);
     res.status(200).json(postById);
   } catch (err) {
     console.log(err);
@@ -73,15 +67,8 @@ export const postEditing = async (req, res) => {
   try {
     const post = await Post.findOneAndUpdate(
       { _id: id },
-      { title, description, updated }
+      { title, description, updated, tags }
     );
-    const newTags = await Tags.findOneAndUpdate(
-      {
-        _id: id,
-      },
-      { tags }
-    );
-    post.tags.push(newTags._id);
     res.status(200).json(post);
   } catch (err) {
     res.status(400).send(false);
@@ -93,7 +80,6 @@ export const postDeleting = async (req, res) => {
   const { id } = req.params;
   try {
     await Post.findOneAndDelete({ _id: id });
-    await Tags.findOneAndDelete({ _id: id });
     res.status(200).send(true);
   } catch (err) {
     res.status(400).send(false);

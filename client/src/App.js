@@ -24,7 +24,7 @@ import { GuestBookWriting } from "./Pages/GuestBooks/GuestBookWriting";
 import { GuestBookDetail } from "./Pages/GuestBooks/GuestBookDetail";
 import { GuestBookEdit } from "./Pages/GuestBooks/GuestBookEdit";
 import { Loading } from "./Pages/Etc/Loading";
-import { Searching } from "./components/Search/Searching";
+import { Searching } from "./Pages/Search/Searching";
 dotenv.config();
 
 function App() {

@@ -45,15 +45,12 @@
       .main__hash-tag {
         padding: 0.5em;
         width: fit-content;
+        cursor: pointer;
 
         &:hover {
           text-decoration: underline;
         }
       }
-    }
-    .tags__keyword {
-      position: relative;
-      bottom: 25%;
     }
   }
 

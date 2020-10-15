@@ -1,0 +1,12 @@
+@mixin animation-mixin($name, $from, $to) {
+  @keyframes #{$name} {
+    0% {
+      transform: translateY($from);
+      opacity: 0;
+    }
+    100% {
+      transform: translate3d($to);
+      opacity: 1;
+    }
+  }
+}

@@ -18,7 +18,7 @@ const GUESTBOOKING = "/guestbooking";
 const GUESTBOOKDETAIL = "/guestbookdetail";
 
 // search
-const SEARCH = "/search?term=";
+const SEARCH = "/search";
 
 const routes = {
   home: HOME,

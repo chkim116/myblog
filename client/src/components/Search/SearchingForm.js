@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-export const SearchingForm = ({ match }) => {
-  console.log(match);
-
-  return <div></div>;
+export const SearchingForm = ({ searching }) => {
+  return (
+    <div>
+      <h2>검색 태그는 {searching}</h2>
+    </div>
+  );
 };

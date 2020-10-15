@@ -2,7 +2,7 @@ import React from "react";
 import "./PostingForm.scss";
 import ReactQuill from "react-quill";
 import { formats, modules } from "../../middleware";
-import { TagBox } from "../lib/TagBox";
+import { TagBox } from "../Common/TagBox";
 
 const PostingForm = ({
   onTagDel,

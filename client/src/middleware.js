@@ -92,15 +92,20 @@ export const useGetPort = (url) => {
   return { guest, loading };
 };
 
-export const useGetTag = (tagName) => {
-  const [searchTags, setSearchTags] = useState("");
+export const useGetTag = (url) => {
+  const [searchTags, setSearchTags] = useState({
+    title: "",
+    description: "",
+    createDate: "",
+    creator: "",
+    username: "",
+    updata: false,
+  });
   const [loading, setLoading] = useState(false);
 
   const getSearchTags = async () => {
     try {
-      await Axios.get("/tag/searching", tagName).then((res) =>
-        setSearchTags(res.data)
-      );
+      await Axios.get(url).then((res) => setSearchTags(res.data));
       setLoading(true);
     } catch (err) {
       console.log(err);
@@ -109,9 +114,9 @@ export const useGetTag = (tagName) => {
 
   useEffect(() => {
     getSearchTags();
-  }, [tagName]);
+  }, [url]);
 
-  return [searchTags, loading];
+  return { searchTags, loading };
 };
 
 export const modules = {

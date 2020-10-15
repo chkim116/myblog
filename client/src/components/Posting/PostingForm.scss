@@ -20,6 +20,10 @@
     }
   }
 
+  a {
+    color: $white;
+  }
+
   .form__submit {
     @include button;
     margin-bottom: 1em;
@@ -95,8 +99,9 @@
   }
   .tag__input-btn {
     @include border;
-    @include padding;
     cursor: pointer;
+    height: 30px;
+    font-size: $small;
   }
 }
 .tags__text {

@@ -48,6 +48,7 @@
     border-bottom: 2px solid $blackShadow;
     white-space: pre-line;
     word-break: break-word;
+    font-size: 13px;
 
     @media #{$phone} {
       width: 90%;

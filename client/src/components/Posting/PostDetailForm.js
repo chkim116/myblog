@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const PostDetailForm = ({ postObj, onClick, admin }) => {
   const { title, description, _id, createDate, tags } = postObj;
 
-  const tag = tags[0].tags;
   return (
     <>
       <div className='post__detail' key={_id}>
@@ -36,7 +35,7 @@ const PostDetailForm = ({ postObj, onClick, admin }) => {
         </div>
 
         <span className='post__detail-tags'>
-          {tag.map((tg, index) => (
+          {tags.map((tg, index) => (
             <span key={index}> #{tg}</span>
           ))}
         </span>

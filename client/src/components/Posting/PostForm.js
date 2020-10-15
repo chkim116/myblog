@@ -41,7 +41,7 @@ const PostForm = ({
                   {p.title}
                   <small className='updated'>{p.updated}</small>
                   <span className='post__tags'>
-                    {p.tags[0].tags.map((tag, index) => (
+                    {p.tags.map((tag, index) => (
                       <span key={index}> #{tag}</span>
                     ))}
                   </span>

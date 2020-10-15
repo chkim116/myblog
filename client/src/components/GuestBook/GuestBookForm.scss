@@ -1,4 +1,5 @@
 @import "../../Styles/var";
+@import "../../Styles/Animation/boardAni.scss";
 
 .contents {
   width: 100%;
@@ -60,6 +61,7 @@
     border: 1px solid $blackShadow;
     display: flex;
     position: relative;
+    animation: upAnimation 500ms;
 
     .post__view {
       position: absolute;
@@ -106,6 +108,7 @@
       display: block;
       line-height: 20px;
       overflow: hidden;
+      font-size: 13px;
 
       p {
         word-break: break-word;
@@ -120,3 +123,5 @@
     }
   }
 }
+
+@include animation-mixin(upAnimation, -100%, 0%);

@@ -5,6 +5,6 @@ const tagRouter = express.Router();
 
 tagRouter.get("/", getTags);
 
-tagRouter.get("/searching", getSearchingTags);
+tagRouter.get("/search", getSearchingTags);
 
 export default tagRouter;
