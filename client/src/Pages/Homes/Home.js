@@ -19,19 +19,27 @@ const Home = () => {
     setLoadingHome(false);
   };
 
-  useEffect(() => {
-    getTags();
-  }, []);
-
   tagList.forEach((list) => {
     list.map((list) => tag.push(list));
   });
+
+  const filterTags = tag.reduce((object, currentValue) => {
+    if (!object[currentValue]) {
+      object[currentValue] = 0;
+    }
+    object[currentValue]++;
+    return object;
+  }, {});
+
+  useEffect(() => {
+    getTags();
+  }, []);
 
   if (loadingHome) {
     return <Loading />;
   }
 
-  return <HomeForm tag={tag}></HomeForm>;
+  return <HomeForm filterTags={filterTags}></HomeForm>;
 };
 
 export default Home;

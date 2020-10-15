@@ -17,6 +17,9 @@ const POSTDETAIL = "/postdetail";
 const GUESTBOOKING = "/guestbooking";
 const GUESTBOOKDETAIL = "/guestbookdetail";
 
+// search
+const SEARCH = "/search?term=";
+
 const routes = {
   home: HOME,
   guestbook: GUESTBOOK,
@@ -30,6 +33,7 @@ const routes = {
   postdetail: POSTDETAIL,
   guestbooking: GUESTBOOKING,
   guestbookdetail: GUESTBOOKDETAIL,
+  search: SEARCH,
 };
 
 export default routes;

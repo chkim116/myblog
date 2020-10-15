@@ -36,7 +36,7 @@
   flex-direction: column;
 
   @media #{$phone} {
-    width: 90%;
+    width: 100%;
   }
 
   .post__form-type {
@@ -45,8 +45,8 @@
     .post__edit {
       position: absolute;
       width: fit-content;
-      bottom: 10%;
-      left: 25px;
+      right: 65px;
+      bottom: 20%;
       font-size: $small;
       padding: 0.3em;
       cursor: pointer;
@@ -61,8 +61,8 @@
     .post__form-del {
       position: absolute;
       width: fit-content;
-      bottom: 10%;
-      left: 65px;
+      bottom: 20%;
+      right: 25px;
       @include border;
       padding: 0.3em;
       font-size: $small;

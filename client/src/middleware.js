@@ -92,6 +92,28 @@ export const useGetPort = (url) => {
   return { guest, loading };
 };
 
+export const useGetTag = (tagName) => {
+  const [searchTags, setSearchTags] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const getSearchTags = async () => {
+    try {
+      await Axios.get("/tag/searching", tagName).then((res) =>
+        setSearchTags(res.data)
+      );
+      setLoading(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getSearchTags();
+  }, [tagName]);
+
+  return [searchTags, loading];
+};
+
 export const modules = {
   toolbar: {
     container: [

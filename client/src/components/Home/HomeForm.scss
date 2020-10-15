@@ -26,20 +26,25 @@
     padding: 3em;
     margin: 0 auto;
     display: flex;
+    font-size: $medium;
     justify-content: center;
+    align-items: center;
     border-right: 1px solid $blackShadow;
     align-items: center;
     @media #{$phone} {
       width: 100%;
+      font-size: $small;
       margin-top: 1.5em;
     }
 
     .main__hash-box {
       flex-wrap: wrap;
       display: flex;
+      justify-content: center;
 
       .main__hash-tag {
         padding: 0.5em;
+        width: fit-content;
 
         &:hover {
           text-decoration: underline;
@@ -66,6 +71,9 @@
       width: 100%;
       border-top: 1px solid $blackShadow;
       margin-bottom: 3em;
+    }
+    @media #{$iphone} {
+      font-size: $medium;
     }
   }
 }

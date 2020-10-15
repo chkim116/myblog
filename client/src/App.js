@@ -24,6 +24,7 @@ import { GuestBookWriting } from "./Pages/GuestBooks/GuestBookWriting";
 import { GuestBookDetail } from "./Pages/GuestBooks/GuestBookDetail";
 import { GuestBookEdit } from "./Pages/GuestBooks/GuestBookEdit";
 import { Loading } from "./Pages/Etc/Loading";
+import { Searching } from "./components/Search/Searching";
 dotenv.config();
 
 function App() {
@@ -64,21 +65,22 @@ function App() {
         onClick={onClick}
         admin={admin}></Nav>
       <Switch>
-        <Route exact path={routes.home} component={Home}></Route>
-        <Route path={routes.register} component={Register}></Route>
-        <Route path={routes.login} component={Login}></Route>
-        <Route path={routes.guestbook} component={GuestBook}></Route>
-        <Route path={routes.post} component={Post}></Route>
-        <Route path={routes.about} component={About}></Route>
+        <Route exact path={routes.home} component={Home} />
+        <Route path={routes.register} component={Register} />
+        <Route path={routes.login} component={Login} />
+        <Route path={routes.guestbook} component={GuestBook} />
+        <Route path={routes.post} component={Post} />
+        <Route path={routes.about} component={About} />
+        <Route path={routes.search} component={Searching} />
         {admin ? (
-          <Route path={routes.postwriting} component={PostWriting}></Route>
+          <Route path={routes.postwriting} component={PostWriting} />
         ) : (
           <Route path={routes.postwriting}>
             <h3 className='error__title'>관리자가 아닙니다.</h3>
           </Route>
         )}
 
-        <Route path='/postdetail/:id' component={PostDetail}></Route>
+        <Route path='/postdetail/:id' component={PostDetail} />
         {admin ? (
           <Route path={"/edit/:id"} component={PostEdit} />
         ) : (

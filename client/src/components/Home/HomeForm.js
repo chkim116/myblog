@@ -5,7 +5,7 @@ import "./HomeForm.scss";
 const HashTag = ({ hash, length }) => {
   const color = `#${Math.round(Math.random() * 0xffffff).toString(16)}`;
   return (
-    <Link to='/'>
+    <Link to={`/search?term=${hash}`}>
       <div className='main__hash-tag' style={{ color }}>
         #{hash}({length})
       </div>
@@ -13,19 +13,18 @@ const HashTag = ({ hash, length }) => {
   );
 };
 
-const HomeForm = ({ tag }) => {
+const HomeForm = ({ filterTags }) => {
+  const tagsKeyValue = Object.entries(filterTags).sort((a, b) => b[1] - a[1]);
+  const tags = tagsKeyValue.map(([key, value]) => [key, value]);
+
   return (
     <>
       <main className='main'>
         <div className='main__hash'>
-          <div className='tags__keyword'>Keywords Tags</div>
           <div className='main__hash-box'>
-            {tag.map((t, index) => (
+            {tags.slice(0, 10).map((t, index) => (
               <div key={index}>
-                <HashTag
-                  hash={t}
-                  length={tag.filter((tags) => tags === t).length}
-                />
+                <HashTag hash={t[0]} length={t[1]} />
               </div>
             ))}
           </div>
