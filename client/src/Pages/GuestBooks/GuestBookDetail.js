@@ -13,12 +13,6 @@ export const GuestBookDetail = ({ history }) => {
   const guests = useGetPort(`/port/${id}`);
   const { guest, loading: pageLoading } = guests;
 
-  // admin auth
-  const loggedUser = useUserId("/auth");
-  const {
-    userId: { id: userId },
-  } = loggedUser;
-
   //  delete auth
 
   const [loading, setLoding] = useState(false);
@@ -43,7 +37,7 @@ export const GuestBookDetail = ({ history }) => {
         <title>My Blog | {guest.title}</title>
       </Helmet>
       {pageLoading ? (
-        <GuestBookDetailForm port={guest} onClick={onClick} userId={userId} />
+        <GuestBookDetailForm port={guest} onClick={onClick} />
       ) : (
         <Loading />
       )}

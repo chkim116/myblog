@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-export const PostFormBlock = ({ post, admin, onClick }) => {
+export const PostFormBlock = ({ post, onClick }) => {
+  const admin = useSelector((state) => state.auth.admin);
   return (
     <div className='post__form'>
       {post.map((p) => (

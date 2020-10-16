@@ -1,10 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./GuestBookDetailForm.scss";
 
-export const GuestBookDetailForm = ({ port, onClick, userId }) => {
+export const GuestBookDetailForm = ({ port, onClick }) => {
   const { title, description, createDate, creator, _id, username } = port;
-
+  const userId = useSelector((state) => state.auth.id);
   return (
     <>
       <div className='port__detail' key={_id}>

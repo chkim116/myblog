@@ -22,7 +22,7 @@ button {
 
 input,
 textarea {
-  border: 1px solid $blackShadow;
+  @include border;
 }
 
 h1,

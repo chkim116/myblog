@@ -1,0 +1,59 @@
+@import "../../Styles/var";
+@import "../../Styles/Animation/boardAni.scss";
+
+@include animation-mixin(upAnimation, -100%, 0%);
+
+.searchingbar {
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  height: 100px;
+  align-items: center;
+  animation: upAnimation 500ms;
+
+  &.active {
+    display: block;
+  }
+
+  .searchingbar__form {
+    z-index: 3;
+    display: flex;
+    width: 50%;
+    height: 35px;
+    justify-content: center;
+
+    @media #{$phone} {
+      width: 60%;
+    }
+    @media #{$iphone} {
+      width: 90%;
+    }
+
+    .searchingbar-input {
+      flex: 2;
+      padding-left: 6px;
+    }
+
+    .searchingbar-btn {
+      font-size: $small;
+      @include border;
+      @include padding($padding: 0.2em 0.8em);
+      &:hover {
+        color: $white;
+        background: $black;
+      }
+    }
+
+    .searchingbar-select {
+      cursor: pointer;
+      outline: none;
+      @include padding($padding: 0.2em 0.8em);
+
+      @media #{$iphone} {
+        @include padding($padding: 0.4em 0);
+      }
+    }
+  }
+}

@@ -1,6 +1,5 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import HomeForm from "../../components/Home/HomeForm";
 import { Loading } from "../Etc/Loading";
 
@@ -27,7 +26,9 @@ const Home = () => {
     tag.push(list.tags);
   });
 
-  return <>{loadingHome ? <HomeForm tagList={tag}></HomeForm> : <Loading />}</>;
+  return (
+    <div>{loadingHome ? <HomeForm tagList={tag}></HomeForm> : <Loading />}</div>
+  );
 };
 
 export default Home;

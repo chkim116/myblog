@@ -1,6 +1,5 @@
 import React from "react";
 import "./HomeForm.scss";
-import { Link } from "react-router-dom";
 import { HomeHashtag } from "./HomeHashtag";
 
 const HomeForm = ({ tagList }) => {

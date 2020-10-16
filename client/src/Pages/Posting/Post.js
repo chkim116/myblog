@@ -3,15 +3,9 @@ import Axios from "axios";
 import { Helmet } from "react-helmet-async";
 import PostForm from "../../components/Posting/PostForm";
 import { Loading } from "../Etc/Loading";
-import { useGetPost, useUserId } from "../../middleware";
+import { useGetPost } from "../../middleware";
 
 const Post = ({ location, history }) => {
-  // 관리자 확인
-  const userId = useUserId("/auth");
-  const {
-    userId: { admin },
-  } = userId;
-
   // get all post / 5, 페이지의 수를 파악하기 위해 불러옴
   const [postLength, setPostLenght] = useState();
 
@@ -85,7 +79,6 @@ const Post = ({ location, history }) => {
           onClick={onClick}
           post={post}
           loading={loading}
-          admin={admin}
           postLength={postLength}
           page={page}
           handleChange={handleChange}

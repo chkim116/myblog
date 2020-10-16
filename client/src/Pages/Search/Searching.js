@@ -11,7 +11,7 @@ export const Searching = ({ location }) => {
   return (
     <>
       <Helmet>
-        <title>My Blog | {search} 검색결과</title>
+        <title>My Blog | {search.split("=")[1]} 검색결과</title>
       </Helmet>
       {loading ? (
         <SearchingForm searchTags={searchTags} search={search}></SearchingForm>

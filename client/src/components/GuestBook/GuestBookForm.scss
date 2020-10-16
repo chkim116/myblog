@@ -3,7 +3,7 @@
 
 .contents {
   width: 100%;
-  padding: 3em;
+  padding: 1em;
   display: flex;
   flex-direction: column;
   min-height: 760px;
@@ -39,14 +39,9 @@
   }
 
   .guest {
-    position: absolute;
-    text-align: center;
     color: $tur;
-    top: 62px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-left: 0.5em;
     width: fit-content;
+    margin: 0 auto;
 
     &:hover {
       text-decoration: underline;

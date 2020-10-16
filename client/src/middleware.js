@@ -120,6 +120,39 @@ export const useGetTag = (url) => {
   return { searchTags, loading };
 };
 
+export const useSearch = (select, text) => {
+  console.log(select);
+  const [searchPost, setSearchPost] = useState({
+    title: "",
+    description: "",
+    createDate: "",
+    creator: "",
+    username: "",
+    updata: false,
+    tags: [],
+  });
+
+  const getSearchPost = async (select) => {
+    try {
+      const searchPost = await Axios.get("/api/searching", {
+        select,
+        text,
+      }).then((res) => res.data);
+      setSearchPost(searchPost);
+      console.log(searchPost);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    console.log(select);
+    getSearchPost(select);
+  }, [select]);
+
+  return searchPost;
+};
+
 export const modules = {
   toolbar: {
     container: [

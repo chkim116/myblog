@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import FooterForm from "../../components/Layouts/FooterForm";
-import { useGetPort, useUserId } from "../../middleware";
+import { useGetPort } from "../../middleware";
 import { Helmet } from "react-helmet-async";
 import GuestBookForm from "../../components/GuestBook/GuestBookForm";
 import { Loading } from "../Etc/Loading";
@@ -9,8 +9,6 @@ import Axios from "axios";
 const GuestBook = () => {
   const guests = useGetPort("/port");
   const { guest, loading } = guests;
-  const { userId } = useUserId("/auth");
-  const { id } = userId;
 
   // del
   const [del, setDel] = useState(false);
@@ -39,7 +37,7 @@ const GuestBook = () => {
       {del && <Loading />}
       {loading ? (
         <>
-          <GuestBookForm port={guest} onClick={onClick} id={id}></GuestBookForm>
+          <GuestBookForm port={guest} onClick={onClick}></GuestBookForm>
           <FooterForm />
         </>
       ) : (

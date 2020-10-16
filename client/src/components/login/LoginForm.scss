@@ -22,5 +22,6 @@
   }
   .form__submit {
     @include button;
+    color: $white;
   }
 }

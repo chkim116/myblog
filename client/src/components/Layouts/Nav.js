@@ -1,24 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import routes from "../../routes";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Nav.scss";
+import { SearchingBar } from "../Search/SearchingBar";
+import { NavMenu } from "./NavMenu";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { searchingPost } from "../../Redux/search";
 
-const NavList = ({ link, onClickNav, menu }) => {
-  return (
-    <Link to={link} className='menu__items'>
-      <li onClick={onClickNav}>{menu}</li>
-    </Link>
-  );
-};
-
-const Nav = ({ userId, onClick, onChange, admin }) => {
-  const { username } = userId;
+const Nav = ({ onClick, onChange }) => {
   const onClickNav = () => {
     const menu = document.querySelector(".header__menu");
     menu.classList.toggle("active");
   };
 
+  const sele = useSelector((state) => state.search);
+
+  const dispatch = useDispatch();
+  const [search, setSearch] = useState({
+    select: "all",
+    text: "",
+  });
+  const { select, text } = search;
+
+  const onSearch = (e) => {
+    const { name, value } = e.target;
+    setSearch({ ...search, [name]: value });
+    dispatch(searchingPost(select, text));
+  };
+
+  console.log(sele);
   return (
     <>
       <header onChange={onChange}>
@@ -27,46 +38,12 @@ const Nav = ({ userId, onClick, onChange, admin }) => {
             Think_Tank
           </Link>
         </li>
-        <nav className='header__menu'>
-          <NavList link={routes.home} onClickNav={onClickNav} menu='홈' />
-          <NavList link={routes.post} onClickNav={onClickNav} menu='포스트' />
-          <NavList
-            link={routes.guestbook}
-            onClickNav={onClickNav}
-            menu='방명록'
-          />
-          <NavList link={routes.about} onClickNav={onClickNav} menu='어바웃' />
-
-          {!username ? (
-            <>
-              <NavList
-                link={routes.login}
-                onClickNav={onClickNav}
-                menu='로그인'
-              />
-              <NavList
-                link={routes.register}
-                onClickNav={onClickNav}
-                menu='회원가입'
-              />
-            </>
-          ) : (
-            <>
-              <li className='menu__items' onClick={onClick}>
-                로그아웃
-              </li>
-              {!admin ? (
-                <li className='username'>{username}</li>
-              ) : (
-                <li className='username'>{username} 관리자님 어서오세요</li>
-              )}
-            </>
-          )}
-        </nav>
+        <NavMenu onClickNav={onClickNav} onClick={onClick} />
         <li className='header__hamburger' onClick={onClickNav}>
           <GiHamburgerMenu />
         </li>
       </header>
+      <SearchingBar onSearch={onSearch} />
     </>
   );
 };

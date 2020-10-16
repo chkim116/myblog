@@ -1,10 +1,11 @@
 import React from "react";
 import "./PostDetailForm.scss";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const PostDetailForm = ({ postObj, onClick, admin }) => {
+const PostDetailForm = ({ postObj, onClick }) => {
   const { title, description, _id, createDate, tags } = postObj;
-
+  const admin = useSelector((state) => state.auth.admin);
   return (
     <>
       <div className='post__detail' key={_id}>

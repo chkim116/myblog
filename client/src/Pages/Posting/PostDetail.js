@@ -2,17 +2,12 @@ import React, { useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import PostDetailForm from "../../components/Posting/PostDetailForm";
-import { useUserId, useGetPost } from "../../middleware";
+import { useGetPost } from "../../middleware";
 import { Helmet } from "react-helmet-async";
 import { Loading } from "../Etc/Loading";
 
 const PostDetail = ({ history }) => {
   const { id } = useParams();
-  // get Id
-  const usersId = useUserId("/auth");
-  const {
-    userId: { admin },
-  } = usersId;
 
   // get Post Detail
   const getPost = useGetPost(`/api/${id}`);
@@ -46,7 +41,7 @@ const PostDetail = ({ history }) => {
         <title>My Blog | {post.title}</title>
       </Helmet>
       {del && <Loading />}
-      <PostDetailForm postObj={post} admin={admin} onClick={onClick} />
+      <PostDetailForm postObj={post} onClick={onClick} />
     </>
   );
 };
