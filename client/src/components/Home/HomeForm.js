@@ -1,21 +1,12 @@
 import React from "react";
 import "./HomeForm.scss";
 import { Link } from "react-router-dom";
+import { HomeHashtag } from "./HomeHashtag";
 
-const HashTag = ({ hash, length }) => {
-  const color = `#${Math.round(Math.random() * 0xffffff).toString(16)}`;
-  return (
-    <Link to={`/search?tag=${hash}`}>
-      <div className='main__hash-tag' data-tag={hash} style={{ color }}>
-        #{hash}({length})
-      </div>
-    </Link>
-  );
-};
-
-const HomeForm = ({ tagList, tagId }) => {
+const HomeForm = ({ tagList }) => {
   let tags = [];
   tagList.map((list) => list.forEach((tag) => tags.push(tag)));
+
   const reduceTag = tags.reduce((obj, current) => {
     if (!obj[current]) {
       obj[current] = 0;
@@ -32,9 +23,7 @@ const HomeForm = ({ tagList, tagId }) => {
         <div className='main__hash'>
           <div className='main__hash-box'>
             {sortTags.map((t, index) => (
-              <div key={index}>
-                <HashTag hash={t[0]} length={t[1]} />
-              </div>
+              <HomeHashtag key={index} hash={t[0]} length={t[1]} />
             ))}
           </div>
         </div>

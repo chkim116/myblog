@@ -100,6 +100,7 @@ export const useGetTag = (url) => {
     creator: "",
     username: "",
     updata: false,
+    tags: [],
   });
   const [loading, setLoading] = useState(false);
 

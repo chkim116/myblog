@@ -1,15 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { Helmet } from "react-helmet-async";
 import { SearchingForm } from "../../components/Search/SearchingForm";
 import { useGetTag } from "../../middleware";
+import { Loading } from "../Etc/Loading";
 
 export const Searching = ({ location }) => {
   const { search } = location;
   const { searchTags, loading } = useGetTag(`/tag/search${search}`);
-  console.log(searchTags, loading);
 
   return (
     <>
-      <SearchingForm></SearchingForm>
+      <Helmet>
+        <title>My Blog | {search} 검색결과</title>
+      </Helmet>
+      {loading ? (
+        <SearchingForm searchTags={searchTags} search={search}></SearchingForm>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 };

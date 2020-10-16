@@ -6,14 +6,12 @@ import { Helmet } from "react-helmet-async";
 import { Loading } from "../Etc/Loading";
 
 const Register = ({ history }) => {
-  const initialState = {
+  const [register, setRegister] = useState({
     username: "",
     password: "",
     password2: "",
     email: "",
-  };
-
-  const [register, setRegister] = useState(initialState);
+  });
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(false);
   const { username, password, password2, email } = register;

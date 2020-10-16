@@ -12,9 +12,13 @@ export const getTags = async (req, res) => {
 };
 
 export const getSearchingTags = async (req, res) => {
+  const {
+    query: { tag },
+  } = req;
   try {
+    const post = await Post.find({ tags: tag });
     res.status(200);
-    res.json("하이");
+    res.json(post);
   } catch (err) {
     res.status(400);
     console.log(err);

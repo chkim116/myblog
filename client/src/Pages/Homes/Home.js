@@ -1,5 +1,6 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import HomeForm from "../../components/Home/HomeForm";
 import { Loading } from "../Etc/Loading";
 
@@ -22,21 +23,11 @@ const Home = () => {
   }, []);
 
   let tag = [];
-  let tagId = [];
   tagList.forEach((list) => {
     tag.push(list.tags);
-    tagId.push(list._id);
   });
 
-  return (
-    <>
-      {loadingHome ? (
-        <HomeForm tagList={tag} tagId={tagId}></HomeForm>
-      ) : (
-        <Loading />
-      )}
-    </>
-  );
+  return <>{loadingHome ? <HomeForm tagList={tag}></HomeForm> : <Loading />}</>;
 };
 
 export default Home;
