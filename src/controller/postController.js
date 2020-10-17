@@ -34,7 +34,6 @@ export const postPosting = async (req, res) => {
     body: { title, description, updated, createDate, tags, category },
   } = req;
   try {
-    const categories = await Category.find({ category: category });
     const post = await Post.create({
       title,
       description,
@@ -44,7 +43,6 @@ export const postPosting = async (req, res) => {
       tags: tags,
       category,
     });
-    console.log(categories);
     post.save();
     res.json(true);
     console.log("성공^^");
