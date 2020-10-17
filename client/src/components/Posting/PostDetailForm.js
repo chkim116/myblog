@@ -37,7 +37,9 @@ const PostDetailForm = ({ postObj, onClick }) => {
 
         <span className='post__detail-tags'>
           {tags.map((tg, index) => (
-            <span key={index}> #{tg}</span>
+            <span key={index} data-tag={tg}>
+              #{tg}
+            </span>
           ))}
         </span>
         <span className='post__detail-tags'></span>

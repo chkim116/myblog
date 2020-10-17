@@ -20,7 +20,6 @@ const PostingForm = ({
         <input
           type='text'
           name='title'
-          maxLength='12'
           placeholder='title'
           onChange={onChange}></input>
         <ReactQuill

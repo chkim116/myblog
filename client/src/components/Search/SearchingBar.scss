@@ -1,24 +1,32 @@
 @import "../../Styles/var";
-@import "../../Styles/Animation/boardAni.scss";
+@import "../../Styles/Animation/searchAni.scss";
 
-@include animation-mixin(upAnimation, -100%, 0%);
+@include animation-mixin(showSearchBar, 0px, 100px);
 
 .searchingbar {
   width: 100%;
+  height: 100px;
   max-width: 1440px;
+  position: fixed;
+  z-index: 30;
   display: flex;
   justify-content: center;
   margin: 0 auto;
-  height: 100px;
   align-items: center;
-  animation: upAnimation 500ms;
+  @include center($top: 20px);
+  background: $white;
+  animation: showSearchBar 300ms;
 
-  &.active {
-    display: block;
+  .searchingbar-del {
+    cursor: pointer;
+    font-size: $small;
+    padding: 1em;
+    &:hover {
+      color: $blackShadow;
+    }
   }
-
   .searchingbar__form {
-    z-index: 3;
+    z-index: 33;
     display: flex;
     width: 50%;
     height: 35px;
@@ -28,11 +36,11 @@
       width: 60%;
     }
     @media #{$iphone} {
-      width: 90%;
+      width: 80%;
     }
 
     .searchingbar-input {
-      flex: 2;
+      width: 60%;
       padding-left: 6px;
     }
 
@@ -40,6 +48,7 @@
       font-size: $small;
       @include border;
       @include padding($padding: 0.2em 0.8em);
+      min-width: fit-content;
       &:hover {
         color: $white;
         background: $black;

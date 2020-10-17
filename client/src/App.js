@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";
-
-// scss
 import "./Styles/loading.scss";
+
 // page
 import Nav from "./components/Layouts/Nav";
-import { Loading } from "./Pages/Etc/Loading";
-import { useUserId } from "./middleware";
+import { SearchingBtn } from "./components/Search/SearchingBtn";
 import { RouteCompoents } from "./RouteCompoents";
-import { useDispatch, useSelector } from "react-redux";
-import { getAuth } from "./Redux/auth";
+import { Loading } from "./Pages/Etc/Loading";
+
+// 유저 확인을 위한 hook&redux
+import { useUserId } from "./middleware";
+import { useDispatch } from "react-redux";
+import { getAuth } from "./Modules/auth";
+import { Route } from "react-router-dom";
 
 function App() {
-  // user 확인
+  // user 체크
   const getUser = useUserId("/auth");
   const { userId, loading } = getUser;
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAuth(userId));
   }, [userId]);
-
-  const user = useSelector((state) => state.auth);
-
-  console.log(user);
 
   // userLogout
   const [logout, setLogout] = useState(false);
@@ -53,6 +53,7 @@ function App() {
         <title>My Blog | Home</title>
       </Helmet>
       <Nav logout={logout} onClick={onClick}></Nav>
+      <Route component={SearchingBtn}></Route>
       <RouteCompoents />
     </>
   );

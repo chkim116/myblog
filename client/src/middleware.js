@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Axios from "axios";
+import { useSelector } from "react-redux";
 
 export function registerCheck(err, url, { history }) {
   const {
@@ -120,8 +121,7 @@ export const useGetTag = (url) => {
   return { searchTags, loading };
 };
 
-export const useSearch = (select, text) => {
-  console.log(select);
+export const useSearch = (search) => {
   const [searchPost, setSearchPost] = useState({
     title: "",
     description: "",
@@ -132,11 +132,12 @@ export const useSearch = (select, text) => {
     tags: [],
   });
 
-  const getSearchPost = async (select) => {
+  const getSearchPost = async (search) => {
     try {
-      const searchPost = await Axios.get("/api/searching", {
-        select,
-        text,
+      const searchPost = await Axios({
+        method: "GET",
+        url: "/api/searching",
+        params: { q: search },
       }).then((res) => res.data);
       setSearchPost(searchPost);
       console.log(searchPost);
@@ -146,9 +147,8 @@ export const useSearch = (select, text) => {
   };
 
   useEffect(() => {
-    console.log(select);
-    getSearchPost(select);
-  }, [select]);
+    getSearchPost(search);
+  }, [search]);
 
   return searchPost;
 };

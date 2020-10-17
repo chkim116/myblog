@@ -1,0 +1,10 @@
+@mixin animation-mixin($name, $from, $to) {
+  @keyframes #{$name} {
+    0% {
+      height: $from;
+    }
+    100% {
+      height: $to;
+    }
+  }
+}

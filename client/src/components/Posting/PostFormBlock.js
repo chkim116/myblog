@@ -27,7 +27,7 @@ export const PostFormBlock = ({ post, onClick }) => {
               <small className='updated'>{p.updated}</small>
               <span className='post__tags'>
                 {p.tags.map((tag, index) => (
-                  <span key={index}> #{tag}</span>
+                  <span key={index}>#{tag}</span>
                 ))}
               </span>
             </h3>

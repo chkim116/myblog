@@ -1,0 +1,19 @@
+@import "../../Styles/var";
+
+.search-btn {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  border-radius: 50%;
+  z-index: 15;
+  background: #dbdbdb;
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+  transition: 500ms;
+
+  &:hover {
+    background: $blackShadow;
+    color: $gray;
+  }
+}

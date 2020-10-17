@@ -6,7 +6,14 @@ import { PostPagination } from "./PostPagination";
 import { PostFormBlock } from "./PostFormBlock";
 import { useSelector } from "react-redux";
 
-const PostForm = ({ select, post, onClick, handleChange, postLength }) => {
+const PostForm = ({
+  select,
+  post,
+  onClick,
+  handleChange,
+  postLength,
+  onSearchTag,
+}) => {
   const admin = useSelector((state) => state.auth.admin);
 
   return (
@@ -17,7 +24,11 @@ const PostForm = ({ select, post, onClick, handleChange, postLength }) => {
             {admin && <Link to={routes.postwriting}>Post</Link>}
           </span>
         </div>
-        <PostFormBlock post={post} onClick={onClick} />
+        <PostFormBlock
+          post={post}
+          onSearchTag={onSearchTag}
+          onClick={onClick}
+        />
         <div className='post__form-page'>
           <PostPagination
             handleChange={handleChange}

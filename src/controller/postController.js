@@ -86,13 +86,3 @@ export const postDeleting = async (req, res) => {
     console.log(err);
   }
 };
-
-export const postSearching = (req, res) => {
-  try {
-    res.status(200).send(true);
-    console.log("하이");
-  } catch (err) {
-    console.log(err);
-    res.status(400).send(false);
-  }
-};

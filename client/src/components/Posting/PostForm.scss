@@ -13,6 +13,7 @@
 .post {
   margin: 0 auto;
   width: fit-content;
+  height: 100px;
   span {
     margin: 0 0.5em;
     cursor: pointer;
@@ -37,7 +38,7 @@
   flex-direction: column;
 
   @media #{$phone} {
-    width: 100%;
+    width: 90%;
   }
 
   .post__form-type {
@@ -87,6 +88,13 @@
         right: 0;
         color: $darkgrey;
         font-size: $small;
+        [data-tag] {
+          z-index: 3;
+          margin-right: 0.2em;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
     }
 

@@ -9,7 +9,7 @@ import "react-quill/dist/quill.bubble.css";
 import { createStore, applyMiddleware } from "redux";
 import { createLogger } from "redux-logger";
 import { Provider } from "react-redux";
-import rootReducer from "./Redux/rootReducer";
+import rootReducer from "./Modules/rootReducer";
 
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(logger));

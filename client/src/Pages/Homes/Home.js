@@ -1,9 +1,11 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import HomeForm from "../../components/Home/HomeForm";
+import { hashTagSearch } from "../../Modules/search";
 import { Loading } from "../Etc/Loading";
 
-const Home = () => {
+const Home = ({ history }) => {
   const [loadingHome, setLoadingHome] = useState(false);
   const [tagList, setTagList] = useState([]);
 
@@ -25,6 +27,15 @@ const Home = () => {
   tagList.forEach((list) => {
     tag.push(list.tags);
   });
+
+  const dispatch = useDispatch();
+  const hash = useSelector((state) => state.search.tags);
+
+  const onClick = (e) => {
+    const { tag } = e.target.dataset;
+    dispatch(hashTagSearch(tag));
+    history.push(`/search?tag=${hash}`);
+  };
 
   return (
     <div>{loadingHome ? <HomeForm tagList={tag}></HomeForm> : <Loading />}</div>
