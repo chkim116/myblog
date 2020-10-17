@@ -1,0 +1,113 @@
+@import "../../Styles/var";
+
+.category {
+  max-width: 768px;
+  width: 70%;
+  @include border;
+  margin: 0 auto;
+  padding: 1em;
+  font-size: $small;
+  position: relative;
+
+  .category-plus {
+    top: 10px;
+    font-size: 18px;
+    @include border;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    line-height: 15px;
+    left: 10px;
+    position: absolute;
+
+    &:hover {
+      color: $red;
+      border: 1px solid $yellow;
+    }
+  }
+
+  .category-btn {
+    cursor: pointer;
+    color: $red;
+    text-align: center;
+    &:hover {
+      color: $blackShadow;
+    }
+  }
+
+  .category__wrap {
+    width: 100%;
+
+    .category__all {
+      width: 100%;
+      padding: 0.5em;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.category__form {
+  width: 100%;
+
+  .category__form-name {
+    width: 100%;
+    border-top: 1px solid $blackShadow;
+    padding: 0.5em;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .category__form-list {
+    margin-left: 2em;
+    padding: 0.6em;
+    cursor: pointer;
+    position: relative;
+
+    &::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      position: absolute;
+      border-left: 1px solid $blackShadow;
+      border-bottom: 1px solid $blackShadow;
+
+      left: -10px;
+    }
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.active {
+  color: $red;
+}
+
+.category__create {
+  background: $white;
+  width: 300px;
+  top: 6px;
+  left: 30px;
+  position: absolute;
+  z-index: 50;
+  .category__create-list {
+    height: 24px;
+    @include padding($padding: 0em 0.6em);
+  }
+
+  .category__create-btn {
+    @include border;
+    width: 30px;
+    height: 23px;
+    text-align: center;
+
+    &:hover {
+      color: $blackShadow;
+    }
+  }
+}

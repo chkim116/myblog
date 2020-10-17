@@ -5,6 +5,7 @@ import routes from "../../routes";
 import { PostPagination } from "./PostPagination";
 import { PostFormBlock } from "./PostFormBlock";
 import { useSelector } from "react-redux";
+import { PostCategory } from "./PostCategory";
 
 const PostForm = ({
   select,
@@ -19,6 +20,7 @@ const PostForm = ({
   return (
     <>
       <div className='post__wrap'>
+        <PostCategory />
         <div className='post'>
           <span className='btn post-btn'>
             {admin && <Link to={routes.postwriting}>Post</Link>}

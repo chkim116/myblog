@@ -16,13 +16,19 @@ body {
 
 input,
 textarea,
-button {
+button,
+select {
   outline: none;
 }
 
 input,
-textarea {
+textarea,
+select {
   @include border;
+}
+
+select {
+  cursor: pointer;
 }
 
 h1,

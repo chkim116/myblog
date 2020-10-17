@@ -21,6 +21,7 @@ import guestRouter from "./src/routers/guestRouter";
 import postRouter from "./src/routers/postRouter";
 import userRouter from "./src/routers/userRouter";
 import tagRouter from "./src/routers/tagRouter";
+import categoryRouter from "./src/routers/categoryRouter";
 
 // Schema
 import "./src/models/post.js";
@@ -78,7 +79,7 @@ app.use("/api", postRouter);
 app.use("/port", guestRouter);
 app.use("/auth", userRouter);
 app.use("/tag", tagRouter);
-
+app.use("/category", categoryRouter);
 // server
 const PORT = process.env.PORT || 4000;
 

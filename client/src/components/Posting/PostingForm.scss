@@ -11,12 +11,23 @@
   max-width: 1440px;
   margin: 0 auto;
 
-  input {
-    padding: 0.8em 1em;
-    width: 70%;
+  .posting__form-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
     margin-bottom: 1em;
-    @media #{$phone} {
-      width: 80%;
+
+    select {
+      width: 20%;
+      text-align: center;
+    }
+
+    input {
+      @include padding($padding: 0.8em 1em);
+      width: 50%;
+      @media #{$phone} {
+        width: 60%;
+      }
     }
   }
 

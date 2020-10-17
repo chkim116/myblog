@@ -7,7 +7,9 @@ import { showSearchBar } from "../../Modules/search";
 
 export const SearchingBtn = ({ history }) => {
   const dispatch = useDispatch();
+
   const show = useSelector((state) => state.search.show);
+
   const onClick = () => {
     !show ? dispatch(showSearchBar(true)) : dispatch(showSearchBar(false));
   };
@@ -17,7 +19,7 @@ export const SearchingBtn = ({ history }) => {
       <button onClick={onClick} className='search-btn' type='button'>
         <HiSearch size={32} color='#fdfdfd' />
       </button>
-      <SearchingBar onClick={onClick} history={history} />
+      {show && <SearchingBar onClick={onClick} history={history} />}
     </>
   );
 };

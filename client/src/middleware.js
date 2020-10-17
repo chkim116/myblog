@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createCategoryList } from "./Modules/category";
 
 export function registerCheck(err, url, { history }) {
   const {
@@ -45,10 +46,12 @@ export const useGetPost = (url) => {
     updated: "",
     creator: "",
     tags: [],
+    category: "",
   });
   const [loading, setLoading] = useState(false);
 
   const getPost = async () => {
+    setLoading(false);
     try {
       await Axios.get(url).then((res) => setpost(res.data));
       setLoading(true);
@@ -60,7 +63,7 @@ export const useGetPost = (url) => {
   useEffect(() => {
     getPost();
     // eslint-disable-next-line
-  }, []);
+  }, [url]);
 
   return { post, loading };
 };
@@ -153,6 +156,26 @@ export const useSearch = (search) => {
   return searchPost;
 };
 
+export const useGetCategory = () => {
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  const getCategory = async () => {
+    setLoading(true);
+    await Axios.get("/category").then((res) =>
+      dispatch(createCategoryList(res.data))
+    );
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getCategory();
+  }, []);
+
+  return [loading];
+};
+
+// react-quill
 export const modules = {
   toolbar: {
     container: [

@@ -2,17 +2,22 @@ import React, { useState, useEffect, useCallback } from "react";
 import PostingForm from "../../components/Posting/PostingForm";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";
+import { useGetCategory } from "../../middleware";
 
 const PostWriting = ({ history }) => {
   const [post, setPost] = useState({
     title: "",
     description: "",
     updated: "",
+    category: "",
   });
   const [loading, setLoading] = useState(false);
   const { title, description, updated } = post;
   const [tags, setTags] = useState("");
+  const [selectCategory, setSelectCategory] = useState("");
   const [showTags, setShowTags] = useState([]);
+
+  useGetCategory();
 
   const axiosData = async () => {
     try {
@@ -21,6 +26,7 @@ const PostWriting = ({ history }) => {
         description,
         updated,
         tags: showTags,
+        category: selectCategory,
         createDate: new Date().toLocaleTimeString("ko-KR", {
           weekday: "long",
           year: "numeric",
@@ -38,13 +44,16 @@ const PostWriting = ({ history }) => {
 
   // text event
 
+  const onSelect = (e) => {
+    setSelectCategory(e.target.value);
+  };
+
   const onChange = (e) => {
     const { value, name } = e.target;
     setPost({
       ...post,
       [name]: value,
     });
-    console.log(post);
   };
 
   const onValue = (content, delta, source, editor) => {
@@ -93,7 +102,7 @@ const PostWriting = ({ history }) => {
     if (loading) {
       history.push("/post");
     }
-  });
+  }, [loading]);
 
   return (
     <>
@@ -101,6 +110,8 @@ const PostWriting = ({ history }) => {
         <title>My Blog | 포스트 작성</title>
       </Helmet>
       <PostingForm
+        selectCategory={selectCategory}
+        onSelect={onSelect}
         onTagDel={onTagDel}
         onSubmit={onSubmit}
         onChange={onChange}

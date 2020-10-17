@@ -4,16 +4,19 @@ import { Helmet } from "react-helmet-async";
 import PostForm from "../../components/Posting/PostForm";
 import { Loading } from "../Etc/Loading";
 import { useGetPost } from "../../middleware";
+import { useDispatch } from "react-redux";
+import { searchResults } from "../../Modules/search";
 
 const Post = ({ location, history }) => {
   // get all post / 5, 페이지의 수를 파악하기 위해 불러옴
   const [postLength, setPostLenght] = useState();
-
+  const dispatch = useDispatch();
   const getAllPost = () => {
     const AllPost = async () => {
       try {
         const posting = await Axios.get("/api/all").then((res) => res.data);
         setPostLenght(Math.ceil(posting.length / 6));
+        dispatch(searchResults(posting));
       } catch (err) {
         console.log(err);
       }
@@ -41,11 +44,12 @@ const Post = ({ location, history }) => {
     const { selected } = e;
     setPage({ query: `?page=${selected + 1}` });
     history.push(`/post?page=${selected + 1}`);
+    document.querySelector("#root").scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
     setSelect({ selecting: query ? parseInt(query.split("=")[1] - 1) : 0 });
-  }, [query]);
+  }, [page]);
 
   // 게시글 삭제
 

@@ -33,10 +33,10 @@
     justify-content: center;
 
     @media #{$phone} {
-      width: 60%;
+      width: 80%;
     }
     @media #{$iphone} {
-      width: 80%;
+      width: 90%;
     }
 
     .searchingbar-input {

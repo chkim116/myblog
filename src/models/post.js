@@ -16,6 +16,10 @@ const PostSchema = new mongoose.Schema({
     ref: "User",
   },
   tags: Array,
+  category: {
+    type: String,
+    required: "category is required",
+  },
 });
 
 const model = mongoose.model("Post", PostSchema);

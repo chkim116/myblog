@@ -1,5 +1,5 @@
 import Post from "../models/post.js";
-import Tags from "../models/tags.js";
+import Category from "../models/Category.js";
 
 export const getPost = async (req, res) => {
   const page = parseInt(req.query.page || "1");
@@ -31,10 +31,10 @@ export const getAllPost = async (req, res) => {
 
 export const postPosting = async (req, res) => {
   const {
-    body: { title, description, updated, createDate, tags },
+    body: { title, description, updated, createDate, tags, category },
   } = req;
-
   try {
+    const categories = await Category.find({ category: category });
     const post = await Post.create({
       title,
       description,
@@ -42,8 +42,11 @@ export const postPosting = async (req, res) => {
       createDate,
       creator: req.user._id,
       tags: tags,
+      category,
     });
-    post.save().then((post) => res.json(post));
+    console.log(categories);
+    post.save();
+    res.json(true);
     console.log("성공^^");
   } catch (err) {
     res.status(400);

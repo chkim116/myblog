@@ -16,7 +16,6 @@ export const SearchingBar = ({ onClick, history }) => {
     text: "",
   });
 
-  const show = useSelector((state) => state.search.show);
   const dispatch = useDispatch();
 
   const onChange = (e) => {
@@ -49,34 +48,30 @@ export const SearchingBar = ({ onClick, history }) => {
   return (
     <>
       {loading && <Loading />}
-      {show ? (
-        <div className='searchingbar'>
-          <form
-            className='searchingbar__form'
-            onChange={onChange}
-            onSubmit={onSubmit}>
-            <span className='searchingbar-del' onClick={onClick}>
-              X
-            </span>
-            <select className='searchingbar-select' name='select'>
-              <option value='title'>제목</option>
-              <option value='description'>본문</option>
-              <option value='tags'>태그</option>
-            </select>
-            <input
-              name='text'
-              className='searchingbar-input'
-              type='text'
-              placeholder='검색어를 입력하세요'
-            />
-            <button className='searchingbar-btn' type='submit'>
-              검색
-            </button>
-          </form>
-        </div>
-      ) : (
-        <> </>
-      )}
+      <div className='searchingbar'>
+        <form
+          className='searchingbar__form'
+          onChange={onChange}
+          onSubmit={onSubmit}>
+          <span className='searchingbar-del' onClick={onClick}>
+            X
+          </span>
+          <select className='searchingbar-select' name='select'>
+            <option value='title'>제목</option>
+            <option value='description'>본문</option>
+            <option value='tags'>태그</option>
+          </select>
+          <input
+            name='text'
+            className='searchingbar-input'
+            type='text'
+            placeholder='검색어를 입력하세요'
+          />
+          <button className='searchingbar-btn' type='submit'>
+            검색
+          </button>
+        </form>
+      </div>
     </>
   );
 };
