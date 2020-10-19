@@ -15,6 +15,7 @@ const PostEdit = ({ history }) => {
   const [updatePost, setUpdatePost] = useState("");
   const [tags, setTags] = useState("");
   const [showTags, setShowTags] = useState([]);
+  const [selectCategory, setSelectCategory] = useState("");
 
   // get previous value
   useEffect(() => {
@@ -35,6 +36,10 @@ const PostEdit = ({ history }) => {
   const { title, description, updated } = updatePost;
 
   // text event
+
+  const onSelect = (e) => {
+    setSelectCategory(e.target.value);
+  };
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -64,6 +69,7 @@ const PostEdit = ({ history }) => {
           description,
           updated,
           tags: showTags,
+          category: selectCategory,
         });
         setUpdate(true);
       } catch (err) {
@@ -121,6 +127,7 @@ const PostEdit = ({ history }) => {
           showTags={showTags}
           onTagsSubmit={onTagsSubmit}
           onTagDel={onTagDel}
+          onSelect={onSelect}
           onValue={onValue}></PostEditForm>
       ) : (
         <Loading />

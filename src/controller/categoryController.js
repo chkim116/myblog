@@ -1,8 +1,8 @@
 import Category from "../models/Category";
+import Post from "../models/post";
 
 export const createCategory = async (req, res) => {
   const { category } = req.body;
-  console.log(category);
   try {
     await Category.create({
       category: category,
@@ -25,17 +25,17 @@ export const getCategory = async (req, res) => {
 };
 
 export const editCategory = async (req, res) => {
-  console.log(req.params);
-  const { category } = req.body;
+  const {
+    categoryEdit: { text, id },
+  } = req.body;
   try {
-    const category = await Category.findOneAndUpdate(
+    await Category.findOneAndUpdate(
       { _id: id },
       {
-        category: category,
+        category: text,
       }
     );
-    Category.save();
-    res.staus(200);
+    res.status(200);
   } catch (err) {
     res.status(400);
     console.log(err);
@@ -45,7 +45,11 @@ export const editCategory = async (req, res) => {
 export const delCategory = async (req, res) => {
   const { id } = req.params;
   try {
+    await Category.findOneAndDelete({ _id: id });
+
+    res.status(200);
   } catch (err) {
+    res.status(400);
     console.log(err);
   }
 };

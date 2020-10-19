@@ -53,20 +53,47 @@
 .category__form {
   width: 100%;
 
+  .category__del {
+    position: absolute;
+    right: -15px;
+    top: 6px;
+    cursor: pointer;
+    font-size: 14px;
+
+    &:hover {
+      color: $blackShadow;
+    }
+  }
+
+  .category__edit {
+    position: absolute;
+    right: -30px;
+    top: 6px;
+    cursor: pointer;
+    font-size: 14px;
+
+    &:hover {
+      color: $blackShadow;
+    }
+  }
+
   .category__form-name {
     width: 100%;
     border-top: 1px solid $blackShadow;
     padding: 0.5em;
     cursor: pointer;
-    &:hover {
-      text-decoration: underline;
-    }
   }
+
   .category__form-list {
+    width: fit-content;
     margin-left: 2em;
     padding: 0.6em;
     cursor: pointer;
     position: relative;
+
+    &:hover {
+      text-decoration: underline;
+    }
 
     &::after {
       content: "";
@@ -75,11 +102,18 @@
       position: absolute;
       border-left: 1px solid $blackShadow;
       border-bottom: 1px solid $blackShadow;
-
       left: -10px;
     }
+
     &:hover {
       text-decoration: underline;
+    }
+
+    .category__form-edit {
+      position: absolute;
+      top: 5px;
+      left: 0;
+      z-index: 5;
     }
   }
 }

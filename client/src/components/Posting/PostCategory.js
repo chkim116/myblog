@@ -9,28 +9,69 @@ import {
 } from "../../Modules/category";
 import Axios from "axios";
 
-const Category = ({ createList, post, onClick }) => {
+const Category = ({
+  createList,
+  post,
+  onClick,
+  onDel,
+  onEdit,
+  admin,
+  editShow,
+  onEditSubmit,
+  onEditChange,
+}) => {
   const filter = useSelector((state) => state.category.filter);
 
   return (
     <>
-      <ul className='category__form'>
-        {createList &&
-          createList.map((li, index) => (
-            <div
-              key={index}
-              data-category={li.category}
-              onClick={onClick}
-              className={
-                li.category === filter
-                  ? "category__form-list selected"
-                  : "category__form-list"
-              }>
-              {li.category}(
-              {post.filter((p) => p.category === li.category).length})
-            </div>
-          ))}
-      </ul>
+      {createList &&
+        createList.map((li, index) => (
+          <ul className='category__form' key={index}>
+            <>
+              <div
+                data-category={li.category}
+                onClick={onClick}
+                className={
+                  li.category === filter
+                    ? "category__form-list selected"
+                    : "category__form-list"
+                }>
+                {li.category}(
+                {post.filter((p) => p.category === li.category).length || 0})
+                {editShow && (
+                  <form onSubmit={onEditSubmit}>
+                    <input
+                      data-id={li._id}
+                      className='category__form-edit'
+                      type='text'
+                      defaultValue={li.category}
+                      onChange={onEditChange}
+                    />
+                    <span onClick={onEdit}>X</span>
+                    <button type='submit'>O</button>
+                  </form>
+                )}
+                {admin && (
+                  <>
+                    <span
+                      data-id={li._id}
+                      className='category__del'
+                      key={index + 1}
+                      onClick={onDel}>
+                      X
+                    </span>
+                    <span
+                      className='category__edit'
+                      onClick={onEdit}
+                      key={index + 2}>
+                      E
+                    </span>
+                  </>
+                )}
+              </div>
+            </>
+          </ul>
+        ))}
     </>
   );
 };
@@ -50,7 +91,6 @@ export const PostCategory = ({ history, location }) => {
   const [createCategory, setCreateCategory] = useState("");
 
   const createList = useSelector((state) => state.category.data);
-
   const onCreateCategory = () => {
     !create ? setCreate(true) : setCreate(false);
   };
@@ -64,6 +104,7 @@ export const PostCategory = ({ history, location }) => {
     const postCategory = async () => {
       await Axios.post("/category/create", { category: createCategory });
     };
+    setCreate(false);
     postCategory();
     window.location.reload();
   };
@@ -86,6 +127,43 @@ export const PostCategory = ({ history, location }) => {
     const filter = post.filter((f) => (category ? f.category === category : f));
     dispatch(filterCategory(category, filter.splice(0, 6)));
     history.push(category ? `/post?page=1&filter=${category}` : "/post?page=1");
+  };
+
+  // del post
+
+  const onDel = (e) => {
+    const { id } = e.target.dataset;
+    const delCategory = async () => {
+      await Axios.get(`/category/del/${id}`);
+    };
+    delCategory();
+    window.location.reload();
+  };
+
+  //  edit Post
+  const [categoryEdit, setCategoryEdit] = useState({ text: "", id: "" });
+  const [editShow, setEditShow] = useState(false);
+
+  const onEdit = (e) => {
+    !editShow ? setEditShow(true) : setEditShow(false);
+  };
+
+  const onEditChange = (e) => {
+    const { value } = e.target;
+    console.log(e.target);
+    const { id } = e.target.dataset;
+    setCategoryEdit({ ...categoryEdit, text: value, id });
+  };
+
+  const onEditSubmit = (e) => {
+    e.preventDefault();
+    const postCategoryEdit = async () => {
+      await Axios.post("/category/edit", { categoryEdit }).then(
+        (res) => res.data
+      );
+    };
+    postCategoryEdit();
+    window.location.reload();
   };
 
   return (
@@ -118,12 +196,22 @@ export const PostCategory = ({ history, location }) => {
       <div className='category-btn' onClick={onCategory}>
         카테고리 <BiDownArrow />
       </div>
-      {show && (
+      {!show && (
         <div className='category__wrap'>
           <div className='category__all active' onClick={onClick}>
             전체글({post.length})
           </div>
-          <Category post={post} onClick={onClick} createList={createList} />
+          <Category
+            editShow={editShow}
+            onEditSubmit={onEditSubmit}
+            onEditChange={onEditChange}
+            post={post}
+            onEdit={onEdit}
+            onDel={onDel}
+            onClick={onClick}
+            admin={admin}
+            createList={createList}
+          />
         </div>
       )}
     </div>

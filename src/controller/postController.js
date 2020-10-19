@@ -66,11 +66,11 @@ export const getPostById = async (req, res) => {
 
 export const postEditing = async (req, res) => {
   const { id } = req.params;
-  const { title, description, updated, tags } = req.body;
+  const { title, description, updated, tags, category } = req.body;
   try {
     const post = await Post.findOneAndUpdate(
       { _id: id },
-      { title, description, updated, tags }
+      { title, description, updated, tags, category }
     );
     res.status(200).json(post);
   } catch (err) {

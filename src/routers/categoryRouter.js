@@ -24,6 +24,6 @@ categoryRouter.post("/edit", editCategory);
 
 // delete
 
-categoryRouter.get("/del", delCategory);
+categoryRouter.get("/del/:id", delCategory);
 
 export default categoryRouter;
