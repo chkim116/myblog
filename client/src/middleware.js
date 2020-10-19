@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { createCategoryList } from "./Modules/category";
+import { createCategoryList, filterCategory } from "./Modules/category";
+import { searchResults } from "./Modules/search";
 
 export function registerCheck(err, url, { history }) {
   const {
@@ -39,21 +40,18 @@ export const useUserId = (url) => {
 };
 
 // get Post Hooks
-export const useGetPost = (url) => {
-  const [post, setpost] = useState({
-    title: "",
-    description: "",
-    updated: "",
-    creator: "",
-    tags: [],
-    category: "",
-  });
+export const useGetPost = (url, location) => {
+  const dispatch = useDispatch();
+  let filter = useSelector((state) => state.category.filter);
+
   const [loading, setLoading] = useState(false);
 
   const getPost = async () => {
     setLoading(false);
     try {
-      await Axios.get(url).then((res) => setpost(res.data));
+      await Axios.get(url).then((res) =>
+        dispatch(filterCategory(filter, res.data))
+      );
       setLoading(true);
     } catch (err) {
       console.log(err);
@@ -61,11 +59,16 @@ export const useGetPost = (url) => {
   };
 
   useEffect(() => {
+    if (location) {
+      if (location.search.indexOf("filter") > -1) {
+        filter = decodeURI(location.search.split("&")[1].split("=")[1]);
+      }
+    }
     getPost();
     // eslint-disable-next-line
-  }, [url]);
+  }, [url || filter]);
 
-  return { post, loading };
+  return { loading };
 };
 
 export const useGetPort = (url) => {
@@ -143,7 +146,6 @@ export const useSearch = (search) => {
         params: { q: search },
       }).then((res) => res.data);
       setSearchPost(searchPost);
-      console.log(searchPost);
     } catch (err) {
       console.log(err);
     }
@@ -172,7 +174,7 @@ export const useGetCategory = () => {
     getCategory();
   }, []);
 
-  return [loading];
+  return { loading };
 };
 
 // react-quill

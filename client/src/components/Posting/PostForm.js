@@ -7,34 +7,23 @@ import { PostFormBlock } from "./PostFormBlock";
 import { useSelector } from "react-redux";
 import { PostCategory } from "./PostCategory";
 
-const PostForm = ({
-  select,
-  post,
-  onClick,
-  handleChange,
-  postLength,
-  onSearchTag,
-}) => {
+const PostForm = ({ select, onClick, handleChange, history, location }) => {
   const admin = useSelector((state) => state.auth.admin);
 
   return (
     <>
       <div className='post__wrap'>
-        <PostCategory />
+        <PostCategory history={history} location={location} />
         <div className='post'>
           <span className='btn post-btn'>
             {admin && <Link to={routes.postwriting}>Post</Link>}
           </span>
         </div>
-        <PostFormBlock
-          post={post}
-          onSearchTag={onSearchTag}
-          onClick={onClick}
-        />
+        <PostFormBlock onClick={onClick} />
         <div className='post__form-page'>
           <PostPagination
             handleChange={handleChange}
-            postLength={postLength}
+            location={location}
             select={select}></PostPagination>
         </div>
       </div>

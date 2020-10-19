@@ -9,32 +9,25 @@ import {
 } from "../../Modules/category";
 import Axios from "axios";
 
-const Category = ({ list, post, onClick }) => {
-  const category = post.map((arr) => arr.category);
-  const reduceCategory = category.reduce((allCategory, category) => {
-    if (category in allCategory) {
-      allCategory[category]++;
-    } else {
-      allCategory[category] = 1;
-    }
-    return allCategory;
-  }, {});
-  const tagsKeyValue = Object.entries(reduceCategory).sort(
-    (a, b) => b[1] - a[1]
-  );
-  const sortCategory = tagsKeyValue.map(([key, value]) => [key, value]);
+const Category = ({ createList, post, onClick }) => {
+  const filter = useSelector((state) => state.category.filter);
 
   return (
     <>
       <ul className='category__form'>
-        {list &&
-          sortCategory.map((li, index) => (
+        {createList &&
+          createList.map((li, index) => (
             <div
               key={index}
-              data-category={li[0]}
+              data-category={li.category}
               onClick={onClick}
-              className='category__form-list'>
-              {li[0]} ({li[1] || 0})
+              className={
+                li.category === filter
+                  ? "category__form-list selected"
+                  : "category__form-list"
+              }>
+              {li.category}(
+              {post.filter((p) => p.category === li.category).length})
             </div>
           ))}
       </ul>
@@ -42,7 +35,7 @@ const Category = ({ list, post, onClick }) => {
   );
 };
 
-export const PostCategory = () => {
+export const PostCategory = ({ history, location }) => {
   // redux
   const show = useSelector((state) => state.category.show);
   const admin = useSelector((state) => state.auth.admin);
@@ -88,10 +81,11 @@ export const PostCategory = () => {
   const post = useSelector((state) => state.search.post);
 
   // filter post
-
   const onClick = (e) => {
     const { category } = e.target.dataset;
-    dispatch(filterCategory(category));
+    const filter = post.filter((f) => (category ? f.category === category : f));
+    dispatch(filterCategory(category, filter.splice(0, 6)));
+    history.push(category ? `/post?page=1&filter=${category}` : "/post?page=1");
   };
 
   return (
@@ -129,7 +123,7 @@ export const PostCategory = () => {
           <div className='category__all active' onClick={onClick}>
             전체글({post.length})
           </div>
-          <Category post={post} onClick={onClick} list={createList} />
+          <Category post={post} onClick={onClick} createList={createList} />
         </div>
       )}
     </div>

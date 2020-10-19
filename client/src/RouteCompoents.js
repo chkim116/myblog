@@ -17,7 +17,6 @@ import { GuestBookDetail } from "./Pages/GuestBooks/GuestBookDetail";
 import { GuestBookEdit } from "./Pages/GuestBooks/GuestBookEdit";
 import { Searching } from "./Pages/Search/Searching";
 import { useSelector } from "react-redux";
-import { SearchingBtn } from "./components/Search/SearchingBtn";
 
 export const RouteCompoents = () => {
   const auth = useSelector((state) => state.auth);

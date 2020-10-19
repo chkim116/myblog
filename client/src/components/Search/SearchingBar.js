@@ -1,13 +1,13 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   searchingPost,
   searchResults,
   showSearchBar,
 } from "../../Modules/search";
-import { Loading } from "../../Pages/Etc/Loading";
 import "./SearchingBar.scss";
+import { SearchingBarForm } from "./SearchingBarForm";
 
 export const SearchingBar = ({ onClick, history }) => {
   const [loading, setLoading] = useState(false);
@@ -41,37 +41,18 @@ export const SearchingBar = ({ onClick, history }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setSearch({ select: "title", text: "" });
     dispatch(showSearchBar(false));
     history.push(`/search?select=${search.select}&text=${search.text}`);
   };
 
   return (
-    <>
-      {loading && <Loading />}
-      <div className='searchingbar'>
-        <form
-          className='searchingbar__form'
-          onChange={onChange}
-          onSubmit={onSubmit}>
-          <span className='searchingbar-del' onClick={onClick}>
-            X
-          </span>
-          <select className='searchingbar-select' name='select'>
-            <option value='title'>제목</option>
-            <option value='description'>본문</option>
-            <option value='tags'>태그</option>
-          </select>
-          <input
-            name='text'
-            className='searchingbar-input'
-            type='text'
-            placeholder='검색어를 입력하세요'
-          />
-          <button className='searchingbar-btn' type='submit'>
-            검색
-          </button>
-        </form>
-      </div>
-    </>
+    <SearchingBarForm
+      onClick={onClick}
+      loading={loading}
+      onSubmit={onSubmit}
+      search={search}
+      onChange={onChange}
+    />
   );
 };

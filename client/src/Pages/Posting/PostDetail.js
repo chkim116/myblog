@@ -5,14 +5,15 @@ import PostDetailForm from "../../components/Posting/PostDetailForm";
 import { useGetPost } from "../../middleware";
 import { Helmet } from "react-helmet-async";
 import { Loading } from "../Etc/Loading";
+import { useSelector } from "react-redux";
 
 const PostDetail = ({ history }) => {
   const { id } = useParams();
 
   // get Post Detail
   const getPost = useGetPost(`/api/${id}`);
-  const { post, loading } = getPost;
-
+  const { loading } = getPost;
+  const post = useSelector((state) => state.category.post);
   //  del post
 
   const [del, setDel] = useState(false);

@@ -3,12 +3,14 @@ import Category from "../models/Category.js";
 
 export const getPost = async (req, res) => {
   const page = parseInt(req.query.page || "1");
+  const { filter } = req.query;
+  console.log(filter);
   if (page < 1) {
     res.status(400).send("페이지 에러");
     return;
   }
   try {
-    const post = await Post.find({})
+    const post = await Post.find(filter ? { category: decodeURI(filter) } : {})
       .sort({ _id: -1 })
       .limit(6)
       .skip((page - 1) * 6)

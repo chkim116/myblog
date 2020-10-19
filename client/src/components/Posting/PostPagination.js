@@ -1,7 +1,11 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
+import { useSelector } from "react-redux";
 
-export const PostPagination = ({ handleChange, postLength, select }) => {
+export const PostPagination = ({ handleChange, select }) => {
+  const post = useSelector((state) => state.search.post);
+  const filter = useSelector((state) => state.category.filter);
+  const filterPost = filter && post.filter((f) => f.category === filter);
   return (
     <>
       <ReactPaginate
@@ -9,7 +13,11 @@ export const PostPagination = ({ handleChange, postLength, select }) => {
         nextLabel={"다음"}
         breakLabel={"..."}
         breakClassName={"break-me"}
-        pageCount={postLength}
+        pageCount={
+          !filter
+            ? Math.ceil(post.length / 6)
+            : Math.ceil(filterPost.length / 6)
+        }
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
         onPageChange={handleChange}
@@ -17,8 +25,7 @@ export const PostPagination = ({ handleChange, postLength, select }) => {
         subContainerClassName={"pages pagination"}
         pageClassName={"page-btn"}
         activeClassName={"active"}
-        forcePage={select}
-      ></ReactPaginate>
+        forcePage={select || 0}></ReactPaginate>
     </>
   );
 };

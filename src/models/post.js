@@ -18,7 +18,6 @@ const PostSchema = new mongoose.Schema({
   tags: Array,
   category: {
     type: String,
-    required: "category is required",
   },
 });
 

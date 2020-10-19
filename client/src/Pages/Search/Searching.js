@@ -15,6 +15,7 @@ export const Searching = ({ location }) => {
       {loading ? (
         <>
           <SearchingForm
+            loading={loading}
             searchTags={searchTags}
             search={search}></SearchingForm>
         </>
