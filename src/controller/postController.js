@@ -1,10 +1,10 @@
 import Post from "../models/post.js";
-import Category from "../models/Category.js";
+import Comments from "../models/Comments";
 
 export const getPost = async (req, res) => {
   const page = parseInt(req.query.page || "1");
   const { filter } = req.query;
-  console.log(filter);
+
   if (page < 1) {
     res.status(400).send("페이지 에러");
     return;
@@ -57,7 +57,7 @@ export const postPosting = async (req, res) => {
 export const getPostById = async (req, res) => {
   const { id } = req.params;
   try {
-    const postById = await Post.findById(id);
+    const postById = await Post.findById(id).populate("comment");
     res.status(200).json(postById);
   } catch (err) {
     console.log(err);
@@ -86,6 +86,39 @@ export const postDeleting = async (req, res) => {
     res.status(200).send(true);
   } catch (err) {
     res.status(400).send(false);
+    console.log(err);
+  }
+};
+
+export const postComments = async (req, res) => {
+  const { id } = req.params;
+  const {
+    comment: { comment },
+    createDate,
+  } = req.body;
+  try {
+    const post = await Post.findById(id);
+    const comments = await Comments.create({
+      comment: comment,
+      creator: req.user ? req.user.username : "익명",
+      createDate: createDate,
+    });
+    post.comment.push(comments);
+    post.save();
+    res.status(400);
+  } catch (err) {
+    res.status(200);
+    console.log(err);
+  }
+};
+
+export const delComments = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Comments.findOneAndDelete({ _id: id });
+    res.status(200);
+  } catch (err) {
+    res.status(400);
     console.log(err);
   }
 };

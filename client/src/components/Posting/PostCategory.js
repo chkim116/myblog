@@ -8,75 +8,9 @@ import {
   showCategory,
 } from "../../Modules/category";
 import Axios from "axios";
+import { PostCategoryList } from "./PostCategoryList";
 
-const Category = ({
-  createList,
-  post,
-  onClick,
-  onDel,
-  onEdit,
-  admin,
-  editShow,
-  onEditSubmit,
-  onEditChange,
-}) => {
-  const filter = useSelector((state) => state.category.filter);
-
-  return (
-    <>
-      {createList &&
-        createList.map((li, index) => (
-          <ul className='category__form' key={index}>
-            <>
-              <div
-                data-category={li.category}
-                onClick={onClick}
-                className={
-                  li.category === filter
-                    ? "category__form-list selected"
-                    : "category__form-list"
-                }>
-                {li.category}(
-                {post.filter((p) => p.category === li.category).length || 0})
-                {editShow && (
-                  <form onSubmit={onEditSubmit}>
-                    <input
-                      data-id={li._id}
-                      className='category__form-edit'
-                      type='text'
-                      defaultValue={li.category}
-                      onChange={onEditChange}
-                    />
-                    <span onClick={onEdit}>X</span>
-                    <button type='submit'>O</button>
-                  </form>
-                )}
-                {admin && (
-                  <>
-                    <span
-                      data-id={li._id}
-                      className='category__del'
-                      key={index + 1}
-                      onClick={onDel}>
-                      X
-                    </span>
-                    <span
-                      className='category__edit'
-                      onClick={onEdit}
-                      key={index + 2}>
-                      E
-                    </span>
-                  </>
-                )}
-              </div>
-            </>
-          </ul>
-        ))}
-    </>
-  );
-};
-
-export const PostCategory = ({ history, location }) => {
+export const PostCategory = ({ history }) => {
   // redux
   const show = useSelector((state) => state.category.show);
   const admin = useSelector((state) => state.auth.admin);
@@ -136,8 +70,10 @@ export const PostCategory = ({ history, location }) => {
     const delCategory = async () => {
       await Axios.get(`/category/del/${id}`);
     };
-    delCategory();
-    window.location.reload();
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      delCategory();
+      window.location.reload();
+    }
   };
 
   //  edit Post
@@ -201,7 +137,7 @@ export const PostCategory = ({ history, location }) => {
           <div className='category__all active' onClick={onClick}>
             전체글({post.length})
           </div>
-          <Category
+          <PostCategoryList
             editShow={editShow}
             onEditSubmit={onEditSubmit}
             onEditChange={onEditChange}

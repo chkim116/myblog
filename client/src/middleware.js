@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { createCategoryList, filterCategory } from "./Modules/category";
-import { searchResults } from "./Modules/search";
 
 export function registerCheck(err, url, { history }) {
   const {
@@ -40,6 +39,7 @@ export const useUserId = (url) => {
 };
 
 // get Post Hooks
+
 export const useGetPost = (url, location) => {
   const dispatch = useDispatch();
   let filter = useSelector((state) => state.category.filter);
@@ -71,6 +71,8 @@ export const useGetPost = (url, location) => {
   return { loading };
 };
 
+// get GuestBook
+
 export const useGetPort = (url) => {
   const [guest, setGuest] = useState({
     title: "",
@@ -99,6 +101,8 @@ export const useGetPort = (url) => {
   return { guest, loading };
 };
 
+// get Tags
+
 export const useGetTag = (url) => {
   const [searchTags, setSearchTags] = useState({
     title: "",
@@ -108,6 +112,7 @@ export const useGetTag = (url) => {
     username: "",
     updata: false,
     tags: [],
+    comment: [],
   });
   const [loading, setLoading] = useState(false);
 
@@ -127,6 +132,8 @@ export const useGetTag = (url) => {
   return { searchTags, loading };
 };
 
+// searching post
+
 export const useSearch = (search) => {
   const [searchPost, setSearchPost] = useState({
     title: "",
@@ -136,6 +143,7 @@ export const useSearch = (search) => {
     username: "",
     updata: false,
     tags: [],
+    comment: [],
   });
 
   const getSearchPost = async (search) => {
@@ -157,6 +165,8 @@ export const useSearch = (search) => {
 
   return searchPost;
 };
+
+// get category
 
 export const useGetCategory = () => {
   const [loading, setLoading] = useState(false);

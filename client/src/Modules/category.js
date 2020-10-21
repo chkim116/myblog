@@ -20,6 +20,8 @@ export const filterCategory = (filter, post) => ({
   payload: { filter, post },
 });
 
+// 리듀서
+
 function category(state = {}, action) {
   switch (action.type) {
     case SHOW_CATEGORY: {

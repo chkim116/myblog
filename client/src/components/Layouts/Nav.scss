@@ -1,18 +1,23 @@
 @import "../../Styles/var";
 
+.wrap__header {
+  width: 100%;
+  background: $white;
+}
 header {
   margin: 0 auto;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   position: fixed;
   width: 100%;
   height: 45px;
-  max-width: 1920px;
+  max-width: 1268px;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  background: #ffffff;
+  background: $white;
   z-index: 4;
+  font-size: $medium;
 
   .header__menu {
     display: flex;
@@ -94,7 +99,7 @@ header {
 
 .username {
   color: $black;
-  font-weight: bold;
+  font-size: $small;
   text-align: center;
   pointer-events: none;
   line-height: 45px;

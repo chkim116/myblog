@@ -22,7 +22,9 @@ export const GuestBookDetail = ({ history }) => {
       await Axios.get(`/port/del/${id}`);
       setLoding(true);
     };
-    deletePost();
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      deletePost();
+    }
   };
 
   useEffect(() => {

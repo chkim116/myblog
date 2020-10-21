@@ -22,10 +22,14 @@ import postRouter from "./src/routers/postRouter";
 import userRouter from "./src/routers/userRouter";
 import tagRouter from "./src/routers/tagRouter";
 import categoryRouter from "./src/routers/categoryRouter";
+import homeRouter from "./src/routers/HomeRouter";
 
 // Schema
 import "./src/models/post.js";
 import "./src/models/User.js";
+import "./src/models/Category.js";
+import "./src/models/Comments.js";
+import "./src/models/Guest.js";
 import "./passport";
 import "./multer";
 
@@ -75,6 +79,7 @@ if (
   });
 }
 
+app.use("/", homeRouter);
 app.use("/api", postRouter);
 app.use("/port", guestRouter);
 app.use("/auth", userRouter);

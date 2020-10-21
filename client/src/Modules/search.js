@@ -32,6 +32,8 @@ export const showSearchBar = (show) => ({
   },
 });
 
+// 리듀서
+
 function search(state = {}, action) {
   switch (action.type) {
     case SEARCH_INPUT:

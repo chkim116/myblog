@@ -17,24 +17,28 @@ export const NavMenu = ({ onClickNav, onClick }) => {
 
   return (
     <nav className='header__menu'>
-      <NavList link={routes.home} onClickNav={onClickNav} menu='홈' />
-      <NavList link={routes.post} onClickNav={onClickNav} menu='포스트' />
-      <NavList link={routes.guestbook} onClickNav={onClickNav} menu='방명록' />
-      <NavList link={routes.about} onClickNav={onClickNav} menu='어바웃' />
+      <NavList link={routes.home} onClickNav={onClickNav} menu='Home' />
+      <NavList link={routes.post} onClickNav={onClickNav} menu='Post' />
+      <NavList
+        link={routes.guestbook}
+        onClickNav={onClickNav}
+        menu='GuestBook'
+      />
+      <NavList link={routes.about} onClickNav={onClickNav} menu='About' />
 
       {!username ? (
         <>
-          <NavList link={routes.login} onClickNav={onClickNav} menu='로그인' />
+          <NavList link={routes.login} onClickNav={onClickNav} menu='Sign in' />
           <NavList
             link={routes.register}
             onClickNav={onClickNav}
-            menu='회원가입'
+            menu='Sign Up'
           />
         </>
       ) : (
         <>
           <li className='menu__items' onClick={onClick}>
-            로그아웃
+            Logout
           </li>
           {!admin ? (
             <li className='username'>{username}</li>

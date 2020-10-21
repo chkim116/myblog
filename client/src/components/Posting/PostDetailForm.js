@@ -2,9 +2,16 @@ import React from "react";
 import "./PostDetailForm.scss";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { PostComment } from "./PostComment";
 
-const PostDetailForm = ({ postObj, onClick }) => {
-  const { title, description, _id, createDate, tags } = postObj;
+const PostDetailForm = ({
+  post,
+  onClick,
+  onChangeComment,
+  onComment,
+  onDelComment,
+}) => {
+  const { title, description, _id, createDate, tags, comment } = post;
   const admin = useSelector((state) => state.auth.admin);
   return (
     <>
@@ -46,6 +53,12 @@ const PostDetailForm = ({ postObj, onClick }) => {
         <p className='post__detail-date'>
           <small>Uploaded: {createDate}</small>
         </p>
+        <PostComment
+          comment={comment}
+          onChangeComment={onChangeComment}
+          onComment={onComment}
+          onDelComment={onDelComment}
+        />
       </div>
     </>
   );

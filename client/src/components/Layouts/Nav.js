@@ -12,7 +12,7 @@ const Nav = ({ onClick, onChange }) => {
   };
 
   return (
-    <>
+    <div className='wrap__header'>
       <header onChange={onChange}>
         <li>
           <Link to={routes.home} className='header__logo'>
@@ -24,7 +24,7 @@ const Nav = ({ onClick, onChange }) => {
           <GiHamburgerMenu />
         </li>
       </header>
-    </>
+    </div>
   );
 };
 

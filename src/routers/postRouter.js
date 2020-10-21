@@ -7,6 +7,8 @@ import {
   postDeleting,
   getAllPost,
   postSearch,
+  postComments,
+  delComments,
 } from "../controller/postController";
 
 const postRouter = express.Router();
@@ -27,5 +29,11 @@ postRouter.post("/edit/:id", postEditing);
 
 // post delete
 postRouter.get("/del/:id", postDeleting);
+
+// comments create
+postRouter.post("/comment/:id", postComments);
+
+// commetns delete
+postRouter.get("/comment/del/:id", delComments);
 
 export default postRouter;

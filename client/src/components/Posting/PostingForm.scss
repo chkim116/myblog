@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   min-height: 480px;
-  max-width: 1440px;
+  max-width: 1000px;
   margin: 0 auto;
 
   .posting__form-title {
@@ -95,29 +95,4 @@
     color: $black;
     background: $white;
   }
-}
-
-.tag__form {
-  @include padding;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-
-  .tag__input {
-    width: 250px;
-    @include padding;
-  }
-  .tag__input-btn {
-    @include border;
-    cursor: pointer;
-    height: 30px;
-    font-size: $small;
-  }
-}
-.tags__text {
-  font-size: $small;
-  margin-bottom: 2em;
-  width: 100%;
-  text-align: center;
 }

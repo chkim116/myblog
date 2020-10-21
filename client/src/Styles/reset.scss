@@ -12,6 +12,15 @@ body {
   padding-top: 45px;
   background-color: $white;
   font-family: "NEXON Lv1 Gothic OTF";
+
+  &::-webkit-scrollbar {
+    background: $blackShadow;
+    width: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $blackShadow;
+    border-radius: 12px;
+  }
 }
 
 input,
@@ -46,6 +55,7 @@ button {
 
 button {
   all: unset;
+  font-size: $small;
   cursor: pointer;
 }
 

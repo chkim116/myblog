@@ -14,6 +14,7 @@ const PostDetail = ({ history }) => {
   const getPost = useGetPost(`/api/${id}`);
   const { loading } = getPost;
   const post = useSelector((state) => state.category.post);
+
   //  del post
 
   const [del, setDel] = useState(false);
@@ -32,6 +33,55 @@ const PostDetail = ({ history }) => {
     deletePost();
   };
 
+  // 코멘트 작성
+
+  const [comment, setComment] = useState({ comment: "" });
+
+  const onChangeComment = (e) => {
+    setComment({ ...comment, comment: e.target.value });
+  };
+
+  // create comment
+
+  const onComment = (e) => {
+    e.preventDefault();
+    const postComments = async () => {
+      try {
+        await Axios.post(`/api/comment/${id}`, {
+          comment,
+          createDate: new Date().toLocaleTimeString("ko-KR", {
+            year: "2-digit",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "numeric",
+            minute: "numeric",
+          }),
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    postComments();
+    window.location.reload();
+  };
+
+  // comment delete
+
+  const onDelComment = (e) => {
+    const { id } = e.target.dataset;
+    const delComments = async () => {
+      try {
+        await Axios.get(`/api/comment/del/${id}`);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      delComments();
+      window.location.reload();
+    }
+  };
+
   if (!loading) {
     return <Loading />;
   }
@@ -42,7 +92,13 @@ const PostDetail = ({ history }) => {
         <title>My Blog | {post.title}</title>
       </Helmet>
       {del && <Loading />}
-      <PostDetailForm postObj={post} onClick={onClick} />
+      <PostDetailForm
+        post={post}
+        onClick={onClick}
+        onChangeComment={onChangeComment}
+        onComment={onComment}
+        onDelComment={onDelComment}
+      />
     </>
   );
 };

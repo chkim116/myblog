@@ -1,0 +1,86 @@
+@import "../../Styles/var";
+
+.wrap__comments {
+  width: 80%;
+  max-width: 1000px;
+  margin: 0em auto 3em auto;
+  min-height: 600px;
+
+  .post__box-name {
+    width: fit-content;
+    margin: 0.5em 0;
+    @include border;
+    border-radius: 33px;
+    font-size: $small;
+    @include padding($padding: 0.5em 0.6em);
+  }
+
+  .post__box-date {
+    font-size: $small;
+    text-align: right;
+    color: $blackShadow;
+  }
+
+  .post__box {
+    display: flex;
+    width: 100%;
+    height: auto;
+    @include padding;
+    @include border;
+    align-items: center;
+    font-size: $small;
+    justify-content: space-between;
+    border-radius: 33px;
+
+    .post__box-comments {
+      flex: 2;
+      @include padding;
+    }
+    .post__box-del {
+      @include padding;
+      cursor: pointer;
+      position: relative;
+
+      &::after {
+        position: absolute;
+        content: "";
+        width: 1px;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: $blackShadow;
+      }
+      &:hover {
+        color: $blackShadow;
+      }
+    }
+  }
+  .comment-length {
+    font-size: $small;
+  }
+  .post__comments {
+    display: flex;
+    width: 100%;
+    margin: 1em 0;
+    .post__comments-input {
+      flex: 2;
+      @include padding;
+      font-size: $small;
+      border-top-left-radius: 12px;
+      border-bottom-left-radius: 12px;
+    }
+    .post__comments-btn {
+      @include border;
+      width: 35px;
+      text-align: center;
+      height: 35px;
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+
+      &:hover {
+        background: $black;
+        color: $white;
+      }
+    }
+  }
+}

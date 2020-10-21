@@ -19,6 +19,12 @@ const PostSchema = new mongoose.Schema({
   category: {
     type: String,
   },
+  comment: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comments",
+    },
+  ],
 });
 
 const model = mongoose.model("Post", PostSchema);

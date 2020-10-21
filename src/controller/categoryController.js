@@ -16,7 +16,7 @@ export const createCategory = async (req, res) => {
 
 export const getCategory = async (req, res) => {
   try {
-    const category = await Category.find({}).sort({});
+    const category = await Category.find({}).sort({ category: -1 });
     res.status(200).json(category);
   } catch (err) {
     res.status(400);

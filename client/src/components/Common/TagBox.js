@@ -1,4 +1,5 @@
 import React from "react";
+import "./TagBox.scss";
 
 export const TagBox = ({ onTags, onTagsSubmit, showTags, tags, onTagDel }) => {
   return (

@@ -26,7 +26,9 @@ const GuestBook = () => {
         alert("삭제에 실패했습니다.");
       }
     };
-    deletePost();
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      deletePost();
+    }
   };
 
   return (
