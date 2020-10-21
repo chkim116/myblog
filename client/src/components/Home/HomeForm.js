@@ -1,4 +1,5 @@
 import React from "react";
+import { HomeBanner } from "./HomeBanner";
 import "./HomeForm.scss";
 import { HomeHashtag } from "./HomeHashtag";
 
@@ -18,8 +19,10 @@ const HomeForm = ({ tagList }) => {
 
   return (
     <>
+      <HomeBanner />
       <main className='main'>
         <div className='main__hash'>
+          <div className='main__hash-title'>Keyword Tags</div>
           <div className='main__hash-box'>
             {sortTags.map((t, index) => (
               <HomeHashtag key={index} hash={t[0]} length={t[1]} />

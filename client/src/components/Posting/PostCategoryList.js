@@ -13,7 +13,6 @@ export const PostCategoryList = ({
   onEditChange,
 }) => {
   const filter = useSelector((state) => state.category.filter);
-
   return (
     <>
       {createList &&
@@ -62,9 +61,11 @@ export const PostCategoryList = ({
             </>
           </ul>
         ))}
-      <span className='category__edit' onClick={onEdit}>
-        ✍
-      </span>
+      {admin && (
+        <span className='category__edit' onClick={onEdit}>
+          ✍
+        </span>
+      )}
     </>
   );
 };

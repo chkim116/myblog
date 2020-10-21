@@ -8,7 +8,8 @@ $yellow: rgb(251, 188, 31);
 $pink: rgb(243, 129, 127);
 $darkgrey: rgb(123, 124, 129);
 $tur: rgb(76, 168, 208);
-$lightblue: rgb(153, 194, 232);
+$marin: #7a6ccf;
+$lightblue: #c5c5e6;
 $blackShadow: rgba(0, 0, 0, 0.2);
 $blue: rgb(153, 194, 232);
 $darkblue: rgb(115, 170, 206);
@@ -24,12 +25,12 @@ $medium: "all and (max-width: 1000px)";
 $large: "all and (max-width: 1280px)";
 
 @mixin center($top: -50%) {
-  top: $top;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, $top);
 }
 
-@mixin button($bgColor: $tur, $hoverColor: $lightblue) {
+@mixin button($bgColor: $marin, $hoverColor: $lightblue) {
   padding: 0.5em 1em;
   cursor: pointer;
   background-color: $bgColor;
@@ -42,7 +43,7 @@ $large: "all and (max-width: 1280px)";
   margin-top: 0.6em;
 
   &:hover {
-    background-color: $hoverColor;
+    color: $yellow;
   }
 }
 

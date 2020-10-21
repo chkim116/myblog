@@ -12,9 +12,17 @@
   color: $black;
   position: fixed;
   cursor: pointer;
-  right: 5%;
+  right: 120px;
   bottom: 5%;
   transition: 500ms;
+
+  @media #{$phone} {
+    bottom: 100px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    line-height: 58px;
+  }
 
   &:hover {
     color: $yellow;

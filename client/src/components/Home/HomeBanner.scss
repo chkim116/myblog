@@ -1,0 +1,25 @@
+@import "../../Styles/var";
+
+.banner__form {
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative;
+
+  .banner__form-img {
+    width: 100%;
+    height: 100%;
+    background-image: url("../../image/MUSIQO. (1).png");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  .banner__form-title {
+    position: absolute;
+    @include center;
+    color: $white;
+    font-size: $Large;
+  }
+}

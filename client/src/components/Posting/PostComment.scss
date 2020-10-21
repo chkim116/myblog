@@ -18,7 +18,7 @@
   .post__box-date {
     font-size: $small;
     text-align: right;
-    color: $blackShadow;
+    color: $gray;
   }
 
   .post__box {
@@ -75,6 +75,7 @@
       text-align: center;
       height: 35px;
       border-top-right-radius: 12px;
+      font-size: $small;
       border-bottom-right-radius: 12px;
 
       &:hover {
