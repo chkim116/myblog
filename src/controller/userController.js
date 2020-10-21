@@ -8,7 +8,7 @@ export const postRegister = async (req, res, next) => {
     body: { username, email, password, password2 },
   } = req;
   const schema = Joi.object().keys({
-    username: Joi.string().min(5).required().messages({
+    username: Joi.string().min(5).alphanum().required().messages({
       "string.min": "아이디는 5자 이상입니다.",
       "string.alphanum": "아이디는 영어와 숫자로 구성해 주세요.",
     }),

@@ -1,4 +1,5 @@
 import Guest from "../models/Guest";
+import mongoose from "mongoose";
 
 export const getGuest = async (req, res) => {
   try {
@@ -27,9 +28,11 @@ export const postGuest = async (req, res) => {
     const guest = await Guest.create({
       title,
       description,
-      creator: req.user._id || "",
+      creator: req.user
+        ? req.user._id
+        : mongoose.Types.ObjectId("4edd40c86762e0fb12000003"),
       createDate,
-      username: req.user.username || "",
+      username: req.user ? req.user.username : "익명",
       updata: false,
     });
     guest.save();

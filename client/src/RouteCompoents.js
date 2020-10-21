@@ -37,7 +37,6 @@ export const RouteCompoents = () => {
           <h3 className='error__title'>관리자가 아닙니다.</h3>
         </Route>
       )}
-
       <Route path='/postdetail/:id' component={PostDetail} />
       {admin ? (
         <Route path={"/edit/:id"} component={PostEdit} />
@@ -48,11 +47,7 @@ export const RouteCompoents = () => {
       )}
       <Route path='/guestbookdetail/:id' component={GuestBookDetail} />
       <Route path='/guestbookedit/:id' component={GuestBookEdit} />
-      {id ? (
-        <Route path={routes.guestbooking} component={GuestBookWriting} />
-      ) : (
-        <Login />
-      )}
+      <Route path={routes.guestbooking} component={GuestBookWriting} />
 
       <Route component={NotFound} />
     </Switch>

@@ -8,7 +8,7 @@ export const GuestBookDetailForm = ({ port, onClick }) => {
   const userId = useSelector((state) => state.auth.id);
   return (
     <>
-      <div className='port__detail' key={_id}>
+      <div className='guest__detail' key={_id}>
         <div
           className='previous'
           onClick={() => {
@@ -17,7 +17,7 @@ export const GuestBookDetailForm = ({ port, onClick }) => {
           뒤로가기
         </div>
         {userId === creator && (
-          <div className='port__btn'>
+          <div className='guest__btn'>
             <span className='btn'>
               <Link to={`/guestbookedit/${_id}`}>Edit</Link>
             </span>
@@ -26,14 +26,14 @@ export const GuestBookDetailForm = ({ port, onClick }) => {
             </span>
           </div>
         )}
-        <div className='port__detail-title'>{title}</div>
-        <div className='port__detail-desc'>
+        <div className='guest__detail-title'>{title}</div>
+        <div className='guest__detail-desc'>
           {description.split("\n").map((text, key) => {
             return <p key={key}>{text}</p>;
           })}
         </div>
-        <p className='port__detail-user'>{createDate}</p>
-        <p className='port__detail-user'>Upload By: {username}</p>
+        <p className='guest__detail-user'>{createDate}</p>
+        <p className='guest__detail-user'>Upload By: {username || "익명"}</p>
       </div>
     </>
   );

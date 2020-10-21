@@ -5,13 +5,11 @@ import { Helmet } from "react-helmet-async";
 import { Loading } from "../Etc/Loading";
 
 export const GuestBookWriting = ({ history }) => {
-  const initialState = {
+  const [guest, setGuest] = useState({
     title: "",
     description: "",
     createDate: "",
-  };
-
-  const [guest, setGuest] = useState(initialState);
+  });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(false);
 

@@ -1,6 +1,6 @@
 @import "../../Styles/var";
 
-.port__detail {
+.guest__detail {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,7 +11,7 @@
   min-height: 600px;
   margin-bottom: 3em;
 
-  .port__btn {
+  .guest__btn {
     display: flex;
 
     a {
@@ -28,7 +28,7 @@
     }
   }
 
-  .port__detail-title {
+  .guest__detail-title {
     font-size: 1.25rem;
     text-align: center;
     width: 70%;
@@ -44,7 +44,7 @@
     }
   }
 
-  .port__detail-desc {
+  .guest__detail-desc {
     font-size: 13px;
     padding: 2em;
     width: 70%;
@@ -61,7 +61,7 @@
   // 보더 테두리 꾸미기
 }
 
-.port__detail-user {
+.guest__detail-user {
   margin-top: 0.3em;
   color: rgba(0, 0, 0, 0.5);
   font-size: $medium;
