@@ -22,7 +22,7 @@ import postRouter from "./src/routers/postRouter";
 import userRouter from "./src/routers/userRouter";
 import tagRouter from "./src/routers/tagRouter";
 import categoryRouter from "./src/routers/categoryRouter";
-import homeRouter from "./src/routers/HomeRouter";
+import homeRouter from "./src/routers/homeRouter";
 
 // Schema
 import "./src/models/post.js";
