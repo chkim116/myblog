@@ -16,6 +16,7 @@ import { useUserId } from "./middleware";
 import { useDispatch } from "react-redux";
 import { getAuth } from "./Modules/auth";
 import { Route } from "react-router-dom";
+import { ArrowUp } from "./components/Layouts/ArrowUp";
 
 function App() {
   // view
@@ -66,6 +67,11 @@ function App() {
     return <Loading />;
   }
 
+  // scroll to top
+  const onScrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <>
       <Helmet>
@@ -73,6 +79,7 @@ function App() {
       </Helmet>
       <Nav logout={logout} onClick={onClick}></Nav>
       <Route component={SearchingBtn}></Route>
+      <ArrowUp onClick={onScrollTop} />
       <RouteCompoents />
       <FooterForm view={view} />
     </>

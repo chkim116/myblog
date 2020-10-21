@@ -1,20 +1,19 @@
 @import "../../Styles/var";
 
-.search-btn {
-  width: 50px;
-  height: 50px;
-  line-height: 65px;
+.arrowup {
+  width: 52px;
+  height: 52px;
   text-align: center;
+  line-height: 70px;
   border-radius: 50%;
   z-index: 15;
-  @include border;
-  background-color: $white;
   color: $black;
   position: fixed;
-  cursor: pointer;
-  right: 5%;
+  right: 9%;
+  @include border;
   bottom: 5%;
   transition: 500ms;
+  cursor: pointer;
 
   &:hover {
     color: $yellow;

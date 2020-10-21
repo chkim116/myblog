@@ -16,9 +16,9 @@ export const SearchingBtn = ({ history }) => {
 
   return (
     <>
-      <button onClick={onClick} className='search-btn' type='button'>
-        <HiSearch size={32} color='#fdfdfd' />
-      </button>
+      <div onClick={onClick} className='search-btn'>
+        <HiSearch size={30} />
+      </div>
       {show && <SearchingBar onClick={onClick} history={history} />}
     </>
   );

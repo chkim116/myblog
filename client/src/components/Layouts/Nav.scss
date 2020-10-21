@@ -6,6 +6,7 @@
   position: fixed;
   top: 0;
   height: 45px;
+  z-index: 55;
 }
 header {
   margin: 0 auto;
@@ -24,6 +25,7 @@ header {
 
   .header__menu {
     display: flex;
+    background: $white;
 
     .menu__items {
       padding: 1em;
@@ -102,7 +104,7 @@ header {
 
 .username {
   color: $black;
-  font-size: $small;
+  font-size: $medium;
   text-align: center;
   pointer-events: none;
   line-height: 45px;
