@@ -11,7 +11,7 @@ export const GuestBookEdit = ({ history }) => {
 
   // user
   const {
-    userId: { id: userId },
+    userId: { id: userId, admin },
   } = useUserId("/auth");
 
   // get GuestBook
@@ -89,7 +89,7 @@ export const GuestBookEdit = ({ history }) => {
       <Helmet>
         <title>My Blog | 방명록 수정 {guest.title}</title>
       </Helmet>
-      {userId === guest.creator ? (
+      {userId === guest.creator || admin ? (
         <GuestBookEditForm
           port={guest}
           onChange={onChange}

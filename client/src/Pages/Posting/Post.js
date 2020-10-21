@@ -9,8 +9,9 @@ import { searchResults } from "../../Modules/search";
 import { filterCategory } from "../../Modules/category";
 
 const Post = ({ location, history }) => {
-  // get all post / 5, 페이지의 수를 파악하기 위해 불러옴
   const dispatch = useDispatch();
+
+  // get all post / 5, 페이지의 수를 파악하기 위해 불러옴
   const [allLoading, setAllLoading] = useState(false);
   const getAllPost = () => {
     const AllPost = async () => {
@@ -101,7 +102,6 @@ const Post = ({ location, history }) => {
       {del && <Loading />}
       {loading && allLoading ? (
         <PostForm
-          location={location}
           history={history}
           onClick={onClick}
           loading={loading}

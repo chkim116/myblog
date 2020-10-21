@@ -32,11 +32,6 @@
       margin-top: 1.5em;
     }
 
-    .main__hash-title {
-      position: absolute;
-      top: 40px;
-    }
-
     .main__hash-box {
       flex-wrap: wrap;
       display: flex;
@@ -60,22 +55,114 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    line-height: 40px;
     margin: 0 auto;
     justify-content: center;
     align-items: center;
+    position: relative;
 
     @media #{$phone} {
       width: 100%;
       border-top: 1px solid $blackShadow;
       margin-bottom: 3em;
+      font-size: $small;
     }
     @media #{$iphone} {
       font-size: $medium;
     }
+
+    .main__btn {
+      display: flex;
+      flex-direction: column;
+
+      @media #{$phone} {
+        margin-top: 3em;
+      }
+
+      .main__btn-guest,
+      .main__btn-about,
+      .main__btn-post {
+        margin: 1em 0;
+        border-bottom: 2px solid $red;
+
+        &:hover {
+          color: $red;
+          border-bottom: 2px solid $marin;
+        }
+      }
+    }
   }
+}
+
+.main__hash-title {
+  position: absolute;
+  top: 10%;
+  padding-bottom: 0.6em;
+  border-bottom: 2px solid $yellow;
 }
 
 a {
   color: $black;
+}
+
+.wrap__post {
+  display: flex;
+  width: 100%;
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+
+  .main__post {
+    display: flex;
+    flex-wrap: wrap;
+    width: 33%;
+    flex-direction: column;
+    margin: 0.5em;
+    min-height: 300px;
+    border-bottom: 1px solid $blackShadow;
+    cursor: pointer;
+
+    @media #{$phone} {
+      width: 50%;
+    }
+
+    a {
+      width: 100%;
+      height: 100%;
+    }
+
+    .main__post-title {
+      padding: 0.5em;
+      border-bottom: 1px solid $blackShadow;
+    }
+    .main__post-desc {
+      padding: 0.5em;
+      font-size: $small;
+    }
+  }
+}
+
+.recent {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  border-bottom: 2px solid $blackShadow;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  .recent-post {
+    font-size: $medium;
+    font-weight: bold;
+  }
+
+  .recent-btn {
+    font-weight: bold;
+    font-size: $small;
+    width: fit-content;
+    padding: 0.5em;
+    &:hover {
+      color: $yellow;
+      text-decoration: underline;
+    }
+  }
 }

@@ -20,7 +20,7 @@ import { useSelector } from "react-redux";
 
 export const RouteCompoents = () => {
   const auth = useSelector((state) => state.auth);
-  const { id, admin } = auth;
+  const { admin } = auth;
   return (
     <Switch>
       <Route exact path={routes.home} component={Home} />

@@ -60,6 +60,11 @@ function App() {
     userLogout();
   };
 
+  // scroll to top
+  const onScrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   if (logout) {
     return (window.location.href = "/");
   }
@@ -67,10 +72,7 @@ function App() {
     return <Loading />;
   }
 
-  // scroll to top
-  const onScrollTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  //  slide
 
   return (
     <>

@@ -11,12 +11,12 @@ const NavList = ({ link, onClickNav, menu }) => {
   );
 };
 
-export const NavMenu = ({ onClickNav, onClick }) => {
+export const NavMenu = ({ onClickNav, onClick, menu }) => {
   const auth = useSelector((state) => state.auth);
   const { username, admin } = auth;
 
   return (
-    <nav className='header__menu'>
+    <nav className='header__menu' ref={menu}>
       <NavList link={routes.home} onClickNav={onClickNav} menu='Home' />
       <NavList link={routes.post} onClickNav={onClickNav} menu='Post' />
       <NavList

@@ -12,7 +12,7 @@
   justify-content: center;
   margin: 0 auto;
   align-items: center;
-  @include center($top: 20px);
+  top: 20px;
   background: $white;
   animation: showSearchBar 300ms;
 

@@ -7,13 +7,13 @@ import { PostFormBlock } from "./PostFormBlock";
 import { useSelector } from "react-redux";
 import { PostCategory } from "./PostCategory";
 
-const PostForm = ({ select, onClick, handleChange, history, location }) => {
+const PostForm = ({ select, onClick, handleChange, history }) => {
   const admin = useSelector((state) => state.auth.admin);
 
   return (
     <>
       <div className='post__wrap'>
-        <PostCategory history={history} location={location} />
+        <PostCategory history={history} />
         <div className='post'>
           <span className='btn post-btn'>
             {admin && <Link to={routes.postwriting}>Post</Link>}
@@ -23,7 +23,6 @@ const PostForm = ({ select, onClick, handleChange, history, location }) => {
         <div className='post__form-page'>
           <PostPagination
             handleChange={handleChange}
-            location={location}
             select={select}></PostPagination>
         </div>
       </div>

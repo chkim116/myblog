@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const { MONGO_ATLAS, MONGO_ATLAS_STABUCKS } = process.env;
 
-mongoose.connect(MONGO_ATLAS_STABUCKS, {
+mongoose.connect(MONGO_ATLAS_STABUCKS || MONGO_ATLAS, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true,

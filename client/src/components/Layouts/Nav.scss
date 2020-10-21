@@ -2,11 +2,12 @@
 
 .wrap__header {
   width: 100%;
-  background: $white;
   position: fixed;
   top: 0;
   height: 45px;
   z-index: 55;
+  background: $white;
+  transition: 300ms;
 }
 header {
   margin: 0 auto;
@@ -20,13 +21,11 @@ header {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  background: $white;
   z-index: 4;
   font-size: $medium;
 
   .header__menu {
     display: flex;
-    background: $white;
 
     .menu__items {
       padding: 1em;
@@ -45,6 +44,8 @@ header {
       position: fixed;
       top: 45px;
       width: 100%;
+      left: 0;
+      right: 0;
       padding: 0 3em;
       height: 370px;
       background: $white;
@@ -69,7 +70,6 @@ header {
           width: 100%;
 
           &:hover {
-            background: $lightblue;
             font-weight: bold;
           }
         }
@@ -81,6 +81,7 @@ header {
     color: $black;
     font-weight: bold;
     line-height: 45px;
+
     @media #{$phone} {
       position: absolute;
       left: 15px;
@@ -105,7 +106,7 @@ header {
 
 .username {
   color: $black;
-  font-size: $medium;
+  font-size: $small;
   text-align: center;
   pointer-events: none;
   line-height: 45px;

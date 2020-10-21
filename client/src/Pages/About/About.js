@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 import AboutForm from "../../components/About/AboutForm";
 
-const About = () => {
+const About = ({ location }) => {
   return (
     <>
       <Helmet>

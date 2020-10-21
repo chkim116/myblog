@@ -12,12 +12,12 @@
   color: $black;
   position: fixed;
   cursor: pointer;
-  right: 120px;
+  right: 110px;
   bottom: 5%;
   transition: 500ms;
 
   @media #{$phone} {
-    bottom: 100px;
+    bottom: 85px;
     right: 20px;
     width: 40px;
     height: 40px;

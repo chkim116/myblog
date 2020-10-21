@@ -14,6 +14,7 @@ body {
   font-family: "NEXON Lv1 Gothic OTF";
 
   &::-webkit-scrollbar {
+    border-radius: 12px;
     background: $blackShadow;
     width: 10px;
   }
