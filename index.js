@@ -30,6 +30,7 @@ import "./src/models/User.js";
 import "./src/models/Category.js";
 import "./src/models/Comments.js";
 import "./src/models/Guest.js";
+import "./src/models/Home.js";
 import "./passport";
 import "./multer";
 
@@ -85,6 +86,7 @@ app.use("/port", guestRouter);
 app.use("/auth", userRouter);
 app.use("/tag", tagRouter);
 app.use("/category", categoryRouter);
+
 // server
 const PORT = process.env.PORT || 4000;
 

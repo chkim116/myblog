@@ -6,7 +6,7 @@ const LoginForm = ({ onChange, onSubmit }) => {
   return (
     <>
       <form className='admin__form' onSubmit={onSubmit} onChange={onChange}>
-        <h1>로그인</h1>
+        <h2>Sign in</h2>
         <input type='text' name='username' placeholder='아이디' />
         <input
           type='password'
@@ -15,11 +15,11 @@ const LoginForm = ({ onChange, onSubmit }) => {
           placeholder='6자리 이상의 영어와 숫자로 이루어진 비밀번호'
         />
         <button className='form__submit' type='submit'>
-          로그인
+          Sign in
         </button>
         <Link to='/register'>
           <button className='form__submit' type='submit'>
-            회원가입
+            Sign Up
           </button>
         </Link>
       </form>

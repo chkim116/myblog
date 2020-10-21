@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";
 import "./Styles/loading.scss";
+import schedule from "node-schedule";
 
 // page
 import Nav from "./components/Layouts/Nav";
+import FooterForm from "./components/Layouts/FooterForm";
 import { SearchingBtn } from "./components/Search/SearchingBtn";
 import { RouteCompoents } from "./RouteCompoents";
 import { Loading } from "./Pages/Etc/Loading";
@@ -16,6 +18,23 @@ import { getAuth } from "./Modules/auth";
 import { Route } from "react-router-dom";
 
 function App() {
+  // view
+  const [view, setView] = useState({});
+
+  useEffect(() => {
+    const getViews = async () => {
+      await Axios.post("/view").then((res) => setView(res.data));
+    };
+    getViews();
+  }, []);
+
+  // 자정마다 totalview를 수정합니다.
+  const date = new Date().setHours(0, 0, 0, 0);
+
+  schedule.scheduleJob(date, async () => {
+    await Axios.post("/total", { views: view });
+  });
+
   // user 체크
   const getUser = useUserId("/auth");
   const { userId, loading } = getUser;
@@ -55,6 +74,7 @@ function App() {
       <Nav logout={logout} onClick={onClick}></Nav>
       <Route component={SearchingBtn}></Route>
       <RouteCompoents />
+      <FooterForm view={view} />
     </>
   );
 }

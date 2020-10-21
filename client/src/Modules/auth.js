@@ -18,6 +18,7 @@ function auth(state = {}, action) {
         username: action.payload.username,
         admin: action.payload.admin,
       };
+
     default:
       return state;
   }

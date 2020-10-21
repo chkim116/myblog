@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import FooterForm from "../../components/Layouts/FooterForm";
 import { useGetPort } from "../../middleware";
 import { Helmet } from "react-helmet-async";
 import GuestBookForm from "../../components/GuestBook/GuestBookForm";
@@ -40,7 +39,6 @@ const GuestBook = () => {
       {loading ? (
         <>
           <GuestBookForm port={guest} onClick={onClick}></GuestBookForm>
-          <FooterForm />
         </>
       ) : (
         <Loading />

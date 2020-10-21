@@ -15,3 +15,13 @@ footer {
     margin-bottom: 2em;
   }
 }
+
+.view__box {
+  display: flex;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  justify-content: center;
+  .view {
+    color: $red;
+    font-size: $small;
+  }
+}

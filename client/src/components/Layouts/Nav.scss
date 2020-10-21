@@ -3,6 +3,9 @@
 .wrap__header {
   width: 100%;
   background: $white;
+  position: fixed;
+  top: 0;
+  height: 45px;
 }
 header {
   margin: 0 auto;

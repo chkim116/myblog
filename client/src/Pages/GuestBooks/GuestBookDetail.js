@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useGetPort, useUserId } from "../../middleware";
+import { useGetPort } from "../../middleware";
 import { GuestBookDetailForm } from "../../components/GuestBook/GuestBookDetailForm";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";

@@ -1,29 +1,5 @@
 @import "../../Styles/var";
 
-.flash__message {
-  top: 0;
-  position: absolute;
-  height: 50px;
-  width: 100%;
-  background-color: $pink;
-  text-align: center;
-  line-height: 50px;
-  animation: flash 4000ms forwards;
-}
-
-@keyframes flash {
-  0% {
-    transform: translateY(-50px);
-  }
-
-  25% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(-50px);
-  }
-}
-
 .register__title {
   color: $black;
 }

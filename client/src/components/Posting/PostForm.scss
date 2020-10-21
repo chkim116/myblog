@@ -9,6 +9,14 @@
   @media #{$phone} {
     padding-bottom: 3em;
   }
+
+  .post__form-empty {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 6em;
+    align-items: center;
+  }
 }
 
 .post__category {

@@ -5,12 +5,12 @@ const RegisterForm = ({ onChange, onSubmit }) => {
   return (
     <>
       <form className='register__form' onChange={onChange} onSubmit={onSubmit}>
-        <h1 className='register__title'>회원 가입</h1>
+        <h2 className='register__title'>Sign Up</h2>
         <input
           type='text'
           name='username'
-          placeholder='아이디 또는 이름'
-          min='3'
+          placeholder='5자리 이상'
+          min='5'
           required
         />
         <input
@@ -18,7 +18,7 @@ const RegisterForm = ({ onChange, onSubmit }) => {
           name='password'
           required
           min='6'
-          placeholder='6자리 이상의 비밀번호'
+          placeholder='영어와 숫자를 포함한 6자리 이상 비밀번호'
         />
         <input
           type='password'
@@ -26,14 +26,9 @@ const RegisterForm = ({ onChange, onSubmit }) => {
           required
           placeholder='비밀번호 확인'
         />
-        <input
-          type='email'
-          name='email'
-          placeholder='ex) xxxxxxx@xxxx.com'
-          required
-        />
+        <input type='email' name='email' placeholder='ex) email' required />
         <button className='form__submit' type='submit'>
-          가입완료
+          Submit
         </button>
       </form>
     </>
