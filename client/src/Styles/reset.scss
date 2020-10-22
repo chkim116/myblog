@@ -56,8 +56,10 @@ button {
 }
 
 button {
-  all: unset;
+  outline: none;
+  border: none;
   font-size: $medium;
+  background: transparent;
   cursor: pointer;
 }
 

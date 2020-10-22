@@ -10,7 +10,7 @@ export const GuestBookDetailForm = ({ guest, onClick }) => {
     <>
       <div className='guest__detail' key={_id}>
         <div
-          className='previous'
+          className='back'
           onClick={() => {
             window.history.back();
           }}>

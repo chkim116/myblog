@@ -36,4 +36,6 @@ postRouter.post("/comment/:id", postComments);
 // commetns delete
 postRouter.get("/comment/del/:id", delComments);
 
+// image
+
 export default postRouter;

@@ -1,9 +1,8 @@
 import React from "react";
 import "./PostingForm.scss";
-import ReactQuill from "react-quill";
-import { formats, modules } from "../../middleware";
 import { TagBox } from "./TagBox";
 import { useSelector } from "react-redux";
+import { ReactQuillForm } from "./ReactQuillForm";
 
 const PostingForm = ({
   onTagDel,
@@ -18,6 +17,7 @@ const PostingForm = ({
   onSelect,
 }) => {
   const selectList = useSelector((state) => state.category.data);
+
   return (
     <>
       <form className='posting__form' onSubmit={onSubmit}>
@@ -37,13 +37,7 @@ const PostingForm = ({
             placeholder='title'
             onChange={onChange}></input>
         </div>
-        <ReactQuill
-          theme='snow'
-          modules={modules}
-          formats={formats}
-          name='description'
-          placeholder='description'
-          onChange={onValue}></ReactQuill>
+        <ReactQuillForm onValue={onValue}></ReactQuillForm>
         <button className='form__submit' type='submit'>
           UPLOAD
         </button>

@@ -32,7 +32,7 @@ function App() {
   // 자정마다 totalview를 수정합니다.
   const date = new Date().setHours(0, 0, 0, 0);
 
-  schedule.scheduleJob(date, async () => {
+  schedule.scheduleJob("0 32 0 * * *", async () => {
     await Axios.post("/total", { views: view });
   });
 

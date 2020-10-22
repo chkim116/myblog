@@ -122,3 +122,7 @@ export const delComments = async (req, res) => {
     console.log(err);
   }
 };
+
+export const postImage = async (req, res) => {
+  console.log(req.body);
+};

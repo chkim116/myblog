@@ -22,7 +22,7 @@ const PostDetailForm = ({
       <PostRecentForm recentPost={recentPost} location={location} />
       <div className='post__detail' key={_id}>
         <div
-          className='previous'
+          className='back'
           onClick={() => {
             window.history.back();
           }}>

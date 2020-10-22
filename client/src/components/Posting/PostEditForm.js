@@ -1,9 +1,8 @@
 import React from "react";
 import "./PostingForm.scss";
-import ReactQuill from "react-quill";
-import { modules, formats } from "../../middleware";
 import { TagBox } from "./TagBox";
 import { useSelector } from "react-redux";
+import { ReactQuillForm } from "./ReactQuillForm";
 
 const PostEditForm = ({
   post,
@@ -41,14 +40,9 @@ const PostEditForm = ({
             placeholder='title'
             onChange={onChange}></input>
         </div>
-        <ReactQuill
-          theme='snow'
-          modules={modules}
-          formats={formats}
-          name='description'
-          defaultValue={description}
-          placeholder='description'
-          onChange={onValue}></ReactQuill>
+        <ReactQuillForm
+          description={description}
+          onValue={onValue}></ReactQuillForm>
         <button className='form__submit' type='submit'>
           UPDATE
         </button>
