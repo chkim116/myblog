@@ -39,7 +39,7 @@ export const GuestBookDetail = ({ history }) => {
         <title>My Blog | {guest.title}</title>
       </Helmet>
       {pageLoading ? (
-        <GuestBookDetailForm port={guest} onClick={onClick} />
+        <GuestBookDetailForm guest={guest} onClick={onClick} />
       ) : (
         <Loading />
       )}

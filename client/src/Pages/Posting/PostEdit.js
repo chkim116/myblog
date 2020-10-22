@@ -33,7 +33,7 @@ const PostEdit = ({ history }) => {
     // eslint-disable-next-line
   }, []);
 
-  const { title, description, updated } = updatePost;
+  const { title, description, updated, category } = updatePost;
 
   // text event
 
@@ -69,7 +69,7 @@ const PostEdit = ({ history }) => {
           description,
           updated,
           tags: showTags,
-          category: selectCategory,
+          category: selectCategory ? selectCategory : category,
         });
         setUpdate(true);
       } catch (err) {

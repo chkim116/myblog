@@ -7,11 +7,18 @@
   align-items: center;
   width: 100%;
   max-width: 1000px;
-  margin: 0em auto 3em auto;
+  margin: 1em auto 3em auto;
+  padding: 0.8em 0;
   min-height: 600px;
+  border: 1px solid $blackShadow;
+
+  @media #{$phone} {
+    width: 95%;
+  }
 
   .post__btn {
     display: flex;
+    font-size: $small;
 
     a {
       color: black;
@@ -25,18 +32,18 @@
       }
     }
   }
-  h2 {
-    font-size: 1.25rem;
-    text-align: center;
+
+  .post__detail-title {
     width: 80%;
-    margin-bottom: 0.8em;
-    padding: 0.3em;
-    border-bottom: 2px solid $blackShadow;
+    margin: 0.8em 0;
+    padding: 1em;
     word-break: break-word;
     white-space: pre-line;
-
+    @include top-bottom-border;
+    border-bottom: 2px solid $yellow;
     @media #{$phone} {
       width: 90%;
+      padding: 0.5em;
     }
   }
 
@@ -44,25 +51,27 @@
     width: 80%;
     min-height: 450px;
     line-height: 30px;
-    border-bottom: 2px solid $blackShadow;
     white-space: pre-line;
     word-break: break-word;
-    font-size: 13px;
+    font-size: $small;
+    padding: 1em;
 
     @media #{$phone} {
       width: 90%;
-      padding: 0.5em;
+      padding: 0.2em;
     }
   }
 
   .post__detail-tags {
+    margin-top: 1em;
     font-size: $small;
     color: $darkgrey;
   }
-
-  .post__detail-date {
-    margin-top: 0.3em;
-    color: rgba(0, 0, 0, 0.5);
-    letter-spacing: -1px;
-  }
+}
+.post__detail-date {
+  margin-top: 0.3em;
+  color: rgba(0, 0, 0, 0.5);
+  letter-spacing: -1px;
+  text-align: center;
+  font-size: $small;
 }

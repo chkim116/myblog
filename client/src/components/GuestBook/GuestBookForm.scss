@@ -43,6 +43,7 @@
     width: fit-content;
     margin: 0 auto;
     height: 100px;
+    line-height: 60px;
 
     &:hover {
       text-decoration: underline;
@@ -62,7 +63,7 @@
     .guest__view {
       position: absolute;
       right: 16px;
-      top: 18px;
+      top: 10px;
       font-size: $small;
       cursor: pointer;
 

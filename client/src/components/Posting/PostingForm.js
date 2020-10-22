@@ -2,7 +2,7 @@ import React from "react";
 import "./PostingForm.scss";
 import ReactQuill from "react-quill";
 import { formats, modules } from "../../middleware";
-import { TagBox } from "../Common/TagBox";
+import { TagBox } from "./TagBox";
 import { useSelector } from "react-redux";
 
 const PostingForm = ({

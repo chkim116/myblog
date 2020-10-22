@@ -13,6 +13,7 @@
 
   .guest__btn {
     display: flex;
+    font-size: $small;
 
     a {
       color: $black;
@@ -29,7 +30,7 @@
   }
 
   .guest__detail-title {
-    font-size: 1.25rem;
+    font-size: $medium;
     text-align: center;
     width: 70%;
     margin-bottom: 0.8em;
@@ -64,12 +65,14 @@
 .guest__detail-user {
   margin-top: 0.3em;
   color: rgba(0, 0, 0, 0.5);
-  font-size: $medium;
+  font-size: $small;
   letter-spacing: -1px;
 }
 
 .previous {
   cursor: pointer;
+  font-size: $small;
+  padding-bottom: 1em;
   &:hover {
     text-decoration: underline;
   }

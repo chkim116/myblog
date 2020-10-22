@@ -4,7 +4,7 @@ import "./GuestBookWritingForm.scss";
 export const GuestBookWritingForm = ({ onSubmit, onChange }) => {
   return (
     <>
-      <form className='port__form' onChange={onChange} onSubmit={onSubmit}>
+      <form className='guest__form' onChange={onChange} onSubmit={onSubmit}>
         <input type='text' name='title' placeholder='title'></input>
         <textarea type='text' name='description' placeholder='description' />
         <button className='form__submit' type='submit'>

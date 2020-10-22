@@ -9,11 +9,11 @@ const FooterForm = ({ view }) => {
       <footer>
         <div>
           <h2> Think_Tank </h2>
+          <div className='view__box'>
+            <div className='view'>today:{view.views}</div>
+            <div className='view'>total:{view.totalView}</div>
+          </div>
           <small>Copyright ©{year}</small>
-        </div>
-        <div className='view__box'>
-          <div className='view'>today: {view.views}</div>
-          <div className='view'>total: {view.totalView}</div>
         </div>
       </footer>
     </>

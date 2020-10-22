@@ -38,6 +38,7 @@
   .form__submit {
     @include button;
     margin-bottom: 1em;
+    color: $white;
   }
 
   .quill {

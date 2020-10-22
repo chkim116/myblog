@@ -3,6 +3,7 @@ import "./PostDetailForm.scss";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { PostComment } from "./PostComment";
+import { PostRecentForm } from "./PostRecentForm";
 
 const PostDetailForm = ({
   post,
@@ -10,11 +11,15 @@ const PostDetailForm = ({
   onChangeComment,
   onComment,
   onDelComment,
+  location,
 }) => {
   const { title, description, _id, createDate, tags, comment } = post;
   const admin = useSelector((state) => state.auth.admin);
+  const recentPost = useSelector((state) => state.search.post);
+
   return (
     <>
+      <PostRecentForm recentPost={recentPost} location={location} />
       <div className='post__detail' key={_id}>
         <div
           className='previous'
@@ -35,24 +40,22 @@ const PostDetailForm = ({
             </>
           )}
         </div>
-        <h2 className='post__detail-title'>{title}</h2>
+        <div className='post__detail-title'>{title}</div>
         <div className='post__detail-desc'>
           <div
             className='ql-editor'
             dangerouslySetInnerHTML={{ __html: description }}></div>
         </div>
 
-        <span className='post__detail-tags'>
+        <div className='post__detail-tags'>
           {tags.map((tg, index) => (
             <span key={index} data-tag={tg}>
               #{tg}
             </span>
           ))}
-        </span>
+        </div>
         <span className='post__detail-tags'></span>
-        <p className='post__detail-date'>
-          <small>Uploaded: {createDate}</small>
-        </p>
+        <div className='post__detail-date'>Uploaded: {createDate}</div>
         <PostComment
           comment={comment}
           onChangeComment={onChangeComment}

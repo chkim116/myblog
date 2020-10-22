@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import NotFound from "../../Pages/Etc/NotFound";
 
 export const PostFormBlock = ({ onClick, post, loading }) => {
   const admin = useSelector((state) => state.auth.admin);
@@ -15,7 +14,7 @@ export const PostFormBlock = ({ onClick, post, loading }) => {
           filterPost.map((p, index) => (
             <div className='post__form' key={index} data-type={p.category}>
               <div className='post__form-type' key={p._id}>
-                <span className='post__category'>{p.category}</span>
+                <div className='post__category'>{p.category}</div>
                 {admin && (
                   <>
                     <Link to={`/edit/${p._id}`}>
@@ -30,7 +29,7 @@ export const PostFormBlock = ({ onClick, post, loading }) => {
                   </>
                 )}
                 <Link to={`/postdetail/${p._id}`}>
-                  <h3 className='post__form-title'>
+                  <div className='post__form-title'>
                     {p.title}
                     <small className='updated'>{p.updated}</small>
                     <span className='post__tags'>
@@ -38,7 +37,7 @@ export const PostFormBlock = ({ onClick, post, loading }) => {
                         <span key={index}>#{tag}</span>
                       ))}
                     </span>
-                  </h3>
+                  </div>
                   <div className='post__form-desc'>
                     <div
                       className='ql-editor'
@@ -58,7 +57,7 @@ export const PostFormBlock = ({ onClick, post, loading }) => {
         post.map((p, index) => (
           <div className='post__form' key={index} data-type={p.category}>
             <div className='post__form-type' key={p._id}>
-              <span className='post__category'>{p.category}</span>
+              <div className='post__category'>{p.category}</div>
               {admin && (
                 <>
                   <Link to={`/edit/${p._id}`}>
@@ -73,7 +72,7 @@ export const PostFormBlock = ({ onClick, post, loading }) => {
                 </>
               )}
               <Link to={`/postdetail/${p._id}`}>
-                <h3 className='post__form-title'>
+                <div className='post__form-title'>
                   {p.title}
                   <small className='updated'>{p.updated}</small>
                   <span className='post__tags'>
@@ -81,7 +80,7 @@ export const PostFormBlock = ({ onClick, post, loading }) => {
                       <span key={index}>#{tag}</span>
                     ))}
                   </span>
-                </h3>
+                </div>
                 <div className='post__form-desc'>
                   <div
                     className='ql-editor'

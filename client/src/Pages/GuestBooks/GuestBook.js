@@ -38,7 +38,7 @@ const GuestBook = () => {
       {del && <Loading />}
       {loading ? (
         <>
-          <GuestBookForm port={guest} onClick={onClick}></GuestBookForm>
+          <GuestBookForm guest={guest} onClick={onClick}></GuestBookForm>
         </>
       ) : (
         <Loading />

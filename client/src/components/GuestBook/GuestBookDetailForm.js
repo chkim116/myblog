@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./GuestBookDetailForm.scss";
 
-export const GuestBookDetailForm = ({ port, onClick }) => {
-  const { title, description, createDate, creator, _id, username } = port;
+export const GuestBookDetailForm = ({ guest, onClick }) => {
+  const { title, description, createDate, creator, _id, username } = guest;
   const userId = useSelector((state) => state.auth.id);
   return (
     <>

@@ -2,7 +2,7 @@ import React from "react";
 import "./PostingForm.scss";
 import ReactQuill from "react-quill";
 import { modules, formats } from "../../middleware";
-import { TagBox } from "../Common/TagBox";
+import { TagBox } from "./TagBox";
 import { useSelector } from "react-redux";
 
 const PostEditForm = ({
@@ -19,6 +19,7 @@ const PostEditForm = ({
   onSelect,
 }) => {
   const { title, description } = post;
+  console.log(post);
   const selectList = useSelector((state) => state.category.data);
   return (
     <>

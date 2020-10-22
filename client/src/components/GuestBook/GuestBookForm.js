@@ -3,7 +3,7 @@ import "./GuestBookForm.scss";
 import { Link } from "react-router-dom";
 import routes from "../../routes";
 import { useSelector } from "react-redux";
-const GuestBookForm = ({ port, onClick }) => {
+const GuestBookForm = ({ guest, onClick }) => {
   const { id, admin } = useSelector((state) => state.auth);
   return (
     <>
@@ -11,7 +11,7 @@ const GuestBookForm = ({ port, onClick }) => {
         <Link to={routes.guestbooking} className='guest'>
           글 작성
         </Link>
-        {port.map((p, key) => (
+        {guest.map((p, key) => (
           <div className='article__guest' key={key}>
             {id === p.creator || admin ? (
               <>

@@ -28,7 +28,7 @@ const HomeForm = ({ tagList, post }) => {
         </Link>
       </div>
       <div className='wrap__post'>
-        {post.splice(0, 3).map((p, index) => (
+        {post.slice(0, 4).map((p, index) => (
           <div className='main__post' key={index}>
             <Link to={`/postdetail/${p._id}`}>
               <div className='main__post-title'>{p.title}</div>

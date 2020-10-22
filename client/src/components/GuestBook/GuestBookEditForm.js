@@ -1,12 +1,12 @@
 import React from "react";
 import "./GuestBookWritingForm.scss";
 
-export const GuestBookEditForm = ({ port, onChange, onSubmit }) => {
-  const { title, description } = port;
+export const GuestBookEditForm = ({ guest, onChange, onSubmit }) => {
+  const { title, description } = guest;
 
   return (
     <>
-      <form className='port__form' onChange={onChange} onSubmit={onSubmit}>
+      <form className='guest__form' onChange={onChange} onSubmit={onSubmit}>
         <input
           maxLength='15'
           type='text'

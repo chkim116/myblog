@@ -13,6 +13,7 @@ const Post = ({ location, history }) => {
 
   // get all post / 5, 페이지의 수를 파악하기 위해 불러옴
   const [allLoading, setAllLoading] = useState(false);
+
   const getAllPost = () => {
     const AllPost = async () => {
       try {

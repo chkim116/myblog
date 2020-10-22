@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./PostCategory.scss";
-import { BiDownArrow } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createCategoryList,
@@ -9,6 +8,7 @@ import {
 } from "../../Modules/category";
 import Axios from "axios";
 import { PostCategoryList } from "./PostCategoryList";
+import { PostCategoryTitle } from "./PostCategoryTitle";
 
 export const PostCategory = ({ history }) => {
   // redux
@@ -104,34 +104,14 @@ export const PostCategory = ({ history }) => {
 
   return (
     <div className='category'>
-      {admin && (
-        <button
-          className='category-plus'
-          onClick={onCreateCategory}
-          type='button'>
-          {create ? "x" : "+"}
-        </button>
-      )}
-      {create && (
-        <div>
-          <form
-            className='category__create'
-            onChange={onCreate}
-            onSubmit={onCreateSubmit}>
-            <input
-              className='category__create-list'
-              type='text'
-              name='createCategory'
-            />
-            <button className='category__create-btn' type='submit'>
-              생성
-            </button>
-          </form>
-        </div>
-      )}
-      <div className='category-btn' onClick={onCategory}>
-        카테고리 <BiDownArrow />
-      </div>
+      <PostCategoryTitle
+        admin={admin}
+        create={create}
+        onCreateCategory={onCreateCategory}
+        onCreate={onCreate}
+        onCreateSubmit={onCreateSubmit}
+        onCategory={onCategory}
+      />
       {!show && (
         <div className='category__wrap'>
           <div className='category__all active' onClick={onClick}>

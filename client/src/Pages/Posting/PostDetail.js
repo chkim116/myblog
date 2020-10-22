@@ -1,19 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import PostDetailForm from "../../components/Posting/PostDetailForm";
 import { useGetPost } from "../../middleware";
 import { Helmet } from "react-helmet-async";
 import { Loading } from "../Etc/Loading";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { searchResults } from "../../Modules/search";
 
-const PostDetail = ({ history }) => {
+const PostDetail = ({ history, location }) => {
   const { id } = useParams();
 
   // get Post Detail
   const getPost = useGetPost(`/api/${id}`);
   const { loading } = getPost;
   const post = useSelector((state) => state.category.post);
+
+  const [allLoading, setAllLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  const getAllPost = () => {
+    const AllPost = async () => {
+      try {
+        const posting = await Axios.get("/api/all").then((res) => res.data);
+        dispatch(searchResults(posting));
+        setAllLoading(true);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    AllPost();
+  };
+
+  useEffect(() => {
+    getAllPost();
+  }, []);
 
   //  del post
 
@@ -82,7 +103,7 @@ const PostDetail = ({ history }) => {
     }
   };
 
-  if (!loading) {
+  if (!loading || !allLoading) {
     return <Loading />;
   }
 
@@ -94,6 +115,7 @@ const PostDetail = ({ history }) => {
       {del && <Loading />}
       <PostDetailForm
         post={post}
+        location={location}
         onClick={onClick}
         onChangeComment={onChangeComment}
         onComment={onComment}

@@ -21,12 +21,14 @@
 
 .post__category {
   font-size: $small;
+  padding-bottom: 1em;
 }
 
 .post {
   margin: 0 auto;
   width: fit-content;
-  height: 100px;
+  height: 60px;
+  line-height: 60px;
   span {
     margin: 0 0.5em;
     cursor: pointer;
@@ -60,14 +62,15 @@
 
     .post__edit {
       position: absolute;
-      width: fit-content;
-      right: 65px;
+      width: 40px;
+      text-align: center;
+      right: 40px;
       bottom: 20%;
       font-size: $small;
       padding: 0.3em;
       cursor: pointer;
       color: $black;
-      @include border;
+      border-right: 1px solid $blackShadow;
 
       &:hover {
         color: $blackShadow;
@@ -78,8 +81,7 @@
       position: absolute;
       width: fit-content;
       bottom: 20%;
-      right: 25px;
-      @include border;
+      right: 20px;
       padding: 0.3em;
       font-size: $small;
       cursor: pointer;
@@ -90,17 +92,20 @@
     }
 
     .post__form-title {
-      border-bottom: 1px solid $blackShadow;
-      margin-bottom: 1em;
-      padding-bottom: 0.4em;
-      color: $black;
+      background: $tur;
+      color: $white;
+      @include padding;
+      @include top-bottom-border;
       position: relative;
+
       .post__tags {
         position: absolute;
         bottom: -100%;
         right: 0;
+        top: 35px;
         color: $darkgrey;
         font-size: $small;
+
         [data-tag] {
           z-index: 3;
           margin-right: 0.2em;

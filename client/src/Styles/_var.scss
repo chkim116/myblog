@@ -54,3 +54,13 @@ $large: "all and (max-width: 1280px)";
 @mixin border($border: 1px solid $blackShadow) {
   border: $border;
 }
+
+@mixin boxShadow {
+  box-shadow: 0.5px 0.5px 2px 4px $blackShadow;
+  border-radius: 12px;
+}
+
+@mixin top-bottom-border {
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+}

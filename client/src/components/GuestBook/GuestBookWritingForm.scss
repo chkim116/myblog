@@ -1,6 +1,6 @@
 @import "../../Styles/var";
 
-.port__form {
+.guest__form {
   width: 100%;
   min-height: 760px;
   display: flex;
@@ -24,6 +24,7 @@
 
   .form__submit {
     @include button;
+    color: $white;
   }
 
   textarea {

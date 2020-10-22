@@ -91,7 +91,7 @@ export const GuestBookEdit = ({ history }) => {
       </Helmet>
       {userId === guest.creator || admin ? (
         <GuestBookEditForm
-          port={guest}
+          guest={guest}
           onChange={onChange}
           onSubmit={onSubmit}
         />
