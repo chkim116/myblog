@@ -38,7 +38,7 @@ export const PostFormBlock = ({ onClick, post, loading }) => {
                       ))}
                     </span>
                   </div>
-                  <div className='post__form-desc'>
+                  <div className='post__form-desc  ql-snow'>
                     <div
                       className='ql-editor'
                       dangerouslySetInnerHTML={{ __html: p.description }}></div>
@@ -81,7 +81,7 @@ export const PostFormBlock = ({ onClick, post, loading }) => {
                     ))}
                   </span>
                 </div>
-                <div className='post__form-desc'>
+                <div className='post__form-desc ql-snow'>
                   <div
                     className='ql-editor'
                     dangerouslySetInnerHTML={{ __html: p.description }}></div>

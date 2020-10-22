@@ -18,7 +18,7 @@ const PostEditForm = ({
   onSelect,
 }) => {
   const { title, description } = post;
-  console.log(post);
+
   const selectList = useSelector((state) => state.category.data);
   return (
     <>

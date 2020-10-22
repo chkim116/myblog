@@ -45,9 +45,8 @@ export const getView = async (req, res, next) => {
 // total view
 
 export const totalView = async (req, res) => {
-  const { views } = req.body;
   const home = await Home.find({});
-  const { totalView, _id } = home[0];
+  const { totalView, _id, views } = home[0];
   await Home.findOneAndUpdate(
     { _id },
     { views: 0, totalView: parseInt(totalView + views), ip: [] }

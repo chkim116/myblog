@@ -11,6 +11,7 @@ import cors from "cors";
 import csp from "helmet-csp";
 import dotenv from "dotenv";
 import helmet from "helmet";
+import schedule from "node-schedule";
 
 import "./db";
 dotenv.config();
@@ -33,6 +34,7 @@ import "./src/models/Guest.js";
 import "./src/models/Home.js";
 import "./passport";
 import "./multer";
+import { totalView } from "./src/controller/homeController";
 
 const app = express();
 const cookieStore = mongoStore(session);
@@ -86,6 +88,8 @@ app.use("/port", guestRouter);
 app.use("/auth", userRouter);
 app.use("/tag", tagRouter);
 app.use("/category", categoryRouter);
+
+const views = schedule.scheduleJob("0 0 0 * * *", totalView);
 
 // server
 const PORT = process.env.PORT || 4000;

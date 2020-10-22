@@ -41,7 +41,7 @@ const PostDetailForm = ({
           )}
         </div>
         <div className='post__detail-title'>{title}</div>
-        <div className='post__detail-desc'>
+        <div className='post__detail-desc ql-snow'>
           <div
             className='ql-editor'
             dangerouslySetInnerHTML={{ __html: description }}></div>

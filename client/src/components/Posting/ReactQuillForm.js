@@ -12,30 +12,32 @@ export const ReactQuillForm = ({ description, onValue }) => {
     input.setAttribute("accept", "image/*");
     input.click();
 
-    input.onchange = async () => {
-      const file = input.files[0];
-      const formData = new FormData();
+    console.log(quill);
 
-      formData.append("image", file);
+    // input.onchange = async () => {
+    //   const file = input.files[0];
+    //   const formData = new FormData();
 
-      const range = quill.current.getSelection(true);
+    //   formData.append("image", file);
 
-      quill.current.insertEmbed(
-        range.index,
-        "image",
-        `${window.location.origin}/images/loaders/placeholder.gif`
-      );
+    //   const range = quill.current.getSelection(true);
 
-      quill.current.setSelection(range.index + 1);
+    //   quill.current.insertEmbed(
+    //     range.index,
+    //     "image",
+    //     `${window.location.origin}/images/loaders/placeholder.gif`
+    //   );
 
-      const res = await Axios.post("/api/image", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }).then((res) => res.data);
-      quill.current.deleteText(range.index, 1);
-      quill.insertEmbed(range.index, "image", res);
-    };
+    //   quill.current.setSelection(range.index + 1);
+
+    //   const res = await Axios.post("/api/image", formData, {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //     },
+    //   }).then((res) => res.data);
+    //   quill.current.deleteText(range.index, 1);
+    //   quill.insertEmbed(range.index, "image", res);
+    // };
   };
 
   const modules = {
@@ -46,12 +48,10 @@ export const ReactQuillForm = ({ description, onValue }) => {
         ["bold", "italic", "underline"],
         [{ list: "ordered" }, { list: "bullet" }],
         [{ align: [] }],
-        [{ color: [] }, { background: [] }],
+        ["code-block"],
+        [({ color: [] }, { background: [] })],
         ["link", "image", "video"],
       ],
-      //   handlers: {
-      //     image: imageHandler,
-      //   },
     },
   };
 
@@ -64,6 +64,8 @@ export const ReactQuillForm = ({ description, onValue }) => {
     "list",
     "bullet",
     "align",
+    "direction",
+    "code-block",
     "color",
     "background",
     "link",
