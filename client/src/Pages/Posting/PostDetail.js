@@ -103,6 +103,28 @@ const PostDetail = ({ history, location }) => {
     }
   };
 
+  // pagination
+
+  const allPost = useSelector((state) => state.search.post);
+
+  const [count, setCount] = useState([0, 5]);
+
+  const onViewMore = () => {
+    setCount([
+      Math.ceil(allPost.length / 5) * 5 - 5 > count[0]
+        ? count[0] + 5
+        : count[0],
+      Math.ceil(allPost.length / 5) * 5 > count[1] ? count[1] + 5 : count[1],
+    ]);
+  };
+
+  const onViewClose = () => {
+    setCount([
+      count[0] > 0 ? count[0] - 5 : count[0],
+      count[1] > 5 ? count[1] - 5 : count[1],
+    ]);
+  };
+
   if (!loading || !allLoading) {
     return <Loading />;
   }
@@ -114,6 +136,9 @@ const PostDetail = ({ history, location }) => {
       </Helmet>
       {del && <Loading />}
       <PostDetailForm
+        onViewMore={onViewMore}
+        onViewClose={onViewClose}
+        count={count}
         post={post}
         location={location}
         onClick={onClick}

@@ -5,7 +5,7 @@ import "./ArrowUp.scss";
 export const ArrowUp = ({ onClick }) => {
   return (
     <div className='arrowup' onClick={onClick}>
-      <AiOutlineArrowUp size={32} />
+      <AiOutlineArrowUp size={26} />
     </div>
   );
 };

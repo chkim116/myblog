@@ -32,8 +32,10 @@ const HomeForm = ({ tagList, post }) => {
           <div className='main__post' key={index}>
             <Link to={`/postdetail/${p._id}`}>
               <div className='main__post-title'>{p.title}</div>
-              <div className='main__post-desc'>
-                <div dangerouslySetInnerHTML={{ __html: p.description }}></div>
+              <div className='main__post-desc ql-snow'>
+                <div
+                  className='ql-editor'
+                  dangerouslySetInnerHTML={{ __html: p.description }}></div>
               </div>
             </Link>
           </div>

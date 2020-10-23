@@ -3,6 +3,7 @@ import PostingForm from "../../components/Posting/PostingForm";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";
 import { useGetCategory } from "../../middleware";
+import { Loading } from "../Etc/Loading";
 
 const PostWriting = ({ history }) => {
   const [post, setPost] = useState({
@@ -109,6 +110,7 @@ const PostWriting = ({ history }) => {
       <Helmet>
         <title>My Blog | 포스트 작성</title>
       </Helmet>
+      {loading && <Loading />}
       <PostingForm
         selectCategory={selectCategory}
         onSelect={onSelect}

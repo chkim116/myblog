@@ -12,6 +12,9 @@ const PostDetailForm = ({
   onComment,
   onDelComment,
   location,
+  onViewMore,
+  onViewClose,
+  count,
 }) => {
   const { title, description, _id, createDate, tags, comment } = post;
   const admin = useSelector((state) => state.auth.admin);
@@ -19,7 +22,13 @@ const PostDetailForm = ({
 
   return (
     <>
-      <PostRecentForm recentPost={recentPost} location={location} />
+      <PostRecentForm
+        onViewMore={onViewMore}
+        onViewClose={onViewClose}
+        recentPost={recentPost}
+        location={location}
+        count={count}
+      />
       <div className='post__detail' key={_id}>
         <div
           className='back'

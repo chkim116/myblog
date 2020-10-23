@@ -43,4 +43,18 @@
       }
     }
   }
+
+  .recent__click-btn {
+    font-size: $small;
+    text-align: center;
+    margin-top: 1em;
+
+    span {
+      cursor: pointer;
+
+      &:hover {
+        color: $blackShadow;
+      }
+    }
+  }
 }
