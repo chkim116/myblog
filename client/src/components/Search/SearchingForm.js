@@ -16,7 +16,9 @@ export const SearchingForm = ({ searchTags, search, loading }) => {
         <p>검색 결과 {searchTags.length}개의 게시물이 발견 되었습니다.</p>
       </div>
 
-      <PostFormBlock post={searchTags} loading={loading} />
+      <div className='post__wrap'>
+        <PostFormBlock post={searchTags} loading={loading} />
+      </div>
     </div>
   );
 };

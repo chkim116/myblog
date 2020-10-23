@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet-async";
 import AboutForm from "../../components/About/AboutForm";
 
 const About = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
   return (
     <>
       <Helmet>
