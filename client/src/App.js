@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";
 import "./Styles/loading.scss";
-import schedule from "node-schedule";
 
 // page
 import Nav from "./components/Layouts/Nav";
