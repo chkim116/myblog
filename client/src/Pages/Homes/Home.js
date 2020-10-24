@@ -8,14 +8,13 @@ import { Loading } from "../Etc/Loading";
 const Home = () => {
   const [loadingHome, setLoadingHome] = useState(false);
   const [tagList, setTagList] = useState([]);
-  const { loading } = useGetPost("/api/all");
-  const post = useSelector((state) => state.category.post);
 
   useEffect(() => {
     const getTags = async () => {
       setLoadingHome(false);
       try {
         const tags = await Axios.get("/tag").then((res) => res.data);
+        console.log(tags);
         setTagList(tags);
         setLoadingHome(true);
       } catch (err) {
@@ -32,8 +31,8 @@ const Home = () => {
 
   return (
     <div>
-      {loadingHome && loading ? (
-        <HomeForm post={post} tagList={tag}></HomeForm>
+      {loadingHome ? (
+        <HomeForm post={tagList} tagList={tag}></HomeForm>
       ) : (
         <Loading />
       )}

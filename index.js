@@ -39,6 +39,12 @@ import { totalView } from "./src/controller/homeController";
 const app = express();
 const cookieStore = mongoStore(session);
 
+app.use(express.static(path.join(__dirname, "client/build")));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
+
 // middleware
 app.use(cors());
 app.use(helmet());
@@ -70,12 +76,6 @@ app.use(passport.session());
 //   process.env.NODE_ENV === "production" ||
 //   process.env.NODE_ENV === "staging"
 // ) {
-//   app.use(express.static("./client/build"));
-
-//   app.get("/", (req, res) => {
-//     res.sendFile(path.join(__dirname, "./client", "build", "index.html"));
-//   });
-// }
 
 app.use("/", homeRouter);
 app.use("/api", postRouter);

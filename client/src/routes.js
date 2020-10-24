@@ -1,6 +1,3 @@
-// api route
-const API = "https://warm-savannah-43453.herokuapp.com/";
-
 //  basic path
 const HOME = "/";
 const GUESTBOOK = "/guestbook";
@@ -37,7 +34,6 @@ const routes = {
   guestbooking: GUESTBOOKING,
   guestbookdetail: GUESTBOOKDETAIL,
   search: SEARCH,
-  api: API,
 };
 
 export default routes;
