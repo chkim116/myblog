@@ -40,12 +40,7 @@ const app = express();
 const cookieStore = mongoStore(session);
 
 // middleware
-app.use(
-  cors({
-    origin: "*",
-    optionsSuccessStatus: 200,
-  })
-);
+app.use(cors());
 app.use(helmet());
 app.use(
   csp({
@@ -71,16 +66,16 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-if (
-  process.env.NODE_ENV === "production" ||
-  process.env.NODE_ENV === "staging"
-) {
-  app.use(express.static("./client/build"));
+// if (
+//   process.env.NODE_ENV === "production" ||
+//   process.env.NODE_ENV === "staging"
+// ) {
+//   app.use(express.static("./client/build"));
 
-  app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "./client", "build", "index.html"));
-  });
-}
+//   app.get("/", (req, res) => {
+//     res.sendFile(path.join(__dirname, "./client", "build", "index.html"));
+//   });
+// }
 
 app.use("/", homeRouter);
 app.use("/api", postRouter);
