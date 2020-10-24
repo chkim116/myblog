@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { getAuth } from "./Modules/auth";
 import { Route } from "react-router-dom";
 import { ArrowUp } from "./components/Layouts/ArrowUp";
+import routes from "./routes";
 
 function App() {
   // view

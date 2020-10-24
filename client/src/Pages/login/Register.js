@@ -4,6 +4,7 @@ import Axios from "axios";
 import { registerCheck } from "../../middleware";
 import { Helmet } from "react-helmet-async";
 import { Loading } from "../Etc/Loading";
+import routes from "../../routes";
 
 const Register = ({ history }) => {
   const [register, setRegister] = useState({
