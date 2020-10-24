@@ -22,7 +22,7 @@ const Register = ({ history }) => {
     setRegister({ ...register });
     const adminRegister = async () => {
       try {
-        await Axios.post("/auth/register", {
+        await Axios.post(`${routes.api}/auth/register`, {
           username,
           password,
           password2,

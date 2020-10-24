@@ -23,13 +23,13 @@ function App() {
 
   useEffect(() => {
     const getViews = async () => {
-      await Axios.post("/view").then((res) => setView(res.data));
+      await Axios.post(`${routes.api}/view`).then((res) => setView(res.data));
     };
     getViews();
   }, []);
 
   // user 체크
-  const getUser = useUserId("/auth");
+  const getUser = useUserId(`${routes.api}/auth`);
   const { userId, loading } = getUser;
   const dispatch = useDispatch();
 

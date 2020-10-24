@@ -21,7 +21,7 @@ const Login = ({ history }) => {
     setLogin({ ...login });
     const postLogin = async () => {
       try {
-        await Axios.post("/auth/login", {
+        await Axios.post(`${routes.api}/auth/login`, {
           username,
           password,
         });
