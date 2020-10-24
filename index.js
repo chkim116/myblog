@@ -12,6 +12,7 @@ import csp from "helmet-csp";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import schedule from "node-schedule";
+import http from "http";
 
 import "./db";
 dotenv.config();
@@ -88,7 +89,14 @@ app.get("/", (req, res) => {
   res.send("welcome to my blog server");
 });
 
+// 자정마다 조회수 초기화 및 토탈 추가
 const views = schedule.scheduleJob("0 0 0 * * *", totalView);
+
+// heroku sleep 깨우기
+
+setInterval(() => {
+  http.get("https://kormelon.herokuapp.com/");
+}, 6000000);
 
 // server
 const PORT = process.env.PORT || 4000;
