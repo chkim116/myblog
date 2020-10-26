@@ -4,7 +4,6 @@ import Axios from "axios";
 import { registerCheck } from "../../middleware";
 import { Helmet } from "react-helmet-async";
 import { Loading } from "../Etc/Loading";
-import routes from "../../routes";
 
 const Login = ({ history }) => {
   const initialState = {
@@ -22,7 +21,7 @@ const Login = ({ history }) => {
     setLogin({ ...login });
     const postLogin = async () => {
       try {
-        await Axios.post(`${routes.api}/auth/login`, {
+        await Axios.post("/auth/login", {
           username,
           password,
         });

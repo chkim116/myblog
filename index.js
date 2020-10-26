@@ -47,7 +47,12 @@ app.get("/", (req, res) => {
 });
 
 // middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 app.use(helmet());
 app.use(
   csp({

@@ -1,7 +1,6 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import HomeForm from "../../components/Home/HomeForm";
-import routes from "../../routes";
 import { Loading } from "../Etc/Loading";
 
 const Home = () => {
@@ -12,9 +11,7 @@ const Home = () => {
     const getTags = async () => {
       setLoadingHome(false);
       try {
-        const tags = await Axios.get(`${routes.api}/tag`).then(
-          (res) => res.data
-        );
+        const tags = await Axios.get("/tag").then((res) => res.data);
         console.log(tags);
         setTagList(tags);
         setLoadingHome(true);

@@ -19,18 +19,21 @@ import { ArrowUp } from "./components/Layouts/ArrowUp";
 import routes from "./routes";
 
 function App() {
+  Axios.defaults.baseURL = routes.api;
+  Axios.defaults.withCredentials = true;
+
   // view
   const [view, setView] = useState({});
 
   useEffect(() => {
     const getViews = async () => {
-      await Axios.post(`${routes.api}/view`).then((res) => setView(res.data));
+      await Axios.post("/view").then((res) => setView(res.data));
     };
     getViews();
   }, []);
 
   // user 체크
-  const getUser = useUserId(`${routes.api}/auth`);
+  const getUser = useUserId("/auth");
   const { userId, loading } = getUser;
   const dispatch = useDispatch();
 

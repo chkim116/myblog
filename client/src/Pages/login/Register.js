@@ -4,7 +4,6 @@ import Axios from "axios";
 import { registerCheck } from "../../middleware";
 import { Helmet } from "react-helmet-async";
 import { Loading } from "../Etc/Loading";
-import routes from "../../routes";
 
 const Register = ({ history }) => {
   const [register, setRegister] = useState({
@@ -23,7 +22,7 @@ const Register = ({ history }) => {
     setRegister({ ...register });
     const adminRegister = async () => {
       try {
-        await Axios.post(`${routes.api}/auth/register`, {
+        await Axios.post("/auth/register", {
           username,
           password,
           password2,
