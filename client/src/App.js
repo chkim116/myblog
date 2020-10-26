@@ -11,35 +11,24 @@ import { RouteCompoents } from "./RouteCompoents";
 import { Loading } from "./Pages/Etc/Loading";
 
 // 유저 확인을 위한 hook&redux
-import { useUserId } from "./middleware";
-import { useDispatch } from "react-redux";
-import { getAuth } from "./Modules/auth";
+
 import { Route } from "react-router-dom";
 import { ArrowUp } from "./components/Layouts/ArrowUp";
-import routes from "./routes";
 
 function App() {
   Axios.defaults.baseURL = routes.api;
   Axios.defaults.withCredentials = true;
-
   // view
   const [view, setView] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getViews = async () => {
       await Axios.post("/view").then((res) => setView(res.data));
+      setLoading(false);
     };
     getViews();
   }, []);
-
-  // user 체크
-  const getUser = useUserId("/auth");
-  const { userId, loading } = getUser;
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAuth(userId));
-  }, [userId]);
 
   // userLogout
   const [logout, setLogout] = useState(false);
@@ -64,7 +53,7 @@ function App() {
   if (logout) {
     return (window.location.href = "/");
   }
-  if (!loading) {
+  if (loading) {
     return <Loading />;
   }
 

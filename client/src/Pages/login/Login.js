@@ -37,7 +37,7 @@ const Login = ({ history }) => {
 
   useEffect(() => {
     if (loading) {
-      window.location.href = "/";
+      history.push("/");
     }
   }, [loading]);
 
