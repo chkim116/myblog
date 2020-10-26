@@ -65,10 +65,11 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
+      httpOnly: true,
       secure: true,
-      sameSite: "None",
+      sameSite: "none",
     },
     store: new cookieStore({ mongooseConnection: mongoose.connection }),
   })

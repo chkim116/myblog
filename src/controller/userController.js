@@ -58,6 +58,7 @@ export const postlogin = (req, res, next) => {
         if (err) {
           return next(err);
         } else {
+          console.log(req.session);
           return res.send(req.headers.cookie.split("="));
         }
       });
