@@ -14,6 +14,7 @@ import { Loading } from "./Pages/Etc/Loading";
 
 import { Route } from "react-router-dom";
 import { ArrowUp } from "./components/Layouts/ArrowUp";
+import routes from "./routes";
 
 function App() {
   Axios.defaults.baseURL = routes.api;
