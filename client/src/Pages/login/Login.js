@@ -35,16 +35,16 @@ const Login = ({ history }) => {
     postLogin();
   };
 
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setLogin({ ...login, [name]: value });
+  };
+
   useEffect(() => {
     if (loading) {
       history.push("/");
     }
   }, [loading]);
-
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setLogin({ ...login, [name]: value });
-  };
 
   return (
     <>

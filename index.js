@@ -65,13 +65,12 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
-    cookie: {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-    },
+    saveUninitialized: false,
     store: new cookieStore({ mongooseConnection: mongoose.connection }),
+    cookie: {
+      secure: true,
+      sameSite: "None",
+    },
   })
 );
 app.use(passport.initialize());
