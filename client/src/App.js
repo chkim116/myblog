@@ -17,7 +17,7 @@ import { ArrowUp } from "./components/Layouts/ArrowUp";
 import routes from "./routes";
 
 function App() {
-  // Axios.defaults.baseURL = routes.api;
+  Axios.defaults.baseURL = routes.api;
   Axios.defaults.withCredentials = true;
   // view
   const [view, setView] = useState({});
