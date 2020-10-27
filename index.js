@@ -69,7 +69,7 @@ app.use(
     store: new cookieStore({ mongooseConnection: mongoose.connection }),
     cookie: {
       secure: true,
-      sameSite: "None",
+      sameSite: "none",
     },
   })
 );
