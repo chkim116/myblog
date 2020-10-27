@@ -69,11 +69,11 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: new cookieStore({ mongooseConnection: mongoose.connection }),
-    // cookie: {
-    //   httpOnly: true,
-    //   secure: true,
-    //   sameSite: "none",
-    // },
+    cookie: {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    },
   })
 );
 app.use(passport.initialize());
