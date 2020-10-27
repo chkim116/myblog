@@ -23,7 +23,7 @@ const GuestBookForm = ({ guest, onClick }) => {
                 </span>
               </>
             ) : (
-              <Link> </Link>
+              <> </>
             )}
             <Link to={`/guestbookdetail/${p._id}`}>
               <span className='guest__view'>-view more</span>

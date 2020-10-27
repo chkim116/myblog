@@ -58,8 +58,8 @@ export const postlogin = (req, res, next) => {
         if (err) {
           return next(err);
         } else {
-          // res.setHeader("Set-Cookie", "yummy-cookie=choco; HttpOnly; Secure");
-          return res.send(true);
+          res.setHeader("cookie", req.headers.cookie);
+          return res.send(req.headers.cookie);
         }
       });
     }

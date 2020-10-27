@@ -41,13 +41,14 @@ const app = express();
 const cookieStore = mongoStore(session);
 
 // middleware
+
+app.use(helmet());
 app.use(
   cors({
     origin: true,
     credentials: true,
   })
 );
-app.use(helmet());
 app.use(
   csp({
     directives: {
@@ -61,16 +62,18 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: new cookieStore({ mongooseConnection: mongoose.connection }),
-    cookie: {
-      secure: true,
-      sameSite: "none",
-    },
+    // cookie: {
+    //   httpOnly: true,
+    //   secure: true,
+    //   sameSite: "none",
+    // },
   })
 );
 app.use(passport.initialize());
