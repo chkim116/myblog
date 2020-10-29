@@ -109,5 +109,5 @@ export const auth = (req, res, next) => {
 };
 
 export const logout = (req, res) => {
-  return res.cookie("x_auth", "").status(200).send(true);
+  return res.cookie("x_auth").status(204).send(true);
 };
