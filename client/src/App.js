@@ -45,12 +45,14 @@ function App() {
   }, []);
 
   // userLogout
+  const [logout, setLogout] = useState(false);
 
   const onClick = () => {
     const userLogout = async () => {
       try {
         await Axios.post("/auth/logout");
         document.cookie = "x_auth=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+        setLogout(true);
         dispatch(getAuth(""));
         dispatch(getToken(""));
       } catch (err) {
@@ -65,6 +67,9 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  if (logout) {
+    // window.location.reload();
+  }
   if (loading) {
     return <Loading />;
   }
