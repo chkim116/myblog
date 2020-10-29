@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 export const getGuest = async (req, res) => {
   try {
-    const guest = await Guest.find({}).sort({ createDate: -1 });
+    const guest = await Guest.find({}).sort({ _id: -1 });
     res.status(200).json(guest);
   } catch (err) {
     console.log(err);
@@ -45,7 +45,7 @@ export const postGuest = async (req, res) => {
 
 export const guestEditing = async (req, res) => {
   const { id } = req.params;
-  const { title, description, createDate, creator, updata } = req.body;
+  const { title, description, createDate, creator } = req.body;
   try {
     await Guest.findOneAndUpdate(
       { _id: id },

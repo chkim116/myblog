@@ -15,12 +15,12 @@ import { Loading } from "./Pages/Etc/Loading";
 import { Route } from "react-router-dom";
 import { ArrowUp } from "./components/Layouts/ArrowUp";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuth } from "./Modules/auth";
+import { getAuth, getToken } from "./Modules/auth";
 import routes from "./routes";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
-  Axios.defaults.baseURL = routes.api;
+  // Axios.defaults.baseURL = routes.api;
   Axios.defaults.withCredentials = true;
 
   // view
@@ -53,6 +53,8 @@ function App() {
         await Axios.post("/auth/logout");
         document.cookie = "x_auth=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
         setLogout(true);
+        dispatch(getAuth(""));
+        dispatch(getToken(""));
       } catch (err) {
         console.log(err);
       }
@@ -66,7 +68,7 @@ function App() {
   };
 
   if (logout) {
-    window.location.reload();
+    // window.location.reload();
   }
   if (loading) {
     return <Loading />;
