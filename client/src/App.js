@@ -20,7 +20,7 @@ import routes from "./routes";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
-  // Axios.defaults.baseURL = routes.api;
+  Axios.defaults.baseURL = routes.api;
   Axios.defaults.withCredentials = true;
 
   // view
