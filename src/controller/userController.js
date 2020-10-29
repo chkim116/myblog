@@ -2,6 +2,9 @@ import User from "../models/User";
 import passport from "passport";
 import bcrypt from "bcrypt";
 import Joi from "@hapi/joi";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const postRegister = async (req, res, next) => {
   const {
@@ -57,33 +60,53 @@ export const postlogin = (req, res, next) => {
       req.logIn(user, (err) => {
         if (err) {
           return next(err);
-        } else {
-          return res.send(req.headers.cookie || true);
         }
+        const token = jwt.sign({ userID: user._id }, process.env.JWT_SECRET);
+        user.token = token;
+        user.save((err, user) => {
+          if (err) {
+            return res.status(400).json(err);
+          }
+          return res
+            .cookie("x_auth", user.token, {
+              maxAge: 1000 * 60 * 60 * 24 * 7,
+              httpOnly: true,
+              secure: true,
+              sameSite: "none",
+            })
+            .status(200)
+            .json({ userId: user._id, token });
+        });
       });
     }
   })(req, res, next);
 };
 
-export const auth = async (req, res, next) => {
-  const loggedUser = (await req.user) || null;
-  if (!loggedUser) {
-    res.send(false);
-  } else {
-    const { _id, username, admin } = loggedUser;
-    const user = {
-      id: _id,
-      username,
-      admin,
-    };
-    res.send(user);
-  }
+export const auth = (req, res, next) => {
+  const token = req.cookies.x_auth;
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(500).json("token decode 실패");
+    }
+    User.findOne({ _id: decoded.userID }, (err, user) => {
+      if (err) {
+        return res.json("Not found");
+      }
+      if (!user) {
+        return res.status(400).json("token의 유저가 없습니다.");
+      }
+      if (user) {
+        req.token = token;
+        req.user = user;
+      }
+      next();
+    });
+  });
 };
 
 export const logout = (req, res) => {
   try {
-    req.logout();
-    res.status(200).send(true);
+    return res.cookie("x_auth", "").status(200).json(true);
   } catch (err) {
     console.log(err);
     res.status(400);

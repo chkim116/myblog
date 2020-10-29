@@ -30,6 +30,7 @@ export const checkIp = async (req, res, next) => {
 
 export const getView = async (req, res, next) => {
   const home = await Home.find({});
+
   if (home.length >= 1) {
     next();
     return;

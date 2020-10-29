@@ -4,13 +4,15 @@ import Axios from "axios";
 import { registerCheck } from "../../middleware";
 import { Helmet } from "react-helmet-async";
 import { Loading } from "../Etc/Loading";
+import { getToken } from "../../Modules/auth";
+import { useDispatch } from "react-redux";
 
 const Login = ({ history }) => {
-  const initialState = {
+  const dispatch = useDispatch();
+  const [login, setLogin] = useState({
     username: "",
     password: "",
-  };
-  const [login, setLogin] = useState(initialState);
+  });
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(false);
   const { username, password } = login;
@@ -21,10 +23,11 @@ const Login = ({ history }) => {
     setLogin({ ...login });
     const postLogin = async () => {
       try {
-        await Axios.post("/auth/login", {
+        const token = await Axios.post("/auth/login", {
           username,
           password,
-        });
+        }).then((res) => res.data.token);
+        dispatch(getToken(token));
         setLoading(true);
       } catch (err) {
         const LOGIN = "login";

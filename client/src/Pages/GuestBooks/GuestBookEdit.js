@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { GuestBookEditForm } from "../../components/GuestBook/GuestBookEditForm";
-import { useGetPort, useUserId } from "../../middleware";
+import { useGetPort } from "../../middleware";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";
 import { Loading } from "../Etc/Loading";
+import { useSelector } from "react-redux";
 
 export const GuestBookEdit = ({ history }) => {
   const { id } = useParams();
 
   // user
-  const {
-    userId: { id: userId, admin },
-  } = useUserId("/auth");
+  const user = useSelector((state) => state.auth);
 
   // get GuestBook
   const guests = useGetPort(`/port/${id}`);
@@ -89,7 +88,7 @@ export const GuestBookEdit = ({ history }) => {
       <Helmet>
         <title>My Blog | 방명록 수정 {guest.title}</title>
       </Helmet>
-      {userId === guest.creator || admin ? (
+      {user.id === guest.creator || user.admin ? (
         <GuestBookEditForm
           guest={guest}
           onChange={onChange}

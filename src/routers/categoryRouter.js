@@ -5,6 +5,7 @@ import {
   editCategory,
   getCategory,
 } from "../controller/categoryController";
+import { auth } from "../controller/userController";
 
 const categoryRouter = express.Router();
 
@@ -12,7 +13,7 @@ const categoryRouter = express.Router();
 
 // create
 
-categoryRouter.post("/create", createCategory);
+categoryRouter.post("/create", auth, createCategory);
 
 // read
 
@@ -20,10 +21,10 @@ categoryRouter.get("/", getCategory);
 
 // edit
 
-categoryRouter.post("/edit", editCategory);
+categoryRouter.post("/edit", auth, editCategory);
 
 // delete
 
-categoryRouter.get("/del/:id", delCategory);
+categoryRouter.get("/del/:id", auth, delCategory);
 
 export default categoryRouter;

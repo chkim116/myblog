@@ -1,9 +1,5 @@
 import express from "express";
-import session from "express-session";
 import passport from "passport";
-import mongoose from "mongoose";
-import mongoStore from "connect-mongo";
-import path from "path";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import morgan from "morgan";
@@ -38,7 +34,6 @@ import "./multer";
 import { totalView } from "./src/controller/homeController";
 
 const app = express();
-const cookieStore = mongoStore(session);
 
 // middleware
 
@@ -63,32 +58,8 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: new cookieStore({ mongooseConnection: mongoose.connection }),
-    cookie: {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-    },
-  })
-);
 app.use(passport.initialize());
 app.use(passport.session());
-
-// if (
-//   process.env.NODE_ENV === "production" ||
-//   process.env.NODE_ENV === "staging"
-// ) {
-
-// app.use(express.static(path.join(__dirname, "./client/build")));
-
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-// });
 
 app.use("/", homeRouter);
 app.use("/api", postRouter);

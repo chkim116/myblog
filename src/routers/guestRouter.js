@@ -7,6 +7,7 @@ import {
   guestEditing,
   guestDeleting,
 } from "../controller/guestController";
+import { auth } from "../controller/userController";
 
 const guestRouter = express.Router();
 
@@ -19,12 +20,12 @@ guestRouter.get("/", getGuest);
 guestRouter.get("/:id", getGuestById);
 
 // port Upload
-guestRouter.post("/post", postGuest);
+guestRouter.post("/post", auth, postGuest);
 
 // port Update
-guestRouter.post("/edit/:id", guestEditing);
+guestRouter.post("/edit/:id", auth, guestEditing);
 
 // post Delete
-guestRouter.get("/del/:id", guestDeleting);
+guestRouter.get("/del/:id", auth, guestDeleting);
 
 export default guestRouter;

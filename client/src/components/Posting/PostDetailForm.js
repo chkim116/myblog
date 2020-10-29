@@ -15,6 +15,7 @@ const PostDetailForm = ({
   onViewMore,
   onViewClose,
   count,
+  fakeComment,
 }) => {
   const { title, description, _id, createDate, tags, comment } = post;
   const admin = useSelector((state) => state.auth.admin);
@@ -70,6 +71,7 @@ const PostDetailForm = ({
           onChangeComment={onChangeComment}
           onComment={onComment}
           onDelComment={onDelComment}
+          fakeComment={fakeComment}
         />
       </div>
     </>

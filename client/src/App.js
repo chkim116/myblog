@@ -14,14 +14,27 @@ import { Loading } from "./Pages/Etc/Loading";
 
 import { Route } from "react-router-dom";
 import { ArrowUp } from "./components/Layouts/ArrowUp";
+import { useDispatch, useSelector } from "react-redux";
+import { getAuth } from "./Modules/auth";
 import routes from "./routes";
 
 function App() {
+  const token = useSelector((state) => state.auth.token);
   Axios.defaults.baseURL = routes.api;
   Axios.defaults.withCredentials = true;
+
   // view
   const [view, setView] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getUser = async () => {
+      await Axios.get("/auth").then((res) => dispatch(getAuth(res.data)));
+    };
+    getUser();
+  }, [token]);
 
   useEffect(() => {
     const getViews = async () => {

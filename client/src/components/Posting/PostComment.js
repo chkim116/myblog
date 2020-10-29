@@ -1,6 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { filterCategory } from "../../Modules/category";
+import { useSelector } from "react-redux";
 import "./PostComment.scss";
 
 export const PostComment = ({
@@ -8,8 +7,11 @@ export const PostComment = ({
   onChangeComment,
   onComment,
   onDelComment,
+  fakeComment,
 }) => {
   const username = useSelector((state) => state.auth.username);
+
+  console.log(fakeComment);
   return (
     <div className='wrap__comments'>
       <form

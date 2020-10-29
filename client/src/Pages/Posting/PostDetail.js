@@ -57,7 +57,7 @@ const PostDetail = ({ history, location }) => {
   // 코멘트 작성
 
   const [comment, setComment] = useState({ comment: "" });
-
+  const [fakeComment, setFakeComment] = useState([]);
   const onChangeComment = (e) => {
     setComment({ ...comment, comment: e.target.value });
   };
@@ -77,13 +77,12 @@ const PostDetail = ({ history, location }) => {
             hour: "numeric",
             minute: "numeric",
           }),
-        });
+        }).then((res) => setFakeComment(fakeComment.concat(res.data)));
       } catch (err) {
         console.log(err);
       }
     };
     postComments();
-    window.location.reload();
   };
 
   // comment delete
@@ -136,6 +135,7 @@ const PostDetail = ({ history, location }) => {
       </Helmet>
       {del && <Loading />}
       <PostDetailForm
+        fakeComment={fakeComment}
         onViewMore={onViewMore}
         onViewClose={onViewClose}
         count={count}

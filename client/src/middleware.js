@@ -13,31 +13,6 @@ export function registerCheck(err, url, { history }) {
   }
 }
 
-// id, username hooks
-export const useUserId = (url) => {
-  const [userId, setUserId] = useState({
-    id: "",
-    username: "",
-    admin: false,
-  });
-  const [loading, setLoading] = useState(false);
-
-  const getUserId = async () => {
-    try {
-      await Axios.get(url).then((res) => setUserId(res.data));
-      setLoading(true);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  useEffect(() => {
-    getUserId();
-    // eslint-disable-next-line
-  }, []);
-
-  return { userId, loading };
-};
-
 // get Post Hooks
 
 export const useGetPost = (url, location) => {

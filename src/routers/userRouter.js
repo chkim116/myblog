@@ -16,6 +16,12 @@ userRouter.post("/login", postlogin);
 userRouter.post("/logout", logout);
 
 // user auth
-userRouter.get("/", auth);
+userRouter.get("/", auth, async (req, res) => {
+  res.status(200).json({
+    id: req.user._id,
+    username: req.user.username,
+    admin: req.user.admin,
+  });
+});
 
 export default userRouter;
