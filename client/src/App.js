@@ -30,6 +30,9 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (token === "") {
+      return console.log("can't");
+    }
     const getUser = async () => {
       await Axios.get("/auth").then((res) => dispatch(getAuth(res.data)));
     };
