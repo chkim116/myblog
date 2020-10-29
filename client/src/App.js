@@ -70,9 +70,6 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  if (logout) {
-    // window.location.reload();
-  }
   if (loading) {
     return <Loading />;
   }
