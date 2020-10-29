@@ -1,7 +1,5 @@
 import passport from "passport";
 import User from "./src/models/User";
-import dotenv from "dotenv";
-dotenv.config();
 
 passport.use(User.createStrategy());
 

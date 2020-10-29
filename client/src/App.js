@@ -20,7 +20,7 @@ import routes from "./routes";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
-  Axios.defaults.baseURL = routes.api;
+  // Axios.defaults.baseURL = routes.api;
   Axios.defaults.withCredentials = true;
 
   // view
@@ -51,6 +51,7 @@ function App() {
     const userLogout = async () => {
       try {
         await Axios.post("/auth/logout");
+        document.cookie = "x_auth=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
         setLogout(true);
       } catch (err) {
         console.log(err);
@@ -65,7 +66,7 @@ function App() {
   };
 
   if (logout) {
-    return (window.location.href = "/");
+    window.location.reload();
   }
   if (loading) {
     return <Loading />;

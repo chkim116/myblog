@@ -70,9 +70,6 @@ export const postlogin = (req, res, next) => {
           return res
             .cookie("x_auth", user.token, {
               maxAge: 1000 * 60 * 60 * 24 * 7,
-              httpOnly: true,
-              secure: true,
-              sameSite: "none",
             })
             .status(200)
             .json({ userId: user._id, token });
@@ -84,6 +81,10 @@ export const postlogin = (req, res, next) => {
 
 export const auth = (req, res, next) => {
   const token = req.cookies.x_auth;
+  if (token === undefined || token === "") {
+    return next();
+  }
+
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
       return res.status(500).json("token decode 실패");
@@ -105,10 +106,5 @@ export const auth = (req, res, next) => {
 };
 
 export const logout = (req, res) => {
-  try {
-    return res.cookie("x_auth", "").status(200).json(true);
-  } catch (err) {
-    console.log(err);
-    res.status(400);
-  }
+  return res.cookie("x_auth", "").status(200).send(true);
 };

@@ -11,7 +11,6 @@ export const PostComment = ({
 }) => {
   const username = useSelector((state) => state.auth.username);
 
-  console.log(fakeComment);
   return (
     <div className='wrap__comments'>
       <form

@@ -13,7 +13,6 @@ const userRouter = express.Router();
 // user login
 userRouter.post("/register", postRegister, postlogin);
 userRouter.post("/login", postlogin);
-userRouter.post("/logout", logout);
 
 // user auth
 userRouter.get("/", auth, async (req, res) => {
@@ -21,7 +20,9 @@ userRouter.get("/", auth, async (req, res) => {
     id: req.user._id,
     username: req.user.username,
     admin: req.user.admin,
+    token: req.token,
   });
 });
+userRouter.post("/logout", auth, logout);
 
 export default userRouter;

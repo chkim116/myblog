@@ -105,9 +105,9 @@ export const postComments = async (req, res) => {
     });
     post.comment.push(comments);
     post.save();
-    res.status(400).json(comments);
+    res.status(200).json(comments);
   } catch (err) {
-    res.status(200);
+    res.status(400);
     console.log(err);
   }
 };
