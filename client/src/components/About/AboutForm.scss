@@ -18,29 +18,23 @@
     .about__introduce-desc {
       margin-bottom: 2em;
       .about__introduce-img {
-        width: 250px;
-        height: 250px;
+        width: 350px;
+        height: 350px;
         @include border;
         margin: 0 auto;
         border-radius: 50%;
 
         @media #{$phone} {
-          width: 150px;
-          height: 150px;
+          width: 230px;
+          height: 230px;
         }
 
         img {
           width: 100%;
           height: 100%;
+          object-fit: cover;
+          border-radius: 50%;
         }
-      }
-
-      .about__introduce-me {
-        @include border;
-        width: 80%;
-        min-height: 300px;
-        margin: 0 auto;
-        font-size: $small;
       }
     }
   }
@@ -63,6 +57,10 @@
     .contact-link {
       font-size: $small;
       margin: 0 1em;
+
+      &:hover {
+        color: $yellow;
+      }
     }
   }
 

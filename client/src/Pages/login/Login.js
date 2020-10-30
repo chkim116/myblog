@@ -43,11 +43,15 @@ const Login = ({ history }) => {
     setLogin({ ...login, [name]: value });
   };
 
-  useEffect(() => {
-    if (loading) {
-      history.push("/");
-    }
-  }, [loading]);
+  useEffect(
+    () => {
+      if (loading) {
+        history.push("/");
+      }
+    },
+    // eslint-disable-next-line
+    [loading]
+  );
 
   return (
     <>

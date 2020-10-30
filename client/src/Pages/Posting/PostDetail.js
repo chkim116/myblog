@@ -19,22 +19,21 @@ const PostDetail = ({ history, location }) => {
   const [allLoading, setAllLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const getAllPost = () => {
-    const AllPost = async () => {
-      try {
-        const posting = await Axios.get("/api/all").then((res) => res.data);
-        dispatch(searchResults(posting));
-        setAllLoading(true);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    AllPost();
-  };
-
   useEffect(() => {
+    const getAllPost = () => {
+      const AllPost = async () => {
+        try {
+          const posting = await Axios.get("/api/all").then((res) => res.data);
+          dispatch(searchResults(posting));
+          setAllLoading(true);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      AllPost();
+    };
     getAllPost();
-  }, []);
+  }, [dispatch]);
 
   //  del post
 
@@ -51,13 +50,16 @@ const PostDetail = ({ history, location }) => {
       }
       setDel(false);
     };
-    deletePost();
+    if (window.confirm("정말 삭제하겠습니까?")) {
+      deletePost();
+      history.push("/post");
+    }
   };
 
   // 코멘트 작성
 
   const [comment, setComment] = useState({ comment: "" });
-  const [fakeComment, setFakeComment] = useState();
+  const [fakeComment, setFakeComment] = useState([]);
   const onChangeComment = (e) => {
     setComment({ ...comment, comment: e.target.value });
   };
@@ -77,13 +79,13 @@ const PostDetail = ({ history, location }) => {
             hour: "numeric",
             minute: "numeric",
           }),
-        });
+        }).then((res) => setFakeComment(fakeComment.concat(res.data)));
       } catch (err) {
         console.log(err);
       }
     };
     postComments();
-    window.location.reload();
+    setComment({ comment: "" });
   };
 
   // comment delete
@@ -139,6 +141,7 @@ const PostDetail = ({ history, location }) => {
         fakeComment={fakeComment}
         onViewMore={onViewMore}
         onViewClose={onViewClose}
+        commentValue={comment}
         count={count}
         post={post}
         location={location}

@@ -2,14 +2,14 @@
 
 .banner__form {
   width: 100%;
-  height: 100vh;
+  height: 60vh;
   margin: 0 auto;
   position: relative;
 
   .banner__form-img {
     width: 100%;
     background-blend-mode: color;
-    background-image: url("../../image/MUSIQO. (1).png");
+    background-image: url("../../image/4.jpg");
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -25,5 +25,10 @@
     @include center;
     color: $white;
     font-size: $Large;
+
+    @media #{$phone} {
+      font-size: 14px;
+      font-weight: 500;
+    }
   }
 }

@@ -83,7 +83,7 @@ const PostEdit = ({ history }) => {
   const onTags = useCallback(
     (e) => {
       setTags(e.target.value);
-    },
+    }, // eslint-disable-next-line
     [tags]
   );
 

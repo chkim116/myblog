@@ -40,7 +40,6 @@ export const useGetPost = (url, location) => {
       }
     }
     getPost();
-    // eslint-disable-next-line
   }, [url || filter]);
 
   return { loading };
@@ -91,16 +90,15 @@ export const useGetTag = (url) => {
   });
   const [loading, setLoading] = useState(false);
 
-  const getSearchTags = async () => {
-    try {
-      await Axios.get(url).then((res) => setSearchTags(res.data));
-      setLoading(true);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
+    const getSearchTags = async () => {
+      try {
+        await Axios.get(url).then((res) => setSearchTags(res.data));
+        setLoading(true);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     getSearchTags();
   }, [url]);
 
@@ -147,17 +145,16 @@ export const useGetCategory = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const getCategory = async () => {
-    setLoading(true);
-    await Axios.get("/category").then((res) =>
-      dispatch(createCategoryList(res.data))
-    );
-    setLoading(false);
-  };
-
   useEffect(() => {
+    const getCategory = async () => {
+      setLoading(true);
+      await Axios.get("/category").then((res) =>
+        dispatch(createCategoryList(res.data))
+      );
+      setLoading(false);
+    };
     getCategory();
-  }, []);
+  }, [dispatch]);
 
   return { loading };
 };

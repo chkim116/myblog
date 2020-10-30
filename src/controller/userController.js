@@ -112,7 +112,6 @@ export const logout = (req, res) => {
   req.token = "";
   return res
     .cookie("x_auth", "", {
-      maxAge: 1,
       httpOnly: true,
       secure: true,
       sameSite: "none",

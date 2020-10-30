@@ -24,20 +24,23 @@ export const SearchingBar = ({ onClick, history }) => {
     dispatch(searchingPost(search.select, search.text));
   };
 
-  const getSearching = () => {
-    const searchPost = async () => {
-      setLoading(true);
-      await Axios.get("/api/all").then((res) =>
-        dispatch(searchResults(res.data))
-      );
-      setLoading(false);
-    };
-    searchPost();
-  };
-
-  useEffect(() => {
-    getSearching();
-  }, []);
+  useEffect(
+    () => {
+      const getSearching = () => {
+        const searchPost = async () => {
+          setLoading(true);
+          await Axios.get("/api/all").then((res) =>
+            dispatch(searchResults(res.data))
+          );
+          setLoading(false);
+        };
+        searchPost();
+      };
+      getSearching();
+    },
+    // eslint-disable-next-line
+    []
+  );
 
   const onSubmit = (e) => {
     e.preventDefault();

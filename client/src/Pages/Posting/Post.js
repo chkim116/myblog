@@ -6,31 +6,30 @@ import { Loading } from "../Etc/Loading";
 import { useGetPost } from "../../middleware";
 import { useDispatch, useSelector } from "react-redux";
 import { searchResults } from "../../Modules/search";
-import { filterCategory } from "../../Modules/category";
 
 const Post = ({ location, history }) => {
   const dispatch = useDispatch();
+  const filterPost = useSelector((state) => state.category.post);
 
   // get all post / 5, 페이지의 수를 파악하기 위해 불러옴
   const [allLoading, setAllLoading] = useState(false);
 
-  const getAllPost = () => {
-    const AllPost = async () => {
-      try {
-        const posting = await Axios.get("/api/all").then((res) => res.data);
-        dispatch(searchResults(posting));
-        dispatch(filterCategory(null, posting));
-        setAllLoading(true);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    AllPost();
-  };
-
   useEffect(() => {
+    const getAllPost = () => {
+      const AllPost = async () => {
+        try {
+          const posting = await Axios.get("/api/all").then((res) => res.data);
+          dispatch(searchResults(posting));
+          setAllLoading(true);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      AllPost();
+    };
+
     getAllPost();
-  }, []);
+  }, [dispatch]);
 
   // url에 따른 포스트 호출
   const [page, setPage] = useState({ query: location.search });
@@ -82,7 +81,6 @@ const Post = ({ location, history }) => {
       setDel(true);
       try {
         await Axios.get(`/api/del/${boardId}`);
-        window.location.reload();
       } catch (err) {
         console.log(err);
         alert("삭제에 실패했습니다.");
@@ -92,6 +90,7 @@ const Post = ({ location, history }) => {
 
     if (window.confirm("정말 삭제하시겠습니까?")) {
       deletePost();
+      window.location.reload();
     }
   };
 
@@ -106,9 +105,11 @@ const Post = ({ location, history }) => {
           history={history}
           onClick={onClick}
           loading={loading}
+          location={location}
           page={page}
           handleChange={handleChange}
           select={selecting}
+          filterPost={filterPost}
         />
       ) : (
         <Loading />

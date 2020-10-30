@@ -2,7 +2,7 @@ import React from "react";
 import "./AboutForm.scss";
 import { SiReact } from "react-icons/si";
 import { FaNodeJs } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import about from "../../image/about.jpg";
 
 const AboutForm = () => {
   return (
@@ -14,11 +14,7 @@ const AboutForm = () => {
 
         <div className='about__introduce-desc'>
           <div className='about__introduce-img'>
-            <img src='/' alt='얼굴사진' />
-          </div>
-          <div className='about__introduce-me'>
-            저는 1남 1녀의 유복한 가정에서 태어나... 어려서부터... 그렇고 그래서
-            그래서 그러하였습니다.
+            <img src={about} alt='얼굴사진' />
           </div>
         </div>
       </div>
@@ -57,7 +53,7 @@ const AboutForm = () => {
             <ul className='list'>
               <li className='list-items'>Express</li>
               <li className='list-items'>Mongoose</li>
-              <li className='list-items'>Passport</li>
+              <li className='list-items'>Jwt</li>
             </ul>
             <div className='about__stack-icon'>
               <FaNodeJs className='node' size={48} />

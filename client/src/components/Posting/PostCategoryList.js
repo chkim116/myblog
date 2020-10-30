@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
 export const PostCategoryList = ({
   createList,
@@ -12,7 +11,6 @@ export const PostCategoryList = ({
   onEditSubmit,
   onEditChange,
 }) => {
-  const filter = useSelector((state) => state.category.filter);
   return (
     <>
       {createList &&
@@ -22,11 +20,7 @@ export const PostCategoryList = ({
               <div
                 data-category={li.category}
                 onClick={onClick}
-                className={
-                  li.category === filter
-                    ? "category__form-list selected"
-                    : "category__form-list"
-                }>
+                className={"category__form-list"}>
                 {li.category}(
                 {post.filter((p) => p.category === li.category).length || 0})
                 {editShow && (
@@ -63,7 +57,7 @@ export const PostCategoryList = ({
         ))}
       {admin && (
         <span className='category__edit' onClick={onEdit}>
-          ✍
+          <span role='img' aria-label='✍'></span>
         </span>
       )}
     </>

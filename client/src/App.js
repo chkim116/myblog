@@ -29,15 +29,19 @@ function App() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (token === "") {
-      return console.log("can't");
-    }
-    const getUser = async () => {
-      await Axios.get("/auth").then((res) => dispatch(getAuth(res.data)));
-    };
-    getUser();
-  }, [token]);
+  useEffect(
+    () => {
+      if (token === "") {
+        return console.log("can't");
+      }
+      const getUser = async () => {
+        await Axios.get("/auth").then((res) => dispatch(getAuth(res.data)));
+      };
+      getUser();
+    },
+    // eslint-disable-next-line
+    [token]
+  );
 
   useEffect(() => {
     const getViews = async () => {
@@ -54,7 +58,6 @@ function App() {
     const userLogout = async () => {
       try {
         await Axios.post("/auth/logout");
-        document.cookie = "x_auth=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
         setLogout(true);
         dispatch(getAuth(""));
         dispatch(getToken(""));

@@ -79,6 +79,7 @@ const PostWriting = ({ history }) => {
     (e) => {
       setTags(e.target.value);
     },
+    // eslint-disable-next-line
     [tags]
   );
 
@@ -88,6 +89,7 @@ const PostWriting = ({ history }) => {
       setShowTags([...showTags.concat(tags)]);
       setTags("");
     },
+    // eslint-disable-next-line
     [showTags, tags]
   );
 
@@ -103,7 +105,7 @@ const PostWriting = ({ history }) => {
     if (loading) {
       history.push("/post");
     }
-  }, [loading]);
+  }, [loading, history]);
 
   return (
     <>
