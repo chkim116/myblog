@@ -1,5 +1,4 @@
 import Category from "../models/Category";
-import Post from "../models/post";
 
 export const createCategory = async (req, res) => {
   const { category } = req.body;

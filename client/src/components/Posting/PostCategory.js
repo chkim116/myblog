@@ -39,8 +39,8 @@ export const PostCategory = ({ history }) => {
     const postCategory = async () => {
       await Axios.post("/category/create", { category: createCategory });
     };
-    setCreate(false);
     postCategory();
+    setCreate(false);
     window.location.reload();
   };
 
@@ -51,7 +51,7 @@ export const PostCategory = ({ history }) => {
       );
     };
     getCategory();
-  }, [dispatch]);
+  }, []);
 
   // post length
   const post = useSelector((state) => state.search.post);

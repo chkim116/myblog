@@ -79,7 +79,7 @@ const views = schedule.scheduleJob("0 0 0 * * *", totalView);
 
 setInterval(() => {
   http.get("https://kormelon.herokuapp.com/");
-}, 6000000);
+}, 1800000);
 
 // server
 const PORT = process.env.PORT || 4000;
