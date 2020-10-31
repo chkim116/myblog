@@ -70,9 +70,9 @@ export const postlogin = (req, res, next) => {
           return res
             .cookie("x_auth", user.token, {
               maxAge: 1000 * 60 * 60 * 24 * 7,
-              // httpOnly: true,
-              // secure: true,
-              // sameSite: "none",
+              httpOnly: true,
+              secure: true,
+              sameSite: "none",
             })
             .status(200)
             .json({ userId: user._id, token });
@@ -112,9 +112,9 @@ export const logout = (req, res) => {
   req.token = "";
   return res
     .cookie("x_auth", "", {
-      // httpOnly: true,
-      // secure: true,
-      // sameSite: "none",
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
     })
     .status(200)
     .send(req.token);
