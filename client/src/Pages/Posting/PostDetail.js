@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import PostDetailForm from "../../components/Posting/PostDetailForm";
@@ -39,7 +39,7 @@ const PostDetail = ({ history, location }) => {
 
   const [del, setDel] = useState(false);
 
-  const onClick = () => {
+  const onClick = useCallback(() => {
     setDel(true);
     const deletePost = async () => {
       try {
@@ -54,7 +54,7 @@ const PostDetail = ({ history, location }) => {
       deletePost();
       history.push("/post");
     }
-  };
+  }, [id, history]);
 
   // 코멘트 작성
 
@@ -66,31 +66,34 @@ const PostDetail = ({ history, location }) => {
 
   // create comment
 
-  const onComment = (e) => {
-    e.preventDefault();
-    const postComments = async () => {
-      try {
-        await Axios.post(`/api/comment/${id}`, {
-          comment,
-          createDate: new Date().toLocaleTimeString("ko-KR", {
-            year: "2-digit",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "numeric",
-            minute: "numeric",
-          }),
-        }).then((res) => setFakeComment(fakeComment.concat(res.data)));
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    postComments();
-    setComment({ comment: "" });
-  };
+  const onComment = useCallback(
+    (e) => {
+      e.preventDefault();
+      const postComments = async () => {
+        try {
+          await Axios.post(`/api/comment/${id}`, {
+            comment,
+            createDate: new Date().toLocaleTimeString("ko-KR", {
+              year: "2-digit",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "numeric",
+              minute: "numeric",
+            }),
+          }).then((res) => setFakeComment(fakeComment.concat(res.data)));
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      postComments();
+      setComment({ comment: "" });
+    },
+    [fakeComment, comment, id]
+  );
 
   // comment delete
 
-  const onDelComment = (e) => {
+  const onDelComment = useCallback((e) => {
     const { id } = e.target.dataset;
     const delComments = async () => {
       try {
@@ -103,7 +106,7 @@ const PostDetail = ({ history, location }) => {
       delComments();
       window.location.reload();
     }
-  };
+  }, []);
 
   // pagination
 
@@ -111,21 +114,21 @@ const PostDetail = ({ history, location }) => {
 
   const [count, setCount] = useState([0, 5]);
 
-  const onViewMore = () => {
+  const onViewMore = useCallback(() => {
     setCount([
       Math.ceil(allPost.length / 5) * 5 - 5 > count[0]
         ? count[0] + 5
         : count[0],
       Math.ceil(allPost.length / 5) * 5 > count[1] ? count[1] + 5 : count[1],
     ]);
-  };
+  }, [count]);
 
-  const onViewClose = () => {
+  const onViewClose = useCallback(() => {
     setCount([
       count[0] > 0 ? count[0] - 5 : count[0],
       count[1] > 5 ? count[1] - 5 : count[1],
     ]);
-  };
+  }, [count]);
 
   if (!loading || !allLoading) {
     return <Loading />;

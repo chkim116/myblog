@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { GuestBookWritingForm } from "../../components/GuestBook/GuestBookWritingForm";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";
@@ -13,38 +13,44 @@ export const GuestBookWriting = ({ history }) => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(false);
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setGuest({
-      ...guest,
-      [name]: value,
-      createDate: new Date().toLocaleTimeString("ko-KR", {
-        weekday: "long",
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
-    });
-  };
+  const onChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setGuest({
+        ...guest,
+        [name]: value,
+        createDate: new Date().toLocaleTimeString("ko-KR", {
+          weekday: "long",
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      });
+    },
+    [guest]
+  );
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setMessage(true);
-    const postGuestBook = async () => {
-      try {
-        await Axios.post("/port/post", guest);
-        setLoading(true);
-      } catch (err) {
-        console.log(err);
-        alert("업로드 실패");
-        setMessage(false);
-      }
-      setLoading(false);
-    };
-    postGuestBook();
-  };
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      setMessage(true);
+      const postGuestBook = async () => {
+        try {
+          await Axios.post("/port/post", guest);
+          setLoading(true);
+        } catch (err) {
+          console.log(err);
+          alert("업로드 실패");
+          setMessage(false);
+        }
+        setLoading(false);
+      };
+      postGuestBook();
+    },
+    [guest]
+  );
 
   useEffect(() => {
     if (loading) {

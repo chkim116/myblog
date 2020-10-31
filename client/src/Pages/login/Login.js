@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import { Loading } from "../Etc/Loading";
 import { getToken } from "../../Modules/auth";
 import { useDispatch } from "react-redux";
+import { useCallback } from "react";
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
@@ -13,44 +14,38 @@ const Login = ({ history }) => {
     username: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(false);
   const { username, password } = login;
 
-  const onSubmit = (e) => {
-    setUser(true);
-    e.preventDefault();
-    setLogin({ ...login });
-    const postLogin = async () => {
-      try {
-        const token = await Axios.post("/auth/login", {
-          username,
-          password,
-        }).then((res) => res.data.token);
-        dispatch(getToken(token));
-        setLoading(true);
-      } catch (err) {
-        const LOGIN = "login";
-        registerCheck(err, LOGIN, { history });
-      }
-      setUser(false);
-    };
-    postLogin();
-  };
-
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setLogin({ ...login, [name]: value });
-  };
-
-  useEffect(
-    () => {
-      if (loading) {
-        history.push("/");
-      }
+  const onChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setLogin({ ...login, [name]: value });
     },
-    // eslint-disable-next-line
-    [loading]
+    [login]
+  );
+
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      setUser(true);
+      const postLogin = async () => {
+        try {
+          const token = await Axios.post("/auth/login", {
+            username,
+            password,
+          }).then((res) => res.data.token);
+          dispatch(getToken(token));
+          history.push("/");
+        } catch (err) {
+          const LOGIN = "login";
+          registerCheck(err, LOGIN, { history });
+        }
+        setUser(false);
+      };
+      postLogin();
+    },
+    [login]
   );
 
   return (

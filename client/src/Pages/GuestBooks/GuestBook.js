@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useGetPort } from "../../middleware";
 import { Helmet } from "react-helmet-async";
 import GuestBookForm from "../../components/GuestBook/GuestBookForm";
@@ -12,23 +12,26 @@ const GuestBook = () => {
   // del
   const [del, setDel] = useState(false);
 
-  const onClick = (e) => {
-    const boardId = e.target.dataset.id;
-    const deletePost = async () => {
-      setDel(true);
-      try {
-        await Axios.get(`/port/del/${boardId}`);
-        window.location.reload();
-      } catch (err) {
-        console.log(err);
-        setDel(false);
-        alert("삭제에 실패했습니다.");
+  const onClick = useCallback(
+    (e) => {
+      const boardId = e.target.dataset.id;
+      const deletePost = async () => {
+        setDel(true);
+        try {
+          await Axios.get(`/port/del/${boardId}`);
+          window.location.reload();
+        } catch (err) {
+          console.log(err);
+          setDel(false);
+          alert("삭제에 실패했습니다.");
+        }
+      };
+      if (window.confirm("정말 삭제하시겠습니까?")) {
+        deletePost();
       }
-    };
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      deletePost();
-    }
-  };
+    },
+    [del]
+  );
 
   return (
     <>

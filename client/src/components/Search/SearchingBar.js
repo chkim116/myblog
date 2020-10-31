@@ -1,5 +1,5 @@
 import Axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   searchingPost,
@@ -18,11 +18,14 @@ export const SearchingBar = ({ onClick, history }) => {
 
   const dispatch = useDispatch();
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setSearch({ ...search, [name]: value });
-    dispatch(searchingPost(search.select, search.text));
-  };
+  const onChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setSearch({ ...search, [name]: value });
+      dispatch(searchingPost(search.select, search.text));
+    },
+    [search]
+  );
 
   useEffect(
     () => {
@@ -42,12 +45,15 @@ export const SearchingBar = ({ onClick, history }) => {
     []
   );
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setSearch({ select: "title", text: "" });
-    dispatch(showSearchBar(false));
-    history.push(`/search?select=${search.select}&text=${search.text}`);
-  };
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      setSearch({ select: "title", text: "" });
+      dispatch(showSearchBar(false));
+      history.push(`/search?select=${search.select}&text=${search.text}`);
+    },
+    [search]
+  );
 
   return (
     <SearchingBarForm

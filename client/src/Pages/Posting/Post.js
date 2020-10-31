@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";
 import PostForm from "../../components/Posting/PostForm";
@@ -43,20 +43,23 @@ const Post = ({ location, history }) => {
   const filter = useSelector((state) => state.category.filter);
   const { loading } = useGetPost(query ? `/api${query}` : "/api", location);
 
-  const handleChange = (e) => {
-    const { selected } = e;
-    setPage({
-      query: filter
-        ? `?page=${selected + 1}&filter=${filter}`
-        : `?page=${selected + 1}`,
-    });
-    history.push(
-      filter
-        ? `/post?page=${selected + 1}&filter=${filter}`
-        : `/post?page=${selected + 1}`
-    );
-    document.querySelector("#root").scrollIntoView({ behavior: "smooth" });
-  };
+  const handleChange = useCallback(
+    (e) => {
+      const { selected } = e;
+      setPage({
+        query: filter
+          ? `?page=${selected + 1}&filter=${filter}`
+          : `?page=${selected + 1}`,
+      });
+      history.push(
+        filter
+          ? `/post?page=${selected + 1}&filter=${filter}`
+          : `/post?page=${selected + 1}`
+      );
+      document.querySelector("#root").scrollIntoView({ behavior: "smooth" });
+    },
+    [filter, history]
+  );
 
   useEffect(() => {
     if (location.search.indexOf("filter")) {
@@ -75,7 +78,7 @@ const Post = ({ location, history }) => {
   // del
   const [del, setDel] = useState(false);
 
-  const onClick = (e) => {
+  const onClick = useCallback((e) => {
     const boardId = e.target.dataset.id;
     const deletePost = async () => {
       setDel(true);
@@ -92,7 +95,7 @@ const Post = ({ location, history }) => {
       deletePost();
       window.location.reload();
     }
-  };
+  }, []);
 
   return (
     <>

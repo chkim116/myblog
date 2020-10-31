@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { SearchingBar } from "./SearchingBar";
 import { HiSearch } from "react-icons/hi";
 import "./SearchingBtn.scss";
@@ -10,9 +10,9 @@ export const SearchingBtn = ({ history }) => {
 
   const show = useSelector((state) => state.search.show);
 
-  const onClick = () => {
+  const onClick = useCallback(() => {
     !show ? dispatch(showSearchBar(true)) : dispatch(showSearchBar(false));
-  };
+  }, [show]);
 
   return (
     <>

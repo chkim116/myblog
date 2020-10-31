@@ -13,8 +13,8 @@ const Home = () => {
       setLoadingHome(false);
       try {
         const tags = await Axios.get("/tag").then((res) => res.data);
-        setTagList(tags);
         setLoadingHome(true);
+        setTagList(tags);
       } catch (err) {
         console.log(err);
       }

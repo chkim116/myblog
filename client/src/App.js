@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";
 import "./Styles/loading.scss";
@@ -10,8 +10,6 @@ import { SearchingBtn } from "./components/Search/SearchingBtn";
 import { RouteCompoents } from "./RouteCompoents";
 import { Loading } from "./Pages/Etc/Loading";
 
-// 유저 확인을 위한 hook&redux
-
 import { Route } from "react-router-dom";
 import { ArrowUp } from "./components/Layouts/ArrowUp";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,7 +18,7 @@ import routes from "./routes";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
-  Axios.defaults.baseURL = routes.api;
+  // Axios.defaults.baseURL = routes.api;
   Axios.defaults.withCredentials = true;
 
   // view
@@ -32,10 +30,16 @@ function App() {
   useEffect(
     () => {
       if (token === "") {
-        return console.log("can't");
+        return console.log("empty token");
       }
       const getUser = async () => {
-        await Axios.get("/auth").then((res) => dispatch(getAuth(res.data)));
+        setLoading(true);
+        try {
+          await Axios.get("/auth").then((res) => dispatch(getAuth(res.data)));
+        } catch (err) {
+          console.log(err);
+        }
+        setLoading(false);
       };
       getUser();
     },
@@ -54,7 +58,7 @@ function App() {
   // userLogout
   const [logout, setLogout] = useState(false);
 
-  const onClick = () => {
+  const onClick = useCallback(() => {
     const userLogout = async () => {
       try {
         await Axios.post("/auth/logout");
@@ -66,12 +70,12 @@ function App() {
       }
     };
     userLogout();
-  };
+  }, [logout]);
 
   // scroll to top
-  const onScrollTop = () => {
+  const onScrollTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  }, [window.scrollTo]);
 
   if (loading) {
     return <Loading />;

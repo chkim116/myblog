@@ -45,33 +45,40 @@ const PostWriting = ({ history }) => {
 
   // text event
 
-  const onSelect = (e) => {
-    setSelectCategory(e.target.value);
-  };
+  const onSelect = useCallback(
+    (e) => {
+      setSelectCategory(e.target.value);
+    },
+    [selectCategory]
+  );
 
-  const onChange = (e) => {
-    const { value, name } = e.target;
-    setPost({
-      ...post,
-      [name]: value,
-    });
-  };
+  const onChange = useCallback(
+    (e) => {
+      const { value, name } = e.target;
+      setPost({
+        ...post,
+        [name]: value,
+      });
+    },
+    [post]
+  );
 
   const onValue = (content, delta, source, editor) => {
-    console.log(content, delta, source, editor);
     const text = editor.getHTML();
-    console.log(editor.getHTML());
     setPost({
       ...post,
       description: text,
     });
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setPost({ ...post });
-    axiosData();
-  };
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      setPost({ ...post });
+      axiosData();
+    },
+    [post, showTags, tags]
+  );
 
   // tag event
 
@@ -95,11 +102,14 @@ const PostWriting = ({ history }) => {
 
   // tag del
 
-  const onTagDel = (e) => {
-    const tagId = e.target.dataset.tag;
-    const filterTags = showTags.filter((tags) => tags !== tagId);
-    setShowTags(filterTags);
-  };
+  const onTagDel = useCallback(
+    (e) => {
+      const tagId = e.target.dataset.tag;
+      const filterTags = showTags.filter((tags) => tags !== tagId);
+      setShowTags(filterTags);
+    },
+    [showTags]
+  );
 
   useEffect(() => {
     if (loading) {

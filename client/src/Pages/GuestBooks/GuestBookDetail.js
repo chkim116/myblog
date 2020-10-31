@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetPort } from "../../middleware";
 import { GuestBookDetailForm } from "../../components/GuestBook/GuestBookDetailForm";
@@ -17,7 +17,7 @@ export const GuestBookDetail = ({ history }) => {
 
   const [loading, setLoding] = useState(false);
 
-  const onClick = () => {
+  const onClick = useCallback(() => {
     const deletePost = async () => {
       await Axios.get(`/port/del/${id}`);
       setLoding(true);
@@ -25,7 +25,7 @@ export const GuestBookDetail = ({ history }) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       deletePost();
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     if (loading) {

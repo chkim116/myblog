@@ -26,23 +26,29 @@ export const PostCategory = ({ history }) => {
 
   const createList = useSelector((state) => state.category.data);
 
-  const onCreateCategory = () => {
+  const onCreateCategory = useCallback(() => {
     !create ? setCreate(true) : setCreate(false);
-  };
+  }, [create]);
 
-  const onCreate = (e) => {
-    setCreateCategory(e.target.value);
-  };
+  const onCreate = useCallback(
+    (e) => {
+      setCreateCategory(e.target.value);
+    },
+    [createCategory]
+  );
 
-  const onCreateSubmit = (e) => {
-    e.preventDefault();
-    const postCategory = async () => {
-      await Axios.post("/category/create", { category: createCategory });
-    };
-    postCategory();
-    setCreate(false);
-    window.location.reload();
-  };
+  const onCreateSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      const postCategory = async () => {
+        await Axios.post("/category/create", { category: createCategory });
+      };
+      postCategory();
+      setCreate(false);
+      window.location.reload();
+    },
+    [createCategory]
+  );
 
   useEffect(() => {
     const getCategory = async () => {
@@ -58,16 +64,23 @@ export const PostCategory = ({ history }) => {
 
   // filter post
 
-  const onClick = (e) => {
-    const { category } = e.target.dataset;
-    const filter = post.filter((f) => (category ? f.category === category : f));
-    dispatch(filterCategory(category, filter.splice(0, 6)));
-    history.push(category ? `/post?page=1&filter=${category}` : "/post?page=1");
-  };
+  const onClick = useCallback(
+    (e) => {
+      const { category } = e.target.dataset;
+      const filter = post.filter((f) =>
+        category ? f.category === category : f
+      );
+      dispatch(filterCategory(category, filter.splice(0, 6)));
+      history.push(
+        category ? `/post?page=1&filter=${category}` : "/post?page=1"
+      );
+    },
+    [history]
+  );
 
   // del post
 
-  const onDel = (e) => {
+  const onDel = useCallback((e) => {
     const { id } = e.target.dataset;
     const delCategory = async () => {
       await Axios.get(`/category/del/${id}`);
@@ -76,30 +89,39 @@ export const PostCategory = ({ history }) => {
       delCategory();
       window.location.reload();
     }
-  };
+  }, []);
 
   //  edit Post
   const [categoryEdit, setCategoryEdit] = useState({ text: "", id: "" });
   const [editShow, setEditShow] = useState(false);
 
-  const onEdit = (e) => {
-    !editShow ? setEditShow(true) : setEditShow(false);
-  };
+  const onEdit = useCallback(
+    (e) => {
+      !editShow ? setEditShow(true) : setEditShow(false);
+    },
+    [editShow]
+  );
 
-  const onEditChange = (e) => {
-    const { value } = e.target;
-    const { id } = e.target.dataset;
-    setCategoryEdit({ ...categoryEdit, text: value, id });
-  };
+  const onEditChange = useCallback(
+    (e) => {
+      const { value } = e.target;
+      const { id } = e.target.dataset;
+      setCategoryEdit({ ...categoryEdit, text: value, id });
+    },
+    [categoryEdit]
+  );
 
-  const onEditSubmit = (e) => {
-    e.preventDefault();
-    const postCategoryEdit = async () => {
-      await Axios.post("/category/edit", { categoryEdit });
-    };
-    postCategoryEdit();
-    window.location.reload();
-  };
+  const onEditSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      const postCategoryEdit = async () => {
+        await Axios.post("/category/edit", { categoryEdit });
+      };
+      postCategoryEdit();
+      window.location.reload();
+    },
+    [categoryEdit]
+  );
 
   return (
     <div className='category'>

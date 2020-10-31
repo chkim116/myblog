@@ -37,18 +37,24 @@ const PostEdit = ({ history }) => {
 
   // text event
 
-  const onSelect = (e) => {
-    setSelectCategory(e.target.value);
-  };
+  const onSelect = useCallback(
+    (e) => {
+      setSelectCategory(e.target.value);
+    },
+    [selectCategory]
+  );
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setUpdatePost({
-      ...updatePost,
-      [name]: value,
-      updated: "(수정됨)",
-    });
-  };
+  const onChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setUpdatePost({
+        ...updatePost,
+        [name]: value,
+        updated: "(수정됨)",
+      });
+    },
+    [updatePost]
+  );
 
   const onValue = (content, delta, source, editor) => {
     const text = editor.getHTML();
@@ -59,32 +65,35 @@ const PostEdit = ({ history }) => {
     });
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setUpdatePost({ ...updatePost });
-    const axiosData = async () => {
-      try {
-        await Axios.post(`/api/edit/${id}`, {
-          title,
-          description,
-          updated,
-          tags: showTags,
-          category: selectCategory ? selectCategory : category,
-        });
-        setUpdate(true);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    axiosData();
-  };
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      setUpdatePost({ ...updatePost });
+      const axiosData = async () => {
+        try {
+          await Axios.post(`/api/edit/${id}`, {
+            title,
+            description,
+            updated,
+            tags: showTags,
+            category: selectCategory ? selectCategory : category,
+          });
+          setUpdate(true);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      axiosData();
+    },
+    [selectCategory, id, category, updatePost, showTags]
+  );
 
   // tag event
   const onTags = useCallback(
     (e) => {
       setTags(e.target.value);
     }, // eslint-disable-next-line
-    [tags]
+    [showTags, tags]
   );
 
   const onTagsSubmit = useCallback(
@@ -98,11 +107,14 @@ const PostEdit = ({ history }) => {
 
   // tag del
 
-  const onTagDel = (e) => {
-    const tagId = e.target.dataset.tag;
-    const filterTags = showTags.filter((tags) => tags !== tagId);
-    setShowTags(filterTags);
-  };
+  const onTagDel = useCallback(
+    (e) => {
+      const tagId = e.target.dataset.tag;
+      const filterTags = showTags.filter((tags) => tags !== tagId);
+      setShowTags(filterTags);
+    },
+    [showTags]
+  );
 
   // if update go post page
   useEffect(() => {
