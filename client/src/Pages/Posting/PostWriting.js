@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import PostingForm from "../../components/Posting/PostingForm";
 import Axios from "axios";
 import { Helmet } from "react-helmet-async";
@@ -82,23 +82,19 @@ const PostWriting = ({ history }) => {
 
   // tag event
 
-  const onTags = useCallback(
+  const onTags = 
     (e) => {
       setTags(e.target.value);
     },
-    // eslint-disable-next-line
-    [tags]
-  );
+ 
+  ;
 
-  const onTagsSubmit = useCallback(
+  const onTagsSubmit = 
     (e) => {
       e.preventDefault();
       setShowTags([...showTags.concat(tags)]);
       setTags("");
-    },
-    // eslint-disable-next-line
-    [showTags, tags]
-  );
+    }
 
   // tag del
 

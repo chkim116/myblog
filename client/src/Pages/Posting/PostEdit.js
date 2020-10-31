@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import PostEditForm from "../../components/Posting/PostEditForm";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
@@ -44,17 +44,14 @@ const PostEdit = ({ history }) => {
     [selectCategory]
   );
 
-  const onChange = useCallback(
-    (e) => {
-      const { name, value } = e.target;
-      setUpdatePost({
-        ...updatePost,
-        [name]: value,
-        updated: "(수정됨)",
-      });
-    },
-    [updatePost]
-  );
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setUpdatePost({
+      ...updatePost,
+      [name]: value,
+      updated: "(수정됨)",
+    });
+  };
 
   const onValue = (content, delta, source, editor) => {
     const text = editor.getHTML();
@@ -65,56 +62,44 @@ const PostEdit = ({ history }) => {
     });
   };
 
-  const onSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-      setUpdatePost({ ...updatePost });
-      const axiosData = async () => {
-        try {
-          await Axios.post(`/api/edit/${id}`, {
-            title,
-            description,
-            updated,
-            tags: showTags,
-            category: selectCategory ? selectCategory : category,
-          });
-          setUpdate(true);
-        } catch (err) {
-          console.log(err);
-        }
-      };
-      axiosData();
-    },
-    [selectCategory, id, category, updatePost, showTags]
-  );
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setUpdatePost({ ...updatePost });
+    const axiosData = async () => {
+      try {
+        await Axios.post(`/api/edit/${id}`, {
+          title,
+          description,
+          updated,
+          tags: showTags,
+          category: selectCategory ? selectCategory : category,
+        });
+        setUpdate(true);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    axiosData();
+  };
 
   // tag event
-  const onTags = useCallback(
-    (e) => {
-      setTags(e.target.value);
-    }, // eslint-disable-next-line
-    [showTags, tags]
-  );
+  const onTags = (e) => {
+    setTags(e.target.value);
+  };
 
-  const onTagsSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-      setShowTags([...showTags.concat(tags)]);
-      setTags("");
-    },
-    [showTags, tags]
-  );
+  const onTagsSubmit = (e) => {
+    e.preventDefault();
+    setShowTags([...showTags.concat(tags)]);
+    setTags("");
+  };
 
   // tag del
 
-  const onTagDel = useCallback(
-    (e) => {
-      const tagId = e.target.dataset.tag;
-      const filterTags = showTags.filter((tags) => tags !== tagId);
-      setShowTags(filterTags);
-    },
-    [showTags]
-  );
+  const onTagDel = (e) => {
+    const tagId = e.target.dataset.tag;
+    const filterTags = showTags.filter((tags) => tags !== tagId);
+    setShowTags(filterTags);
+  };
 
   // if update go post page
   useEffect(() => {
