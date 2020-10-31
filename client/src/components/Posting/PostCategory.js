@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./PostCategory.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -16,9 +16,9 @@ export const PostCategory = ({ history }) => {
   const admin = useSelector((state) => state.auth.admin);
   const dispatch = useDispatch();
 
-  const onCategory = useCallback(() => {
+  const onCategory = () => {
     !show ? dispatch(showCategory(true)) : dispatch(showCategory(false));
-  }, [show, dispatch]);
+  };
 
   // category create event
   const [create, setCreate] = useState(false);

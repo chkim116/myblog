@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import PostEditForm from "../../components/Posting/PostEditForm";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
@@ -80,21 +80,15 @@ const PostEdit = ({ history }) => {
   };
 
   // tag event
-  const onTags = useCallback(
-    (e) => {
-      setTags(e.target.value);
-    }, // eslint-disable-next-line
-    [tags]
-  );
+  const onTags = (e) => {
+    setTags(e.target.value);
+  };
 
-  const onTagsSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-      setShowTags([...showTags.concat(tags)]);
-      setTags("");
-    },
-    [showTags, tags]
-  );
+  const onTagsSubmit = (e) => {
+    e.preventDefault();
+    setShowTags([...showTags.concat(tags)]);
+    setTags("");
+  };
 
   // tag del
 
