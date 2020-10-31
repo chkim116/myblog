@@ -75,19 +75,15 @@ const PostWriting = ({ history }) => {
 
   // tag event
 
-  const onTags = 
-    (e) => {
-      setTags(e.target.value);
-    },
- 
-  ;
+  const onTags = (e) => {
+    setTags(e.target.value);
+  };
 
-  const onTagsSubmit = 
-    (e) => {
-      e.preventDefault();
-      setShowTags([...showTags.concat(tags)]);
-      setTags("");
-    }
+  const onTagsSubmit = (e) => {
+    e.preventDefault();
+    setShowTags([...showTags.concat(tags)]);
+    setTags("");
+  };
 
   // tag del
 

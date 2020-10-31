@@ -88,7 +88,7 @@ export const GuestBookEdit = ({ history }) => {
       <Helmet>
         <title>My Blog | 방명록 수정 {guest.title}</title>
       </Helmet>
-      {user.id === guest.creator || user.admin ? (
+      {user.id === guest.creator ? (
         <GuestBookEditForm
           guest={guest}
           onChange={onChange}
