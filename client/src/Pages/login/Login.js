@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import LoginForm from "../../components/login/LoginForm";
 import Axios from "axios";
-import { registerCheck } from "../../middleware";
-import { Helmet } from "react-helmet-async";
+import { registerCheck } from "../../customHooks";
 import { Loading } from "../Etc/Loading";
 import { getToken } from "../../Modules/auth";
 import { useDispatch } from "react-redux";
+import { SeoMeta } from "../../SeoMeta";
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
@@ -53,11 +53,15 @@ const Login = ({ history }) => {
     [loading]
   );
 
+  const data = {
+    title: "로그인 | Think_Thank",
+    description: "내가 생각하는 창고, Think Tank",
+    canonical: `login`,
+  };
+
   return (
     <>
-      <Helmet>
-        <title>My Blog | 로그인</title>
-      </Helmet>
+      <SeoMeta data={data} />
 
       {user && <Loading />}
       <LoginForm

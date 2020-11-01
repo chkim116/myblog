@@ -1,6 +1,6 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   searchingPost,
   searchResults,
@@ -17,6 +17,7 @@ export const SearchingBar = ({ onClick, history }) => {
   });
 
   const dispatch = useDispatch();
+  const post = useSelector((state) => state.search.post);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -24,23 +25,22 @@ export const SearchingBar = ({ onClick, history }) => {
     dispatch(searchingPost(search.select, search.text));
   };
 
-  useEffect(
-    () => {
-      const getSearching = () => {
-        const searchPost = async () => {
-          setLoading(true);
-          await Axios.get("/api/all").then((res) =>
-            dispatch(searchResults(res.data))
-          );
-          setLoading(false);
-        };
-        searchPost();
+  useEffect(() => {
+    if (post) {
+      return setLoading(false);
+    }
+    const getSearching = () => {
+      const searchPost = async () => {
+        setLoading(true);
+        await Axios.get("/api/all").then((res) =>
+          dispatch(searchResults(res.data))
+        );
+        setLoading(false);
       };
-      getSearching();
-    },
-    // eslint-disable-next-line
-    []
-  );
+      searchPost();
+    };
+    getSearching();
+  }, [post, dispatch]);
 
   const onSubmit = (e) => {
     e.preventDefault();

@@ -1,12 +1,12 @@
 import React from "react";
 import "./PostDetailForm.scss";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { PostComment } from "./PostComment";
 import { PostRecentForm } from "./PostRecentForm";
 
 const PostDetailForm = ({
   post,
+  username,
   onClick,
   onChangeComment,
   onComment,
@@ -17,10 +17,10 @@ const PostDetailForm = ({
   count,
   fakeComment,
   commentValue,
+  admin,
+  recentPost,
 }) => {
   const { title, description, _id, createDate, tags, comment } = post;
-  const admin = useSelector((state) => state.auth.admin);
-  const recentPost = useSelector((state) => state.search.post);
 
   return (
     <>
@@ -69,6 +69,7 @@ const PostDetailForm = ({
         <div className='post__detail-date'>Uploaded: {createDate}</div>
         <PostComment
           comment={comment}
+          username={username}
           onChangeComment={onChangeComment}
           onComment={onComment}
           onDelComment={onDelComment}

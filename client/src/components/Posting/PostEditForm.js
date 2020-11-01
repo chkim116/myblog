@@ -1,7 +1,6 @@
 import React from "react";
 import "./PostingForm.scss";
 import { TagBox } from "./TagBox";
-import { useSelector } from "react-redux";
 import { ReactQuillForm } from "./ReactQuillForm";
 
 const PostEditForm = ({
@@ -16,10 +15,10 @@ const PostEditForm = ({
   onTagDel,
   selectCategory,
   onSelect,
+  selectList,
 }) => {
   const { title, description } = post;
 
-  const selectList = useSelector((state) => state.category.data);
   return (
     <>
       <form className='posting__form' onSubmit={onSubmit} onChange={onChange}>

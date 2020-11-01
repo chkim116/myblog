@@ -47,7 +47,7 @@ export const useGetPost = (url, location) => {
 
 // get GuestBook
 
-export const useGetPort = (url) => {
+export const useGetGuest = (url) => {
   const [guest, setGuest] = useState({
     title: "",
     description: "",
@@ -105,40 +105,6 @@ export const useGetTag = (url) => {
   return { searchTags, loading };
 };
 
-// searching post
-
-export const useSearch = (search) => {
-  const [searchPost, setSearchPost] = useState({
-    title: "",
-    description: "",
-    createDate: "",
-    creator: "",
-    username: "",
-    updata: false,
-    tags: [],
-    comment: [],
-  });
-
-  const getSearchPost = async (search) => {
-    try {
-      const searchPost = await Axios({
-        method: "GET",
-        url: "/api/searching",
-        params: { q: search },
-      }).then((res) => res.data);
-      setSearchPost(searchPost);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    getSearchPost(search);
-  }, [search]);
-
-  return searchPost;
-};
-
 // get category
 
 export const useGetCategory = () => {
@@ -158,34 +124,3 @@ export const useGetCategory = () => {
 
   return { loading };
 };
-
-// react-quill
-export const modules = {
-  toolbar: {
-    container: [
-      [{ font: [] }],
-      [{ size: ["small", false, "large", "huge"] }],
-      ["bold", "italic", "underline"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      [{ align: [] }],
-      [{ color: [] }, { background: [] }],
-      ["link", "image", "video"],
-    ],
-  },
-};
-
-export const formats = [
-  "font",
-  "size",
-  "bold",
-  "italic",
-  "underline",
-  "list",
-  "bullet",
-  "align",
-  "color",
-  "background",
-  "link",
-  "image",
-  "video",
-];

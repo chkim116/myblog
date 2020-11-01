@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import PostEditForm from "../../components/Posting/PostEditForm";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import { Loading } from "../Etc/Loading";
+import { useSelector } from "react-redux";
+import { SeoMeta } from "../../SeoMeta";
 
 const PostEdit = ({ history }) => {
+  const selectList = useSelector((state) => state.category.data);
+
   const { id } = useParams();
 
   //   get post
@@ -105,13 +108,18 @@ const PostEdit = ({ history }) => {
     }
   });
 
+  const data = {
+    title: "포스트 수정 | Think_Thank",
+    description: "내가 생각하는 창고, Think Tank",
+    canonical: `edit/${id}`,
+  };
+
   return (
     <>
-      <Helmet>
-        <title>My Blog | 포스트 수정</title>
-      </Helmet>
+      <SeoMeta data={data} />
       {loading ? (
         <PostEditForm
+          selectList={selectList}
           post={updatePost}
           loading={loading}
           onSubmit={onSubmit}

@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import "./PostComment.scss";
 
 export const PostComment = ({
@@ -9,9 +8,8 @@ export const PostComment = ({
   onDelComment,
   fakeComment,
   commentValue,
+  username,
 }) => {
-  const username = useSelector((state) => state.auth.username);
-
   return (
     <div className='wrap__comments'>
       {comment ? (

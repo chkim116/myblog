@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useGetPort } from "../../middleware";
-import { Helmet } from "react-helmet-async";
+import { useGetGuest } from "../../customHooks";
 import GuestBookForm from "../../components/GuestBook/GuestBookForm";
 import { Loading } from "../Etc/Loading";
 import Axios from "axios";
+import { SeoMeta } from "../../SeoMeta";
 
 const GuestBook = () => {
-  const guests = useGetPort("/port");
+  const guests = useGetGuest("/port");
   const { guest, loading } = guests;
 
   // del
@@ -30,11 +30,15 @@ const GuestBook = () => {
     }
   };
 
+  const data = {
+    title: "방명록 | Think_Thank",
+    description: "내가 생각하는 창고, Think Tank",
+    canonical: `guestbook`,
+  };
+
   return (
     <>
-      <Helmet>
-        <title>My Blog | 방명록</title>
-      </Helmet>
+      <SeoMeta data={data} />
       {del && <Loading />}
       {loading ? (
         <>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { GuestBookWritingForm } from "../../components/GuestBook/GuestBookWritingForm";
 import Axios from "axios";
-import { Helmet } from "react-helmet-async";
 import { Loading } from "../Etc/Loading";
+import { SeoMeta } from "../../SeoMeta";
 
 export const GuestBookWriting = ({ history }) => {
   const [guest, setGuest] = useState({
@@ -52,12 +52,16 @@ export const GuestBookWriting = ({ history }) => {
     }
   });
 
+  const data = {
+    title: "방명록 작성 | Think_Thank",
+    description: "내가 생각하는 창고, Think Tank",
+    canonical: `guestbooking`,
+  };
+
   return (
     <>
+      <SeoMeta data={data} />
       {message && <Loading />}
-      <Helmet>
-        <title>My Blog | 방명록 작성</title>
-      </Helmet>
       <GuestBookWritingForm onChange={onChange} onSubmit={onSubmit} />
     </>
   );

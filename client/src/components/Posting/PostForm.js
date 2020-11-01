@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import routes from "../../routes";
 import { PostPagination } from "./PostPagination";
 import { PostFormBlock } from "./PostFormBlock";
-import { useSelector } from "react-redux";
 import { PostCategory } from "./PostCategory";
 
 const PostForm = ({
@@ -13,10 +12,12 @@ const PostForm = ({
   handleChange,
   history,
   filterPost,
+  filter,
+  filteringPost,
   location,
+  admin,
+  post,
 }) => {
-  const admin = useSelector((state) => state.auth.admin);
-
   return (
     <>
       <div className='post__wrap'>
@@ -26,9 +27,16 @@ const PostForm = ({
             {admin && <Link to={routes.postwriting}>Post</Link>}
           </span>
         </div>
-        <PostFormBlock filterPost={filterPost} onClick={onClick} />
+        <PostFormBlock
+          filterPost={filterPost}
+          onClick={onClick}
+          admin={admin}
+        />
         <div className='post__form-page'>
           <PostPagination
+            filter={filter}
+            post={post}
+            filteringPost={filteringPost}
             handleChange={handleChange}
             select={select}></PostPagination>
         </div>

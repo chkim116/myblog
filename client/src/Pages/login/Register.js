@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import RegisterForm from "../../components/login/RegisterForm";
 import Axios from "axios";
-import { registerCheck } from "../../middleware";
-import { Helmet } from "react-helmet-async";
+import { registerCheck } from "../../customHooks";
 import { Loading } from "../Etc/Loading";
+import { SeoMeta } from "../../SeoMeta";
 
 const Register = ({ history }) => {
   const [register, setRegister] = useState({
@@ -50,12 +50,15 @@ const Register = ({ history }) => {
     setRegister({ ...register, [name]: value });
   };
 
+  const data = {
+    title: "회원가입 | Think_Thank",
+    description: "내가 생각하는 창고, Think Tank",
+    canonical: `register`,
+  };
+
   return (
     <>
-      <Helmet>
-        <title>My Blog | 회원가입</title>
-      </Helmet>
-
+      <SeoMeta data={data} />
       {user && <Loading />}
       <RegisterForm onChange={onChange} onSubmit={onSubmit}></RegisterForm>
     </>

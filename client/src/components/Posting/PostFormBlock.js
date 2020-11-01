@@ -1,10 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-export const PostFormBlock = ({ onClick, post, loading, filterPost }) => {
-  const admin = useSelector((state) => state.auth.admin);
-
+export const PostFormBlock = ({
+  admin,
+  onClick,
+  post,
+  loading,
+  filterPost,
+}) => {
   // loading은 검색했을 때 생기는 loading
   return (
     <>

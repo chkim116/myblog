@@ -2,7 +2,7 @@ import React from "react";
 import { PostFormBlock } from "../Posting/PostFormBlock";
 import "./SearchingForm.scss";
 
-export const SearchingForm = ({ searchTags, search, loading }) => {
+export const SearchingForm = ({ admin, searchTags, search, loading }) => {
   const uri = search.split("=")[2];
   return (
     <div>
@@ -17,7 +17,7 @@ export const SearchingForm = ({ searchTags, search, loading }) => {
       </div>
 
       <div className='post__wrap'>
-        <PostFormBlock post={searchTags} loading={loading} />
+        <PostFormBlock post={searchTags} admin={admin} loading={loading} />
       </div>
     </div>
   );

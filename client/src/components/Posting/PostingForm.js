@@ -1,7 +1,7 @@
 import React from "react";
 import "./PostingForm.scss";
 import { TagBox } from "./TagBox";
-import { useSelector } from "react-redux";
+
 import { ReactQuillForm } from "./ReactQuillForm";
 
 const PostingForm = ({
@@ -14,10 +14,9 @@ const PostingForm = ({
   tags,
   showTags,
   selectCategory,
+  selectList,
   onSelect,
 }) => {
-  const selectList = useSelector((state) => state.category.data);
-
   return (
     <>
       <form className='posting__form' onSubmit={onSubmit}>
