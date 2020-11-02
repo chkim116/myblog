@@ -10,20 +10,20 @@ import { SeoMeta } from "../../SeoMeta";
 
 const PostDetail = ({ history, location }) => {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const admin = useSelector((state) => state.auth.admin);
-  const recentPost = useSelector((state) => state.search.post);
+  const allPost = useSelector((state) => state.search.post);
   const username = useSelector((state) => state.auth.username);
+  const post = useSelector((state) => state.category.post);
 
   // get Post Detail
   const getPost = useGetPost(`/api/${id}`);
   const { loading } = getPost;
-  const post = useSelector((state) => state.category.post);
 
   const [allLoading, setAllLoading] = useState(false);
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (recentPost) {
+    if (allPost) {
       return setAllLoading(true);
     }
     const getAllPost = () => {
@@ -113,16 +113,12 @@ const PostDetail = ({ history, location }) => {
 
   // pagination
 
-  const allPost = useSelector((state) => state.search.post);
-
   const [count, setCount] = useState([0, 5]);
 
   const onViewMore = () => {
     setCount([
-      Math.ceil(allPost.length / 5) * 5 - 5 > count[0]
-        ? count[0] + 5
-        : count[0],
-      Math.ceil(allPost.length / 5) * 5 > count[1] ? count[1] + 5 : count[1],
+      Math.ceil(post.length / 5) * 5 - 5 > count[0] ? count[0] + 5 : count[0],
+      Math.ceil(post.length / 5) * 5 > count[1] ? count[1] + 5 : count[1],
     ]);
   };
 
@@ -162,7 +158,7 @@ const PostDetail = ({ history, location }) => {
         onComment={onComment}
         onDelComment={onDelComment}
         admin={admin}
-        recentPost={recentPost}
+        allPost={allPost}
       />
     </>
   );

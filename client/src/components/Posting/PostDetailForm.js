@@ -18,7 +18,7 @@ const PostDetailForm = ({
   fakeComment,
   commentValue,
   admin,
-  recentPost,
+  allPost,
 }) => {
   const { title, description, _id, createDate, tags, comment } = post;
 
@@ -27,7 +27,7 @@ const PostDetailForm = ({
       <PostRecentForm
         onViewMore={onViewMore}
         onViewClose={onViewClose}
-        recentPost={recentPost}
+        allPost={allPost}
         location={location}
         count={count}
       />

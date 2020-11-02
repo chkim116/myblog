@@ -11,10 +11,9 @@ import { PostCategoryList } from "./PostCategoryList";
 import { PostCategoryTitle } from "./PostCategoryTitle";
 
 export const PostCategory = ({ history }) => {
-  // redux
+  const dispatch = useDispatch();
   const show = useSelector((state) => state.category.show);
   const admin = useSelector((state) => state.auth.admin);
-  const dispatch = useDispatch();
 
   const onCategory = () => {
     !show ? dispatch(showCategory(true)) : dispatch(showCategory(false));

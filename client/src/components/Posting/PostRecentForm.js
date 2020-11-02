@@ -3,19 +3,19 @@ import { Link } from "react-router-dom";
 import "./PostRecentForm.scss";
 
 export const PostRecentForm = ({
-  recentPost,
   location,
   onViewMore,
   onViewClose,
   count,
+  allPost,
 }) => {
   const path = location.pathname.split("/")[2];
 
   return (
     <div className='post__nav-wrap'>
       <div className='recent__post'>최근 글</div>
-      {recentPost &&
-        recentPost.slice(count[0], count[1]).map((p, index) => (
+      {allPost &&
+        allPost.slice(count[0], count[1]).map((p, index) => (
           <div className='post__nav' key={index}>
             <Link className='post__nav-link' to={`/postdetail/${p._id}`}>
               <div
