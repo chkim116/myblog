@@ -1,15 +1,19 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Axios from "axios";
-import { Helmet } from "react-helmet-async";
 import PostForm from "../../components/Posting/PostForm";
 import { Loading } from "../Etc/Loading";
-import { useGetPost } from "../../middleware";
+import { useGetPost } from "../../customHooks";
 import { useDispatch, useSelector } from "react-redux";
 import { searchResults } from "../../Modules/search";
+import { SeoMeta } from "../../SeoMeta";
 
 const Post = ({ location, history }) => {
   const dispatch = useDispatch();
+  const admin = useSelector((state) => state.auth.admin);
+  const post = useSelector((state) => state.search.post);
+  const filter = useSelector((state) => state.category.filter);
   const filterPost = useSelector((state) => state.category.post);
+  const filteringPost = filter && post.filter((f) => f.category === filter);
 
   // get all post / 5, 페이지의 수를 파악하기 위해 불러옴
   const [allLoading, setAllLoading] = useState(false);
@@ -40,7 +44,6 @@ const Post = ({ location, history }) => {
   const { selecting } = select;
 
   // query url에 따른 보여주는 포스트
-  const filter = useSelector((state) => state.category.filter);
   const { loading } = useGetPost(query ? `/api${query}` : "/api", location);
 
   const handleChange = useCallback(
@@ -97,14 +100,19 @@ const Post = ({ location, history }) => {
     }
   }, []);
 
+  const data = {
+    title: "포스트 | Think_Thank",
+    description: "내가 생각하는 창고, Think Tank",
+    canonical: `post${location.search}`,
+  };
+
   return (
     <>
-      <Helmet>
-        <title>My Blog | 포스트</title>
-      </Helmet>
+      <SeoMeta data={data} />
       {del && <Loading />}
       {loading && allLoading ? (
         <PostForm
+          post={post}
           history={history}
           onClick={onClick}
           loading={loading}
@@ -113,6 +121,8 @@ const Post = ({ location, history }) => {
           handleChange={handleChange}
           select={selecting}
           filterPost={filterPost}
+          filteringPost={filteringPost}
+          admin={admin}
         />
       ) : (
         <Loading />

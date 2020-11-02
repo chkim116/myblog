@@ -1,7 +1,7 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import HomeForm from "../../components/Home/HomeForm";
-
+import { SeoMeta } from "../../SeoMeta";
 import { Loading } from "../Etc/Loading";
 
 const Home = () => {
@@ -12,7 +12,11 @@ const Home = () => {
     const getTags = async () => {
       setLoadingHome(false);
       try {
+<<<<<<< HEAD
         const tags = await Axios.get("/tag").then((res) => res.data);
+=======
+        await Axios.get("/tag").then((res) => setTagList(res.data));
+>>>>>>> 61bc4913be17f9f89f8af44729596b36bd99ffea
         setLoadingHome(true);
         setTagList(tags);
       } catch (err) {
@@ -27,14 +31,24 @@ const Home = () => {
     tag.push(list.tags);
   });
 
+  const data = {
+    title: "Think_Thank",
+    description: "내가 생각하는 창고, Think Tank",
+    canonical: ``,
+    keywords: tagList.map((tag) => tag.tags.slice(0, 10).join()),
+  };
+
   return (
-    <div>
-      {loadingHome ? (
-        <HomeForm post={tagList} tagList={tag}></HomeForm>
-      ) : (
-        <Loading />
-      )}
-    </div>
+    <>
+      <SeoMeta data={data} />
+      <div>
+        {loadingHome ? (
+          <HomeForm post={tagList} tagList={tag}></HomeForm>
+        ) : (
+          <Loading />
+        )}
+      </div>
+    </>
   );
 };
 

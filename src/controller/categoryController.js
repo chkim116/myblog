@@ -6,7 +6,7 @@ export const createCategory = async (req, res) => {
     await Category.create({
       category: category,
     });
-    res.status(200);
+    res.status(200).json("create!");
   } catch (err) {
     console.log(err);
     res.status(400);

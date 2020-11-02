@@ -1,6 +1,11 @@
 import Axios from "axios";
+<<<<<<< HEAD
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+=======
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+>>>>>>> 61bc4913be17f9f89f8af44729596b36bd99ffea
 import {
   searchingPost,
   searchResults,
@@ -17,6 +22,7 @@ export const SearchingBar = ({ onClick, history }) => {
   });
 
   const dispatch = useDispatch();
+  const post = useSelector((state) => state.search.post);
 
   const onChange = useCallback(
     (e) => {
@@ -27,23 +33,22 @@ export const SearchingBar = ({ onClick, history }) => {
     [search]
   );
 
-  useEffect(
-    () => {
-      const getSearching = () => {
-        const searchPost = async () => {
-          setLoading(true);
-          await Axios.get("/api/all").then((res) =>
-            dispatch(searchResults(res.data))
-          );
-          setLoading(false);
-        };
-        searchPost();
+  useEffect(() => {
+    if (post) {
+      return setLoading(false);
+    }
+    const getSearching = () => {
+      const searchPost = async () => {
+        setLoading(true);
+        await Axios.get("/api/all").then((res) =>
+          dispatch(searchResults(res.data))
+        );
+        setLoading(false);
       };
-      getSearching();
-    },
-    // eslint-disable-next-line
-    []
-  );
+      searchPost();
+    };
+    getSearching();
+  }, [post, dispatch]);
 
   const onSubmit = useCallback(
     (e) => {

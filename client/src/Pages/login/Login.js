@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import LoginForm from "../../components/login/LoginForm";
 import Axios from "axios";
-import { registerCheck } from "../../middleware";
-import { Helmet } from "react-helmet-async";
+import { registerCheck } from "../../customHooks";
 import { Loading } from "../Etc/Loading";
 import { getToken } from "../../Modules/auth";
 import { useDispatch } from "react-redux";
+<<<<<<< HEAD
 import { useCallback } from "react";
+=======
+import { SeoMeta } from "../../SeoMeta";
+>>>>>>> 61bc4913be17f9f89f8af44729596b36bd99ffea
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
@@ -48,11 +51,15 @@ const Login = ({ history }) => {
     [login]
   );
 
+  const data = {
+    title: "로그인 | Think_Thank",
+    description: "내가 생각하는 창고, Think Tank",
+    canonical: `login`,
+  };
+
   return (
     <>
-      <Helmet>
-        <title>My Blog | 로그인</title>
-      </Helmet>
+      <SeoMeta data={data} />
 
       {user && <Loading />}
       <LoginForm

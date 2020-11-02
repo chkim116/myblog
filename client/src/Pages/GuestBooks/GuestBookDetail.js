@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useGetPort } from "../../middleware";
+import { useGetGuest } from "../../customHooks";
 import { GuestBookDetailForm } from "../../components/GuestBook/GuestBookDetailForm";
 import Axios from "axios";
-import { Helmet } from "react-helmet-async";
 import { Loading } from "../Etc/Loading";
+import { SeoMeta } from "../../SeoMeta";
 
 export const GuestBookDetail = ({ history }) => {
   const { id } = useParams();
 
   // get portfolio
-  const guests = useGetPort(`/port/${id}`);
+  const guests = useGetGuest(`/port/${id}`);
   const { guest, loading: pageLoading } = guests;
 
   //  delete auth
@@ -33,11 +33,15 @@ export const GuestBookDetail = ({ history }) => {
     }
   });
 
+  const data = {
+    title: guest.title,
+    description: guest.title,
+    canonical: `guestbookdetail/${id}`,
+  };
+
   return (
     <>
-      <Helmet>
-        <title>My Blog | {guest.title}</title>
-      </Helmet>
+      <SeoMeta data={data} />
       {pageLoading ? (
         <GuestBookDetailForm guest={guest} onClick={onClick} />
       ) : (

@@ -2,14 +2,17 @@ import React, { useCallback, useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import PostDetailForm from "../../components/Posting/PostDetailForm";
-import { useGetPost } from "../../middleware";
-import { Helmet } from "react-helmet-async";
+import { useGetPost } from "../../customHooks";
 import { Loading } from "../Etc/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { searchResults } from "../../Modules/search";
+import { SeoMeta } from "../../SeoMeta";
 
 const PostDetail = ({ history, location }) => {
   const { id } = useParams();
+  const admin = useSelector((state) => state.auth.admin);
+  const recentPost = useSelector((state) => state.search.post);
+  const username = useSelector((state) => state.auth.username);
 
   // get Post Detail
   const getPost = useGetPost(`/api/${id}`);
@@ -20,6 +23,9 @@ const PostDetail = ({ history, location }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (recentPost) {
+      return setAllLoading(true);
+    }
     const getAllPost = () => {
       const AllPost = async () => {
         try {
@@ -134,13 +140,19 @@ const PostDetail = ({ history, location }) => {
     return <Loading />;
   }
 
+  const data = {
+    title: `${post.title}`,
+    description: `${post.title}`,
+    canonical: `postdetail/${id}`,
+    keywords: post.tags.join(),
+  };
+
   return (
     <>
-      <Helmet>
-        <title>My Blog | {post.title}</title>
-      </Helmet>
+      <SeoMeta data={data} />
       {del && <Loading />}
       <PostDetailForm
+        username={username}
         fakeComment={fakeComment}
         onViewMore={onViewMore}
         onViewClose={onViewClose}
@@ -152,6 +164,8 @@ const PostDetail = ({ history, location }) => {
         onChangeComment={onChangeComment}
         onComment={onComment}
         onDelComment={onDelComment}
+        admin={admin}
+        recentPost={recentPost}
       />
     </>
   );

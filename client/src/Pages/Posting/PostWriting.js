@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import PostingForm from "../../components/Posting/PostingForm";
 import Axios from "axios";
-import { Helmet } from "react-helmet-async";
-import { useGetCategory } from "../../middleware";
+import { useGetCategory } from "../../customHooks";
 import { Loading } from "../Etc/Loading";
+import { useSelector } from "react-redux";
+import { SeoMeta } from "../../SeoMeta";
 
 const PostWriting = ({ history }) => {
+  const selectList = useSelector((state) => state.category.data);
+
   const [post, setPost] = useState({
     title: "",
     description: "",
@@ -82,19 +85,15 @@ const PostWriting = ({ history }) => {
 
   // tag event
 
-  const onTags = 
-    (e) => {
-      setTags(e.target.value);
-    },
- 
-  ;
+  const onTags = (e) => {
+    setTags(e.target.value);
+  };
 
-  const onTagsSubmit = 
-    (e) => {
-      e.preventDefault();
-      setShowTags([...showTags.concat(tags)]);
-      setTags("");
-    }
+  const onTagsSubmit = (e) => {
+    e.preventDefault();
+    setShowTags([...showTags.concat(tags)]);
+    setTags("");
+  };
 
   // tag del
 
@@ -113,13 +112,19 @@ const PostWriting = ({ history }) => {
     }
   }, [loading, history]);
 
+  const data = {
+    title: "포스트 작성 | Think_Thank",
+    description: "내가 생각하는 창고, Think Tank",
+    canonical: "postwriting",
+  };
+
   return (
     <>
-      <Helmet>
-        <title>My Blog | 포스트 작성</title>
-      </Helmet>
+      <SeoMeta data={data} />
+
       {loading && <Loading />}
       <PostingForm
+        selectList={selectList}
         selectCategory={selectCategory}
         onSelect={onSelect}
         onTagDel={onTagDel}

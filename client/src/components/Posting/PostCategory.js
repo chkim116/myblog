@@ -37,6 +37,7 @@ export const PostCategory = ({ history }) => {
     [createCategory]
   );
 
+<<<<<<< HEAD
   const onCreateSubmit = useCallback(
     (e) => {
       e.preventDefault();
@@ -49,6 +50,18 @@ export const PostCategory = ({ history }) => {
     },
     [createCategory]
   );
+=======
+  const onCreateSubmit = (e) => {
+    e.preventDefault();
+    const postCategory = async () => {
+      await Axios.post("/category/create", { category: createCategory });
+    };
+    if (window.confirm("새로 만드십니까?")) {
+      postCategory();
+      window.location.reload();
+    }
+  };
+>>>>>>> 61bc4913be17f9f89f8af44729596b36bd99ffea
 
   useEffect(() => {
     const getCategory = async () => {
