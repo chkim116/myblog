@@ -23,7 +23,7 @@ const AboutForm = () => {
         <div className='contact-btn'>Contact Me</div>
         <div>
           <a
-            href='https://portffoilo.netlify.app/'
+            href='https://portffollio.netlify.app/'
             target='blank'
             className='contact-link'>
             PORTFOLIO
