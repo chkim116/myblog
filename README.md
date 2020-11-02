@@ -34,6 +34,7 @@ Blog with React && Node JS
 
 * 그 외
   * Today / Total 조회수
+  * Passport, Jwt토큰
 
 ### Stack
 - [x] MongoDB
