@@ -39,9 +39,10 @@ export const PostCategory = ({ history }) => {
     const postCategory = async () => {
       await Axios.post("/category/create", { category: createCategory });
     };
-    postCategory();
-    setCreate(false);
-    window.location.reload();
+    if (window.confirm("새로 만드십니까?")) {
+      postCategory();
+      window.location.reload();
+    }
   };
 
   useEffect(() => {

@@ -5,12 +5,9 @@ const HOME = "/";
 const GUESTBOOK = "/guestbook";
 const POST = "/post";
 const ABOUT = "/about";
-const ME = "/me";
 const REGISTER = "/register";
 const LOGIN = "/login";
 
-// 관리자
-const ADMIN = "/admin";
 // posting
 const POSTWRITING = "/postwriting";
 const POSTDETAIL = "/postdetail";
@@ -27,8 +24,6 @@ const routes = {
   guestbook: GUESTBOOK,
   post: POST,
   about: ABOUT,
-  me: ME,
-  admin: ADMIN,
   register: REGISTER,
   login: LOGIN,
   postwriting: POSTWRITING,
