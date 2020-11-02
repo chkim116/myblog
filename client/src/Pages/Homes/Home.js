@@ -21,8 +21,6 @@ const Home = () => {
     getTags();
   }, []);
 
-  console.log(tagList);
-
   let tag = [];
   tagList.forEach((list) => {
     tag.push(list.tags);
