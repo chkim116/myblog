@@ -6,7 +6,12 @@ Blog with React && Node JS
 MERN 스택을 활용, 서버는 Heroku에
 프론트는 Netlify에 배포되었습니다.
 
+<br>
 [구경하기](https://www.kormelon.cf/)
+
+샘플유저 <br>
+id: sample
+password: 123456
 
 # 기능
 
