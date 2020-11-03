@@ -8,10 +8,13 @@ MERN 스택을 활용, 서버는 Heroku에
 
 
 [구경하기](https://www.kormelon.cf/)
-샘플 아이디 <br>
+<br>
+샘플 아이디
+<br>
+```c 
 id : sample
 pwd : 123456
-
+```
 # 기능
 
 - 공통
