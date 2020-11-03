@@ -2,7 +2,7 @@
 
 Blog with React && Node JS
 
-마이블로그 프로젝트는 8월 26일에 시작하였으며 <br>
+마이블로그 프로젝트는 <br>
 MERN 스택을 활용, 서버는 Heroku에
 프론트는 Netlify에 배포되었습니다.
 
