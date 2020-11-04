@@ -2,13 +2,10 @@
 
 .post__nav-wrap {
   padding: 1em;
-  @include border;
   max-width: 1000px;
   margin: 0 auto;
-
-  @media #{$phone} {
-    width: 95%;
-  }
+  margin-bottom: 2em;
+  width: 95%;
 
   .recent__post {
     margin: 0 auto;

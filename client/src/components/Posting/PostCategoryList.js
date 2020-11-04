@@ -10,19 +10,23 @@ export const PostCategoryList = ({
   editShow,
   onEditSubmit,
   onEditChange,
+  onDelClick,
+  del,
 }) => {
   return (
     <>
-      {createList &&
-        createList.map((li, index) => (
-          <ul className='category__form' key={index}>
-            <>
+      <div className='category__form'>
+        {createList &&
+          createList.map((li, index) => (
+            <div key={index}>
               <div
                 data-category={li.category}
                 onClick={onClick}
                 className={"category__form-list"}>
-                {li.category}(
-                {post.filter((p) => p.category === li.category).length || 0})
+                {li.category}
+                <span className='category-length'>
+                  {post.filter((p) => p.category === li.category).length || 0}
+                </span>
                 {editShow && (
                   <form className='category__edit-form' onSubmit={onEditSubmit}>
                     <input
@@ -42,23 +46,32 @@ export const PostCategoryList = ({
                 )}
                 {admin && (
                   <span>
-                    <span
-                      data-id={li._id}
-                      className='category__del'
-                      key={index + 1}
-                      onClick={onDel}>
-                      X
-                    </span>
+                    {del && (
+                      <span
+                        data-id={li._id}
+                        className='category__del'
+                        key={index + 1}
+                        onClick={onDel}>
+                        X
+                      </span>
+                    )}
                   </span>
                 )}
               </div>
-            </>
-          </ul>
-        ))}
+            </div>
+          ))}
+      </div>
       {admin && (
-        <span className='category__edit' onClick={onEdit}>
-          <span role='img' aria-label='✍'></span>
-        </span>
+        <>
+          <span className='category__edit' onClick={onEdit}>
+            <span role='img' aria-label='✍'>
+              ✍
+            </span>
+          </span>
+          <span className='category__delete' onClick={onDelClick}>
+            <span>X</span>
+          </span>
+        </>
       )}
     </>
   );

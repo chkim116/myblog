@@ -4,7 +4,7 @@
   width: 100%;
   position: fixed;
   top: 0;
-  height: 45px;
+  height: 60px;
   z-index: 55;
   background: $white;
   transition: 300ms;
@@ -13,10 +13,11 @@ header {
   margin: 0 auto;
   padding: 0 0.5em;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   position: fixed;
   width: 100%;
-  height: 45px;
+  height: 60px;
   max-width: 1268px;
   top: 0;
   left: 50%;
@@ -26,7 +27,6 @@ header {
 
   .header__menu {
     display: flex;
-
     .menu__items {
       padding: 1em;
       cursor: pointer;
@@ -80,12 +80,6 @@ header {
     font-size: $medium;
     color: $black;
     font-weight: bold;
-    line-height: 45px;
-
-    @media #{$phone} {
-      position: absolute;
-      left: 15px;
-    }
   }
 }
 
@@ -94,7 +88,7 @@ header {
   position: absolute;
   cursor: pointer;
   color: $black;
-  top: 10px;
+  top: 20px;
   right: 15px;
   z-index: 3;
   display: none;

@@ -44,10 +44,17 @@
   .quill {
     width: 100%;
 
+    .ql-toolbar.ql-snow {
+      position: sticky;
+      top: 60px;
+      z-index: 100;
+      background: $white;
+    }
     .ql-snow {
       width: 70%;
       padding: 1em;
       margin: 0 auto;
+
       @media #{$phone} {
         width: 80%;
       }

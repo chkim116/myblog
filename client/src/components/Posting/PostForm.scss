@@ -21,7 +21,7 @@
 
 .post__category {
   font-size: $small;
-  padding-bottom: 1em;
+  padding-bottom: 2em;
 }
 
 .post {
@@ -100,9 +100,8 @@
 
       .post__tags {
         position: absolute;
-        bottom: -100%;
+        bottom: 100%;
         right: 0;
-        top: 35px;
         color: $darkgrey;
         font-size: $small;
 

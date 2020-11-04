@@ -9,6 +9,10 @@
   font-size: $small;
   position: relative;
 
+  @media #{$phone} {
+    width: 85%;
+  }
+
   .category-plus {
     top: 10px;
     font-size: 18px;
@@ -51,14 +55,36 @@
 }
 
 .category__form {
-  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  .category-length {
+    position: relative;
+    padding: 0.3em;
+    margin: 0 auto;
+    color: $red;
+    left: 7px;
+    font-size: 10px;
+    top: -1px;
+    &::before {
+      z-index: -1;
+      width: 15px;
+      height: 15px;
+      content: "";
+      border: 1px solid $blackShadow;
+      border-radius: 50%;
+      left: -1px;
+      top: -1px;
+      background: $white;
+      position: absolute;
+    }
+  }
 
   .category__del {
     position: absolute;
-    right: -15px;
-    top: 6px;
+    left: -11px;
+    top: 20px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: $small;
 
     &:hover {
       color: $blackShadow;
@@ -149,6 +175,18 @@
   position: absolute;
   left: 80px;
   top: 28px;
+  cursor: pointer;
+  font-size: 14px;
+
+  &:hover {
+    color: $blackShadow;
+  }
+}
+
+.category__delete {
+  position: absolute;
+  left: 105px;
+  top: 33px;
   cursor: pointer;
   font-size: 14px;
 

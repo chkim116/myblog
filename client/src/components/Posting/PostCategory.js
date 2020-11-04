@@ -31,16 +31,17 @@ export const PostCategory = ({ history }) => {
 
   const onCreate = (e) => {
     setCreateCategory(e.target.value);
+    console.log(createCategory);
   };
 
   const onCreateSubmit = (e) => {
     e.preventDefault();
     const postCategory = async () => {
       await Axios.post("/category/create", { category: createCategory });
+      window.location.reload();
     };
     if (window.confirm("새로 만드십니까?")) {
       postCategory();
-      window.location.reload();
     }
   };
 
@@ -66,15 +67,20 @@ export const PostCategory = ({ history }) => {
   };
 
   // del post
+  const [del, setDel] = useState(false);
+
+  const onDelClick = (e) => {
+    setDel((prev) => !prev);
+  };
 
   const onDel = (e) => {
     const { id } = e.target.dataset;
     const delCategory = async () => {
       await Axios.get(`/category/del/${id}`);
+      window.location.reload();
     };
     if (window.confirm("정말 삭제하시겠습니까?")) {
       delCategory();
-      window.location.reload();
     }
   };
 
@@ -96,9 +102,11 @@ export const PostCategory = ({ history }) => {
     e.preventDefault();
     const postCategoryEdit = async () => {
       await Axios.post("/category/edit", { categoryEdit });
+      window.location.reload();
     };
-    postCategoryEdit();
-    window.location.reload();
+    if (window.confirm("정말 수정하시겠습니까?")) {
+      postCategoryEdit();
+    }
   };
 
   return (
@@ -126,6 +134,8 @@ export const PostCategory = ({ history }) => {
             onClick={onClick}
             admin={admin}
             createList={createList}
+            del={del}
+            onDelClick={onDelClick}
           />
         </div>
       )}

@@ -10,7 +10,6 @@
   margin: 1em auto 3em auto;
   padding: 0.8em 0;
   min-height: 600px;
-  border: 1px solid $blackShadow;
 
   @media #{$phone} {
     width: 95%;
@@ -53,8 +52,9 @@
     line-height: 30px;
     white-space: pre-line;
     word-break: break-word;
-    font-size: 14px;
+    font-size: $medium;
     padding: 1em;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
     @media #{$phone} {
       width: 90%;

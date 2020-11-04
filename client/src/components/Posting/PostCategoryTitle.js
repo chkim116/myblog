@@ -12,12 +12,14 @@ export const PostCategoryTitle = ({
   return (
     <>
       {admin && (
-        <button
-          className='category-plus'
-          onClick={onCreateCategory}
-          type='button'>
-          {create ? "x" : "+"}
-        </button>
+        <>
+          <button
+            className='category-plus'
+            onClick={onCreateCategory}
+            type='button'>
+            {create ? "x" : "+"}
+          </button>
+        </>
       )}
       {create && (
         <div>
@@ -30,7 +32,10 @@ export const PostCategoryTitle = ({
               type='text'
               name='createCategory'
             />
-            <button className='category__create-btn' type='submit'>
+            <button
+              onSubmit={onCreateSubmit}
+              className='category__create-btn'
+              type='submit'>
               생성
             </button>
           </form>

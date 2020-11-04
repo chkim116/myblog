@@ -24,13 +24,6 @@ const PostDetailForm = ({
 
   return (
     <>
-      <PostRecentForm
-        onViewMore={onViewMore}
-        onViewClose={onViewClose}
-        allPost={allPost}
-        location={location}
-        count={count}
-      />
       <div className='post__detail' key={_id}>
         <div
           className='back'
@@ -75,6 +68,13 @@ const PostDetailForm = ({
           onDelComment={onDelComment}
           commentValue={commentValue}
           fakeComment={fakeComment}
+        />
+        <PostRecentForm
+          onViewMore={onViewMore}
+          onViewClose={onViewClose}
+          allPost={allPost}
+          location={location}
+          count={count}
         />
       </div>
     </>
