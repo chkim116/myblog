@@ -41,8 +41,8 @@
     @include top-bottom-border;
     border-bottom: 2px solid $yellow;
     @media #{$phone} {
-      width: 90%;
-      padding: 0.5em;
+      width: 95%;
+      padding: 0.3em;
     }
   }
 
@@ -59,6 +59,10 @@
     @media #{$phone} {
       width: 90%;
       padding: 0.2em;
+
+      & > .ql-editor {
+        padding: 0 !important;
+      }
     }
   }
 
