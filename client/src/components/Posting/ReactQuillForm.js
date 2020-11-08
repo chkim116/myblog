@@ -15,6 +15,7 @@ export const ReactQuillForm = ({ description, onValue }) => {
         ["link"],
       ],
     },
+    syntax: true,
   };
 
   const formats = [
