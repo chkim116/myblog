@@ -4,19 +4,6 @@ import "./HomeForm.scss";
 import { Link } from "react-router-dom";
 
 const HomeForm = ({ tagList, post }) => {
-    let tags = [];
-    tagList.map((list) => list.forEach((tag) => tags.push(tag)));
-
-    const reduceTag = tags.reduce((obj, current) => {
-        if (!obj[current]) {
-            obj[current] = 0;
-        }
-        obj[current]++;
-        return obj;
-    }, {});
-    const tagsKeyValue = Object.entries(reduceTag).sort((a, b) => b[1] - a[1]);
-    const sortTags = tagsKeyValue.map(([key, value]) => [key, value]);
-
     return (
         <>
             <div className="recent">
@@ -26,7 +13,7 @@ const HomeForm = ({ tagList, post }) => {
                 </Link>
             </div>
             <div className="wrap__post">
-                {post.slice(0, 4).map((p, index) => (
+                {post.map((p, index) => (
                     <div className="main__post" key={index}>
                         <Link to={`/postdetail/${p._id}`}>
                             <div className="main__post-title">{p.title}</div>
@@ -45,7 +32,7 @@ const HomeForm = ({ tagList, post }) => {
                 <div className="main__hash">
                     <div className="main__hash-title">Keyword Tags</div>
                     <div className="main__hash-box">
-                        {sortTags.map((t, index) => (
+                        {tagList.map((t, index) => (
                             <HomeHashtag
                                 key={index}
                                 hash={t[0]}

@@ -68,6 +68,16 @@ export const getPostById = async (req, res) => {
     }
 };
 
+export const getRecentPost = async (req, res) => {
+    try {
+        const post = await Post.find({}).sort({ _id: -1 }).limit(4);
+        res.status(200).json(post);
+    } catch (err) {
+        res.status(400);
+        console.log(err);
+    }
+};
+
 export const postEditing = async (req, res) => {
     const { id } = req.params;
     const { title, description, updated, tags, category } = req.body;
@@ -125,8 +135,4 @@ export const delComments = async (req, res) => {
         res.status(400);
         console.log(err);
     }
-};
-
-export const postImage = async (req, res) => {
-    console.log(req.body);
 };

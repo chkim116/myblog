@@ -1,13 +1,14 @@
 import express from "express";
 import {
-  postPosting,
-  getPost,
-  getPostById,
-  postEditing,
-  postDeleting,
-  getAllPost,
-  postComments,
-  delComments,
+    postPosting,
+    getPost,
+    getPostById,
+    postEditing,
+    postDeleting,
+    getAllPost,
+    postComments,
+    delComments,
+    getRecentPost,
 } from "../controller/postController";
 import { auth } from "../controller/userController";
 
@@ -19,8 +20,13 @@ const postRouter = express.Router();
 postRouter.get("/" || "?page", getPost);
 
 postRouter.get("/all", getAllPost);
+
+// recent get
+postRouter.get("/recent", getRecentPost);
+
 // post get by ID
 postRouter.get("/:id", auth, getPostById);
+
 // post Upload
 postRouter.post("/post", auth, postPosting);
 

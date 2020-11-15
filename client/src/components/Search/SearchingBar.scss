@@ -4,65 +4,65 @@
 @include animation-mixin(showSearchBar, 0px, 100px);
 
 .searchingbar {
-  width: 100%;
-  height: 100px;
-  position: fixed;
-  z-index: 30;
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  align-items: center;
-  top: 20px;
-  background: $white;
-  animation: showSearchBar 300ms;
-
-  .searchingbar-del {
-    cursor: pointer;
-    font-size: $small;
-    padding: 1em;
-    &:hover {
-      color: $blackShadow;
-    }
-  }
-  .searchingbar__form {
-    z-index: 33;
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    z-index: 30;
     display: flex;
-    max-width: 1000px;
-    width: 50%;
-    height: 35px;
     justify-content: center;
+    margin: 0 auto;
+    align-items: center;
+    top: 40px;
+    background: $white;
+    animation: showSearchBar 300ms;
 
-    @media #{$phone} {
-      width: 80%;
+    .searchingbar-del {
+        cursor: pointer;
+        font-size: $small;
+        padding: 1em;
+        &:hover {
+            color: $blackShadow;
+        }
     }
-    @media #{$iphone} {
-      width: 90%;
-    }
+    .searchingbar__form {
+        z-index: 33;
+        display: flex;
+        max-width: 1000px;
+        width: 50%;
+        height: 35px;
+        justify-content: center;
 
-    .searchingbar-input {
-      width: 60%;
-      padding-left: 6px;
-    }
+        @media #{$phone} {
+            width: 80%;
+        }
+        @media #{$iphone} {
+            width: 90%;
+        }
 
-    .searchingbar-btn {
-      font-size: $small;
-      @include border;
-      @include padding($padding: 0.2em 0.8em);
-      min-width: fit-content;
-      &:hover {
-        color: $white;
-        background: $black;
-      }
-    }
+        .searchingbar-input {
+            width: 60%;
+            padding-left: 6px;
+        }
 
-    .searchingbar-select {
-      cursor: pointer;
-      outline: none;
-      @include padding($padding: 0.2em 0.8em);
+        .searchingbar-btn {
+            font-size: $small;
+            @include border;
+            @include padding($padding: 0.2em 0.8em);
+            min-width: fit-content;
+            &:hover {
+                color: $white;
+                background: $black;
+            }
+        }
 
-      @media #{$iphone} {
-        @include padding($padding: 0.4em 0);
-      }
+        .searchingbar-select {
+            cursor: pointer;
+            outline: none;
+            @include padding($padding: 0.2em 0.8em);
+
+            @media #{$iphone} {
+                @include padding($padding: 0.4em 0);
+            }
+        }
     }
-  }
 }
