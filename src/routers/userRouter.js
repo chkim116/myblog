@@ -1,9 +1,9 @@
 import express from "express";
 import {
-  postRegister,
-  postlogin,
-  auth,
-  logout,
+    postRegister,
+    postlogin,
+    auth,
+    logout,
 } from "../controller/userController";
 
 const userRouter = express.Router();
@@ -16,12 +16,12 @@ userRouter.post("/login", postlogin);
 
 // user auth
 userRouter.get("/", auth, async (req, res) => {
-  res.status(200).json({
-    id: req.user._id,
-    username: req.user.username,
-    admin: req.user.admin,
-    token: req.token,
-  });
+    res.status(200).json({
+        id: req.user._id,
+        username: req.user.username,
+        admin: req.user.admin,
+        token: req.token,
+    });
 });
 userRouter.post("/logout", auth, logout);
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import PostDetailForm from "../../components/Posting/PostDetailForm";
-import { useGetPost } from "../../customHooks";
+import { useGetPost, useGetPostById } from "../../customHooks";
 import { Loading } from "../Etc/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { searchResults } from "../../Modules/search";
@@ -14,11 +14,9 @@ const PostDetail = ({ history, location }) => {
     const admin = useSelector((state) => state.auth.admin);
     const allPost = useSelector((state) => state.search.post);
     const username = useSelector((state) => state.auth.username);
-    const post = useSelector((state) => state.category.post);
 
     // get Post Detail
-    const getPost = useGetPost(`/api/${id}`);
-    const { loading } = getPost;
+    const { loading, post } = useGetPostById(`/api/${id}`);
 
     const [allLoading, setAllLoading] = useState(false);
 
