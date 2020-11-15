@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import search from "./search";
 import auth from "./auth";
-import category from "./category";
+import post from "./post";
 
 const rootReducer = combineReducers({
-  search,
-  auth,
-  category,
+    search,
+    auth,
+    post,
 });
 
 export default rootReducer;

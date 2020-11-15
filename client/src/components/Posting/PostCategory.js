@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./PostCategory.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    createCategoryList,
-    filterCategory,
+    getCategoryList,
+    getPostByFilter,
     lastPage,
     showCategory,
-} from "../../Modules/category";
+} from "../../Modules/post";
 import Axios from "axios";
 import { PostCategoryList } from "./PostCategoryList";
 import { PostCategoryTitle } from "./PostCategoryTitle";
@@ -14,7 +14,7 @@ import { Loading } from "../../Pages/Etc/Loading";
 
 export const PostCategory = ({ history }) => {
     const dispatch = useDispatch();
-    const show = useSelector((state) => state.category.show);
+    const show = useSelector((state) => state.post.show);
     const admin = useSelector((state) => state.auth.admin);
 
     const onCategory = () => {
@@ -25,7 +25,7 @@ export const PostCategory = ({ history }) => {
     const [create, setCreate] = useState(false);
     const [createCategory, setCreateCategory] = useState("");
 
-    const createList = useSelector((state) => state.category.data);
+    const createList = useSelector((state) => state.post.data);
 
     const onCreateCategory = () => {
         !create ? setCreate(true) : setCreate(false);
@@ -50,7 +50,7 @@ export const PostCategory = ({ history }) => {
     useEffect(() => {
         const getCategory = async () => {
             await Axios.get("/category").then((res) =>
-                dispatch(createCategoryList(res.data))
+                dispatch(getCategoryList(res.data))
             );
         };
         getCategory();
@@ -69,7 +69,7 @@ export const PostCategory = ({ history }) => {
                 await Axios.get(
                     category ? `/api?page=1&filter=${category}` : `/api?page=1`
                 ).then((res) => {
-                    dispatch(filterCategory(category, res.data.post));
+                    dispatch(getPostByFilter(category, res.data.post));
                     dispatch(lastPage(Math.ceil(res.data.postCount / 6)));
                 });
             } catch (err) {

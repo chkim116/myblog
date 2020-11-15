@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import PostDetailForm from "../../components/Posting/PostDetailForm";
-import { useGetPost, useGetPostById } from "../../customHooks";
+import { useGetPostById } from "../../customHooks";
 import { Loading } from "../Etc/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { searchResults } from "../../Modules/search";
@@ -39,7 +39,7 @@ const PostDetail = ({ history, location }) => {
             AllPost();
         };
         getAllPost();
-    }, [dispatch]);
+    }, [dispatch, allPost]);
 
     //  del post
 

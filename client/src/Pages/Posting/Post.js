@@ -11,8 +11,8 @@ const Post = ({ location, history }) => {
     const dispatch = useDispatch();
     const admin = useSelector((state) => state.auth.admin);
     const post = useSelector((state) => state.search.post);
-    const filter = useSelector((state) => state.category.filter);
-    const filterPost = useSelector((state) => state.category.post);
+    const filter = useSelector((state) => state.post.filter);
+    const filterPost = useSelector((state) => state.post.post);
     // get all post / 5, 페이지의 수를 파악하기 위해 불러옴
     const [allLoading, setAllLoading] = useState(false);
 
@@ -44,7 +44,7 @@ const Post = ({ location, history }) => {
     const { selecting } = select;
 
     // query url에 따른 보여주는 포스트
-    const lastPage = useSelector((state) => state.category.lastPage);
+    const lastPage = useSelector((state) => state.post.lastPage);
     const { loading } = useGetPost(query ? `/api${query}` : "/api", location);
     const handleChange = (e) => {
         const { selected } = e;
