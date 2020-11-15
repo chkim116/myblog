@@ -6,8 +6,11 @@ import { useGetPost } from "../../customHooks";
 import { useDispatch, useSelector } from "react-redux";
 import { searchResults } from "../../Modules/search";
 import { SeoMeta } from "../../SeoMeta";
+import { delPostOnClick } from "../../Modules/post";
 
 const Post = ({ location, history }) => {
+    const { search } = location;
+
     const dispatch = useDispatch();
     const admin = useSelector((state) => state.auth.admin);
     const post = useSelector((state) => state.search.post);
@@ -29,6 +32,7 @@ const Post = ({ location, history }) => {
                     console.log(err);
                 }
             };
+
             AllPost();
         };
 
@@ -36,7 +40,7 @@ const Post = ({ location, history }) => {
     }, [dispatch]);
 
     // url에 따른 포스트 호출
-    const [page, setPage] = useState({ query: location.search });
+    const [page, setPage] = useState({ query: search });
     const { query } = page;
 
     // 눌렀던 번호를 쿼리에 맞춰 설정
@@ -62,18 +66,16 @@ const Post = ({ location, history }) => {
     };
 
     useEffect(() => {
-        if (location.search.indexOf("filter")) {
+        if (search.indexOf("filter")) {
             setSelect({
-                selecting: parseInt(
-                    location.search.split("&")[0].split("=")[1] - 1
-                ),
+                selecting: parseInt(search.split("&")[0].split("=")[1] - 1),
             });
         } else {
             setSelect({
-                selecting: parseInt(location.search.split("=")[1] - 1 || 0),
+                selecting: parseInt(search.split("=")[1] - 1 || 0),
             });
         }
-    }, [location]);
+    }, [search]);
 
     // 게시글 삭제
 
@@ -95,14 +97,14 @@ const Post = ({ location, history }) => {
 
         if (window.confirm("정말 삭제하시겠습니까?")) {
             deletePost();
-            window.location.reload();
+            dispatch(delPostOnClick(boardId));
         }
     };
 
     const data = {
         title: "포스트 | Think_Thank",
         description: "내가 생각하는 창고, Think Tank",
-        canonical: `post${location.search}`,
+        canonical: `post${search}`,
     };
 
     return (

@@ -51,7 +51,7 @@ export const postRegister = async (req, res, next) => {
 
 export const postlogin = (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
-        if (err) return next(err);
+        if (err) return res.send("message: error").next(err);
         if (!user) {
             res.status(400).send({
                 message: "아이디나 비밀번호를 다시 입력해 주세요.",

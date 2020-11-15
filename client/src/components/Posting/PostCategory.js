@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./PostCategory.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
+    delCategoryList,
     getCategoryList,
     getPostByFilter,
     lastPage,
@@ -54,7 +55,7 @@ export const PostCategory = ({ history }) => {
             );
         };
         getCategory();
-    }, []);
+    }, [dispatch]);
 
     // post length
     const post = useSelector((state) => state.search.post);
@@ -94,10 +95,10 @@ export const PostCategory = ({ history }) => {
         const { id } = e.target.dataset;
         const delCategory = async () => {
             await Axios.get(`/category/del/${id}`);
-            window.location.reload();
         };
         if (window.confirm("정말 삭제하시겠습니까?")) {
             delCategory();
+            dispatch(delCategoryList(id));
         }
     };
 

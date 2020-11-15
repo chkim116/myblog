@@ -6,49 +6,51 @@ import Axios from "axios";
 import { SeoMeta } from "../../SeoMeta";
 
 const GuestBook = () => {
-  const guests = useGetGuest("/port");
-  const { guest, loading } = guests;
+    const guests = useGetGuest("/port");
+    const { guest, loading } = guests;
 
-  // del
-  const [del, setDel] = useState(false);
+    // del
+    const [del, setDel] = useState(false);
 
-  const onClick = (e) => {
-    const boardId = e.target.dataset.id;
-    const deletePost = async () => {
-      setDel(true);
-      try {
-        await Axios.get(`/port/del/${boardId}`);
-        window.location.reload();
-      } catch (err) {
-        console.log(err);
-        setDel(false);
-        alert("삭제에 실패했습니다.");
-      }
+    const onClick = (e) => {
+        const boardId = e.target.dataset.id;
+        const deletePost = async () => {
+            setDel(true);
+            try {
+                await Axios.get(`/port/del/${boardId}`);
+            } catch (err) {
+                console.log(err);
+                alert("삭제에 실패했습니다.");
+            }
+            setDel(false);
+        };
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+            deletePost();
+            window.location.reload();
+        }
     };
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      deletePost();
-    }
-  };
 
-  const data = {
-    title: "방명록 | Think_Thank",
-    description: "내가 생각하는 창고, Think Tank",
-    canonical: `guestbook`,
-  };
+    const data = {
+        title: "방명록 | Think_Thank",
+        description: "내가 생각하는 창고, Think Tank",
+        canonical: `guestbook`,
+    };
 
-  return (
-    <>
-      <SeoMeta data={data} />
-      {del && <Loading />}
-      {loading ? (
+    return (
         <>
-          <GuestBookForm guest={guest} onClick={onClick}></GuestBookForm>
+            <SeoMeta data={data} />
+            {del && <Loading />}
+            {loading ? (
+                <>
+                    <GuestBookForm
+                        guest={guest}
+                        onClick={onClick}></GuestBookForm>
+                </>
+            ) : (
+                <Loading />
+            )}
         </>
-      ) : (
-        <Loading />
-      )}
-    </>
-  );
+    );
 };
 
 export default GuestBook;

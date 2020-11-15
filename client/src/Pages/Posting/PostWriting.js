@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { SeoMeta } from "../../SeoMeta";
 
 const PostWriting = ({ history }) => {
-    const selectList = useSelector((state) => state.category.data);
+    const selectList = useSelector((state) => state.post.data);
 
     const [post, setPost] = useState({
         title: "",
@@ -16,35 +16,13 @@ const PostWriting = ({ history }) => {
         category: "",
     });
     const [loading, setLoading] = useState(false);
+    const [positing, setPosting] = useState(false);
     const { title, description, updated } = post;
     const [tags, setTags] = useState("");
     const [selectCategory, setSelectCategory] = useState("");
     const [showTags, setShowTags] = useState([]);
 
     useGetCategory();
-
-    const axiosData = async () => {
-        try {
-            await Axios.post("/api/post", {
-                title,
-                description,
-                updated,
-                tags: showTags,
-                category: selectCategory,
-                createDate: new Date().toLocaleTimeString("ko-KR", {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                }),
-            });
-            setLoading(true);
-        } catch (err) {
-            console.log(err);
-        }
-    };
 
     // text event
 
@@ -71,6 +49,30 @@ const PostWriting = ({ history }) => {
     const onSubmit = (e) => {
         e.preventDefault();
         setPost({ ...post });
+        const axiosData = async () => {
+            setPosting(true);
+            try {
+                await Axios.post("/api/post", {
+                    title,
+                    description,
+                    updated,
+                    tags: showTags,
+                    category: selectCategory,
+                    createDate: new Date().toLocaleTimeString("ko-KR", {
+                        weekday: "long",
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                    }),
+                });
+                setLoading(true);
+            } catch (err) {
+                console.log(err);
+            }
+            setPosting(false);
+        };
         axiosData();
     };
 
@@ -110,7 +112,7 @@ const PostWriting = ({ history }) => {
         <>
             <SeoMeta data={data} />
 
-            {loading && <Loading />}
+            {positing && <Loading />}
             <PostingForm
                 selectList={selectList}
                 selectCategory={selectCategory}
