@@ -2,17 +2,6 @@ import React, { createElement, useRef } from "react";
 import ReactQuill from "react-quill";
 
 export const ReactQuillForm = ({ description, onValue }) => {
-    const quill = useRef();
-
-    const handleImage = () => {
-        const input = createElement("input");
-
-        input.setAttribute("type", "file");
-        input.setAttribute("accept", "image/*");
-
-        input.click();
-    };
-
     const modules = {
         toolbar: {
             container: [
@@ -23,13 +12,10 @@ export const ReactQuillForm = ({ description, onValue }) => {
                 [{ list: "ordered" }, { list: "bullet" }],
                 [{ align: [] }],
                 ["code-block"],
-                ["link"],
-                ["image"],
+                ["link", "image"],
             ],
-            handlers: {
-                image: handleImage,
-            },
         },
+        clipboard: { matchVisual: false },
         syntax: true,
     };
 
@@ -47,15 +33,11 @@ export const ReactQuillForm = ({ description, onValue }) => {
         "code-block",
         "color",
         "link",
-        "image",
     ];
-
-    const quillEl = quill.current;
 
     return (
         <ReactQuill
             theme="snow"
-            ref={quill}
             modules={modules}
             formats={formats}
             defaultValue={description}
