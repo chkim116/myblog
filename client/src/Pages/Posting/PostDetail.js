@@ -16,7 +16,7 @@ const PostDetail = ({ history, location }) => {
     const username = useSelector((state) => state.auth.username);
 
     // get Post Detail
-    const { loading, post } = useGetPostById(`/api/${id}`);
+    const { loading, post } = useGetPostById(`/api/${id}`, location);
 
     const [allLoading, setAllLoading] = useState(false);
 

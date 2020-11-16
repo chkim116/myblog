@@ -12,7 +12,8 @@ export const ReactQuillForm = ({ description, onValue }) => {
                 [{ list: "ordered" }, { list: "bullet" }],
                 [{ align: [] }],
                 ["code-block"],
-                ["link", "image"],
+                ["link"],
+                ["image"],
             ],
         },
         clipboard: { matchVisual: false },
@@ -33,6 +34,7 @@ export const ReactQuillForm = ({ description, onValue }) => {
         "code-block",
         "color",
         "link",
+        "image",
     ];
 
     return (

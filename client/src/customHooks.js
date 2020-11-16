@@ -46,7 +46,7 @@ export const useGetPost = (url, location) => {
 
 // get post by id
 
-export const useGetPostById = (url) => {
+export const useGetPostById = (url, location) => {
     const [loading, setLoading] = useState(false);
     const [post, setPost] = useState({});
     const dispatch = useDispatch();
@@ -66,7 +66,7 @@ export const useGetPostById = (url) => {
 
     useEffect(() => {
         getPost();
-    }, []);
+    }, [location]);
     return { loading, post };
 };
 
