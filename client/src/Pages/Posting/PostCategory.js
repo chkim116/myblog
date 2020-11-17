@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./PostCategory.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
     delCategoryList,
@@ -9,9 +8,9 @@ import {
     showCategory,
 } from "../../Modules/post";
 import Axios from "axios";
-import { PostCategoryList } from "./PostCategoryList";
-import { PostCategoryTitle } from "./PostCategoryTitle";
-import { Loading } from "../../Pages/Etc/Loading";
+import { PostCategoryList } from "../../components/Posting/PostCategoryList";
+import { PostCategoryTitle } from "../../components/Posting/PostCategoryTitle";
+import { Loading } from "../Etc/Loading";
 
 export const PostCategory = ({ history }) => {
     const dispatch = useDispatch();

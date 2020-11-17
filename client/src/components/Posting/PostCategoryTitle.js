@@ -1,49 +1,50 @@
 import React from "react";
 import { BiDownArrow } from "react-icons/bi";
+import "./PostCategory.scss";
 
 export const PostCategoryTitle = ({
-  admin,
-  create,
-  onCreateCategory,
-  onCreate,
-  onCreateSubmit,
-  onCategory,
+    admin,
+    create,
+    onCreateCategory,
+    onCreate,
+    onCreateSubmit,
+    onCategory,
 }) => {
-  return (
-    <>
-      {admin && (
+    return (
         <>
-          <button
-            className='category-plus'
-            onClick={onCreateCategory}
-            type='button'>
-            {create ? "x" : "+"}
-          </button>
+            {admin && (
+                <>
+                    <button
+                        className="category-plus"
+                        onClick={onCreateCategory}
+                        type="button">
+                        {create ? "x" : "+"}
+                    </button>
+                </>
+            )}
+            {create && (
+                <div>
+                    <form
+                        className="category__create"
+                        onChange={onCreate}
+                        onSubmit={onCreateSubmit}>
+                        <input
+                            className="category__create-list"
+                            type="text"
+                            name="createCategory"
+                        />
+                        <button
+                            onSubmit={onCreateSubmit}
+                            className="category__create-btn"
+                            type="submit">
+                            생성
+                        </button>
+                    </form>
+                </div>
+            )}
+            <div className="category-btn" onClick={onCategory}>
+                카테고리 <BiDownArrow />
+            </div>
         </>
-      )}
-      {create && (
-        <div>
-          <form
-            className='category__create'
-            onChange={onCreate}
-            onSubmit={onCreateSubmit}>
-            <input
-              className='category__create-list'
-              type='text'
-              name='createCategory'
-            />
-            <button
-              onSubmit={onCreateSubmit}
-              className='category__create-btn'
-              type='submit'>
-              생성
-            </button>
-          </form>
-        </div>
-      )}
-      <div className='category-btn' onClick={onCategory}>
-        카테고리 <BiDownArrow />
-      </div>
-    </>
-  );
+    );
 };

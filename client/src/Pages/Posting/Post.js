@@ -49,7 +49,9 @@ const Post = ({ location, history }) => {
 
     // query url에 따른 보여주는 포스트
     const lastPage = useSelector((state) => state.post.lastPage);
+
     const { loading } = useGetPost(query ? `/api${query}` : "/api", location);
+
     const handleChange = (e) => {
         const { selected } = e;
         setPage({

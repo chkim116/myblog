@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import routes from "../../routes";
 import { PostPagination } from "./PostPagination";
 import { PostFormBlock } from "./PostFormBlock";
-import { PostCategory } from "./PostCategory";
+import { PostCategory } from "../../Pages/Posting/PostCategory";
 
 const PostForm = ({
     select,
