@@ -1,196 +1,179 @@
 @import "../../Styles/var";
 
 .category {
-    max-width: 768px;
-    width: 70%;
+  max-width: 768px;
+  width: 70%;
+  @include border;
+  margin: 0 auto;
+  padding: 1em;
+  font-size: $small;
+  position: relative;
+
+  @media #{$phone} {
+    width: 85%;
+  }
+
+  .category-plus {
+    top: 10px;
+    font-size: 18px;
     @include border;
-    margin: 0 auto;
-    padding: 1em;
-    font-size: $small;
-    position: relative;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    line-height: 15px;
+    left: 10px;
+    position: absolute;
 
-    @media #{$phone} {
-        width: 85%;
+    &:hover {
+      color: $red;
+      border: 1px solid $yellow;
     }
+  }
 
-    .category-plus {
-        top: 10px;
-        font-size: 18px;
-        @include border;
-        width: 15px;
-        height: 15px;
-        text-align: center;
-        line-height: 15px;
-        left: 10px;
-        position: absolute;
-
-        &:hover {
-            color: $red;
-            border: 1px solid $yellow;
-        }
+  .category-btn {
+    cursor: pointer;
+    color: $red;
+    text-align: center;
+    &:hover {
+      color: $blackShadow;
     }
+  }
 
-    .category-btn {
-        cursor: pointer;
-        color: $red;
-        text-align: center;
-        &:hover {
-            color: $blackShadow;
-        }
+  .category__wrap {
+    width: 100%;
+
+    .category__all {
+      width: 100%;
+      padding: 0.5em;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
-
-    .category__wrap {
-        width: 100%;
-
-        .category__all {
-            width: 100%;
-            padding: 0.5em;
-            cursor: pointer;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-    }
+  }
 }
 
 .category__form {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+
+  .category__del {
+    position: absolute;
+    left: -11px;
+    top: 20px;
+    cursor: pointer;
+    font-size: $small;
+
+    &:hover {
+      color: $blackShadow;
+    }
+  }
+
+  .category__form-name {
+    width: 100%;
+    border-top: 1px solid $blackShadow;
+    padding: 0.5em;
+    cursor: pointer;
+  }
+
+  .category__form-list {
+    margin-left: 2em;
+    padding: 0.6em;
+    cursor: pointer;
+    position: relative;
     .category-length {
-        position: relative;
-        padding: 0.3em;
-        margin: 0 auto;
-        color: $red;
-        left: 7px;
-        font-size: 10px;
-        top: -1px;
-        &::before {
-            z-index: -1;
-            width: 15px;
-            height: 15px;
-            content: "";
-            border: 1px solid $blackShadow;
-            border-radius: 50%;
-            left: -1px;
-            top: -1px;
-            background: $white;
-            position: absolute;
-        }
+      padding: 0.3em;
+      margin: 0 auto;
+      color: $red;
+      font-size: 10px;
+    }
+    &::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      position: absolute;
+      border-left: 1px solid $blackShadow;
+      border-bottom: 1px solid $blackShadow;
+      left: -10px;
+      top: 10px;
     }
 
-    .category__del {
+    .category__edit-form {
+      display: flex;
+
+      &:hover {
+        text-decoration: none;
+      }
+
+      .category__edit-input {
         position: absolute;
-        left: -11px;
-        top: 20px;
-        cursor: pointer;
+        top: 5px;
+        left: 0;
+        z-index: 5;
+        padding: 0.3em;
+      }
+      .category__edit-btn {
+        margin: 0 1em;
         font-size: $small;
+        margin-top: 1em;
 
         &:hover {
-            color: $blackShadow;
+          color: $blackShadow;
         }
+      }
     }
-
-    .category__form-name {
-        width: 100%;
-        border-top: 1px solid $blackShadow;
-        padding: 0.5em;
-        cursor: pointer;
-    }
-
-    .category__form-list {
-        width: fit-content;
-        margin-left: 2em;
-        padding: 0.6em;
-        cursor: pointer;
-        position: relative;
-
-        &::after {
-            content: "";
-            width: 8px;
-            height: 8px;
-            position: absolute;
-            border-left: 1px solid $blackShadow;
-            border-bottom: 1px solid $blackShadow;
-            left: -10px;
-            top: 10px;
-        }
-
-        .category__edit-form {
-            display: flex;
-
-            &:hover {
-                text-decoration: none;
-            }
-
-            .category__edit-input {
-                position: absolute;
-                top: 5px;
-                left: 0;
-                z-index: 5;
-                padding: 0.3em;
-            }
-            .category__edit-btn {
-                margin: 0 1em;
-                font-size: $small;
-                margin-top: 1em;
-
-                &:hover {
-                    color: $blackShadow;
-                }
-            }
-        }
-    }
+  }
 }
 
 .active {
-    color: $red;
+  color: $red;
 }
 
 .category__create {
-    background: $white;
-    width: 300px;
-    top: 6px;
-    left: 30px;
-    position: absolute;
-    z-index: 50;
-    .category__create-list {
-        height: 24px;
-        @include padding($padding: 0em 0.6em);
-    }
+  background: $white;
+  width: 300px;
+  top: 6px;
+  left: 30px;
+  position: absolute;
+  z-index: 50;
+  .category__create-list {
+    height: 24px;
+    @include padding($padding: 0em 0.6em);
+  }
 
-    .category__create-btn {
-        @include border;
-        width: 30px;
-        height: 23px;
-        text-align: center;
+  .category__create-btn {
+    @include border;
+    width: 30px;
+    height: 23px;
+    text-align: center;
 
-        &:hover {
-            color: $blackShadow;
-        }
+    &:hover {
+      color: $blackShadow;
     }
+  }
 }
 
 .category__edit {
-    position: absolute;
-    left: 80px;
-    top: 28px;
-    cursor: pointer;
-    font-size: 14px;
+  position: absolute;
+  left: 80px;
+  top: 28px;
+  cursor: pointer;
+  font-size: 14px;
 
-    &:hover {
-        color: $blackShadow;
-    }
+  &:hover {
+    color: $blackShadow;
+  }
 }
 
 .category__delete {
-    position: absolute;
-    left: 105px;
-    top: 33px;
-    cursor: pointer;
-    font-size: 14px;
+  position: absolute;
+  left: 105px;
+  top: 33px;
+  cursor: pointer;
+  font-size: 14px;
 
-    &:hover {
-        color: $blackShadow;
-    }
+  &:hover {
+    color: $blackShadow;
+  }
 }

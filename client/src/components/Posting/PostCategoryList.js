@@ -26,9 +26,9 @@ export const PostCategoryList = ({
                                 className={"category__form-list"}>
                                 {li.category}
                                 <span className="category-length">
-                                    {post.filter(
+                                    ({post.filter(
                                         (p) => p.category === li.category
-                                    ).length || 0}
+                                    ).length || 0})
                                 </span>
                                 {editShow && (
                                     <form
