@@ -1,12 +1,12 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
+import Helmet from "react-helmet";
 import img from "./image/4.jpg";
 
 export const SeoMeta = ({ data }) => {
     const lang = "ko";
     const title = data.title;
     const description = data.description;
-    const image = img ? img : data.image;
+    const image = img;
     const canonical = `https://www.kormelon.cf/${data.canonical}`;
     const type = data.type === undefined ? "article" : data.type;
     const width = data.image && (data.width || 1200);

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import { Helmet } from "react-helmet-async";
 import "./Styles/loading.scss";
 
 // page
@@ -84,9 +83,6 @@ function App() {
 
     return (
         <>
-            <Helmet>
-                <title>My Blog | Home</title>
-            </Helmet>
             <Nav logout={logout} onClick={onClick}></Nav>
             <Route component={SearchingBtn}></Route>
             <ArrowUp onClick={onScrollTop} />

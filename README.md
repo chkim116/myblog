@@ -8,12 +8,6 @@ Consist of React & Node JS
 직접 운영할 블로그를 만들기 위해 시작되었으며
 MVC패턴으로 리액트와 노드 JS로 구성되었습니다.
 <br>
-관리자 샘플 아이디
-
-```c
-id : sample
-pwd : 123456
-```
 
 [구경하기](https://www.kormelon.cf/)
 
@@ -23,7 +17,6 @@ pwd : 123456
 
 #### In Common
 
--   React-helmet-async : SEO 메타 태그 설정
 -   <a href="#passport" style="color:black">Passport&Jwt : 회원가입 및 로그인</a>
 -   <a href="#hashtag" style="color:black">HashTags : 해시태그 합계 및 검색</a>
 -   <a href="#view" style="color:black">Today / Total : 페이지 방문자 IP 집계
