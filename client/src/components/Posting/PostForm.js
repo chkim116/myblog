@@ -14,11 +14,9 @@ const PostForm = ({
     filterPost,
     location,
     admin,
-    post,
     filter,
     lastPage,
 }) => {
-    const filtering = post.filter((p) => p.category === filter);
     return (
         <>
             <div className="post__wrap">
@@ -37,7 +35,6 @@ const PostForm = ({
                     <PostPagination
                         filter={filter}
                         lastPage={lastPage}
-                        filtering={filtering}
                         handleChange={handleChange}
                         select={select}></PostPagination>
                 </div>

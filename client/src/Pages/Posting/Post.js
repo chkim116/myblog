@@ -13,7 +13,6 @@ const Post = ({ location, history }) => {
 
     const dispatch = useDispatch();
     const admin = useSelector((state) => state.auth.admin);
-    const post = useSelector((state) => state.search.post);
     const filter = useSelector((state) => state.post.filter);
     const filterPost = useSelector((state) => state.post.post);
     // get all post / 5, 페이지의 수를 파악하기 위해 불러옴
@@ -116,7 +115,6 @@ const Post = ({ location, history }) => {
             {loading && allLoading ? (
                 <PostForm
                     filter={filter}
-                    post={post}
                     lastPage={lastPage}
                     history={history}
                     onClick={onClick}
