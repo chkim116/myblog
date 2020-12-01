@@ -3,7 +3,7 @@ import LoginForm from "../../components/login/LoginForm";
 import Axios from "axios";
 import { registerCheck } from "../../customHooks";
 import { Loading } from "../Etc/Loading";
-import { getAuth, getToken } from "../../Modules/auth";
+import { getToken } from "../../Modules/auth";
 import { useDispatch } from "react-redux";
 import { SeoMeta } from "../../SeoMeta";
 

@@ -18,7 +18,7 @@ import { getAuth } from "./Modules/auth";
 import routes from "./routes";
 
 function App() {
-    Axios.defaults.baseURL = routes.api;
+    // Axios.defaults.baseURL = routes.api;
     Axios.defaults.withCredentials = true;
 
     // view

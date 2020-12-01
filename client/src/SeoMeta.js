@@ -15,7 +15,7 @@ export const SeoMeta = ({ data }) => {
 
     return (
         <Helmet titleTemplate="%s">
-            <html lang={lang} />
+            <html lang={lang} data-react-helemt="true" />
             <title>{title}</title>
             <meta name="description" content={description} />
             {canonical ? <link rel="canonical" href={canonical} /> : null}

@@ -87,10 +87,10 @@ export const PostCategory = ({ history }) => {
         const { id } = e.target.dataset;
         const delCategory = async () => {
             await Axios.get(`/category/del/${id}`);
+            window.location.reload();
         };
         if (window.confirm("정말 삭제하시겠습니까?")) {
             delCategory();
-            setCategoryList(categoryList.map((list) => list.id !== id));
         }
     };
 
