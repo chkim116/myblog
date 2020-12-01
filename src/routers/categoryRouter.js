@@ -1,9 +1,9 @@
 import express from "express";
 import {
-  createCategory,
-  delCategory,
-  editCategory,
-  getCategory,
+    createCategory,
+    delCategory,
+    editCategory,
+    getCategory,
 } from "../controller/categoryController";
 import { auth } from "../controller/userController";
 

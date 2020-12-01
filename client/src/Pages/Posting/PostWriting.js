@@ -18,7 +18,7 @@ const PostWriting = ({ history }) => {
     const [tags, setTags] = useState("");
     const [selectCategory, setSelectCategory] = useState("");
     const [showTags, setShowTags] = useState([]);
-    const { selectList } = useGetCategory();
+    const [selectList, categoryLoading] = useGetCategory();
 
     // text event
 
@@ -119,6 +119,7 @@ const PostWriting = ({ history }) => {
                 title={title}
                 onTagsSubmit={onTagsSubmit}
                 onValue={onValue}
+                categoryLoading={categoryLoading}
                 tags={tags}
                 showTags={showTags}
                 onTags={onTags}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostByFilter, lastPage } from "./Modules/post";
+import { getCategoryList, getPostByFilter, lastPage } from "./Modules/post";
 
 export function registerCheck(err, url, { history }) {
     const {
@@ -133,19 +133,19 @@ export const useGetTag = (url) => {
 // get category
 
 export const useGetCategory = () => {
+    const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
-    const [categoryList, setCategoryList] = useState([]);
+    const { categoryList } = useSelector((state) => state.post);
 
     useEffect(() => {
         const getCategory = async () => {
-            setLoading(true);
             await Axios.get("/category").then((res) =>
-                setCategoryList(res.data)
+                dispatch(getCategoryList(res.data))
             );
-            setLoading(false);
+            setLoading(true);
         };
         getCategory();
-    }, []);
+    }, [dispatch]);
 
-    return { loading, categoryList };
+    return [categoryList, loading];
 };

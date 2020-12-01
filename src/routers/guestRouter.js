@@ -1,11 +1,10 @@
 import express from "express";
-import { uploadImage } from "../../multer";
 import {
-  getGuest,
-  getGuestById,
-  postGuest,
-  guestEditing,
-  guestDeleting,
+    getGuest,
+    getGuestById,
+    postGuest,
+    guestEditing,
+    guestDeleting,
 } from "../controller/guestController";
 import { auth } from "../controller/userController";
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostByFilter, lastPage } from "../../Modules/post";
+import { getCategoryList, getPostByFilter, lastPage } from "../../Modules/post";
 import Axios from "axios";
 import { PostCategoryList } from "../../components/Posting/PostCategoryList";
 import { PostCategoryTitle } from "../../components/Posting/PostCategoryTitle";
@@ -18,7 +18,7 @@ export const PostCategory = ({ history }) => {
     // category create event
     const [create, setCreate] = useState(false);
     const [createCategory, setCreateCategory] = useState("");
-    const [categoryList, setCategoryList] = useState([]);
+    const { categoryList } = useSelector((state) => state.post);
 
     const onCreateCategory = () => {
         setCreate((prev) => !prev);
@@ -42,39 +42,11 @@ export const PostCategory = ({ history }) => {
     useEffect(() => {
         const getCategory = async () => {
             await Axios.get("/category").then((res) =>
-                setCategoryList(res.data)
+                dispatch(getCategoryList(res.data))
             );
         };
         getCategory();
     }, []);
-
-    // post length
-    const post = useSelector((state) => state.post.postLength);
-
-    // filter post
-    const [loading, setLoading] = useState(false);
-
-    const onClick = (e) => {
-        const { category } = e.target.dataset;
-        const getPost = async () => {
-            setLoading(true);
-            try {
-                await Axios.get(
-                    category ? `/api?page=1&filter=${category}` : `/api?page=1`
-                ).then((res) => {
-                    dispatch(getPostByFilter(category, res.data.post));
-                    dispatch(lastPage(Math.ceil(res.data.postCount / 6)));
-                });
-            } catch (err) {
-                console.log(err);
-            }
-            setLoading(false);
-        };
-        getPost();
-        history.push(
-            category ? `/post?page=1&filter=${category}` : "/post?page=1"
-        );
-    };
 
     // del post
     const [del, setDel] = useState(false);
@@ -87,9 +59,9 @@ export const PostCategory = ({ history }) => {
         const { id } = e.target.dataset;
         const delCategory = async () => {
             await Axios.get(`/category/del/${id}`);
-            window.location.reload();
         };
         if (window.confirm("정말 삭제하시겠습니까?")) {
+            window.location.reload();
             delCategory();
         }
     };
@@ -112,11 +84,43 @@ export const PostCategory = ({ history }) => {
         e.preventDefault();
         const postCategoryEdit = async () => {
             await Axios.post("/category/edit", { categoryEdit });
-            window.location.reload();
         };
         if (window.confirm("정말 수정하시겠습니까?")) {
+            setEditShow((prev) => !prev);
+            window.location.reload();
             postCategoryEdit();
         }
+    };
+
+    // post length
+    const post = useSelector((state) => state.post.postLength);
+
+    // filter post
+    const [loading, setLoading] = useState(false);
+
+    const onClick = (e) => {
+        if (editShow) {
+            return;
+        }
+        const { category } = e.target.dataset;
+        const getPost = async () => {
+            setLoading(true);
+            try {
+                await Axios.get(
+                    category ? `/api?page=1&filter=${category}` : `/api?page=1`
+                ).then((res) => {
+                    dispatch(getPostByFilter(category, res.data.post));
+                    dispatch(lastPage(Math.ceil(res.data.postCount / 6)));
+                });
+            } catch (err) {
+                console.log(err);
+            }
+            setLoading(false);
+        };
+        getPost();
+        history.push(
+            category ? `/post?page=1&filter=${category}` : "/post?page=1"
+        );
     };
 
     return (
