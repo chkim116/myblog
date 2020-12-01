@@ -40,7 +40,7 @@ export const useGetPost = (url, location) => {
             }
         }
         getPost();
-    }, [url || filter]);
+    }, [url]);
     return { loading };
 };
 

@@ -87,6 +87,7 @@
       margin: 0 auto;
       color: $red;
       font-size: 10px;
+      pointer-events: none;
     }
     &::after {
       content: "";

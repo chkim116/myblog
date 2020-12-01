@@ -29,8 +29,8 @@
         "slick-carousel": "^1.8.1"
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "cross-env INLINE_RUNTIME_CHUNK=false react-scripts build",
+        "start": "cross-env NODE_ENV=development react-scripts start",
+        "build": "cross-env INLINE_RUNTIME_CHUNK=false NODE_ENV=production GENERATE_SOURCEMAP=false react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },

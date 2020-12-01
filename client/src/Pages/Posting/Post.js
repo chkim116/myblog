@@ -58,6 +58,7 @@ const Post = ({ location, history }) => {
                 ? `?page=${selected + 1}&filter=${filter}`
                 : `?page=${selected + 1}`,
         });
+        console.log(query);
         history.push(
             filter
                 ? `/post?page=${selected + 1}&filter=${filter}`

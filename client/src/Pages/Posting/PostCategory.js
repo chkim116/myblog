@@ -61,6 +61,7 @@ export const PostCategory = ({ history }) => {
 
     // filter post
     const [loading, setLoading] = useState(false);
+
     const onClick = (e) => {
         const { category } = e.target.dataset;
         const getPost = async () => {

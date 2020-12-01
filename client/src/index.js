@@ -11,7 +11,13 @@ import { Provider } from "react-redux";
 import rootReducer from "./Modules/rootReducer";
 
 const logger = createLogger();
-const store = createStore(rootReducer, applyMiddleware(logger));
+
+const store = createStore(
+    rootReducer,
+    process.env.NODE_ENV === "production"
+        ? applyMiddleware()
+        : applyMiddleware(logger)
+);
 
 ReactDOM.render(
     <BrowserRouter>
