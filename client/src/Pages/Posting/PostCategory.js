@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    delCategoryList,
-    getCategoryList,
-    getPostByFilter,
-    lastPage,
-    showCategory,
-} from "../../Modules/post";
+import { getPostByFilter, lastPage } from "../../Modules/post";
 import Axios from "axios";
 import { PostCategoryList } from "../../components/Posting/PostCategoryList";
 import { PostCategoryTitle } from "../../components/Posting/PostCategoryTitle";
@@ -14,26 +8,24 @@ import { Loading } from "../Etc/Loading";
 
 export const PostCategory = ({ history }) => {
     const dispatch = useDispatch();
-    const show = useSelector((state) => state.post.show);
+    const [show, setShow] = useState(false);
     const admin = useSelector((state) => state.auth.admin);
 
     const onCategory = () => {
-        !show ? dispatch(showCategory(true)) : dispatch(showCategory(false));
+        setShow((prev) => !prev);
     };
 
     // category create event
     const [create, setCreate] = useState(false);
     const [createCategory, setCreateCategory] = useState("");
-
-    const createList = useSelector((state) => state.post.data);
+    const [categoryList, setCategoryList] = useState([]);
 
     const onCreateCategory = () => {
-        !create ? setCreate(true) : setCreate(false);
+        setCreate((prev) => !prev);
     };
 
     const onCreate = (e) => {
         setCreateCategory(e.target.value);
-        console.log(createCategory);
     };
 
     const onCreateSubmit = (e) => {
@@ -50,14 +42,14 @@ export const PostCategory = ({ history }) => {
     useEffect(() => {
         const getCategory = async () => {
             await Axios.get("/category").then((res) =>
-                dispatch(getCategoryList(res.data))
+                setCategoryList(res.data)
             );
         };
         getCategory();
-    }, [dispatch]);
+    }, []);
 
     // post length
-    const post = useSelector((state) => state.search.post);
+    const post = useSelector((state) => state.post.postLength);
 
     // filter post
     const [loading, setLoading] = useState(false);
@@ -98,7 +90,7 @@ export const PostCategory = ({ history }) => {
         };
         if (window.confirm("정말 삭제하시겠습니까?")) {
             delCategory();
-            dispatch(delCategoryList(id));
+            setCategoryList(categoryList.map((list) => list.id !== id));
         }
     };
 
@@ -107,7 +99,7 @@ export const PostCategory = ({ history }) => {
     const [editShow, setEditShow] = useState(false);
 
     const onEdit = (e) => {
-        !editShow ? setEditShow(true) : setEditShow(false);
+        setEditShow((prev) => !prev);
     };
 
     const onEditChange = (e) => {
@@ -152,7 +144,7 @@ export const PostCategory = ({ history }) => {
                         onDel={onDel}
                         onClick={onClick}
                         admin={admin}
-                        createList={createList}
+                        createList={categoryList}
                         del={del}
                         onDelClick={onDelClick}
                     />

@@ -14,12 +14,10 @@ import { Loading } from "./Pages/Etc/Loading";
 import { Route } from "react-router-dom";
 import { ArrowUp } from "./components/Layouts/ArrowUp";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuth, getToken } from "./Modules/auth";
+import { getAuth } from "./Modules/auth";
 import routes from "./routes";
 
 function App() {
-    const token = useSelector((state) => state.auth.token);
-
     Axios.defaults.baseURL = routes.api;
     Axios.defaults.withCredentials = true;
 
@@ -28,12 +26,10 @@ function App() {
     const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch();
+    const isLogin = useSelector((state) => state.auth.isLogin);
 
     useEffect(
         () => {
-            if (token === "") {
-                return console.log("can't");
-            }
             const getUser = async () => {
                 await Axios.get("/auth").then((res) =>
                     dispatch(getAuth(res.data))
@@ -42,7 +38,7 @@ function App() {
             getUser();
         },
         // eslint-disable-next-line
-        [token]
+        [isLogin]
     );
 
     useEffect(() => {
@@ -62,7 +58,6 @@ function App() {
                 await Axios.post("/auth/logout");
                 setLogout(true);
                 dispatch(getAuth(""));
-                dispatch(getToken(""));
             } catch (err) {
                 console.log(err);
             }

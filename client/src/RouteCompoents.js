@@ -19,37 +19,36 @@ import { Searching } from "./Pages/Search/Searching";
 import { useSelector } from "react-redux";
 
 export const RouteCompoents = () => {
-  const auth = useSelector((state) => state.auth);
-  const { admin } = auth;
-  return (
-    <Switch>
-      <Route exact path={routes.home} component={Home} />
-      <Route path={routes.register} component={Register} />
-      <Route path={routes.login} component={Login} />
-      <Route path={routes.guestbook} component={GuestBook} />
-      <Route path={routes.post} component={Post} />
-      <Route path={routes.about} component={About} />
-      <Route path={routes.search} component={Searching} />
-      {admin ? (
-        <Route path={routes.postwriting} component={PostWriting} />
-      ) : (
-        <Route path={routes.postwriting}>
-          <h3 className='error__title'>관리자가 아닙니다.</h3>
-        </Route>
-      )}
-      <Route path='/postdetail/:id' component={PostDetail} />
-      {admin ? (
-        <Route path={"/edit/:id"} component={PostEdit} />
-      ) : (
-        <Route path={"/edit/:id"}>
-          <h3 className='error__title'>관리자가 아닙니다.</h3>
-        </Route>
-      )}
-      <Route path='/guestbookdetail/:id' component={GuestBookDetail} />
-      <Route path='/guestbookedit/:id' component={GuestBookEdit} />
-      <Route path={routes.guestbooking} component={GuestBookWriting} />
+    const { admin } = useSelector((state) => state.auth);
+    return (
+        <Switch>
+            <Route exact path={routes.home} component={Home} />
+            <Route path={routes.register} component={Register} />
+            <Route path={routes.login} component={Login} />
+            <Route path={routes.guestbook} component={GuestBook} />
+            <Route path={routes.post} component={Post} />
+            <Route path={routes.about} component={About} />
+            <Route path={routes.search} component={Searching} />
+            {admin ? (
+                <Route path={routes.postwriting} component={PostWriting} />
+            ) : (
+                <Route path={routes.postwriting}>
+                    <h3 className="error__title">관리자가 아닙니다.</h3>
+                </Route>
+            )}
+            <Route path="/postdetail/:id" component={PostDetail} />
+            {admin ? (
+                <Route path={"/edit/:id"} component={PostEdit} />
+            ) : (
+                <Route path={"/edit/:id"}>
+                    <h3 className="error__title">관리자가 아닙니다.</h3>
+                </Route>
+            )}
+            <Route path="/guestbookdetail/:id" component={GuestBookDetail} />
+            <Route path="/guestbookedit/:id" component={GuestBookEdit} />
+            <Route path={routes.guestbooking} component={GuestBookWriting} />
 
-      <Route component={NotFound} />
-    </Switch>
-  );
+            <Route component={NotFound} />
+        </Switch>
+    );
 };

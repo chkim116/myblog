@@ -78,7 +78,7 @@ export const postlogin = (req, res, next) => {
                             sameSite: "none",
                         })
                         .status(200)
-                        .json({ userId: user._id, token });
+                        .json(user._id);
                 });
             });
         }

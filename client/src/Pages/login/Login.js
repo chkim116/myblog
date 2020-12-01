@@ -3,7 +3,7 @@ import LoginForm from "../../components/login/LoginForm";
 import Axios from "axios";
 import { registerCheck } from "../../customHooks";
 import { Loading } from "../Etc/Loading";
-import { getToken } from "../../Modules/auth";
+import { getAuth, getToken } from "../../Modules/auth";
 import { useDispatch } from "react-redux";
 import { SeoMeta } from "../../SeoMeta";
 
@@ -23,11 +23,10 @@ const Login = ({ history }) => {
         setLogin({ ...login });
         const postLogin = async () => {
             try {
-                const token = await Axios.post("/auth/login", {
+                await Axios.post("/auth/login", {
                     username,
                     password,
-                }).then((res) => res.data.token);
-                dispatch(getToken(token));
+                }).then((res) => dispatch(getToken(true)));
                 setLoading(true);
             } catch (err) {
                 const LOGIN = "login";

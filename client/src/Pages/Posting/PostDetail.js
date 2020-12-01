@@ -5,14 +5,14 @@ import PostDetailForm from "../../components/Posting/PostDetailForm";
 import { useGetPostById } from "../../customHooks";
 import { Loading } from "../Etc/Loading";
 import { useDispatch, useSelector } from "react-redux";
-import { searchResults } from "../../Modules/search";
 import { SeoMeta } from "../../SeoMeta";
+import { getAllPostForLength } from "../../Modules/post";
 
 const PostDetail = ({ history, location }) => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const admin = useSelector((state) => state.auth.admin);
-    const allPost = useSelector((state) => state.search.post);
+    const allPost = useSelector((state) => state.post.postLength);
     const username = useSelector((state) => state.auth.username);
 
     // get Post Detail
@@ -30,7 +30,7 @@ const PostDetail = ({ history, location }) => {
                     const posting = await Axios.get("/api/all").then(
                         (res) => res.data
                     );
-                    dispatch(searchResults(posting));
+                    dispatch(getAllPostForLength(posting));
                     setAllLoading(true);
                 } catch (err) {
                     console.log(err);

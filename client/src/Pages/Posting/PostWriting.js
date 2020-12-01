@@ -3,12 +3,9 @@ import PostingForm from "../../components/Posting/PostingForm";
 import Axios from "axios";
 import { useGetCategory } from "../../customHooks";
 import { Loading } from "../Etc/Loading";
-import { useSelector } from "react-redux";
 import { SeoMeta } from "../../SeoMeta";
 
 const PostWriting = ({ history }) => {
-    const selectList = useSelector((state) => state.post.data);
-
     const [post, setPost] = useState({
         title: "",
         description: "",
@@ -21,8 +18,7 @@ const PostWriting = ({ history }) => {
     const [tags, setTags] = useState("");
     const [selectCategory, setSelectCategory] = useState("");
     const [showTags, setShowTags] = useState([]);
-
-    useGetCategory();
+    const { selectList } = useGetCategory();
 
     // text event
 

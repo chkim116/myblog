@@ -4,9 +4,8 @@ import PostForm from "../../components/Posting/PostForm";
 import { Loading } from "../Etc/Loading";
 import { useGetPost } from "../../customHooks";
 import { useDispatch, useSelector } from "react-redux";
-import { searchResults } from "../../Modules/search";
 import { SeoMeta } from "../../SeoMeta";
-import { delPostOnClick } from "../../Modules/post";
+import { delPostOnClick, getAllPostForLength } from "../../Modules/post";
 
 const Post = ({ location, history }) => {
     const { search } = location;
@@ -15,6 +14,7 @@ const Post = ({ location, history }) => {
     const admin = useSelector((state) => state.auth.admin);
     const filter = useSelector((state) => state.post.filter);
     const filterPost = useSelector((state) => state.post.post);
+
     // get all post / 5, 페이지의 수를 파악하기 위해 불러옴
     const [allLoading, setAllLoading] = useState(false);
 
@@ -25,7 +25,7 @@ const Post = ({ location, history }) => {
                     const posting = await Axios.get("/api/all").then(
                         (res) => res.data
                     );
-                    dispatch(searchResults(posting));
+                    dispatch(getAllPostForLength(posting));
                     setAllLoading(true);
                 } catch (err) {
                     console.log(err);
@@ -58,7 +58,6 @@ const Post = ({ location, history }) => {
                 ? `?page=${selected + 1}&filter=${filter}`
                 : `?page=${selected + 1}`,
         });
-        console.log(query);
         history.push(
             filter
                 ? `/post?page=${selected + 1}&filter=${filter}`
