@@ -18,7 +18,7 @@
 
     .searchingbar-del {
         cursor: pointer;
-        font-size: $small;
+        font-size: $ss;
         padding: 1em;
         &:hover {
             color: $blackShadow;
@@ -45,7 +45,7 @@
         }
 
         .searchingbar-btn {
-            font-size: $small;
+            font-size: $ss;
             @include border;
             @include padding($padding: 0.2em 0.8em);
             min-width: fit-content;

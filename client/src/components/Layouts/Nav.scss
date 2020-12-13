@@ -1,107 +1,107 @@
 @import "../../Styles/var";
 
 .wrap__header {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  height: 60px;
-  z-index: 55;
-  background: $white;
-  transition: 300ms;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 60px;
+    z-index: 55;
+    background: $white;
+    transition: 300ms;
 }
 header {
-  margin: 0 auto;
-  padding: 0 0.5em;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: fixed;
-  width: 100%;
-  height: 60px;
-  max-width: 1268px;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 4;
-  font-size: $medium;
-
-  .header__menu {
+    margin: 0 auto;
+    padding: 0 0.5em;
     display: flex;
-    .menu__items {
-      padding: 1em;
-      cursor: pointer;
-      color: $black;
-      font-size: 14px;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    max-width: 1268px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    font-size: $ms;
 
-      &:hover {
-        color: $pink;
-      }
-    }
+    .header__menu {
+        display: flex;
+        .menu__items {
+            padding: 1em;
+            cursor: pointer;
+            color: $black;
+            font-size: 14px;
 
-    @media #{$phone} {
-      flex-direction: column;
-      align-items: center;
-      position: fixed;
-      top: 45px;
-      width: 100%;
-      left: 0;
-      right: 0;
-      padding: 0 3em;
-      height: 370px;
-      background: $white;
-      display: none;
-
-      &.active {
-        display: block;
-      }
-
-      .menu__items {
-        padding: 0;
-        margin: 1.7em 0;
-        color: $black;
-        width: 100%;
-        text-align: center;
-        cursor: pointer;
-        font-size: $medium;
-
-        li {
-          padding: 1em;
-          margin-top: 1em;
-          width: 100%;
-
-          &:hover {
-            font-weight: bold;
-          }
+            &:hover {
+                color: $pink;
+            }
         }
-      }
+
+        @media #{$phone} {
+            flex-direction: column;
+            align-items: center;
+            position: fixed;
+            top: 45px;
+            width: 100%;
+            left: 0;
+            right: 0;
+            padding: 0 3em;
+            height: 370px;
+            background: $white;
+            display: none;
+
+            &.active {
+                display: block;
+            }
+
+            .menu__items {
+                padding: 0;
+                margin: 1.7em 0;
+                color: $black;
+                width: 100%;
+                text-align: center;
+                cursor: pointer;
+                font-size: $ms;
+
+                li {
+                    padding: 1em;
+                    margin-top: 1em;
+                    width: 100%;
+
+                    &:hover {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
     }
-  }
-  .header__logo {
-    font-size: $medium;
-    color: $black;
-    font-weight: bold;
-  }
+    .header__logo {
+        font-size: $ms;
+        color: $black;
+        font-weight: bold;
+    }
 }
 
 .header__hamburger {
-  font-size: 1.5rem;
-  position: absolute;
-  cursor: pointer;
-  color: $black;
-  top: 20px;
-  right: 15px;
-  z-index: 3;
-  display: none;
+    font-size: 1.5rem;
+    position: absolute;
+    cursor: pointer;
+    color: $black;
+    top: 20px;
+    right: 15px;
+    z-index: 3;
+    display: none;
 
-  @media #{$phone} {
-    display: block;
-  }
+    @media #{$phone} {
+        display: block;
+    }
 }
 
 .username {
-  color: $black;
-  font-size: $small;
-  text-align: center;
-  pointer-events: none;
-  line-height: 45px;
+    color: $black;
+    font-size: $ss;
+    text-align: center;
+    pointer-events: none;
+    line-height: 45px;
 }

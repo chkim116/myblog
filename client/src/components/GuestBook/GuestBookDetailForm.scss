@@ -1,79 +1,79 @@
 @import "../../Styles/var";
 
 .guest__detail {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 0 auto;
-  max-width: 1200px;
-  min-height: 600px;
-  margin-bottom: 3em;
-
-  .guest__btn {
     display: flex;
-    font-size: $small;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1200px;
+    min-height: 600px;
+    margin-bottom: 3em;
 
-    a {
-      color: $black;
+    .guest__btn {
+        display: flex;
+        font-size: $ss;
+
+        a {
+            color: $black;
+        }
+
+        .btn {
+            margin: 0 0.3em;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 
-    .btn {
-      margin: 0 0.3em;
-      cursor: pointer;
+    .guest__detail-title {
+        font-size: $ms;
+        text-align: center;
+        width: 70%;
+        margin-bottom: 0.8em;
+        padding: 0.3em;
+        border-bottom: 2px solid $blackShadow;
+        word-break: break-word;
+        text-overflow: ellipsis;
+        white-space: pre-line;
 
-      &:hover {
-        text-decoration: underline;
-      }
+        @media #{$phone} {
+            width: 90%;
+        }
     }
-  }
 
-  .guest__detail-title {
-    font-size: $medium;
-    text-align: center;
-    width: 70%;
-    margin-bottom: 0.8em;
-    padding: 0.3em;
-    border-bottom: 2px solid $blackShadow;
-    word-break: break-word;
-    text-overflow: ellipsis;
-    white-space: pre-line;
+    .guest__detail-desc {
+        font-size: 13px;
+        padding: 2em;
+        width: 70%;
+        min-height: 450px;
+        line-height: 30px;
+        white-space: pre-line;
+        word-break: break-word;
+        border-bottom: 2px solid $blackShadow;
 
-    @media #{$phone} {
-      width: 90%;
+        @media #{$phone} {
+            width: 90%;
+        }
     }
-  }
-
-  .guest__detail-desc {
-    font-size: 13px;
-    padding: 2em;
-    width: 70%;
-    min-height: 450px;
-    line-height: 30px;
-    white-space: pre-line;
-    word-break: break-word;
-    border-bottom: 2px solid $blackShadow;
-
-    @media #{$phone} {
-      width: 90%;
-    }
-  }
-  // 보더 테두리 꾸미기
+    // 보더 테두리 꾸미기
 }
 
 .guest__detail-user {
-  margin-top: 0.3em;
-  color: rgba(0, 0, 0, 0.5);
-  font-size: $small;
-  letter-spacing: -1px;
+    margin-top: 0.3em;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: $ss;
+    letter-spacing: -1px;
 }
 
 .back {
-  cursor: pointer;
-  font-size: $small;
-  padding-bottom: 1em;
-  &:hover {
-    text-decoration: underline;
-  }
+    cursor: pointer;
+    font-size: $ss;
+    padding-bottom: 1em;
+    &:hover {
+        text-decoration: underline;
+    }
 }

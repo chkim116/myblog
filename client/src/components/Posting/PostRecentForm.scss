@@ -1,57 +1,57 @@
 @import "../../Styles/var";
 
 .post__nav-wrap {
-  padding: 1em;
-  max-width: 1000px;
-  margin: 0 auto;
-  margin-bottom: 2em;
-  width: 95%;
-
-  .recent__post {
+    padding: 1em;
+    max-width: 1000px;
     margin: 0 auto;
-    width: fit-content;
-    padding-bottom: 0.3em;
-    margin-bottom: 0.3em;
-    border-bottom: 2px solid $yellow;
-  }
+    margin-bottom: 2em;
+    width: 95%;
 
-  .post__nav {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    font-size: $small;
+    .recent__post {
+        margin: 0 auto;
+        width: fit-content;
+        padding-bottom: 0.3em;
+        margin-bottom: 0.3em;
+        border-bottom: 2px solid $yellow;
+    }
 
-    .post__nav-link {
-      width: 100%;
-      max-width: 600px;
-      display: flex;
-      justify-content: space-between;
-      cursor: pointer;
-      padding: 0.7em 0;
-      &:hover {
-        color: $blackShadow;
-      }
-      .post__nav-title {
-        color: $black;
-        &.active {
-          color: $yellow;
-          font-weight: bold;
+    .post__nav {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        font-size: $ss;
+
+        .post__nav-link {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 0.7em 0;
+            &:hover {
+                color: $blackShadow;
+            }
+            .post__nav-title {
+                color: $black;
+                &.active {
+                    color: $yellow;
+                    font-weight: bold;
+                }
+            }
         }
-      }
     }
-  }
 
-  .recent__click-btn {
-    font-size: $small;
-    text-align: center;
-    margin-top: 1em;
+    .recent__click-btn {
+        font-size: $ss;
+        text-align: center;
+        margin-top: 1em;
 
-    span {
-      cursor: pointer;
+        span {
+            cursor: pointer;
 
-      &:hover {
-        color: $blackShadow;
-      }
+            &:hover {
+                color: $blackShadow;
+            }
+        }
     }
-  }
 }

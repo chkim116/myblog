@@ -1,28 +1,28 @@
 @import "../../Styles/var";
 
 footer {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 2em;
-  border-top: 1px solid #d4dfe6;
-  text-align: center;
-  font-family: "paybooc-Bold";
-  color: $tur;
-  box-shadow: 1px 1px #d4dfe6;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2em;
+    border-top: 1px solid #d4dfe6;
+    text-align: center;
+    font-family: "paybooc-Bold";
+    color: $tur;
+    box-shadow: 1px 1px #d4dfe6;
 
-  h2 {
-    margin-bottom: 2em;
-  }
+    h2 {
+        margin-bottom: 2em;
+    }
 }
 
 .view__box {
-  display: flex;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  justify-content: center;
-  .view {
-    color: $red;
-    font-size: $small;
-    margin: 0 0.5em;
-  }
+    display: flex;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    justify-content: center;
+    .view {
+        color: $red;
+        font-size: $ss;
+        margin: 0 0.5em;
+    }
 }

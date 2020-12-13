@@ -1,45 +1,45 @@
 @import "./var";
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
-  margin: 0 auto;
-  padding-top: 60px;
-  background-color: $white;
-  font-family: "NEXON Lv1 Gothic OTF";
+    margin: 0 auto;
+    padding-top: 60px;
+    background-color: $white;
+    font-family: "NEXON Lv1 Gothic OTF";
 
-  &::-webkit-scrollbar {
-    border-radius: 12px;
-    background: $blackShadow;
-    width: 10px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: $blackShadow;
-    border-radius: 12px;
-  }
+    &::-webkit-scrollbar {
+        border-radius: 12px;
+        background: $blackShadow;
+        width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: $blackShadow;
+        border-radius: 12px;
+    }
 }
 
 input,
 textarea,
 button,
 select {
-  outline: none;
+    outline: none;
 }
 
 input,
 textarea,
 select {
-  @include border;
-  box-shadow: inset 0 2px 4px 0 hsla(0, 0%, 0%, 0.08);
+    @include border;
+    box-shadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)";
 }
 
 select {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 h1,
@@ -51,39 +51,39 @@ p,
 ul,
 li,
 button {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 button {
-  outline: none;
-  border: none;
-  font-size: $medium;
-  background: transparent;
-  cursor: pointer;
+    outline: none;
+    border: none;
+    font-size: $medium;
+    background: transparent;
+    cursor: pointer;
 }
 
 li {
-  list-style: none;
+    list-style: none;
 }
 
 a {
-  text-decoration: none;
-  cursor: pointer;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 @font-face {
-  font-family: "paybooc-Bold";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Bold.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "paybooc-Bold";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Bold.woff")
+        format("woff");
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: "NEXON Lv1 Gothic OTF";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "NEXON Lv1 Gothic OTF";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff")
+        format("woff");
+    font-weight: normal;
+    font-style: normal;
 }

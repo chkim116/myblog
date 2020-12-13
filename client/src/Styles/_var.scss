@@ -1,8 +1,9 @@
 $black: #333333;
 $white: #fdfdfd;
-$Large: 24px;
-$medium: 16px;
-$small: 12px;
+$xls: 24px;
+$ls: 20px;
+$ms: 14px;
+$ss: 12px;
 
 $yellow: rgb(251, 188, 31);
 $pink: rgb(243, 129, 127);
@@ -10,14 +11,14 @@ $darkgrey: rgb(123, 124, 129);
 $tur: rgb(76, 168, 208);
 $marin: #7a6ccf;
 $lightblue: #c5c5e6;
-$blackShadow: rgba(0, 0, 0, 0.2);
-$blue: rgb(153, 194, 232);
+$blackShadow: #dbdbdb;
+$blue: #1da1f2;
 $darkblue: rgb(115, 170, 206);
 $gray: #dbdbdb;
 $red: #d63031;
 $green: #00b894;
 $deepgreen: #238b12;
-
+$boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.2)";
 $iphone: "all and (max-width: 480px)";
 $phone: "all and (max-width: 768px)";
 $desktop: "all and (min-width:769px)";
@@ -25,42 +26,42 @@ $medium: "all and (max-width: 1000px)";
 $large: "all and (max-width: 1280px)";
 
 @mixin center($top: -50%) {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, $top);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, $top);
 }
 
 @mixin button($bgColor: $marin, $hoverColor: $lightblue) {
-  padding: 0.5em 1em;
-  cursor: pointer;
-  background-color: $bgColor;
-  color: $white;
-  border-radius: 12px;
-  border: none;
-  outline: none;
-  width: 150px;
-  text-align: center;
-  margin-top: 0.6em;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    background-color: $bgColor;
+    color: $white;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    width: 150px;
+    text-align: center;
+    margin-top: 0.6em;
 
-  &:hover {
-    color: $yellow;
-  }
+    &:hover {
+        color: $yellow;
+    }
 }
 
 @mixin padding($padding: 0.5em 1em) {
-  padding: $padding;
+    padding: $padding;
 }
 
 @mixin border($border: 1px solid $blackShadow) {
-  border: $border;
+    border: $border;
 }
 
 @mixin boxShadow {
-  box-shadow: 0.5px 0.5px 2px 4px $blackShadow;
-  border-radius: 12px;
+    box-shadow: 0.5px 0.5px 2px 4px $blackShadow;
+    border-radius: 12px;
 }
 
 @mixin top-bottom-border {
-  border-top-right-radius: 12px;
-  border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
 }

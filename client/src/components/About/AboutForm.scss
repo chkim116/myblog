@@ -1,132 +1,132 @@
 @import "../../Styles/var";
 
 .about {
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-
-  .about__introduce {
     width: 100%;
-    text-align: center;
-    padding: 1em;
+    max-width: 1000px;
+    margin: 0 auto;
 
-    .about__introduce-text {
-      margin: 2em 0;
-      font-size: $medium;
+    .about__introduce {
+        width: 100%;
+        text-align: center;
+        padding: 1em;
+
+        .about__introduce-text {
+            margin: 2em 0;
+            font-size: $ms;
+        }
+
+        .about__introduce-desc {
+            margin-bottom: 2em;
+            .about__introduce-img {
+                width: 350px;
+                height: 350px;
+                @include border;
+                margin: 0 auto;
+                border-radius: 50%;
+
+                @media #{$phone} {
+                    width: 230px;
+                    height: 230px;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+        }
     }
 
-    .about__introduce-desc {
-      margin-bottom: 2em;
-      .about__introduce-img {
-        width: 350px;
-        height: 350px;
-        @include border;
-        margin: 0 auto;
-        border-radius: 50%;
+    .contact {
+        width: 100%;
+        padding: 1em;
+        min-height: 200px;
+        text-align: center;
+        line-height: 40px;
 
-        @media #{$phone} {
-          width: 230px;
-          height: 230px;
+        .contact-btn {
+            width: 120px;
+            margin: 0 auto;
+            padding: 0.5em;
+            border-radius: 12px;
+            color: $red;
         }
 
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: 50%;
+        .contact-link {
+            font-size: $ss;
+            margin: 0 1em;
+
+            &:hover {
+                color: $yellow;
+            }
         }
-      }
-    }
-  }
-
-  .contact {
-    width: 100%;
-    padding: 1em;
-    min-height: 200px;
-    text-align: center;
-    line-height: 40px;
-
-    .contact-btn {
-      width: 120px;
-      margin: 0 auto;
-      padding: 0.5em;
-      border-radius: 12px;
-      color: $red;
     }
 
-    .contact-link {
-      font-size: $small;
-      margin: 0 1em;
+    .about__stack {
+        width: 100%;
+        text-align: center;
+        .about__stack-desc {
+            padding: 2em;
+            display: flex;
+            justify-content: center;
 
-      &:hover {
-        color: $yellow;
-      }
+            @media #{$phone} {
+                width: 90%;
+                margin: 0 auto;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about__stack-react {
+                min-height: 300px;
+                position: relative;
+
+                @media #{$phone} {
+                    width: 95%;
+                }
+            }
+
+            .about__stack-node {
+                min-height: 300px;
+                position: relative;
+                @media #{$phone} {
+                    width: 95%;
+                }
+            }
+
+            .about__stack-icon {
+                position: absolute;
+                width: 40%;
+                height: 25%;
+                bottom: 0;
+                left: 30%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                @media #{$phone} {
+                    width: 40%;
+                    height: 30%;
+                }
+
+                .react {
+                    color: $tur;
+                }
+
+                .node {
+                    color: $green;
+                }
+            }
+        }
     }
-  }
-
-  .about__stack {
-    width: 100%;
-    text-align: center;
-    .about__stack-desc {
-      padding: 2em;
-      display: flex;
-      justify-content: center;
-
-      @media #{$phone} {
-        width: 90%;
-        margin: 0 auto;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .about__stack-react {
-        min-height: 300px;
-        position: relative;
-
-        @media #{$phone} {
-          width: 95%;
-        }
-      }
-
-      .about__stack-node {
-        min-height: 300px;
-        position: relative;
-        @media #{$phone} {
-          width: 95%;
-        }
-      }
-
-      .about__stack-icon {
-        position: absolute;
-        width: 40%;
-        height: 25%;
-        bottom: 0;
-        left: 30%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        @media #{$phone} {
-          width: 40%;
-          height: 30%;
-        }
-
-        .react {
-          color: $tur;
-        }
-
-        .node {
-          color: $green;
-        }
-      }
-    }
-  }
 }
 
 .list {
-  padding: 2em;
+    padding: 2em;
 }
 .list-items {
-  list-style: circle;
-  padding: 1em;
+    list-style: circle;
+    padding: 1em;
 }

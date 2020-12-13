@@ -20,7 +20,7 @@
 }
 
 .post__category {
-    font-size: $small;
+    font-size: $ss;
     margin-bottom: 0.5em;
     padding-bottom: 2em;
 }
@@ -54,24 +54,22 @@
     flex-direction: column;
 
     @media #{$phone} {
-        width: 90%;
+        width: 98%;
     }
 
     .post__form-type {
         position: relative;
         animation: upAnimation 1s;
-
         .post__edit {
             position: absolute;
             width: 40px;
             text-align: center;
             right: 40px;
-            bottom: 20%;
-            font-size: $small;
+            bottom: 0%;
+            font-size: $ss;
             padding: 0.3em;
             cursor: pointer;
             color: $black;
-            border-right: 1px solid $blackShadow;
 
             &:hover {
                 color: $blackShadow;
@@ -81,10 +79,10 @@
         .post__form-del {
             position: absolute;
             width: fit-content;
-            bottom: 20%;
-            right: 20px;
+            bottom: 0%;
+            right: 25px;
             padding: 0.3em;
-            font-size: $small;
+            font-size: $ss;
             cursor: pointer;
 
             &:hover {
@@ -93,18 +91,20 @@
         }
 
         .post__form-title {
-            background: $tur;
-            color: $white;
-            @include padding;
+            color: $black;
+            padding: 0.5em 0;
             @include top-bottom-border;
+            margin-bottom: 1em;
             position: relative;
+            font-size: $ls;
+            border-bottom: 1px solid $yellow;
 
             .post__tags {
                 position: absolute;
                 bottom: 100%;
                 right: 0;
                 color: $darkgrey;
-                font-size: $small;
+                font-size: $ss;
 
                 [data-tag] {
                     z-index: 3;
