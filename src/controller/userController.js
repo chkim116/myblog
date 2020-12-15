@@ -34,6 +34,7 @@ export const postRegister = async (req, res, next) => {
     }
     const salt = await bcrypt.genSalt(10); // hash
     const hashPassword = await bcrypt.hash(password, salt);
+    console.log(hashPassword, password);
     try {
         const user = await User({
             username,
