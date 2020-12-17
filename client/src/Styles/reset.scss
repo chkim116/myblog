@@ -12,6 +12,7 @@ body {
     padding-top: 60px;
     background-color: $white;
     font-family: "NEXON Lv1 Gothic OTF";
+    --webkit-font-smoothing: antialiased;
 
     &::-webkit-scrollbar {
         border-radius: 12px;
