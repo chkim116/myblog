@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LoginForm from "../../components/login/LoginForm";
 import Axios from "axios";
-import { registerCheck } from "../../customHooks";
+import { registerCheck } from "../../hook/customHooks";
 import { Loading } from "../Etc/Loading";
 import { getToken } from "../../Modules/auth";
 import { useDispatch } from "react-redux";

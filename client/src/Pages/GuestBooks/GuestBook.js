@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useGetGuest } from "../../customHooks";
+import { useGetGuest } from "../../hook/customHooks";
 import GuestBookForm from "../../components/GuestBook/GuestBookForm";
 import { Loading } from "../Etc/Loading";
 import Axios from "axios";

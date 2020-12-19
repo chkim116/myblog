@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PostingForm from "../../components/Posting/PostingForm";
 import Axios from "axios";
-import { useGetCategory } from "../../customHooks";
+import { useGetCategory } from "../../hook/customHooks";
 import { Loading } from "../Etc/Loading";
 import { SeoMeta } from "../../SeoMeta";
 
@@ -10,11 +10,10 @@ const PostWriting = ({ history }) => {
         title: "",
         description: "",
         updated: "",
-        category: "",
     });
+    const { title, description, updated } = post;
     const [loading, setLoading] = useState(false);
     const [positing, setPosting] = useState(false);
-    const { title, description, updated } = post;
     const [tags, setTags] = useState("");
     const [selectCategory, setSelectCategory] = useState("");
     const [showTags, setShowTags] = useState([]);
@@ -66,8 +65,9 @@ const PostWriting = ({ history }) => {
                 setLoading(true);
             } catch (err) {
                 console.log(err);
+                setPosting(false);
+                alert("본문을 다 입력해주세요");
             }
-            setPosting(false);
         };
         axiosData();
     };

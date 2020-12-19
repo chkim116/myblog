@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoryList, getPostByFilter, lastPage } from "./Modules/post";
+import { getCategoryList, getPostByFilter, lastPage } from "../Modules/post";
 
 export function registerCheck(err, url, { history }) {
     const {

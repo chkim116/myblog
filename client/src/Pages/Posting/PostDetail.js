@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import PostDetailForm from "../../components/Posting/PostDetailForm";
-import { useGetPostById } from "../../customHooks";
+import { useGetPostById } from "../../hook/customHooks";
 import { Loading } from "../Etc/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { SeoMeta } from "../../SeoMeta";

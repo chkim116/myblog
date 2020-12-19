@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import PostForm from "../../components/Posting/PostForm";
 import { Loading } from "../Etc/Loading";
-import { useGetPost } from "../../customHooks";
+import { useGetPost } from "../../hook/customHooks";
 import { useDispatch, useSelector } from "react-redux";
 import { SeoMeta } from "../../SeoMeta";
 import { delPostOnClick, getAllPostForLength } from "../../Modules/post";
