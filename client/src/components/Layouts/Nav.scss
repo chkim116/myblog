@@ -23,7 +23,8 @@ header {
     left: 50%;
     transform: translateX(-50%);
     z-index: 4;
-    font-size: $ms;
+    font-weight: 600;
+    font-size: $ls;
 
     .header__menu {
         display: flex;

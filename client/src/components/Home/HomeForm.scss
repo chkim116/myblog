@@ -28,7 +28,7 @@
 
         @media #{$phone} {
             width: 100%;
-            font-size: $ss;
+            font-size: $ms;
             margin-top: 1.5em;
         }
 
@@ -41,7 +41,7 @@
                 padding: 0.5em;
                 width: fit-content;
                 cursor: pointer;
-
+                font-size: 16px;
                 &:hover {
                     text-decoration: underline;
                 }
@@ -59,12 +59,11 @@
         justify-content: center;
         align-items: center;
         position: relative;
-
         @media #{$phone} {
             width: 100%;
             border-top: 1px solid $blackShadow;
             margin-bottom: 3em;
-            font-size: $ss;
+            font-size: $ms;
         }
         @media #{$iphone} {
             font-size: $ms;
@@ -73,7 +72,6 @@
         .main__btn {
             display: flex;
             flex-direction: column;
-
             @media #{$phone} {
                 margin-top: 3em;
             }
@@ -83,6 +81,7 @@
             .main__btn-post {
                 margin: 1em 0;
                 border-bottom: 2px solid $red;
+                color: $black;
 
                 &:hover {
                     color: $red;
@@ -96,12 +95,15 @@
 .main__hash-title {
     position: absolute;
     top: 10%;
+    font-family: "Fira Mono", monospace;
+    font-size: $ls;
     padding-bottom: 0.6em;
     border-bottom: 2px solid $yellow;
 }
 
 a {
     color: $black;
+    font-size: $ms;
 }
 
 .wrap__post {
@@ -138,18 +140,25 @@ a {
 
         a {
             width: 100%;
+            color: $black;
             height: 100%;
         }
 
         .main__post-title {
-            padding: 1em;
+            padding: 0.5em;
             border-bottom: 1px solid $yellow;
             font-size: $ls;
+
+            font-weight: 700;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         .main__post-desc {
-            padding: 1.2em;
-            font-size: $ss;
+            padding-bottom: 12px;
+            font-size: $ms;
             background: #ffffff;
+            border-bottom: 1px solid $blackShadow;
         }
     }
 }
@@ -161,16 +170,17 @@ a {
     border-bottom: 2px solid $blackShadow;
     max-width: 1000px;
     margin: 1em auto;
-
     .recent-post {
-        font-size: $ms;
+        font-family: "Fira Mono", monospace;
+        font-size: 30px;
         font-weight: bold;
     }
 
     .recent-btn {
         font-weight: bold;
-        font-size: $ss;
+        font-size: $ms;
         width: fit-content;
+        color: $black;
         padding: 0.5em;
         &:hover {
             color: $yellow;

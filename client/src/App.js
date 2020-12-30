@@ -17,10 +17,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAuth } from "./Modules/auth";
 import routes from "./routes";
 
-function App() {
-    Axios.defaults.baseURL = routes.api;
-    Axios.defaults.withCredentials = true;
+Axios.defaults.baseURL =
+    process.env.NODE_ENV === "production"
+        ? routes.api
+        : "http://localhost:4000/";
+Axios.defaults.withCredentials = true;
 
+function App() {
     // view
     const [view, setView] = useState({});
     const [loading, setLoading] = useState(false);

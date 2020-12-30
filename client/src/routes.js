@@ -1,5 +1,4 @@
-const API = "https://kormelon.herokuapp.com" || "http://localhost:4000";
-
+const API = "https://kormelon.herokuapp.com";
 //  basic path
 const HOME = "/";
 const GUESTBOOK = "/guestbook";
@@ -20,18 +19,18 @@ const GUESTBOOKDETAIL = "/guestbookdetail";
 const SEARCH = "/search";
 
 const routes = {
-  home: HOME,
-  guestbook: GUESTBOOK,
-  post: POST,
-  about: ABOUT,
-  register: REGISTER,
-  login: LOGIN,
-  postwriting: POSTWRITING,
-  postdetail: POSTDETAIL,
-  guestbooking: GUESTBOOKING,
-  guestbookdetail: GUESTBOOKDETAIL,
-  search: SEARCH,
-  api: API,
+    home: HOME,
+    guestbook: GUESTBOOK,
+    post: POST,
+    about: ABOUT,
+    register: REGISTER,
+    login: LOGIN,
+    postwriting: POSTWRITING,
+    postdetail: POSTDETAIL,
+    guestbooking: GUESTBOOKING,
+    guestbookdetail: GUESTBOOKDETAIL,
+    search: SEARCH,
+    api: API,
 };
 
 export default routes;

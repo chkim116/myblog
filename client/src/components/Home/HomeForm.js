@@ -7,7 +7,7 @@ const HomeForm = ({ tagList, post }) => {
     return (
         <>
             <div className="recent">
-                <div className="recent-post">최근 글</div>
+                <div className="recent-post">최근 게시글</div>
                 <Link to="/post" className="recent-btn">
                     view more
                 </Link>

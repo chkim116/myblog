@@ -39,19 +39,19 @@ const app = express();
 
 app.use(helmet());
 app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
+    cors({
+        origin: ["http://localhost:3000", "https://kormelon.cf"],
+        credentials: true,
+    })
 );
 app.use(
-  csp({
-    directives: {
-      defaultSrc: ["*"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-    },
-    reportOnly: false,
-  })
+    csp({
+        directives: {
+            defaultSrc: ["*"],
+            styleSrc: ["'self'", "'unsafe-inline'"],
+        },
+        reportOnly: false,
+    })
 );
 app.use(morgan("dev"));
 app.use(cookieParser());
@@ -69,7 +69,7 @@ app.use("/tag", tagRouter);
 app.use("/category", categoryRouter);
 
 app.get("/", (req, res) => {
-  res.send("welcome to my blog server");
+    res.send("welcome to my blog server");
 });
 
 // 자정마다 조회수 초기화 및 토탈 추가
@@ -78,12 +78,12 @@ const views = schedule.scheduleJob("0 0 0 * * *", totalView);
 // heroku sleep 깨우기
 
 setInterval(() => {
-  http.get("https://kormelon.herokuapp.com/");
-}, 1800000);
+    http.get("https://kormelon.herokuapp.com/");
+}, 3600000);
 
 // server
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
-  console.log(`Hello, http://localhost:${PORT}`);
+    console.log(`Hello, http://localhost:${PORT}`);
 });

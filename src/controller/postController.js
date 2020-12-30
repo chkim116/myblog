@@ -41,7 +41,6 @@ export const postPosting = async (req, res) => {
         body: { title, description, updated, createDate, tags, category },
     } = req;
     try {
-        // const categories = await Category.find({ category });
         const post = await Post.create({
             title,
             description,
@@ -51,14 +50,11 @@ export const postPosting = async (req, res) => {
             tags: tags,
             category,
         });
-        // categories[0].post.push(post._id);
-        // categories[0].save();
         post.save();
         res.json(true);
-        console.log("성공^^");
     } catch (err) {
         res.status(400);
-        console.log("에러nn", err);
+        res.json(false);
     }
 };
 

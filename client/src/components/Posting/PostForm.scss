@@ -20,7 +20,7 @@
 }
 
 .post__category {
-    font-size: $ss;
+    font-size: $ms;
     margin-bottom: 0.5em;
     padding-bottom: 2em;
 }
@@ -48,14 +48,10 @@
 }
 
 .post__form {
-    width: 70%;
+    width: 98%;
     margin: 1.5em auto;
     display: flex;
     flex-direction: column;
-
-    @media #{$phone} {
-        width: 98%;
-    }
 
     .post__form-type {
         position: relative;
@@ -96,7 +92,9 @@
             @include top-bottom-border;
             margin-bottom: 1em;
             position: relative;
-            font-size: $ls;
+            font-size: 28px;
+            font-weight: 600;
+            font-family: "Fira Mono", monospace;
             border-bottom: 1px solid $yellow;
 
             .post__tags {
@@ -106,6 +104,9 @@
                 color: $darkgrey;
                 font-size: $ss;
 
+                & span {
+                    margin: 0 3px;
+                }
                 [data-tag] {
                     z-index: 3;
                     margin-right: 0.2em;
@@ -121,7 +122,7 @@
             display: block;
             height: 200px;
             color: $black;
-            font-size: 13px;
+            font-size: $ms;
 
             .ql-editor {
                 word-break: break-word;
