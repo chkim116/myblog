@@ -33,16 +33,13 @@ function App() {
 
     useEffect(
         () => {
-            let cookie;
             if (token) {
-                cookie = document.cookie = `x_auth=${token}; max-age=604800; path=/; sameSite=none; secure; httpsOnly`;
+                document.cookie = `x_auth=${token}; max-age=604800; path=/; sameSite=none; secure; httpOnly`;
             }
             const getUser = async () => {
-                await Axios.get("/auth", {
-                    headers: {
-                        cookie,
-                    },
-                }).then((res) => dispatch(getAuth(res.data)));
+                await Axios.get("/auth").then((res) =>
+                    dispatch(getAuth(res.data))
+                );
             };
             getUser();
         },
@@ -64,7 +61,7 @@ function App() {
     const onClick = () => {
         const userLogout = async () => {
             try {
-                document.cookie = `x_auth=; max-age=0; path=/; sameSite=none; secure; httpsOnly`;
+                document.cookie = `x_auth=; max-age=0; path=/; sameSite=none; secure; httpOnly`;
                 await Axios.post("/auth/logout");
                 setLogout(true);
                 dispatch(getAuth(""));
