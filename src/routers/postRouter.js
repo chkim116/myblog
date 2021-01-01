@@ -8,7 +8,6 @@ import {
     getAllPost,
     postComments,
     delComments,
-    getRecentPost,
 } from "../controller/postController";
 import { auth } from "../controller/userController";
 
@@ -20,9 +19,6 @@ const postRouter = express.Router();
 postRouter.get("/" || "?page", getPost);
 
 postRouter.get("/all", getAllPost);
-
-// recent get
-postRouter.get("/recent", getRecentPost);
 
 // post get by ID
 postRouter.get("/:id", auth, getPostById);

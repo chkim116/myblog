@@ -79,9 +79,15 @@
 
     .category__form-list {
         margin-left: 2em;
+        font-size: $ms;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         padding: 0.6em;
         cursor: pointer;
         position: relative;
+
+        &:hover {
+            text-decoration: underline;
+        }
         .category-length {
             padding: 0.3em;
             margin: 0 auto;

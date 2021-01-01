@@ -14,7 +14,4 @@ export const Loading = () => {
             <Skeleton active />
         </div>
     );
-    // <div className="loading">
-    /* <div className='loading__title'></div> */
-    // </div>
 };

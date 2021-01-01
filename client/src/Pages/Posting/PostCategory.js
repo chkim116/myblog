@@ -5,6 +5,7 @@ import Axios from "axios";
 import { PostCategoryList } from "../../components/Posting/PostCategoryList";
 import { PostCategoryTitle } from "../../components/Posting/PostCategoryTitle";
 import { Loading } from "../Etc/Loading";
+import FixedLoading from "../Etc/FixedLoading";
 
 export const PostCategory = ({ history }) => {
     const dispatch = useDispatch();
@@ -55,14 +56,15 @@ export const PostCategory = ({ history }) => {
         setDel((prev) => !prev);
     };
 
-    const onDel = (e) => {
+    const onDel = async (e) => {
         const { id } = e.target.dataset;
-        const delCategory = async () => {
-            await Axios.get(`/category/del/${id}`);
-        };
+
         if (window.confirm("정말 삭제하시겠습니까?")) {
-            window.location.reload();
+            const delCategory = async () => {
+                await Axios.get(`/category/del/${id}`);
+            };
             delCategory();
+            window.location.reload();
         }
     };
 
@@ -82,13 +84,14 @@ export const PostCategory = ({ history }) => {
 
     const onEditSubmit = (e) => {
         e.preventDefault();
-        const postCategoryEdit = async () => {
-            await Axios.post("/category/edit", { categoryEdit });
-        };
+
         if (window.confirm("정말 수정하시겠습니까?")) {
             setEditShow((prev) => !prev);
-            window.location.reload();
+            const postCategoryEdit = async () => {
+                await Axios.post("/category/edit", { categoryEdit });
+            };
             postCategoryEdit();
+            window.location.reload();
         }
     };
 
@@ -125,7 +128,7 @@ export const PostCategory = ({ history }) => {
 
     return (
         <div className="category">
-            {loading && <Loading />}
+            {loading && <FixedLoading />}
             <PostCategoryTitle
                 admin={admin}
                 create={create}

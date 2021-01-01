@@ -25,7 +25,7 @@ export const useGetPost = (url, location) => {
         try {
             await Axios.get(url).then((res) => {
                 dispatch(getPostByFilter(filter, res.data.post));
-                dispatch(lastPage(Math.ceil(res.data.postCount / 6)));
+                dispatch(lastPage(Math.ceil(+res.data.postCount / 6)));
             });
             setLoading(true);
         } catch (err) {
@@ -49,14 +49,12 @@ export const useGetPost = (url, location) => {
 export const useGetPostById = (url, location) => {
     const [loading, setLoading] = useState(false);
     const [post, setPost] = useState({});
-    const dispatch = useDispatch();
 
     const getPost = async () => {
         setLoading(false);
         try {
             await Axios.get(url).then((res) => {
                 setPost(res.data);
-                dispatch(lastPage(Math.ceil(res.data.postCount / 6)));
             });
             setLoading(true);
         } catch (err) {

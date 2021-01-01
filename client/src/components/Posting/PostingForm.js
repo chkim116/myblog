@@ -25,7 +25,10 @@ const PostingForm = ({
                 <>
                     <form className="posting__form" onSubmit={onSubmit}>
                         <div className="posting__form-title">
-                            <select value={selectCategory} onChange={onSelect}>
+                            <select
+                                value={selectCategory}
+                                onChange={onSelect}
+                                required>
                                 <option value="none">선택</option>
                                 {selectList &&
                                     selectList.map((list, index) => (
@@ -37,6 +40,7 @@ const PostingForm = ({
                                     ))}
                             </select>
                             <input
+                                required
                                 type="text"
                                 name="title"
                                 placeholder="title"

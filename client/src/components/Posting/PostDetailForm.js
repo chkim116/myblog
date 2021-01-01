@@ -1,6 +1,6 @@
 import React from "react";
 import "./PostDetailForm.scss";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { PostComment } from "./PostComment";
 import { PostRecentForm } from "./PostRecentForm";
 
@@ -21,16 +21,16 @@ const PostDetailForm = ({
     allPost,
 }) => {
     const { title, description, _id, createDate, tags, comment } = post;
-
+    const history = useHistory();
     return (
         <>
             <div className="post__detail" key={_id}>
                 <div
                     className="back"
                     onClick={() => {
-                        window.history.back();
+                        history.push("/post");
                     }}>
-                    뒤로가기
+                    목록으로
                 </div>
                 <div className="post__btn">
                     {admin && (

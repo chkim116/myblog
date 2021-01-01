@@ -1,8 +1,8 @@
-const GET_USER = "auth/GET_USER";
+const GET_AUTH = "auth/GET_AUTH";
 const GET_TOKEN = "auth/GET_TOKEN";
 
 export const getAuth = (user) => ({
-    type: GET_USER,
+    type: GET_AUTH,
     payload: {
         id: user.id,
         username: user.username,
@@ -10,14 +10,14 @@ export const getAuth = (user) => ({
     },
 });
 
-export const getToken = (isLogin) => ({
+export const getToken = ({ id, token }) => ({
     type: GET_TOKEN,
-    payload: { isLogin },
+    payload: { id, token },
 });
 
 function auth(state = {}, action) {
     switch (action.type) {
-        case GET_USER:
+        case GET_AUTH:
             return {
                 ...state,
                 id: action.payload.id,
@@ -27,7 +27,8 @@ function auth(state = {}, action) {
         case GET_TOKEN:
             return {
                 ...state,
-                isLogin: action.payload.isLogin,
+                isLogin: action.payload.id === true,
+                token: action.payload.token,
             };
         default:
             return state;

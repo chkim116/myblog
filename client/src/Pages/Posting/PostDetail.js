@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import PostDetailForm from "../../components/Posting/PostDetailForm";
@@ -6,7 +6,7 @@ import { useGetPostById } from "../../hook/customHooks";
 import { Loading } from "../Etc/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { SeoMeta } from "../../SeoMeta";
-import { getAllPostForLength } from "../../Modules/post";
+import { delPostOnClick, getAllPostForLength } from "../../Modules/post";
 
 const PostDetail = ({ history, location }) => {
     const { id } = useParams();
@@ -39,30 +39,34 @@ const PostDetail = ({ history, location }) => {
             AllPost();
         };
         getAllPost();
-    }, [dispatch, allPost]);
+    }, [allPost]);
 
     //  del post
 
     const [del, setDel] = useState(false);
 
     const onClick = () => {
-        setDel(true);
-        const deletePost = async () => {
-            try {
-                await Axios.get(`/api/del/${id}`).then((res) =>
-                    setDel(res.data)
-                );
-                history.push("/post");
-            } catch (err) {
-                console.log(err);
-            }
-            setDel(false);
-        };
         if (window.confirm("정말 삭제하겠습니까?")) {
+            const deletePost = async () => {
+                try {
+                    dispatch(delPostOnClick(id));
+                    await Axios.get(`/api/del/${id}`).then((res) =>
+                        setDel(res.data)
+                    );
+                } catch (err) {
+                    console.log(err);
+                    setDel(false);
+                }
+            };
             deletePost();
-            history.push("/post");
         }
     };
+
+    useEffect(() => {
+        if (del) {
+            history.push("/post");
+        }
+    }, [del]);
 
     // 코멘트 작성
 
@@ -100,14 +104,15 @@ const PostDetail = ({ history, location }) => {
 
     const onDelComment = (e) => {
         const { id } = e.target.dataset;
-        const delComments = async () => {
-            try {
-                await Axios.get(`/api/comment/del/${id}`);
-            } catch (err) {
-                console.log(err);
-            }
-        };
+
         if (window.confirm("정말 삭제하시겠습니까?")) {
+            const delComments = async () => {
+                try {
+                    await Axios.get(`/api/comment/del/${id}`);
+                } catch (err) {
+                    console.log(err);
+                }
+            };
             delComments();
             window.location.reload();
         }

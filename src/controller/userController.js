@@ -76,12 +76,15 @@ export const postlogin = (req, res, next) => {
                             maxAge: 1000 * 60 * 60 * 24 * 7,
                             path: "/",
                             domain: undefined,
-                            httpOnly: true,
-                            secure: true,
-                            sameSite: "none",
+                            httpOnly: process.env.NODE_ENV === "production",
+                            secure: process.env.NODE_ENV === "production",
+                            sameSite:
+                                process.env.NODE_ENV === "production"
+                                    ? "none"
+                                    : "lax",
                         })
                         .status(200)
-                        .json(user._id);
+                        .json({ id: user._id, token: user.token });
                 });
             });
         }
@@ -119,10 +122,11 @@ export const logout = (req, res) => {
     return res
         .cookie("x_auth", "", {
             path: "/",
+            maxAge: 0,
             domain: undefined,
-            httpOnly: true,
-            secure: true,
-            sameSite: "none",
+            httpOnly: process.env.NODE_ENV === "production",
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         })
         .status(200)
         .send(req.token);

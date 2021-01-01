@@ -37,6 +37,7 @@ export const getAllPost = async (req, res) => {
 };
 
 export const postPosting = async (req, res) => {
+    console.log(req.body);
     const {
         body: { title, description, updated, createDate, tags, category },
     } = req;
@@ -53,6 +54,7 @@ export const postPosting = async (req, res) => {
         post.save();
         res.json(true);
     } catch (err) {
+        console.log(err);
         res.status(400);
         res.json(false);
     }
@@ -64,16 +66,6 @@ export const getPostById = async (req, res) => {
         const postById = await Post.findById(id).populate("comment");
         res.status(200).json(postById);
     } catch (err) {
-        console.log(err);
-    }
-};
-
-export const getRecentPost = async (req, res) => {
-    try {
-        const post = await Post.find({}).sort({ _id: -1 }).limit(4);
-        res.status(200).json(post);
-    } catch (err) {
-        res.status(400);
         console.log(err);
     }
 };

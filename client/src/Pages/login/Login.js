@@ -26,7 +26,7 @@ const Login = ({ history }) => {
                 await Axios.post("/auth/login", {
                     username,
                     password,
-                }).then((res) => dispatch(getToken(true)));
+                }).then((res) => dispatch(getToken(res.data)));
                 setLoading(true);
             } catch (err) {
                 const LOGIN = "login";

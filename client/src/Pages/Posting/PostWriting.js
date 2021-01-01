@@ -12,6 +12,7 @@ const PostWriting = ({ history }) => {
         updated: "",
     });
     const { title, description, updated } = post;
+
     const [loading, setLoading] = useState(false);
     const [positing, setPosting] = useState(false);
     const [tags, setTags] = useState("");
