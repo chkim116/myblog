@@ -4,13 +4,13 @@ import Axios from "axios";
 import { useGetCategory } from "../../hook/customHooks";
 import { Loading } from "../Etc/Loading";
 import { SeoMeta } from "../../SeoMeta";
+import { useDispatch, useSelector } from "react-redux";
+import { writePost } from "../../Modules/post";
 
 const PostWriting = ({ history }) => {
-    const [post, setPost] = useState({
-        title: "",
-        description: "",
-        updated: "",
-    });
+    const dispatch = useDispatch();
+    const { post } = useSelector((state) => state.post);
+
     const { title, description, updated } = post;
 
     const [loading, setLoading] = useState(false);
@@ -20,6 +20,8 @@ const PostWriting = ({ history }) => {
     const [showTags, setShowTags] = useState([]);
     const [selectList, categoryLoading] = useGetCategory();
 
+    console.log(post);
+
     // text event
 
     const onSelect = (e) => {
@@ -28,15 +30,12 @@ const PostWriting = ({ history }) => {
 
     const onChange = (e) => {
         const { value, name } = e.target;
-        setPost({
-            ...post,
-            [name]: value,
-        });
+        dispatch(writePost({ ...post, [name]: value }));
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
-        setPost({ ...post });
+        dispatch(writePost({ ...post }));
         const axiosData = async () => {
             setPosting(true);
             try {
@@ -116,7 +115,6 @@ const PostWriting = ({ history }) => {
                 showTags={showTags}
                 onTags={onTags}
                 post={post}
-                setPost={setPost}
                 description={description}
             ></PostingForm>
         </>

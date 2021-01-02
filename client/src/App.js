@@ -11,7 +11,7 @@ import { Loading } from "./Pages/Etc/Loading";
 
 // 유저 확인을 위한 hook&redux
 
-import { Route } from "react-router-dom";
+import { Route, useLocation } from "react-router-dom";
 import { ArrowUp } from "./components/Layouts/ArrowUp";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuth, getToken } from "./Modules/auth";
@@ -27,6 +27,7 @@ function App() {
     // view
     const [view, setView] = useState({});
     const [loading, setLoading] = useState(false);
+    const location = useLocation();
 
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.auth);
@@ -90,7 +91,8 @@ function App() {
             <Route component={SearchingBtn}></Route>
             <ArrowUp onClick={onScrollTop} />
             <RouteCompoents />
-            <FooterForm view={view} />
+            {location.pathname === "/login" ||
+                location.pathname === "/register" || <FooterForm view={view} />}
         </>
     );
 }

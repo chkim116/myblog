@@ -1,6 +1,5 @@
 import Post from "../models/post.js";
 import Comments from "../models/Comments";
-import Category from "../models/Category";
 
 export const getPost = async (req, res) => {
     const page = parseInt(req.query.page || "1");

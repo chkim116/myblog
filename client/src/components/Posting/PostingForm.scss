@@ -1,106 +1,111 @@
 @import "../../Styles/var";
 
 .posting__form {
-  width: 100%;
-  margin-top: 2em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 480px;
-  max-width: 1000px;
-  margin: 0 auto;
-
-  .posting__form-title {
     width: 100%;
+    margin-top: 2em;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    margin-bottom: 1em;
+    min-height: 480px;
+    max-width: 1000px;
+    margin: 0 auto;
 
-    select {
-      width: 20%;
-      text-align: center;
+    .posting__form-title {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1em;
+
+        select {
+            width: 20%;
+            text-align: center;
+        }
+
+        input {
+            @include padding($padding: 0.8em 1em);
+            width: 50%;
+            @media #{$phone} {
+                width: 60%;
+            }
+        }
     }
 
-    input {
-      @include padding($padding: 0.8em 1em);
-      width: 50%;
-      @media #{$phone} {
-        width: 60%;
-      }
-    }
-  }
-
-  a {
-    color: $white;
-  }
-
-  .form__submit {
-    @include button;
-    margin-bottom: 1em;
-    color: $white;
-  }
-
-  .quill {
-    width: 100%;
-
-    .ql-toolbar.ql-snow {
-      position: sticky;
-      top: 60px;
-      z-index: 100;
-      background: $white;
-    }
-    .ql-snow {
-      width: 70%;
-      padding: 1em;
-      margin: 0 auto;
-
-      @media #{$phone} {
-        width: 80%;
-      }
+    a {
+        color: $white;
     }
 
-    .ql-container {
-      width: 70%;
-      min-height: 550px;
-      @media #{$phone} {
-        width: 80%;
-        margin: 0 auto 1em auto;
-      }
+    .form__submit {
+        @include button;
+        margin-bottom: 1em;
+        color: $white;
     }
-  }
+
+    .quill {
+        width: 100%;
+
+        img {
+            display: block;
+            margin: 8px auto;
+        }
+
+        .ql-toolbar.ql-snow {
+            position: sticky;
+            top: 60px;
+            z-index: 100;
+            background: $white;
+        }
+        .ql-snow {
+            width: 70%;
+            padding: 1em;
+            margin: 0 auto;
+
+            @media #{$phone} {
+                width: 80%;
+            }
+        }
+
+        .ql-container {
+            width: 70%;
+            min-height: 550px;
+            @media #{$phone} {
+                width: 80%;
+                margin: 0 auto 1em auto;
+            }
+        }
+    }
 }
 
 // pagination
 
 .pagination {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-
-  a {
-    outline: none;
-  }
-
-  .previous,
-  .next {
-    cursor: pointer;
-    margin: 0 0.25em;
-  }
-
-  .page-btn {
-    padding: 0.15em;
-    cursor: pointer;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 
     a {
-      padding: 0.35em;
+        outline: none;
     }
-  }
 
-  .active {
-    border: 1px solid $blackShadow;
-    color: $black;
-    background: $white;
-  }
+    .previous,
+    .next {
+        cursor: pointer;
+        margin: 0 0.25em;
+    }
+
+    .page-btn {
+        padding: 0.15em;
+        cursor: pointer;
+
+        a {
+            padding: 0.35em;
+        }
+    }
+
+    .active {
+        border: 1px solid $blackShadow;
+        color: $black;
+        background: $white;
+    }
 }

@@ -7,6 +7,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import schedule from "node-schedule";
+import http from "http";
 
 import "./db";
 dotenv.config();
@@ -64,6 +65,10 @@ app.get("/", (req, res) => {
 
 // 자정마다 조회수 초기화 및 토탈 추가
 const views = schedule.scheduleJob("0 0 0 * * *", totalView);
+
+setInterval(() => {
+    http.get("https://kormelon.herokuapp.com/");
+}, 3600000);
 
 // server
 const PORT = process.env.PORT || 4000;

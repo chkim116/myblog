@@ -1,7 +1,12 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import Quill from "quill";
+import Axios from "axios";
+import { useDispatch } from "react-redux";
+import { writePost } from "../../Modules/post";
 
-export const ReactQuillForm = ({ description, setPost, post, edit }) => {
+export const ReactQuillForm = ({ description, post, edit }) => {
+    const dispatch = useDispatch();
+
     const quillElement = useRef();
     const quillInstance = useRef();
     const modules = {
@@ -57,7 +62,6 @@ export const ReactQuillForm = ({ description, setPost, post, edit }) => {
                     const file = input.files[0];
                     const formData = new FormData();
                     formData.append("image", file);
-
                     // 현재 커서 위치 저장
                     const range = quill.getSelection(true);
                     // 현재 위치에 이미지 놓기
@@ -90,15 +94,17 @@ export const ReactQuillForm = ({ description, setPost, post, edit }) => {
             quill.on("text-change", (delta, oldDelta, source) => {
                 if (source === "user") {
                     edit
-                        ? setPost({
-                              ...post,
-                              description: quill.root.innerHTML,
-                              updated: "(수정됨)",
-                          })
-                        : setPost({
-                              ...post,
-                              description: quill.root.innerHTML,
-                          });
+                        ? dispatch(
+                              writePost({
+                                  description: quill.root.innerHTML,
+                                  updated: "(수정됨)",
+                              })
+                          )
+                        : dispatch(
+                              writePost({
+                                  description: quill.root.innerHTML,
+                              })
+                          );
                 }
             });
             quill.getModule("toolbar").addHandler("image", onClickImg);
@@ -115,17 +121,10 @@ export const ReactQuillForm = ({ description, setPost, post, edit }) => {
     }, [description]);
 
     return (
-        <div ref={quillElement}>
-            <div ref={quillInstance}></div>
-            {/* <ReactQuill
-                theme="snow"
-                modules={modules}
-                formats={formats}
-                defaultValue={description}
-                name="description"
-                placeholder="description"
-                onChange={onValue}
-            ></ReactQuill> */}
+        <div className="quill">
+            <div ref={quillElement}>
+                <div ref={quillInstance}></div>
+            </div>
         </div>
     );
 };

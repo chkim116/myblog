@@ -9,7 +9,6 @@ const PostingForm = ({
     onTagDel,
     onSubmit,
     onChange,
-    setPost,
     onTags,
     onTagsSubmit,
     tags,
@@ -50,10 +49,7 @@ const PostingForm = ({
                                 onChange={onChange}
                             ></input>
                         </div>
-                        <ReactQuillForm
-                            setPost={setPost}
-                            post={post}
-                        ></ReactQuillForm>
+                        <ReactQuillForm post={post}></ReactQuillForm>
                         <button className="form__submit" type="submit">
                             UPLOAD
                         </button>
