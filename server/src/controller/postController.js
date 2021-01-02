@@ -128,3 +128,15 @@ export const delComments = async (req, res) => {
         console.log(err);
     }
 };
+
+export const postImg = (req, res) => {
+    const {
+        file: { location },
+    } = req;
+    try {
+        res.status(200).json(location);
+    } catch (err) {
+        console.log(err);
+        res.status(400).json(err.message);
+    }
+};

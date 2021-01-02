@@ -34,14 +34,6 @@ const PostWriting = ({ history }) => {
         });
     };
 
-    const onValue = (content, delta, source, editor) => {
-        const text = editor.getHTML();
-        setPost({
-            ...post,
-            description: text,
-        });
-    };
-
     const onSubmit = (e) => {
         e.preventDefault();
         setPost({ ...post });
@@ -119,12 +111,14 @@ const PostWriting = ({ history }) => {
                 onChange={onChange}
                 title={title}
                 onTagsSubmit={onTagsSubmit}
-                onValue={onValue}
                 categoryLoading={categoryLoading}
                 tags={tags}
                 showTags={showTags}
                 onTags={onTags}
-                description={description}></PostingForm>
+                post={post}
+                setPost={setPost}
+                description={description}
+            ></PostingForm>
         </>
     );
 };

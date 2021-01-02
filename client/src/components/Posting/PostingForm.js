@@ -9,7 +9,7 @@ const PostingForm = ({
     onTagDel,
     onSubmit,
     onChange,
-    onValue,
+    setPost,
     onTags,
     onTagsSubmit,
     tags,
@@ -17,6 +17,7 @@ const PostingForm = ({
     selectCategory,
     selectList,
     onSelect,
+    post,
     categoryLoading,
 }) => {
     return (
@@ -28,13 +29,15 @@ const PostingForm = ({
                             <select
                                 value={selectCategory}
                                 onChange={onSelect}
-                                required>
+                                required
+                            >
                                 <option value="none">선택</option>
                                 {selectList &&
                                     selectList.map((list, index) => (
                                         <option
                                             key={index}
-                                            value={list.category}>
+                                            value={list.category}
+                                        >
                                             {list.category}
                                         </option>
                                     ))}
@@ -44,9 +47,13 @@ const PostingForm = ({
                                 type="text"
                                 name="title"
                                 placeholder="title"
-                                onChange={onChange}></input>
+                                onChange={onChange}
+                            ></input>
                         </div>
-                        <ReactQuillForm onValue={onValue}></ReactQuillForm>
+                        <ReactQuillForm
+                            setPost={setPost}
+                            post={post}
+                        ></ReactQuillForm>
                         <button className="form__submit" type="submit">
                             UPLOAD
                         </button>
