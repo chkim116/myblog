@@ -23,10 +23,10 @@
         }
 
         input {
-            @include padding($padding: 0.8em 1em);
+            @include padding($padding: 0.3em 0.8em);
             width: 50%;
             @media #{$phone} {
-                width: 60%;
+                width: 76%;
             }
         }
     }
@@ -61,7 +61,7 @@
             margin: 0 auto;
 
             @media #{$phone} {
-                width: 80%;
+                width: 96%;
             }
         }
 
@@ -69,7 +69,7 @@
             width: 70%;
             min-height: 550px;
             @media #{$phone} {
-                width: 80%;
+                width: 96%;
                 margin: 0 auto 1em auto;
             }
         }
