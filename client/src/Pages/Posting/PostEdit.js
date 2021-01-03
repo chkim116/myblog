@@ -55,15 +55,6 @@ const PostEdit = ({ history }) => {
         });
     };
 
-    const onValue = (content, delta, source, editor) => {
-        const text = editor.getHTML();
-        setUpdatePost({
-            ...updatePost,
-            description: text,
-            updated: "(수정됨)",
-        });
-    };
-
     const onSubmit = (e) => {
         e.preventDefault();
         setUpdatePost({ ...updatePost });
@@ -123,6 +114,7 @@ const PostEdit = ({ history }) => {
                 <PostEditForm
                     selectList={selectList}
                     post={updatePost}
+                    setUpdatePost={setUpdatePost}
                     loading={loading}
                     onSubmit={onSubmit}
                     onChange={onChange}
@@ -132,7 +124,7 @@ const PostEdit = ({ history }) => {
                     onTagsSubmit={onTagsSubmit}
                     onTagDel={onTagDel}
                     onSelect={onSelect}
-                    onValue={onValue}></PostEditForm>
+                ></PostEditForm>
             ) : (
                 <Loading />
             )}

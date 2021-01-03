@@ -4,7 +4,6 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import cors from "cors";
-import csp from "helmet-csp";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import schedule from "node-schedule";
@@ -44,15 +43,7 @@ app.use(
         credentials: true,
     })
 );
-app.use(
-    csp({
-        directives: {
-            defaultSrc: ["*"],
-            styleSrc: ["'self'", "'unsafe-inline'"],
-        },
-        reportOnly: false,
-    })
-);
+
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -74,8 +65,6 @@ app.get("/", (req, res) => {
 
 // 자정마다 조회수 초기화 및 토탈 추가
 const views = schedule.scheduleJob("0 0 0 * * *", totalView);
-
-// heroku sleep 깨우기
 
 setInterval(() => {
     http.get("https://kormelon.herokuapp.com/");

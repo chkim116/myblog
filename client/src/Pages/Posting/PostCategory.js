@@ -4,7 +4,6 @@ import { getCategoryList, getPostByFilter, lastPage } from "../../Modules/post";
 import Axios from "axios";
 import { PostCategoryList } from "../../components/Posting/PostCategoryList";
 import { PostCategoryTitle } from "../../components/Posting/PostCategoryTitle";
-import { Loading } from "../Etc/Loading";
 import FixedLoading from "../Etc/FixedLoading";
 
 export const PostCategory = ({ history }) => {
