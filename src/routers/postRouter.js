@@ -8,8 +8,10 @@ import {
     getAllPost,
     postComments,
     delComments,
+    postImg,
 } from "../controller/postController";
 import { auth } from "../controller/userController";
+import { uploadImage } from "../../multer";
 
 const postRouter = express.Router();
 
@@ -25,6 +27,9 @@ postRouter.get("/:id", auth, getPostById);
 
 // post Upload
 postRouter.post("/post", auth, postPosting);
+
+// post image
+postRouter.post("/img", uploadImage, postImg);
 
 // post Update
 postRouter.post("/edit/:id", auth, postEditing);

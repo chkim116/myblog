@@ -6,6 +6,21 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 
+const options = (login) => {
+    const option = {
+        maxAge: login ? 1000 * 60 * 60 * 24 * 7 : 0,
+        path: "/",
+        domain:
+            process.env.NODE_ENV === "production"
+                ? "api.kormelon.cf"
+                : undefined,
+        httpOnly: process.env.NODE_ENV === "production",
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    };
+    return option;
+};
+
 export const postRegister = async (req, res, next) => {
     const {
         body: { username, email, password, password2 },
@@ -57,6 +72,7 @@ export const postlogin = (req, res, next) => {
             res.status(400).send({
                 message: "아이디나 비밀번호를 다시 입력해 주세요.",
             });
+            return;
         } else {
             req.logIn(user, (err) => {
                 if (err) {
@@ -72,17 +88,7 @@ export const postlogin = (req, res, next) => {
                         return res.status(400).json(err);
                     }
                     return res
-                        .cookie("x_auth", user.token, {
-                            maxAge: 1000 * 60 * 60 * 24 * 7,
-                            path: "/",
-                            domain: undefined,
-                            httpOnly: process.env.NODE_ENV === "production",
-                            secure: process.env.NODE_ENV === "production",
-                            sameSite:
-                                process.env.NODE_ENV === "production"
-                                    ? "none"
-                                    : "lax",
-                        })
+                        .cookie("x_auth", user.token, options(true))
                         .status(200)
                         .json({ id: user._id, token: user.token });
                 });
@@ -119,15 +125,5 @@ export const auth = (req, res, next) => {
 
 export const logout = (req, res) => {
     req.token = "";
-    return res
-        .cookie("x_auth", "", {
-            path: "/",
-            maxAge: 0,
-            domain: undefined,
-            httpOnly: process.env.NODE_ENV === "production",
-            secure: process.env.NODE_ENV === "production",
-            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-        })
-        .status(200)
-        .send(req.token);
+    return res.cookie("x_auth", "", options(false)).status(200).send(req.token);
 };

@@ -1,9 +1,14 @@
 const GET_CATEGORY_LIST = "post/GET_CATEGORY_LIST";
-
+const WRITE_POST = "post/WRITE_POST";
 const GET_ALL_POST_FOR_LENGTH = "post/GET_ALL_POST_FOR_LENGTH";
 const GET_POST_BY_FILTER = "post/GET_POST_BY_FILTER";
 const DEL_POST_ON_CLICK = "post/DEL_POST_ON_CLICK";
 const LAST_PAGE = "post/LAST_PAGE";
+
+export const writePost = (post) => ({
+    type: WRITE_POST,
+    payload: post,
+});
 
 export const getAllPostForLength = (data) => ({
     type: GET_ALL_POST_FOR_LENGTH,
@@ -32,12 +37,21 @@ export const lastPage = (pageNum) => ({
 
 // 리듀서
 
-function post(state = {}, action) {
+function post(
+    state = { post: { title: "", description: "", update: "" } },
+    action
+) {
     switch (action.type) {
         case GET_CATEGORY_LIST: {
             return {
                 ...state,
                 categoryList: action.payload,
+            };
+        }
+        case WRITE_POST: {
+            return {
+                ...state,
+                post: { ...state.post, ...action.payload },
             };
         }
 

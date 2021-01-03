@@ -1,6 +1,5 @@
 import Post from "../models/post.js";
 import Comments from "../models/Comments";
-import Category from "../models/Category";
 
 export const getPost = async (req, res) => {
     const page = parseInt(req.query.page || "1");
@@ -126,5 +125,18 @@ export const delComments = async (req, res) => {
     } catch (err) {
         res.status(400);
         console.log(err);
+    }
+};
+
+export const postImg = (req, res) => {
+    const {
+        file: { location },
+    } = req;
+    console.log(location);
+    try {
+        res.status(200).json(location);
+    } catch (err) {
+        console.log(err);
+        res.status(400).json(err.message);
     }
 };

@@ -4,13 +4,13 @@ import Axios from "axios";
 import { useGetCategory } from "../../hook/customHooks";
 import { Loading } from "../Etc/Loading";
 import { SeoMeta } from "../../SeoMeta";
+import { useDispatch, useSelector } from "react-redux";
+import { writePost } from "../../Modules/post";
 
 const PostWriting = ({ history }) => {
-    const [post, setPost] = useState({
-        title: "",
-        description: "",
-        updated: "",
-    });
+    const dispatch = useDispatch();
+    const { post } = useSelector((state) => state.post);
+
     const { title, description, updated } = post;
 
     const [loading, setLoading] = useState(false);
@@ -20,6 +20,8 @@ const PostWriting = ({ history }) => {
     const [showTags, setShowTags] = useState([]);
     const [selectList, categoryLoading] = useGetCategory();
 
+    console.log(post);
+
     // text event
 
     const onSelect = (e) => {
@@ -28,23 +30,12 @@ const PostWriting = ({ history }) => {
 
     const onChange = (e) => {
         const { value, name } = e.target;
-        setPost({
-            ...post,
-            [name]: value,
-        });
-    };
-
-    const onValue = (content, delta, source, editor) => {
-        const text = editor.getHTML();
-        setPost({
-            ...post,
-            description: text,
-        });
+        dispatch(writePost({ ...post, [name]: value }));
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
-        setPost({ ...post });
+        dispatch(writePost({ ...post }));
         const axiosData = async () => {
             setPosting(true);
             try {
@@ -119,12 +110,13 @@ const PostWriting = ({ history }) => {
                 onChange={onChange}
                 title={title}
                 onTagsSubmit={onTagsSubmit}
-                onValue={onValue}
                 categoryLoading={categoryLoading}
                 tags={tags}
                 showTags={showTags}
                 onTags={onTags}
-                description={description}></PostingForm>
+                post={post}
+                description={description}
+            ></PostingForm>
         </>
     );
 };
