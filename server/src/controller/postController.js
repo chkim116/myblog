@@ -132,6 +132,7 @@ export const postImg = (req, res) => {
     const {
         file: { location },
     } = req;
+    console.log(location);
     try {
         res.status(200).json(location);
     } catch (err) {
