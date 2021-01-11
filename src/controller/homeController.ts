@@ -1,5 +1,5 @@
 import requestIp from "request-ip";
-import Home from "../models/Home.js";
+import Home from "../models/Home";
 import { NextFunction, Request, Response } from "express";
 
 export const getView = async (

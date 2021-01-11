@@ -4,8 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "cross-env NODE_ENV=production node dist/index.js",
-        "dev": "nodemon --exec node dist/index.js",
+        "start": "cross-env NODE_ENV=production pm2 start dist/index.js",
+        "dev": "nodemon --exec ts-node index.ts",
         "build": "tsc"
     },
     "author": "",

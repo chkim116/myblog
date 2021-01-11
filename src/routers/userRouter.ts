@@ -18,12 +18,16 @@ userRouter.post("/login", postlogin);
 // user auth
 userRouter.get("/", auth, async (req, res) => {
     const user = req.user as UserType;
-    res.status(200).json({
-        id: user._id,
-        username: user.username,
-        admin: user.admin,
-        token: (req as any).token,
-    });
+    if (user) {
+        res.status(200).json({
+            id: user._id,
+            username: user.username,
+            admin: user.admin,
+            token: (req as any).token,
+        });
+    } else {
+        res.status(400);
+    }
 });
 userRouter.post("/logout", auth, logout);
 

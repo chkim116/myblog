@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import Post, { PostType } from "../models/post.js";
+import Post, { PostType } from "../models/post";
 import Comments from "../models/Comments";
-import { UserType } from "../models/User.js";
+import { UserType } from "../models/User";
 
 export const getPost = async (req: Request, res: Response) => {
     const { filter, page }: any = req.query;

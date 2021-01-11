@@ -20,12 +20,12 @@ import categoryRouter from "./src/routers/categoryRouter";
 import homeRouter from "./src/routers/homeRouter";
 
 // Schema
-import "./src/models/post.js";
-import "./src/models/User.js";
-import "./src/models/Category.js";
-import "./src/models/Comments.js";
-import "./src/models/Guest.js";
-import "./src/models/Home.js";
+import "./src/models/post";
+import "./src/models/User";
+import "./src/models/Category";
+import "./src/models/Comments";
+import "./src/models/Guest";
+import "./src/models/Home";
 import "./passport";
 import "./multer";
 import { totalView } from "./src/controller/homeController";
