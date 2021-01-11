@@ -1,19 +1,18 @@
-import User from "../models/User";
+import User, { UserType } from "../models/User";
 import passport from "passport";
 import bcrypt from "bcrypt";
 import Joi from "@hapi/joi";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { CookieOptions, NextFunction, Request, Response } from "express";
 dotenv.config();
 
-const options = (login) => {
-    const option = {
+const options = (login: boolean) => {
+    const option: CookieOptions = {
         maxAge: login ? 1000 * 60 * 60 * 24 * 7 : 0,
         path: "/",
         domain:
-            process.env.NODE_ENV === "production"
-                ? "api.kormelon.cf"
-                : undefined,
+            process.env.NODE_ENV === "production" ? ".kormelon.cf" : undefined,
         httpOnly: process.env.NODE_ENV === "production",
         secure: process.env.NODE_ENV === "production",
         sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
@@ -21,7 +20,11 @@ const options = (login) => {
     return option;
 };
 
-export const postRegister = async (req, res, next) => {
+export const postRegister = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
     const {
         body: { username, email, password, password2 },
     } = req;
@@ -51,7 +54,7 @@ export const postRegister = async (req, res, next) => {
     const hashPassword = await bcrypt.hash(password, salt);
     console.log(hashPassword, password);
     try {
-        const user = await User({
+        const user = await new User({
             username,
             email,
             password: hashPassword,
@@ -65,9 +68,9 @@ export const postRegister = async (req, res, next) => {
     }
 };
 
-export const postlogin = (req, res, next) => {
+export const postlogin = (req: Request, res: Response, next: NextFunction) => {
     passport.authenticate("local", (err, user, info) => {
-        if (err) return res.send("message: error").next(err);
+        if (err) return res.send("message: error");
         if (!user) {
             res.status(400).send({
                 message: "아이디나 비밀번호를 다시 입력해 주세요.",
@@ -80,10 +83,10 @@ export const postlogin = (req, res, next) => {
                 }
                 const token = jwt.sign(
                     { userID: user._id },
-                    process.env.JWT_SECRET
+                    process.env.JWT_SECRET as string
                 );
                 user.token = token;
-                user.save((err, user) => {
+                user.save((err: any, user: UserType) => {
                     if (err) {
                         return res.status(400).json(err);
                     }
@@ -97,33 +100,43 @@ export const postlogin = (req, res, next) => {
     })(req, res, next);
 };
 
-export const auth = (req, res, next) => {
+export const auth = (req: Request, res: Response, next: NextFunction) => {
     const token = req.cookies.x_auth;
     if (token === undefined || token === "") {
         return next();
     }
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-            return res.status(500).json("token decode 실패");
-        }
-        User.findOne({ _id: decoded.userID }, (err, user) => {
+    jwt.verify(
+        token,
+        process.env.JWT_SECRET as string,
+        (err: any, decoded: any) => {
             if (err) {
-                return res.json("Not found");
+                return res.status(500).json("token decode 실패");
             }
-            if (!user) {
-                return res.status(400).json("token의 유저가 없습니다.");
-            }
-            if (user) {
-                req.token = token;
-                req.user = user;
-            }
-            next();
-        });
-    });
+            User.findOne(
+                { _id: decoded.userID },
+                (err: any, user: UserType) => {
+                    if (err) {
+                        return res.json("Not found");
+                    }
+                    if (!user) {
+                        return res.status(400).json("token의 유저가 없습니다.");
+                    }
+                    if (user) {
+                        (req as any).token = token;
+                        req.user = user;
+                    }
+                    next();
+                }
+            );
+        }
+    );
 };
 
-export const logout = (req, res) => {
-    req.token = "";
-    return res.cookie("x_auth", "", options(false)).status(200).send(req.token);
+export const logout = (req: Request, res: Response) => {
+    (req as any).token = "";
+    return res
+        .cookie("x_auth", "", options(false))
+        .status(200)
+        .send((req as any).token);
 };

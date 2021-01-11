@@ -1,29 +1,30 @@
 import Category from "../models/Category";
+import { Request, Response } from "express";
 
-export const createCategory = async (req, res) => {
-    const { category } = req.body;
+export const createCategory = async (req: Request, res: Response) => {
+    const { category }: { category: string } = req.body;
     try {
         await Category.create({
-            category: category,
+            category,
         });
         res.status(200).json("create!");
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(400);
     }
 };
 
-export const getCategory = async (req, res) => {
+export const getCategory = async (req: Request, res: Response) => {
     try {
         const category = await Category.find({}).sort({ category: -1 });
         res.status(200).json(category);
     } catch (err) {
         res.status(400);
-        console.log(err);
+        console.error(err);
     }
 };
 
-export const editCategory = async (req, res) => {
+export const editCategory = async (req: Request, res: Response) => {
     const {
         categoryEdit: { text, id },
     } = req.body;
@@ -37,17 +38,17 @@ export const editCategory = async (req, res) => {
         res.status(200);
     } catch (err) {
         res.status(400);
-        console.log(err);
+        console.error(err);
     }
 };
 
-export const delCategory = async (req, res) => {
+export const delCategory = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
         await Category.findOneAndDelete({ _id: id });
         res.status(200);
     } catch (err) {
         res.status(400);
-        console.log(err);
+        console.error(err);
     }
 };

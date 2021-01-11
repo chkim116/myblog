@@ -5,6 +5,7 @@ import {
     auth,
     logout,
 } from "../controller/userController";
+import { UserType } from "../models/User";
 
 const userRouter = express.Router();
 
@@ -16,11 +17,12 @@ userRouter.post("/login", postlogin);
 
 // user auth
 userRouter.get("/", auth, async (req, res) => {
+    const user = req.user as UserType;
     res.status(200).json({
-        id: req.user._id,
-        username: req.user.username,
-        admin: req.user.admin,
-        token: req.token,
+        id: user._id,
+        username: user.username,
+        admin: user.admin,
+        token: (req as any).token,
     });
 });
 userRouter.post("/logout", auth, logout);

@@ -18,7 +18,7 @@ const postRouter = express.Router();
 // /api/
 
 // post get ALL!
-postRouter.get("/" || "?page", getPost);
+postRouter.get("/", getPost);
 
 postRouter.get("/all", getAllPost);
 

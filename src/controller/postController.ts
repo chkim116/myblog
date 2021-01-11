@@ -1,11 +1,13 @@
-import Post from "../models/post.js";
+import { Request, Response } from "express";
+import Post, { PostType } from "../models/post.js";
 import Comments from "../models/Comments";
+import { UserType } from "../models/User.js";
 
-export const getPost = async (req, res) => {
-    const page = parseInt(req.query.page || "1");
-    const { filter } = req.query;
+export const getPost = async (req: Request, res: Response) => {
+    const { filter, page }: any = req.query;
+    const pageNumber = parseInt(page || "1");
 
-    if (page < 1) {
+    if (pageNumber < 1) {
         res.status(400).send("페이지 에러");
         return;
     }
@@ -15,63 +17,63 @@ export const getPost = async (req, res) => {
         )
             .sort({ _id: -1 })
             .limit(6)
-            .skip((page - 1) * 6)
+            .skip((pageNumber - 1) * 6)
             .exec();
         const postCount = await Post.countDocuments(
             filter ? { category: filter } : {}
         ).exec();
         res.json({ post, postCount });
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 };
 
-export const getAllPost = async (req, res) => {
+export const getAllPost = async (req: Request, res: Response) => {
     try {
         const post = await Post.find({}).sort({ _id: -1 });
         res.json(post);
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 };
 
-export const postPosting = async (req, res) => {
-    console.log(req.body);
+export const postPosting = async (req: Request, res: Response) => {
     const {
         body: { title, description, updated, createDate, tags, category },
-    } = req;
+    }: { body: PostType } = req;
+    const id = (req.user as UserType)?._id as string;
     try {
         const post = await Post.create({
             title,
             description,
             updated,
             createDate,
-            creator: req.user._id,
+            creator: id,
             tags: tags,
             category,
         });
         post.save();
         res.json(true);
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(400);
         res.json(false);
     }
 };
 
-export const getPostById = async (req, res) => {
+export const getPostById = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
         const postById = await Post.findById(id).populate("comment");
         res.status(200).json(postById);
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 };
 
-export const postEditing = async (req, res) => {
+export const postEditing = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { title, description, updated, tags, category } = req.body;
+    const { title, description, updated, tags, category }: PostType = req.body;
     try {
         const post = await Post.findOneAndUpdate(
             { _id: id },
@@ -80,22 +82,22 @@ export const postEditing = async (req, res) => {
         res.status(200).json(post);
     } catch (err) {
         res.status(400).send(false);
-        console.log(err);
+        console.error(err);
     }
 };
 
-export const postDeleting = async (req, res) => {
+export const postDeleting = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
         await Post.findOneAndDelete({ _id: id });
         res.status(200).send(true);
     } catch (err) {
         res.status(400).send(false);
-        console.log(err);
+        console.error(err);
     }
 };
 
-export const postComments = async (req, res) => {
+export const postComments = async (req: Request, res: Response) => {
     const { id } = req.params;
     const {
         comment: { comment },
@@ -104,39 +106,39 @@ export const postComments = async (req, res) => {
     try {
         const post = await Post.findById(id);
         const comments = await Comments.create({
-            comment: comment,
-            creator: req.user ? req.user.username : "익명",
+            comment: comment as string,
+            creator: req.user ? (req.user as UserType).username : "익명",
             createDate: createDate,
         });
-        post.comment.push(comments);
-        post.save();
-        res.status(200).json(comments);
+        if (post && comments) {
+            post.comment?.push(comments);
+            post.save();
+            res.status(200).json(comments);
+        }
     } catch (err) {
         res.status(400);
-        console.log(err);
+        console.error(err);
     }
 };
 
-export const delComments = async (req, res) => {
+export const delComments = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
         await Comments.findOneAndDelete({ _id: id });
         res.status(200);
     } catch (err) {
         res.status(400);
-        console.log(err);
+        console.error(err);
     }
 };
 
-export const postImg = (req, res) => {
-    const {
-        file: { location },
-    } = req;
-    console.log(location);
+export const postImg = (req: Request, res: Response) => {
+    const { file } = req;
+    const location = (file as any).location;
     try {
         res.status(200).json(location);
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(400).json(err.message);
     }
 };
