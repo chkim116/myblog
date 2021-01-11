@@ -8,7 +8,9 @@ export const getTags = async (req: Request, res: Response) => {
         });
         let tagList: string[] = [];
 
-        tags.map((array) => array.tags.map((tag) => tagList.push(tag)));
+        tags.map((array: any) =>
+            array.tags.map((tag: any) => tagList.push(tag))
+        );
 
         const reduceTag = tagList.reduce((obj: any, current) => {
             if (!obj[current]) {

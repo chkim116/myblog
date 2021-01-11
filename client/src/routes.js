@@ -1,4 +1,4 @@
-const API = "https://kormelon.herokuapp.com";
+const API = "https://api.kormelon.cf";
 //  basic path
 const HOME = "/";
 const GUESTBOOK = "/guestbook";

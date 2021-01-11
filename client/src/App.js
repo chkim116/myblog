@@ -34,9 +34,6 @@ function App() {
 
     useEffect(
         () => {
-            if (token) {
-                document.cookie = `x_auth=${token}; max-age=604800; path=/; sameSite=none; secure; httpOnly`;
-            }
             const getUser = async () => {
                 await Axios.get("/auth").then((res) =>
                     dispatch(getAuth(res.data))
@@ -62,7 +59,6 @@ function App() {
     const onClick = () => {
         const userLogout = async () => {
             try {
-                document.cookie = `x_auth=; max-age=0; path=/; sameSite=none; secure; httpOnly`;
                 await Axios.post("/auth/logout");
                 setLogout(true);
                 dispatch(getAuth(""));

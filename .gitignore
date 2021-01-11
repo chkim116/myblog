@@ -7,3 +7,5 @@ routes
 /dist
 
 myblog.pem
+
+yarn-error.log
