@@ -38,7 +38,7 @@ const App = styled(Header)<{ scaleheight: string }>`
 `
 interface Props {
     handleShowSider: () => void
-    showSider: boolean
+    showSider?: boolean
 }
 
 const logoutFetcher = async (url: string) => {
@@ -56,6 +56,7 @@ const AppHeader = ({ handleShowSider, showSider }: Props) => {
         setIsToken(false)
     }, [])
 
+    //  유저확인
     useEffect(() => {
         if (localStorage.getItem("token")) {
             setIsToken(true)
@@ -110,7 +111,7 @@ const AppHeader = ({ handleShowSider, showSider }: Props) => {
                         </Link>
                     )}
                 </div>
-                {router.pathname !== "/" && (
+                {router.pathname !== "/" && router.route !== "/[categories]" && (
                     <Button
                         type="ghost"
                         style={{

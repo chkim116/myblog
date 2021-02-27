@@ -4,71 +4,56 @@ import "../styles/index.css"
 import React, {
     createContext,
     useCallback,
-    useContext,
     useEffect,
+    useReducer,
     useState,
 } from "react"
-import Layout, { Content } from "antd/lib/layout/layout"
+import Layout from "antd/lib/layout/layout"
 import AppFooter from "../components/layouts/AppFooter"
 import AppHeader from "../components/layouts/AppHeader"
-import AppSider from "../components/layouts/AppSider"
-import Title from "antd/lib/typography/Title"
-import { useRouter } from "next/router"
-import { Button } from "antd"
-import { MenuOutlined, CloseOutlined } from "@ant-design/icons"
-import Link from "next/link"
 import axios from "axios"
-import { GetServerSideProps } from "next"
 
 const AppLayouts = styled(Layout)`
     width: 100%;
     background-color: #ffffff;
 `
 
-const AppContentLayout = styled(Layout)`
-    width: 100%;
-    background-color: #ffffff;
-    max-width: 1000px;
-    margin: 0 auto;
-`
-
-const AppTitle = styled(Title)`
-    margin: 95px 0;
-    padding: 0.75em 0 1.5em 0;
-    display: flex;
-    align-items: center;
-    color: #5f9ea0 !important;
-    justify-content: center;
-    border-bottom: 1px solid #dbdbdb;
-`
-
-const AppContent = styled(Content)`
-    width: 100%;
-    min-height: 100vh;
-    padding: 1.25em;
-    max-width: 1000px;
-    margin: 0 auto;
-`
-
 axios.defaults.baseURL = "http://localhost:4000"
 axios.defaults.withCredentials = true
 
 const initial = {
-    username: "",
-    token: "",
-    id: "",
-    admin: false,
+    showSider: false,
+    user: {
+        username: "",
+        token: "",
+        id: "",
+        admin: false,
+    },
 }
 
 export const AppContext = createContext(initial)
 
-function MyApp({ Component, pageProps, user }: AppProps) {
-    const router = useRouter()
+const showing = {
+    showSider: false,
+}
 
+function reducer(state: { showSider: boolean }, action: any) {
+    switch (action.type) {
+        case "SHOWING": {
+            return { ...state, showSider: !state.showSider }
+        }
+
+        default:
+            return state
+    }
+}
+
+function MyApp({ Component, pageProps, user }: AppProps) {
     const [showSider, setShowSider] = useState(false)
 
+    const [state, dispatch] = useReducer(reducer, showing)
     const handleShowSider = useCallback(() => {
-        setShowSider((prev) => !prev)
+        dispatch({ type: "SHOWING" })
     }, [])
 
     useEffect(() => {
@@ -80,24 +65,13 @@ function MyApp({ Component, pageProps, user }: AppProps) {
     }, [user])
 
     return (
-        <AppContext.Provider value={user}>
+        <AppContext.Provider value={{ showSider: state.showSider, user }}>
             <AppLayouts>
                 <AppHeader
                     handleShowSider={handleShowSider}
-                    showSider={showSider}
+                    showSider={state.showSider}
                 />
-                {router.pathname === "/" && (
-                    <AppTitle>{router.query?.category || "all"}</AppTitle>
-                )}
-                <AppContentLayout>
-                    <AppContent>
-                        <Component {...pageProps} />
-                    </AppContent>
-                    {router.pathname === "/" && <AppSider />}
-                    {showSider && router.pathname !== "/" && (
-                        <AppSider showSider={showSider} />
-                    )}
-                </AppContentLayout>
+                <Component {...pageProps} />
                 <AppFooter>KimChanghoe &copy; 2021</AppFooter>
             </AppLayouts>
         </AppContext.Provider>

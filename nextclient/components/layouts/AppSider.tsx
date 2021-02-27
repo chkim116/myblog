@@ -1,9 +1,10 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 import Sider from "antd/lib/layout/Sider"
 import { useRouter } from "next/router"
 import Link from "next/link"
+import { Categories } from "../../pages/[categories]"
 
 const App = styled(Sider)<{ show?: string }>`
     background-color: #ffffff;
@@ -15,6 +16,7 @@ const App = styled(Sider)<{ show?: string }>`
         css`
             position: fixed;
             right: 0;
+            top: 0;
             margin-top: 90px;
         `}
     ul {
@@ -32,29 +34,37 @@ const App = styled(Sider)<{ show?: string }>`
     }
 `
 
-const AppSider = ({ showSider }: { showSider?: boolean }) => {
-    const router = useRouter()
+const getAllLength = (category: Categories[]): number => {
+    let res = 0
+    category.reduce((prev: number, cur: Categories) => {
+        return (res = prev + cur.post.length)
+    }, 0)
 
-    // TODO: /? 이럴때마다 카테고리에 해당하는 글 가져오기
-    useEffect(() => {
-        console.log(router.asPath)
-    }, [router.asPath])
+    return res
+}
+
+const AppSider = ({
+    showSider,
+    categories = [],
+}: {
+    showSider?: boolean
+    categories: Categories[]
+}) => {
+    const allPost = useState(getAllLength(categories) || 0)
 
     return (
         <App show={showSider?.toString()}>
             <ul>
                 <Link href="/">
-                    <li>All (9)</li>
+                    <li>All ({allPost})</li>
                 </Link>
-                <Link href="/?category=js">
-                    <li>Javascript (3)</li>
-                </Link>
-                <Link href="/?category=react">
-                    <li>React (3)</li>
-                </Link>
-                <Link href="/?category=node">
-                    <li>Node (3)</li>
-                </Link>
+                {categories.map((list) => (
+                    <Link href={`/${list.category}`} key={list._id}>
+                        <li>
+                            {list.category} ({list.post.length})
+                        </li>
+                    </Link>
+                ))}
             </ul>
         </App>
     )

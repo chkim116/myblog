@@ -1,60 +1,72 @@
-import styled from "@emotion/styled"
-import { Tag } from "antd"
-import Paragraph from "antd/lib/typography/Paragraph"
-import Text from "antd/lib/typography/Text"
+import { GetStaticProps } from "next"
+import React, { useEffect, useState } from "react"
+import axios from "axios"
+import ContentList from "../components/ContentList"
+import { Categories } from "./[categories]"
 import Title from "antd/lib/typography/Title"
-import Link from "next/link"
-import React from "react"
+import AppContents from "../components/layouts/AppContents"
+import styled from "@emotion/styled"
 
-const ContentLayout = styled.div`
-    padding-bottom: 1em;
-    border-bottom: 1px dashed #dbdbdc;
-    margin-bottom: 3em;
-    cursor: pointer;
-
-    .content__title {
-        margin-top: 0.9em !important;
-    }
-
-    .ant-tag {
-        &:hover {
-            text-decoration: underline;
-        }
-    }
+export const AppTitle = styled(Title)`
+    margin: 95px 0;
+    padding: 0.75em 0 1.5em 0;
+    display: flex;
+    align-items: center;
+    color: #5f9ea0 !important;
+    justify-content: center;
+    border-bottom: 1px solid #dbdbdb;
 `
-const routes = [1, 2, 3, 4, 5]
 
-export default function Home() {
+export interface Post {
+    _id: string
+    title: string
+    preview: string
+    description: string
+    createDate: string
+    updated: string
+    creator: string
+    tags: string[]
+    category: string
+}
+
+export interface Props {
+    post: Post[]
+    postCount: number
+    categories: Categories[]
+}
+
+export default function Home({ post, postCount, categories }: Props) {
+    const [postList, setPostList] = useState<Post[]>([])
+    const [page, setPage] = useState(0)
+
+    // TODO: 모든 리스트 가지고 오기
+    //  TODO: 이동 링크는? title로 합니다.
+    useEffect(() => {
+        setPostList(post || [])
+        setPage(postCount || 0)
+    }, [post])
+
     return (
         <>
-            {routes.map((id) => (
-                <Link href={`/contents/${id}`} key={id}>
-                    <ContentLayout>
-                        <Text>{new Date().toDateString()}</Text>
-                        <Title className="content__title">
-                            주니어 클린코드
-                        </Title>
-                        <Paragraph>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing
-                            elit. Corrupti animi sapiente autem natus
-                            consequatur ratione aliquam odit qui quisquam
-                            molestias laboriosam perferendis quibusdam non
-                            dolores dolorem, in blanditiis totam? Sapiente.
-                        </Paragraph>
-                        <>
-                            <Link href="/tag">
-                                <Tag color="processing">태그1</Tag>
-                            </Link>
-                            <Link href="/tag">
-                                <Tag color="processing">태그2</Tag>
-                            </Link>
-                            <Link href="/tag">
-                                <Tag color="processing">태그3</Tag>
-                            </Link>
-                        </>
-                    </ContentLayout>
-                </Link>
-            ))}
+            <AppTitle>all</AppTitle>
+            <AppContents categories={categories}>
+                <ContentList postList={postList}></ContentList>
+            </AppContents>
         </>
     )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+    const post: Props = await axios.get("/api").then((res) => res.data)
+    const categories: Categories[] = await axios
+        .get("/category")
+        .then((res) => res.data)
+
+    return {
+        props: {
+            post: post.post,
+            postCount: post.postCount,
+            categories,
+        },
+    }
 }
