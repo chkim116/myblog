@@ -1,0 +1,24 @@
+{
+    "name": "nextclient",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start"
+    },
+    "dependencies": {
+        "@emotion/core": "^11.0.0",
+        "@emotion/styled": "^11.1.5",
+        "antd": "^4.12.3",
+        "next": "10.0.7",
+        "react": "17.0.1",
+        "react-dom": "17.0.1",
+        "typescript": "^4.2.2"
+    },
+    "devDependencies": {
+        "@types/node": "^14.14.31",
+        "@types/react": "^17.0.2",
+        "@types/react-dom": "^17.0.1"
+    }
+}

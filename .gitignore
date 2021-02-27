@@ -9,3 +9,5 @@ routes
 myblog.pem
 
 yarn-error.log
+
+./client
