@@ -1,6 +1,8 @@
 import { Button, Form, Input } from "antd"
-import React from "react"
+import React, { useCallback, useState } from "react"
 import styled from "@emotion/styled"
+import axios from "axios"
+import { useRouter } from "next/router"
 
 const FormLayout = styled(Form)`
     display: flex;
@@ -19,12 +21,41 @@ const layout = {
     },
 }
 
+const loginFetcher = async (url: string, data: any) => {
+    return await axios.post(url, data)
+}
+
 const Login = () => {
+    const [form, setForm] = useState({ username: "", password: "" })
+    const router = useRouter()
+
+    const handleChange = useCallback((_, all: any) => {
+        setForm(all)
+    }, [])
+
+    const handleFinish = useCallback(() => {
+        const { username, password } = form
+
+        if (username && password) {
+            loginFetcher("/auth/login", form).then((res) => {
+                localStorage.setItem("token", JSON.stringify(res.data.id))
+            })
+            router.push("/")
+        }
+    }, [form])
+
     return (
-        <FormLayout {...layout} layout="horizontal" size="large">
+        <FormLayout
+            onValuesChange={handleChange}
+            onFinish={handleFinish}
+            {...layout}
+            layout="horizontal"
+            size="large"
+        >
             <Form.Item
                 label="Id"
                 style={{ width: "300px" }}
+                name="username"
                 rules={[
                     {
                         required: true,
@@ -37,6 +68,7 @@ const Login = () => {
             <Form.Item
                 label="Password"
                 style={{ width: "300px" }}
+                name="password"
                 rules={[
                     {
                         required: true,

@@ -1,7 +1,13 @@
 import { AppProps } from "next/dist/next-server/lib/router/router"
 import styled from "@emotion/styled"
 import "../styles/index.css"
-import React, { useCallback, useState } from "react"
+import React, {
+    createContext,
+    useCallback,
+    useContext,
+    useEffect,
+    useState,
+} from "react"
 import Layout, { Content } from "antd/lib/layout/layout"
 import AppFooter from "../components/layouts/AppFooter"
 import AppHeader from "../components/layouts/AppHeader"
@@ -11,7 +17,8 @@ import { useRouter } from "next/router"
 import { Button } from "antd"
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons"
 import Link from "next/link"
-import AuthContext from "../context/auth"
+import axios from "axios"
+import { GetServerSideProps } from "next"
 
 const AppLayouts = styled(Layout)`
     width: 100%;
@@ -43,7 +50,19 @@ const AppContent = styled(Content)`
     margin: 0 auto;
 `
 
-function MyApp({ Component, pageProps }: AppProps) {
+axios.defaults.baseURL = "http://localhost:4000"
+axios.defaults.withCredentials = true
+
+const initial = {
+    username: "",
+    token: "",
+    id: "",
+    admin: false,
+}
+
+export const AppContext = createContext(initial)
+
+function MyApp({ Component, pageProps, user }: AppProps) {
     const router = useRouter()
 
     const [showSider, setShowSider] = useState(false)
@@ -52,49 +71,21 @@ function MyApp({ Component, pageProps }: AppProps) {
         setShowSider((prev) => !prev)
     }, [])
 
+    useEffect(() => {
+        if (localStorage.getItem("token")) {
+            return
+        } else {
+            localStorage.setItem("token", JSON.stringify(user.id))
+        }
+    }, [user])
+
     return (
-        <AuthContext>
+        <AppContext.Provider value={user}>
             <AppLayouts>
-                <AppHeader>
-                    <div className="header__container">
-                        <Link href="/">
-                            <div>
-                                <span>개발자의 생각창고</span>
-                            </div>
-                        </Link>
-                        <div className="header__login">
-                            {/* TODO:  로그인  상태에 따라 다르게. */}
-                            <Link href="/upload">
-                                <Button type="link" size="large">
-                                    Upload
-                                </Button>
-                            </Link>
-                            <Link href="/login">
-                                <Button type="link" size="large">
-                                    Login
-                                </Button>
-                            </Link>
-                        </div>
-                        {router.pathname !== "/" && (
-                            <Button
-                                type="ghost"
-                                style={{
-                                    position: "absolute",
-                                    right: "20px",
-                                    top: "10px",
-                                }}
-                                size="large"
-                                onClick={handleShowSider}
-                            >
-                                {showSider ? (
-                                    <CloseOutlined />
-                                ) : (
-                                    <MenuOutlined />
-                                )}
-                            </Button>
-                        )}
-                    </div>
-                </AppHeader>
+                <AppHeader
+                    handleShowSider={handleShowSider}
+                    showSider={showSider}
+                />
                 {router.pathname === "/" && (
                     <AppTitle>{router.query?.category || "all"}</AppTitle>
                 )}
@@ -109,8 +100,27 @@ function MyApp({ Component, pageProps }: AppProps) {
                 </AppContentLayout>
                 <AppFooter>KimChanghoe &copy; 2021</AppFooter>
             </AppLayouts>
-        </AuthContext>
+        </AppContext.Provider>
     )
 }
 
 export default MyApp
+
+MyApp.getInitialProps = async (app: any) => {
+    const request = app.ctx?.req
+
+    let cookie = ""
+    if (request) {
+        cookie = request.headers?.cookie
+    }
+
+    const user = await axios
+        .get("/auth", {
+            headers: {
+                cookie: cookie,
+            },
+        })
+        .then((res) => res.data)
+
+    return { user }
+}

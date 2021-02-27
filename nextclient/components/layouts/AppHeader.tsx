@@ -1,7 +1,11 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import styled from "@emotion/styled"
 import { Header } from "antd/lib/layout/layout"
-import { AppContext } from "../../context/auth"
+import { CloseOutlined, MenuOutlined } from "@ant-design/icons"
+import { Button } from "antd"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import axios from "axios"
 
 const App = styled(Header)<{ scaleheight: string }>`
     position: fixed;
@@ -32,15 +36,33 @@ const App = styled(Header)<{ scaleheight: string }>`
         margin-right: 15px;
     }
 `
-interface AppProp {
-    children: React.ReactChild
+interface Props {
+    handleShowSider: () => void
+    showSider: boolean
 }
 
-const AppHeader = ({ children }: AppProp) => {
-    const [scaleHeight, setScaleHeight] = useState(false)
+const logoutFetcher = async (url: string) => {
+    return await axios.post(url)
+}
 
-    const user = useContext(AppContext)
-    console.log(user)
+const AppHeader = ({ handleShowSider, showSider }: Props) => {
+    const [scaleHeight, setScaleHeight] = useState(false)
+    const router = useRouter()
+    const [isToken, setIsToken] = useState(false)
+
+    const handleLogOut = useCallback(() => {
+        logoutFetcher("/auth/logout")
+        localStorage.removeItem("token")
+        setIsToken(false)
+    }, [])
+
+    useEffect(() => {
+        if (localStorage.getItem("token")) {
+            setIsToken(true)
+        } else {
+            setIsToken(false)
+        }
+    }, [router])
 
     useEffect(() => {
         document.addEventListener("scroll", () => {
@@ -56,7 +78,55 @@ const AppHeader = ({ children }: AppProp) => {
         }
     }, [])
 
-    return <App scaleheight={scaleHeight.toString()}>{children}</App>
+    return (
+        <App scaleheight={scaleHeight.toString()}>
+            <div className="header__container">
+                <Link href="/">
+                    <div>
+                        <span>개발자의 생각창고</span>
+                    </div>
+                </Link>
+                <div className="header__login">
+                    {isToken ? (
+                        <>
+                            <Link href="/upload">
+                                <Button type="link" size="large">
+                                    Upload
+                                </Button>
+                            </Link>
+                            <Button
+                                type="link"
+                                size="large"
+                                onClick={handleLogOut}
+                            >
+                                Logout
+                            </Button>
+                        </>
+                    ) : (
+                        <Link href="/login">
+                            <Button type="link" size="large">
+                                Login
+                            </Button>
+                        </Link>
+                    )}
+                </div>
+                {router.pathname !== "/" && (
+                    <Button
+                        type="ghost"
+                        style={{
+                            position: "absolute",
+                            right: "20px",
+                            top: "10px",
+                        }}
+                        size="large"
+                        onClick={handleShowSider}
+                    >
+                        {showSider ? <CloseOutlined /> : <MenuOutlined />}
+                    </Button>
+                )}
+            </div>
+        </App>
+    )
 }
 
 export default AppHeader
