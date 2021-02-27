@@ -13,7 +13,7 @@ const App = styled(Sider)<{ show?: boolean }>`
     ${({ show }) =>
         show &&
         css`
-            position: absolute;
+            position: fixed;
             right: 0;
             margin-top: 90px;
         `}
