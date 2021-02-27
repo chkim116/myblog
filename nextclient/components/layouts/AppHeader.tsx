@@ -13,6 +13,7 @@ const App = styled(Header)<{ scaleheight: string }>`
     font-size: 1.25rem;
     z-index: 300;
     transition: all 200ms;
+
     .header__container {
         max-width: 900px;
         width: 100%;
@@ -21,6 +22,10 @@ const App = styled(Header)<{ scaleheight: string }>`
         span {
             cursor: pointer;
         }
+    }
+
+    .header__login {
+        margin-right: 15px;
     }
 `
 interface AppProp {

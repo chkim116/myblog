@@ -60,10 +60,17 @@ function MyApp({ Component, pageProps }: AppProps) {
                                 <span>개발자의 생각창고</span>
                             </div>
                         </Link>
+                        <div className="header__login">
+                            <Link href="/login">
+                                <Button type="link" size="large">
+                                    Login
+                                </Button>
+                            </Link>
+                        </div>
                         {router.pathname !== "/" && (
                             <Button
-                                type="text"
-                                style={{ position: "absolute", right: "40px" }}
+                                type="ghost"
+                                style={{ position: "absolute", right: "20px" }}
                                 size="large"
                                 onClick={handleShowSider}
                             >
