@@ -1,7 +1,7 @@
 import { AppProps } from "next/dist/next-server/lib/router/router"
 import styled from "@emotion/styled"
 import "../styles/index.css"
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useState } from "react"
 import Layout, { Content } from "antd/lib/layout/layout"
 import AppFooter from "../components/layouts/AppFooter"
 import AppHeader from "../components/layouts/AppHeader"
@@ -11,6 +11,7 @@ import { useRouter } from "next/router"
 import { Button } from "antd"
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons"
 import Link from "next/link"
+import AuthContext from "../context/auth"
 
 const AppLayouts = styled(Layout)`
     width: 100%;
@@ -44,6 +45,7 @@ const AppContent = styled(Content)`
 
 function MyApp({ Component, pageProps }: AppProps) {
     const router = useRouter()
+
     const [showSider, setShowSider] = useState(false)
 
     const handleShowSider = useCallback(() => {
@@ -51,7 +53,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     }, [])
 
     return (
-        <>
+        <AuthContext>
             <AppLayouts>
                 <AppHeader>
                     <div className="header__container">
@@ -107,7 +109,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 </AppContentLayout>
                 <AppFooter>KimChanghoe &copy; 2021</AppFooter>
             </AppLayouts>
-        </>
+        </AuthContext>
     )
 }
 

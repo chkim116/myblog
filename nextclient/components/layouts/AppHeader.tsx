@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import styled from "@emotion/styled"
 import { Header } from "antd/lib/layout/layout"
+import { AppContext } from "../../context/auth"
 
 const App = styled(Header)<{ scaleheight: string }>`
     position: fixed;
@@ -37,6 +38,9 @@ interface AppProp {
 
 const AppHeader = ({ children }: AppProp) => {
     const [scaleHeight, setScaleHeight] = useState(false)
+
+    const user = useContext(AppContext)
+    console.log(user)
 
     useEffect(() => {
         document.addEventListener("scroll", () => {
