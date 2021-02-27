@@ -12,13 +12,16 @@ const App = styled(Header)<{ scaleheight: string }>`
     align-items: center;
     font-size: 1.25rem;
     z-index: 300;
+    justify-content: space-between;
+
     transition: all 200ms;
 
     .header__container {
-        max-width: 900px;
+        max-width: 1000px;
         width: 100%;
+        display: flex;
+        justify-content: space-between;
         margin: 0 auto;
-
         span {
             cursor: pointer;
         }

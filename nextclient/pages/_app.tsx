@@ -37,7 +37,7 @@ const AppTitle = styled(Title)`
 const AppContent = styled(Content)`
     width: 100%;
     min-height: 100vh;
-    padding: 2em;
+    padding: 1.25em;
     max-width: 1000px;
     margin: 0 auto;
 `
@@ -54,13 +54,19 @@ function MyApp({ Component, pageProps }: AppProps) {
         <>
             <AppLayouts>
                 <AppHeader>
-                    <>
+                    <div className="header__container">
                         <Link href="/">
-                            <div className="header__container">
+                            <div>
                                 <span>개발자의 생각창고</span>
                             </div>
                         </Link>
                         <div className="header__login">
+                            {/* TODO:  로그인  상태에 따라 다르게. */}
+                            <Link href="/upload">
+                                <Button type="link" size="large">
+                                    Upload
+                                </Button>
+                            </Link>
                             <Link href="/login">
                                 <Button type="link" size="large">
                                     Login
@@ -70,7 +76,11 @@ function MyApp({ Component, pageProps }: AppProps) {
                         {router.pathname !== "/" && (
                             <Button
                                 type="ghost"
-                                style={{ position: "absolute", right: "20px" }}
+                                style={{
+                                    position: "absolute",
+                                    right: "20px",
+                                    top: "10px",
+                                }}
                                 size="large"
                                 onClick={handleShowSider}
                             >
@@ -81,7 +91,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                                 )}
                             </Button>
                         )}
-                    </>
+                    </div>
                 </AppHeader>
                 {router.pathname === "/" && (
                     <AppTitle>{router.query?.category || "all"}</AppTitle>
