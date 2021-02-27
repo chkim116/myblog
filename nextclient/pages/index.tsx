@@ -1,10 +1,10 @@
 import styled from "@emotion/styled"
+import { Tag } from "antd"
 import Paragraph from "antd/lib/typography/Paragraph"
 import Text from "antd/lib/typography/Text"
 import Title from "antd/lib/typography/Title"
 import Link from "next/link"
 import React from "react"
-import ContentForm from "../components/layouts/ContentForm"
 
 const ContentLayout = styled.div`
     padding-bottom: 1em;
@@ -14,6 +14,12 @@ const ContentLayout = styled.div`
 
     .content__title {
         margin-top: 0.9em !important;
+    }
+
+    .ant-tag {
+        &:hover {
+            text-decoration: underline;
+        }
     }
 `
 const routes = [1, 2, 3, 4, 5]
@@ -35,6 +41,17 @@ export default function Home() {
                             molestias laboriosam perferendis quibusdam non
                             dolores dolorem, in blanditiis totam? Sapiente.
                         </Paragraph>
+                        <>
+                            <Link href="/tag">
+                                <Tag color="processing">태그1</Tag>
+                            </Link>
+                            <Link href="/tag">
+                                <Tag color="processing">태그2</Tag>
+                            </Link>
+                            <Link href="/tag">
+                                <Tag color="processing">태그3</Tag>
+                            </Link>
+                        </>
                     </ContentLayout>
                 </Link>
             ))}
