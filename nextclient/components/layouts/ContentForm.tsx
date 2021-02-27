@@ -6,7 +6,6 @@ import Paragraph from "antd/lib/typography/Paragraph"
 
 const ContentLayout = styled.div`
     margin-bottom: 3em;
-    cursor: pointer;
 
     .content__title {
         margin-top: 0.9em !important;

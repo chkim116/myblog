@@ -5,13 +5,13 @@ import Sider from "antd/lib/layout/Sider"
 import { useRouter } from "next/router"
 import Link from "next/link"
 
-const App = styled(Sider)<{ show?: boolean }>`
+const App = styled(Sider)<{ show?: string }>`
     background-color: #ffffff;
     padding: 1em;
     margin-top: 1em;
 
     ${({ show }) =>
-        show &&
+        show === "true" &&
         css`
             position: fixed;
             right: 0;
@@ -41,7 +41,7 @@ const AppSider = ({ showSider }: { showSider?: boolean }) => {
     }, [router.asPath])
 
     return (
-        <App show={showSider}>
+        <App show={showSider?.toString()}>
             <ul>
                 {showSider && (
                     <Link href="/">

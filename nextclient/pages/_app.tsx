@@ -10,6 +10,7 @@ import Title from "antd/lib/typography/Title"
 import { useRouter } from "next/router"
 import { Button } from "antd"
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons"
+import Link from "next/link"
 
 const AppLayouts = styled(Layout)`
     width: 100%;
@@ -54,12 +55,15 @@ function MyApp({ Component, pageProps }: AppProps) {
             <AppLayouts>
                 <AppHeader>
                     <>
-                        <div className="header__container">
-                            개발자의 생각창고
-                        </div>
+                        <Link href="/">
+                            <div className="header__container">
+                                <span>개발자의 생각창고</span>
+                            </div>
+                        </Link>
                         {router.pathname !== "/" && (
                             <Button
                                 type="text"
+                                style={{ position: "absolute", right: "40px" }}
                                 size="large"
                                 onClick={handleShowSider}
                             >

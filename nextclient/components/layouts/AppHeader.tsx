@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react"
 import styled from "@emotion/styled"
 import { Header } from "antd/lib/layout/layout"
 
-const App = styled(Header)<{ scaleheight: boolean }>`
+const App = styled(Header)<{ scaleheight: string }>`
     position: fixed;
     width: 100%;
     background-color: #ffffff;
-    height: ${({ scaleheight }) => (scaleheight ? "75px" : "65px")};
+    height: ${({ scaleheight }) => (scaleheight === "true" ? "75px" : "65px")};
     border-bottom: 1px solid #dbdbdb;
     display: flex;
     align-items: center;
@@ -17,6 +17,10 @@ const App = styled(Header)<{ scaleheight: boolean }>`
         max-width: 900px;
         width: 100%;
         margin: 0 auto;
+
+        span {
+            cursor: pointer;
+        }
     }
 `
 interface AppProp {
@@ -40,7 +44,7 @@ const AppHeader = ({ children }: AppProp) => {
         }
     }, [])
 
-    return <App scaleheight={scaleHeight}>{children}</App>
+    return <App scaleheight={scaleHeight.toString()}>{children}</App>
 }
 
 export default AppHeader
