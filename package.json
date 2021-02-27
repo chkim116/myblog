@@ -11,6 +11,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@ant-design/icons": "^4.5.0",
         "@hapi/joi": "^17.1.1",
         "aws-sdk": "^2.752.0",
         "bcrypt": "^5.0.0",

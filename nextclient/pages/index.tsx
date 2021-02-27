@@ -19,7 +19,7 @@ const ContentLayout = styled.div`
 export default function Home() {
     return (
         <>
-            <Link href="/d">
+            <Link href="/contents/1">
                 <ContentLayout>
                     <Text className="content__date">
                         {new Date().toDateString()}
