@@ -1,5 +1,8 @@
 @import "~antd/dist/antd.css";
 
+* {
+    background-color: #ffffff;
+}
 body {
     padding: 0;
     margin: 0;
