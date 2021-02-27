@@ -3,6 +3,7 @@ import QuillEditor from "../components/QuillEditor"
 import styled from "@emotion/styled"
 import { Form, Input, Select } from "antd"
 import TextArea from "antd/lib/input/TextArea"
+import { useRouter } from "next/router"
 const { Item } = Form
 
 const Container = styled.div`
@@ -32,6 +33,10 @@ const Container = styled.div`
 `
 
 const Upload = () => {
+    const router = useRouter()
+
+    // edit === true 일시~ 데이터 넣어주기~
+    console.log(router.query)
     return (
         <Container>
             <Form size="large" layout="inline">
