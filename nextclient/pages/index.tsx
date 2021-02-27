@@ -1,9 +1,10 @@
+import styled from "@emotion/styled"
 import Paragraph from "antd/lib/typography/Paragraph"
 import Text from "antd/lib/typography/Text"
 import Title from "antd/lib/typography/Title"
-import Head from "next/head"
-import styled from "@emotion/styled"
 import Link from "next/link"
+import React from "react"
+import ContentForm from "../components/layouts/ContentForm"
 
 const ContentLayout = styled.div`
     padding-bottom: 1em;
@@ -15,48 +16,28 @@ const ContentLayout = styled.div`
         margin-top: 0.9em !important;
     }
 `
+const routes = [1, 2, 3, 4, 5]
 
 export default function Home() {
     return (
         <>
-            <Link href="/contents/1">
-                <ContentLayout>
-                    <Text className="content__date">
-                        {new Date().toDateString()}
-                    </Text>
-                    <Title className="content__title">
-                        주니어 클린코드 맛보기
-                    </Title>
-                    <Paragraph>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Impedit non nostrum eum minus similique delectus, culpa,
-                        nemo dolor quisquam est at voluptatibus molestias.
-                        Excepturi repellendus odit soluta architecto ipsa eaque.
-                    </Paragraph>
-                </ContentLayout>
-            </Link>
-
-            <ContentLayout>
-                <Text>{new Date().toDateString()}</Text>
-                <Title>주니어 클린코드 맛보기</Title>
-                <Paragraph>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Impedit non nostrum eum minus similique delectus, culpa,
-                    nemo dolor quisquam est at voluptatibus molestias. Excepturi
-                    repellendus odit soluta architecto ipsa eaque.
-                </Paragraph>
-            </ContentLayout>
-
-            <ContentLayout>
-                <Text>{new Date().toDateString()}</Text>
-                <Title>주니어 클린코드 맛보기</Title>
-                <Paragraph>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Impedit non nostrum eum minus similique delectus, culpa,
-                    nemo dolor quisquam est at voluptatibus molestias. Excepturi
-                    repellendus odit soluta architecto ipsa eaque.
-                </Paragraph>
-            </ContentLayout>
+            {routes.map((id) => (
+                <Link href={`/contents/${id}`} key={id}>
+                    <ContentLayout>
+                        <Text>{new Date().toDateString()}</Text>
+                        <Title className="content__title">
+                            주니어 클린코드
+                        </Title>
+                        <Paragraph>
+                            Lorem ipsum dolor sit, amet consectetur adipisicing
+                            elit. Corrupti animi sapiente autem natus
+                            consequatur ratione aliquam odit qui quisquam
+                            molestias laboriosam perferendis quibusdam non
+                            dolores dolorem, in blanditiis totam? Sapiente.
+                        </Paragraph>
+                    </ContentLayout>
+                </Link>
+            ))}
         </>
     )
 }
