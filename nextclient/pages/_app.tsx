@@ -1,7 +1,7 @@
 import { AppProps } from "next/dist/next-server/lib/router/router"
 import styled from "@emotion/styled"
 import "../styles/index.css"
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import Layout, { Content } from "antd/lib/layout/layout"
 import AppFooter from "../components/layouts/AppFooter"
 import AppHeader from "../components/layouts/AppHeader"
@@ -83,7 +83,9 @@ function MyApp({ Component, pageProps }: AppProps) {
                         )}
                     </>
                 </AppHeader>
-                {router.pathname === "/" && <AppTitle>Categories</AppTitle>}
+                {router.pathname === "/" && (
+                    <AppTitle>{router.query?.category || "all"}</AppTitle>
+                )}
                 <AppContentLayout>
                     <AppContent>
                         <Component {...pageProps} />

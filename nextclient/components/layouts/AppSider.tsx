@@ -43,11 +43,9 @@ const AppSider = ({ showSider }: { showSider?: boolean }) => {
     return (
         <App show={showSider?.toString()}>
             <ul>
-                {showSider && (
-                    <Link href="/">
-                        <li>Home</li>
-                    </Link>
-                )}
+                <Link href="/">
+                    <li>All (9)</li>
+                </Link>
                 <Link href="/?category=js">
                     <li>Javascript (3)</li>
                 </Link>
