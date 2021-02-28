@@ -97,7 +97,7 @@ function MyApp({ Component, pageProps, user }: AppProps) {
                 <div
                     style={{
                         position: "fixed",
-                        right: 0,
+                        left: 0,
                         zIndex: 999,
                         fontSize: 8,
                     }}

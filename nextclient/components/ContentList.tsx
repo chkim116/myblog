@@ -36,11 +36,10 @@ const ContentList = ({
     return (
         <div ref={viewPort}>
             {postList.map((post, index) => (
-                <ContentLayout
-                    key={index}
-                    ref={postList.length === index + 1 ? lastElement : null}
-                >
-                    <Link href={`/contents/${post.title}`}>
+                <Link href={`/contents/${post.title}`} key={index}>
+                    <ContentLayout
+                        ref={postList.length === index + 1 ? lastElement : null}
+                    >
                         <Text>{post.createDate}</Text>
                         <Title className="content__title">{post.title}</Title>
                         <Paragraph>{post.preview}</Paragraph>
@@ -49,8 +48,8 @@ const ContentList = ({
                                 <Tag color="processing">{tag}</Tag>
                             </Link>
                         ))}
-                    </Link>
-                </ContentLayout>
+                    </ContentLayout>
+                </Link>
             ))}
         </div>
     )
