@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from "react"
 import styled from "@emotion/styled"
 import ContentForm from "../../components/layouts/ContentForm"
-import { Button, Empty, Modal } from "antd"
+import { Button, Empty, Modal, Skeleton, Spin } from "antd"
 import Link from "next/link"
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import AppContents from "../../components/layouts/AppContents"
@@ -13,10 +13,12 @@ import { Post } from ".."
 import { AppContext } from "../_app"
 import { getCate, postDeleteFetcher } from "../../fetch"
 import { useRouter } from "next/router"
+import Title from "antd/lib/skeleton/Title"
+import AppLoading from "../../components/layouts/AppLoading"
+import AppEmpty from "../../components/layouts/AppEmpty"
 
 const Content = styled.section`
     width: 100%;
-    margin-top: 90px;
 `
 
 const ContentEditBtn = styled.div`
@@ -58,8 +60,12 @@ const Contents = ({ post }: Props) => {
         }
     }, [showSider])
 
+    if (router.isFallback) {
+        return <AppLoading text={true} />
+    }
+
     if (!post) {
-        return <Empty>없음</Empty>
+        return <AppEmpty />
     }
 
     // TODO: 에딧, 삭제 등은 고유 아이디로 이동~

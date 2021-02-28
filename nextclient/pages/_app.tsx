@@ -1,13 +1,7 @@
 import { AppProps } from "next/dist/next-server/lib/router/router"
 import styled from "@emotion/styled"
 import "../styles/index.css"
-import React, {
-    createContext,
-    useCallback,
-    useEffect,
-    useReducer,
-    useState,
-} from "react"
+import React, { createContext, useCallback, useEffect, useReducer } from "react"
 import Layout from "antd/lib/layout/layout"
 import AppFooter from "../components/layouts/AppFooter"
 import AppHeader from "../components/layouts/AppHeader"

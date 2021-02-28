@@ -9,6 +9,7 @@ export const AppContentLayout = styled(Layout)`
     background-color: #ffffff;
     max-width: 1000px;
     margin: 0 auto;
+    margin-top: 90px;
 `
 
 export const AppContent = styled(Content)`

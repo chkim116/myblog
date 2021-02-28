@@ -6,6 +6,8 @@ import { useRouter } from "next/router"
 import AppContents from "../components/layouts/AppContents"
 import { Post, AppTitle } from "."
 import AppSider from "../components/layouts/AppSider"
+import AppLoading from "../components/layouts/AppLoading"
+import AppEmpty from "../components/layouts/AppEmpty"
 
 interface Props {
     post: Post[]
@@ -15,6 +17,15 @@ interface Props {
 
 const Category = ({ post, postCount, categories }: Props) => {
     const router = useRouter()
+
+    if (router.isFallback) {
+        return <AppLoading />
+    }
+
+    if (!post) {
+        return <AppEmpty />
+    }
+
     return (
         <>
             <AppTitle>{router.query?.categories}</AppTitle>
