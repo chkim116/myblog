@@ -1,11 +1,13 @@
 import { GetStaticProps } from "next"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import axios from "axios"
 import ContentList from "../components/ContentList"
 import { Categories } from "./[categories]"
 import Title from "antd/lib/typography/Title"
 import AppContents from "../components/layouts/AppContents"
 import styled from "@emotion/styled"
+import { useInfiniteScroll } from "../hooks"
+import AppLoading from "../components/layouts/AppLoading"
 
 export const AppTitle = styled(Title)`
     margin: 95px 0;
@@ -35,20 +37,43 @@ export interface Props {
     categories: Categories[]
 }
 
+const pagePost = async (page: number) => {
+    return await axios.get(`/api?page=${page}`)
+}
+
 export default function Home({ post, postCount, categories }: Props) {
-    const [postList, setPostList] = useState<Post[]>([])
-    const [page, setPage] = useState(0)
+    const [postList, setPostList] = useState<Post[]>(post)
+    const [isLoading, setIsLoading] = useState(false)
+    const viewPort = useRef<any>(null)
+
+    const data = {
+        viewPort: viewPort.current,
+        isLoading,
+        limit: Math.ceil(postCount / 6),
+    }
+    const [lastElement, page] = useInfiniteScroll(data)
 
     useEffect(() => {
-        setPostList(post || [])
-        setPage(postCount || 0)
-    }, [post])
+        if (page <= 1) return
+        setIsLoading(true)
+        pagePost(page as number).then((res) => {
+            setPostList([...postList, ...res.data.post])
+            setIsLoading(false)
+        })
+    }, [page])
 
     return (
         <>
             <AppTitle>all</AppTitle>
             <AppContents categories={categories}>
-                <ContentList postList={postList}></ContentList>
+                <>
+                    <ContentList
+                        viewPort={viewPort}
+                        postList={postList}
+                        lastElement={lastElement}
+                    ></ContentList>
+                    {isLoading && <AppLoading scroll={true} />}
+                </>
             </AppContents>
         </>
     )

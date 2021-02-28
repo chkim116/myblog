@@ -12,7 +12,15 @@ const Loading = styled.div`
     text-align: center;
 `
 
-const AppLoading = ({ text }: any) => {
+const AppLoading = ({ text, scroll }: any) => {
+    if (scroll) {
+        return (
+            <Loading>
+                <Spin size="large"></Spin>
+            </Loading>
+        )
+    }
+
     return (
         <AppContents>
             <Content>

@@ -24,12 +24,23 @@ const ContentLayout = styled.div`
     }
 `
 
-const ContentList = ({ postList }: { postList: Post[] }) => {
+const ContentList = ({
+    postList,
+    viewPort,
+    lastElement,
+}: {
+    postList: Post[]
+    viewPort: any
+    lastElement: any
+}) => {
     return (
-        <div>
-            {postList.map((post) => (
-                <Link href={`/contents/${post.title}`} key={post._id}>
-                    <ContentLayout>
+        <div ref={viewPort}>
+            {postList.map((post, index) => (
+                <ContentLayout
+                    key={index}
+                    ref={postList.length === index + 1 ? lastElement : null}
+                >
+                    <Link href={`/contents/${post.title}`}>
                         <Text>{post.createDate}</Text>
                         <Title className="content__title">{post.title}</Title>
                         <Paragraph>{post.preview}</Paragraph>
@@ -38,8 +49,8 @@ const ContentList = ({ postList }: { postList: Post[] }) => {
                                 <Tag color="processing">{tag}</Tag>
                             </Link>
                         ))}
-                    </ContentLayout>
-                </Link>
+                    </Link>
+                </ContentLayout>
             ))}
         </div>
     )
