@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useContext, useState } from "react"
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 import Sider from "antd/lib/layout/Sider"
@@ -7,6 +7,7 @@ import { Categories } from "../../pages/[categories]"
 import { DeleteOutlined, FileAddOutlined } from "@ant-design/icons"
 import { Button, Input, Modal, notification } from "antd"
 import { delCategory, postCategory } from "../../fetch"
+import { AppContext } from "../../pages/_app"
 
 const App = styled(Sider)<{ show?: string }>`
     background-color: #ffffff;
@@ -58,6 +59,9 @@ const AppSider = ({
     categories: Categories[]
 }) => {
     const allPost = useState(getAllLength(categories) || 0)
+    const {
+        user: { admin },
+    } = useContext(AppContext)
     const [category, setCategory] = useState("")
     const [add, setAdd] = useState(false)
     const [delCategories, setDelCategories] = useState(false)
@@ -113,7 +117,7 @@ const AppSider = ({
                     <li>All ({allPost})</li>
                 </Link>
                 {categories.map((list) => (
-                    <>
+                    <div key={list._id}>
                         {delCategories ? (
                             <li>
                                 <DeleteOutlined
@@ -134,7 +138,7 @@ const AppSider = ({
                                 </li>
                             </Link>
                         )}
-                    </>
+                    </div>
                 ))}
             </ul>
             {add && (
@@ -148,14 +152,20 @@ const AppSider = ({
                     </Button>
                 </div>
             )}
-            <ContentEditBtn>
-                <Button type="link" size="middle" onClick={handleShowingAdd}>
-                    <FileAddOutlined />
-                </Button>
-                <Button type="link" size="middle" onClick={handleDelete}>
-                    <DeleteOutlined />
-                </Button>
-            </ContentEditBtn>
+            {admin && (
+                <ContentEditBtn>
+                    <Button
+                        type="link"
+                        size="middle"
+                        onClick={handleShowingAdd}
+                    >
+                        <FileAddOutlined />
+                    </Button>
+                    <Button type="link" size="middle" onClick={handleDelete}>
+                        <DeleteOutlined />
+                    </Button>
+                </ContentEditBtn>
+            )}
         </App>
     )
 }

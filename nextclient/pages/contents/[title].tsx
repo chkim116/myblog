@@ -32,7 +32,11 @@ interface Props {
 const Contents = ({ post }: Props) => {
     const [categories, setCategories] = useState<Categories[]>()
     const [loading, setLoading] = useState(false)
-    const { showSider } = useContext(AppContext)
+    const {
+        showSider,
+        user: { admin },
+    } = useContext(AppContext)
+    console.log(admin)
     const router = useRouter()
 
     const handleEdit = useCallback(() => {
@@ -82,20 +86,26 @@ const Contents = ({ post }: Props) => {
         <AppContents>
             <>
                 <Content>
-                    <ContentEditBtn>
-                        <Link href="/upload/?edit=true">
+                    {admin && (
+                        <ContentEditBtn>
+                            <Link href="/upload/?edit=true">
+                                <Button
+                                    type="link"
+                                    size="large"
+                                    onClick={handleEdit}
+                                >
+                                    <EditOutlined />
+                                </Button>
+                            </Link>
                             <Button
                                 type="link"
                                 size="large"
-                                onClick={handleEdit}
+                                onClick={handleDelete}
                             >
-                                <EditOutlined />
+                                <DeleteOutlined />
                             </Button>
-                        </Link>
-                        <Button type="link" size="large" onClick={handleDelete}>
-                            <DeleteOutlined />
-                        </Button>
-                    </ContentEditBtn>
+                        </ContentEditBtn>
+                    )}
                     <ContentForm
                         tags={post.tags}
                         date={post.createDate}

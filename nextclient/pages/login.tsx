@@ -76,7 +76,7 @@ const Login = () => {
                     },
                 ]}
             >
-                <Input placeholder="비밀번호" />
+                <Input.Password placeholder="비밀번호" />
             </Form.Item>
             <Form.Item>
                 <Button type="primary" htmlType="submit">

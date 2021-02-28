@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, {
+    useCallback,
+    useContext,
+    useEffect,
+    useReducer,
+    useState,
+} from "react"
 import styled from "@emotion/styled"
 import { Header } from "antd/lib/layout/layout"
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons"
@@ -6,6 +12,7 @@ import { Button } from "antd"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import axios from "axios"
+import { AppContext } from "../../pages/_app"
 
 const App = styled(Header)<{ scaleheight: string }>`
     position: fixed;
@@ -37,6 +44,7 @@ const App = styled(Header)<{ scaleheight: string }>`
     }
 `
 interface Props {
+    handleLogout: () => void
     handleShowSider: () => void
     showSider?: boolean
 }
@@ -45,13 +53,14 @@ const logoutFetcher = async (url: string) => {
     return await axios.post(url)
 }
 
-const AppHeader = ({ handleShowSider, showSider }: Props) => {
+const AppHeader = ({ handleLogout, handleShowSider, showSider }: Props) => {
     const [scaleHeight, setScaleHeight] = useState(false)
     const router = useRouter()
     const [isToken, setIsToken] = useState(false)
 
     const handleLogOut = useCallback(() => {
         logoutFetcher("/auth/logout")
+        handleLogout()
         localStorage.removeItem("token")
         setIsToken(false)
     }, [])

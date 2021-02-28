@@ -6,7 +6,7 @@ import Layout from "antd/lib/layout/layout"
 import AppFooter from "../components/layouts/AppFooter"
 import AppHeader from "../components/layouts/AppHeader"
 import axios from "axios"
-import { useRouter } from "next/router"
+import { initial, reducer } from "../reducer"
 
 const AppLayouts = styled(Layout)`
     width: 100%;
@@ -16,52 +16,45 @@ const AppLayouts = styled(Layout)`
 axios.defaults.baseURL = "http://localhost:4000"
 axios.defaults.withCredentials = true
 
-const initial = {
-    showSider: false,
-    user: {
-        username: "",
-        token: "",
-        id: "",
-        admin: false,
-    },
-}
-
 export const AppContext = createContext(initial)
 
-const showing = {
-    showSider: false,
-}
-
-function reducer(state: { showSider: boolean }, action: any) {
-    switch (action.type) {
-        case "SHOWING": {
-            return { ...state, showSider: !state.showSider }
-        }
-
-        default:
-            return state
-    }
-}
-
 function MyApp({ Component, pageProps, user }: AppProps) {
-    const [state, dispatch] = useReducer(reducer, showing)
-    const router = useRouter()
+    const [state, dispatch] = useReducer(reducer, initial)
+
+    const handleLogout = () => {
+        dispatch({
+            type: "AUTH",
+            payload: { username: "", token: "", id: "", admin: false },
+        })
+    }
+
     const handleShowSider = useCallback(() => {
         dispatch({ type: "SHOWING" })
     }, [])
 
     useEffect(() => {
         if (localStorage.getItem("token")) {
+            dispatch({
+                type: "AUTH",
+                payload: { ...user },
+            })
             return
-        } else {
+        }
+
+        if (user.id) {
             localStorage.setItem("token", JSON.stringify(user.id))
+            dispatch({
+                type: "AUTH",
+                payload: { ...user },
+            })
         }
     }, [user])
 
     return (
-        <AppContext.Provider value={{ showSider: state.showSider, user }}>
+        <AppContext.Provider value={state}>
             <AppLayouts>
                 <AppHeader
+                    handleLogout={handleLogout}
                     handleShowSider={handleShowSider}
                     showSider={state.showSider}
                 />
