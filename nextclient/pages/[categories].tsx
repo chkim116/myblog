@@ -5,7 +5,6 @@ import ContentList from "../components/ContentList"
 import { useRouter } from "next/router"
 import AppContents from "../components/layouts/AppContents"
 import { Post, AppTitle } from "."
-import AppSider from "../components/layouts/AppSider"
 import AppLoading from "../components/layouts/AppLoading"
 import AppEmpty from "../components/layouts/AppEmpty"
 

@@ -9,7 +9,7 @@ const QuillContainer = styled.div`
     margin-top: 12px;
     .ql-toolbar {
         position: sticky;
-        z-index: 880;
+        z-index: 180;
         top: 0;
         border: none;
         border-bottom: 1px solid #dbdbdb;

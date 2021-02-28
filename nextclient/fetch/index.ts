@@ -14,3 +14,11 @@ export const postFetcher = async (data: Post, id?: string) => {
 export const postDeleteFetcher = async (id: string, category: string) => {
     await axios.get(`/api/del/${id}/${category}`)
 }
+
+export const postCategory = async (url: string, data: any) => {
+    await axios.post(url, data)
+}
+
+export const delCategory = async (url: string) => {
+    await axios.delete(url)
+}

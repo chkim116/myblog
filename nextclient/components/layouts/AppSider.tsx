@@ -1,9 +1,12 @@
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 import Sider from "antd/lib/layout/Sider"
 import Link from "next/link"
 import { Categories } from "../../pages/[categories]"
+import { DeleteOutlined, FileAddOutlined } from "@ant-design/icons"
+import { Button, Input, Modal, notification } from "antd"
+import { delCategory, postCategory } from "../../fetch"
 
 const App = styled(Sider)<{ show?: string }>`
     background-color: #ffffff;
@@ -33,6 +36,11 @@ const App = styled(Sider)<{ show?: string }>`
     }
 `
 
+const ContentEditBtn = styled.div`
+    margin-left: auto;
+    width: 120px;
+`
+
 const getAllLength = (category: Categories[]): number => {
     let res = 0
     category.reduce((prev: number, cur: Categories) => {
@@ -50,6 +58,53 @@ const AppSider = ({
     categories: Categories[]
 }) => {
     const allPost = useState(getAllLength(categories) || 0)
+    const [category, setCategory] = useState("")
+    const [add, setAdd] = useState(false)
+    const [delCategories, setDelCategories] = useState(false)
+
+    const handleShowingAdd = useCallback(() => {
+        setAdd((prev) => !prev)
+    }, [])
+
+    const handleAddCategory = useCallback(() => {
+        if (!category) {
+            return notification.error({
+                message: "제대로 입력해 주세요",
+                placement: "bottomLeft",
+            })
+        }
+        postCategory(`/category/create`, { category })
+        setCategory(() => "")
+        notification.info({
+            message: `${category}가 생성되었습니다. 새로고침 합니다.`,
+            placement: "bottomLeft",
+        })
+        window.location.reload()
+        setAdd((prev) => !prev)
+    }, [category])
+
+    const handleChangeCategory = useCallback((e: any) => {
+        setCategory(() => e.target.value)
+    }, [])
+
+    const handleSelectForDel = useCallback((e: any) => {
+        const { id, cate } = e.currentTarget.dataset
+        Modal.confirm({
+            title: "삭제 여부",
+            content: `${cate} 삭제 하십니까?`,
+            onOk: () => {
+                delCategory(`/category/del/${id}`)
+                notification.success({
+                    message: `${cate} 제거 성공, 새로고침 합니다.`,
+                })
+                window.location.reload()
+            },
+        })
+    }, [])
+
+    const handleDelete = useCallback(() => {
+        setDelCategories((prev) => !prev)
+    }, [])
 
     return (
         <App show={showSider?.toString()}>
@@ -58,13 +113,49 @@ const AppSider = ({
                     <li>All ({allPost})</li>
                 </Link>
                 {categories.map((list) => (
-                    <Link href={`/${list.category}`} key={list._id}>
-                        <li>
-                            {list.category} ({list.post.length})
-                        </li>
-                    </Link>
+                    <>
+                        {delCategories ? (
+                            <li>
+                                <DeleteOutlined
+                                    data-id={list._id}
+                                    data-cate={list.category}
+                                    onClick={handleSelectForDel}
+                                    style={{
+                                        marginRight: "3px",
+                                        color: "red",
+                                    }}
+                                ></DeleteOutlined>
+                                {list.category} ({list.post.length})
+                            </li>
+                        ) : (
+                            <Link href={`/${list.category}`} key={list._id}>
+                                <li>
+                                    {list.category} ({list.post.length})
+                                </li>
+                            </Link>
+                        )}
+                    </>
                 ))}
             </ul>
+            {add && (
+                <div style={{ display: "flex" }}>
+                    <Input
+                        onChange={handleChangeCategory}
+                        placeholder="새로 추가할 카테고리 입력"
+                    />
+                    <Button type="primary" onClick={handleAddCategory}>
+                        확인
+                    </Button>
+                </div>
+            )}
+            <ContentEditBtn>
+                <Button type="link" size="middle" onClick={handleShowingAdd}>
+                    <FileAddOutlined />
+                </Button>
+                <Button type="link" size="middle" onClick={handleDelete}>
+                    <DeleteOutlined />
+                </Button>
+            </ContentEditBtn>
         </App>
     )
 }

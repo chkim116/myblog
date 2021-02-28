@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import QuillEditor from "../components/QuillEditor"
 import styled from "@emotion/styled"
-import { Button, Form, Input, Modal, notification, Select, Tag } from "antd"
+import { Button, Form, Input, notification, Select, Tag } from "antd"
 import TextArea from "antd/lib/input/TextArea"
 import { useRouter } from "next/router"
 import { getCate, postFetcher } from "../fetch"
@@ -65,7 +65,6 @@ const Upload = () => {
     const [form, setForm] = useState<FormValues>()
     const [desc, setDesc] = useState<string>("")
     const [tags, setTags] = useState<string[]>([])
-    const tagInput = useRef<any>()
     const [loading, setLoading] = useState(false)
     const [categories, setCategories] = useState<Categories[]>([])
     const [prevDesc, setPrevDesc] = useState<string>()
@@ -244,10 +243,7 @@ const Upload = () => {
                         label="태그 작성"
                         className="tag__container"
                     >
-                        <Input
-                            ref={tagInput}
-                            placeholder="태그를 입력하세요."
-                        />
+                        <Input placeholder="태그를 입력하세요." />
                     </Item>
                     <Button
                         type="primary"
