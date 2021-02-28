@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from "react"
 import styled from "@emotion/styled"
 import ContentForm from "../../components/layouts/ContentForm"
-import { Button, Modal } from "antd"
+import { Button, Modal, notification } from "antd"
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import AppContents from "../../components/layouts/AppContents"
 import AppSider from "../../components/layouts/AppSider"
@@ -14,6 +14,8 @@ import { getCate, postDeleteFetcher } from "../../fetch"
 import { useRouter } from "next/router"
 import AppLoading from "../../components/layouts/AppLoading"
 import AppEmpty from "../../components/layouts/AppEmpty"
+import { NextSeo } from "next-seo"
+import { useReplace } from "@cooksmelon/utils"
 
 const Content = styled.section`
     width: 100%;
@@ -49,7 +51,11 @@ const Contents = ({ post }: Props) => {
             onOk: () =>
                 postDeleteFetcher(post._id, post.category).then(() => {
                     setLoading(() => true)
-                    window.location.href = `/${post.category}`
+                    notification.success({
+                        message: "삭제는 됐는데, 반영 됐어요?",
+                        placement: "bottomLeft",
+                    })
+                    router.push(`/${post.category}`)
                 }),
         })
     }, [post, router])
@@ -78,39 +84,62 @@ const Contents = ({ post }: Props) => {
 
     // TODO: 에딧, 삭제 등은 고유 아이디로 이동~
     return (
-        <AppContents>
-            <>
-                <Content>
-                    {admin && (
-                        <ContentEditBtn>
-                            <Button
-                                type="link"
-                                size="large"
-                                onClick={handleEdit}
-                            >
-                                <EditOutlined />
-                            </Button>
-                            <Button
-                                type="link"
-                                size="large"
-                                onClick={handleDelete}
-                            >
-                                <DeleteOutlined />
-                            </Button>
-                        </ContentEditBtn>
+        <>
+            <NextSeo
+                title={`${post.title}`}
+                description={`${post.preview}`}
+                canonical="https://www.kormelon.cf/"
+                openGraph={{
+                    title: `${post.title}`,
+                    description: `${post.preview}`,
+                    type: "article",
+                    locale: "ko_KR",
+                    url: `https://www.kormelon.cf/contents/${post.title}`,
+                    site_name: "생각창고",
+                }}
+                twitter={{
+                    handle: "@handle",
+                    site: "@site",
+                    cardType: "summary_large_image",
+                }}
+            />
+            <AppContents>
+                <>
+                    <Content>
+                        {admin && (
+                            <ContentEditBtn>
+                                <Button
+                                    type="link"
+                                    size="large"
+                                    onClick={handleEdit}
+                                >
+                                    <EditOutlined />
+                                </Button>
+                                <Button
+                                    type="link"
+                                    size="large"
+                                    onClick={handleDelete}
+                                >
+                                    <DeleteOutlined />
+                                </Button>
+                            </ContentEditBtn>
+                        )}
+                        <ContentForm
+                            tags={post.tags}
+                            date={post.createDate}
+                            title={post.title}
+                            p={post.description}
+                        />
+                    </Content>
+                    {categories && showSider && (
+                        <AppSider
+                            showSider={showSider}
+                            categories={categories}
+                        />
                     )}
-                    <ContentForm
-                        tags={post.tags}
-                        date={post.createDate}
-                        title={post.title}
-                        p={post.description}
-                    />
-                </Content>
-                {categories && showSider && (
-                    <AppSider showSider={showSider} categories={categories} />
-                )}
-            </>
-        </AppContents>
+                </>
+            </AppContents>
+        </>
     )
 }
 

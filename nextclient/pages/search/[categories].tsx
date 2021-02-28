@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useRouter } from "next/router"
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { AppTitle, Post } from ".."
 import ContentList from "../../components/ContentList"
 import AppContents from "../../components/layouts/AppContents"

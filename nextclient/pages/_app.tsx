@@ -13,6 +13,7 @@ import AppFooter from "../components/layouts/AppFooter"
 import AppHeader from "../components/layouts/AppHeader"
 import axios from "axios"
 import { initial, reducer } from "../reducer"
+import { DefaultSeo } from "next-seo"
 
 const AppLayouts = styled(Layout)`
     width: 100%;
@@ -75,29 +76,47 @@ function MyApp({ Component, pageProps, user }: AppProps) {
     }, [user])
 
     return (
-        <AppContext.Provider value={state}>
-            <div
-                style={{
-                    position: "fixed",
-                    right: 0,
-                    zIndex: 999,
-                    fontSize: 8,
+        <>
+            <DefaultSeo
+                // TODO: 이미지 태그 추가하기!!
+                openGraph={{
+                    title: "개발자의 생각창고",
+                    description: "개발은 즐겁게",
+                    type: "blog",
+                    locale: "ko_KR",
+                    url: "https://www.kormelon.cf/",
+                    site_name: "생각창고",
                 }}
-            >
-                Today{view.views} <span>Total{view.totalView}</span>
-            </div>
-            <AppLayouts>
-                <AppHeader
-                    handleLogout={handleLogout}
-                    handleShowSider={handleShowSider}
-                    showSider={state.showSider}
-                />
-                <Component {...pageProps} />
-                <AppFooter>
-                    <div>KimChanghoe &copy; 2021</div>
-                </AppFooter>
-            </AppLayouts>
-        </AppContext.Provider>
+                twitter={{
+                    handle: "@handle",
+                    site: "@site",
+                    cardType: "summary_large_image",
+                }}
+            />
+            <AppContext.Provider value={state}>
+                <div
+                    style={{
+                        position: "fixed",
+                        right: 0,
+                        zIndex: 999,
+                        fontSize: 8,
+                    }}
+                >
+                    Today{view.views} <span>Total{view.totalView}</span>
+                </div>
+                <AppLayouts>
+                    <AppHeader
+                        handleLogout={handleLogout}
+                        handleShowSider={handleShowSider}
+                        showSider={state.showSider}
+                    />
+                    <Component {...pageProps} />
+                    <AppFooter>
+                        <div>KimChanghoe &copy; 2021</div>
+                    </AppFooter>
+                </AppLayouts>
+            </AppContext.Provider>
+        </>
     )
 }
 

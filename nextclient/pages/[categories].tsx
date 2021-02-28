@@ -8,6 +8,7 @@ import { Post, AppTitle } from "."
 import AppLoading from "../components/layouts/AppLoading"
 import AppEmpty from "../components/layouts/AppEmpty"
 import { useInfiniteScroll } from "../hooks"
+import { NextSeo } from "next-seo"
 
 interface Props {
     post: Post[]
@@ -53,6 +54,11 @@ const Category = ({ post, postCount, categories }: Props) => {
 
     return (
         <>
+            <NextSeo
+                title="개발자의 생각창고"
+                description={`${router.query.categories}에 대한 생각`}
+                canonical="https://www.kormelon.cf"
+            />
             <AppTitle>{router.query?.categories}</AppTitle>
             <AppContents categories={categories}>
                 <>

@@ -7,6 +7,10 @@ import axios from "axios"
 const QuillContainer = styled.div`
     width: 100%;
     margin-top: 12px;
+    .ql-snow .ql-editor blockquote {
+        margin: 0 !important;
+    }
+
     .ql-toolbar {
         position: sticky;
         z-index: 180;

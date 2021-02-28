@@ -8,6 +8,7 @@ import AppContents from "../components/layouts/AppContents"
 import styled from "@emotion/styled"
 import { useInfiniteScroll } from "../hooks"
 import AppLoading from "../components/layouts/AppLoading"
+import { NextSeo } from "next-seo"
 
 export const AppTitle = styled(Title)`
     margin: 95px 0;
@@ -64,6 +65,11 @@ export default function Home({ post, postCount, categories }: Props) {
 
     return (
         <>
+            <NextSeo
+                title="개발자의 생각창고"
+                description="개발자 김창회의 블로그"
+                canonical="https://www.kormelon.cf"
+            />
             <AppTitle>all</AppTitle>
             <AppContents categories={categories}>
                 <>
