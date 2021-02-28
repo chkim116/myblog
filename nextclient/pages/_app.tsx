@@ -1,7 +1,13 @@
 import { AppProps } from "next/dist/next-server/lib/router/router"
 import styled from "@emotion/styled"
 import "../styles/index.css"
-import React, { createContext, useCallback, useEffect, useReducer } from "react"
+import React, {
+    createContext,
+    useCallback,
+    useEffect,
+    useReducer,
+    useState,
+} from "react"
 import Layout from "antd/lib/layout/layout"
 import AppFooter from "../components/layouts/AppFooter"
 import AppHeader from "../components/layouts/AppHeader"
@@ -20,6 +26,8 @@ export const AppContext = createContext(initial)
 
 function MyApp({ Component, pageProps, user }: AppProps) {
     const [state, dispatch] = useReducer(reducer, initial)
+    const [view, setView] = useState({ views: 0, totalView: 0 })
+    const [already, setAlready] = useState(false)
 
     const handleLogout = () => {
         dispatch({
@@ -30,6 +38,22 @@ function MyApp({ Component, pageProps, user }: AppProps) {
 
     const handleShowSider = useCallback(() => {
         dispatch({ type: "SHOWING" })
+    }, [])
+
+    useEffect(() => {
+        const getViews = async () => {
+            await axios.post("/view").then((res) => {
+                setView({
+                    views: res.data.views,
+                    totalView: res.data.totalView,
+                })
+                setAlready(true)
+            })
+        }
+        if (already) {
+            return
+        }
+        getViews()
     }, [])
 
     useEffect(() => {
@@ -52,6 +76,16 @@ function MyApp({ Component, pageProps, user }: AppProps) {
 
     return (
         <AppContext.Provider value={state}>
+            <div
+                style={{
+                    position: "fixed",
+                    right: 0,
+                    zIndex: 999,
+                    fontSize: 8,
+                }}
+            >
+                Today{view.views} <span>Total{view.totalView}</span>
+            </div>
             <AppLayouts>
                 <AppHeader
                     handleLogout={handleLogout}
@@ -59,7 +93,9 @@ function MyApp({ Component, pageProps, user }: AppProps) {
                     showSider={state.showSider}
                 />
                 <Component {...pageProps} />
-                <AppFooter>KimChanghoe &copy; 2021</AppFooter>
+                <AppFooter>
+                    <div>KimChanghoe &copy; 2021</div>
+                </AppFooter>
             </AppLayouts>
         </AppContext.Provider>
     )

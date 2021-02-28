@@ -30,8 +30,8 @@ const ContentList = ({
     lastElement,
 }: {
     postList: Post[]
-    viewPort: any
-    lastElement: any
+    viewPort?: any
+    lastElement?: any
 }) => {
     return (
         <div ref={viewPort}>
