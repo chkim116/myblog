@@ -1,14 +1,17 @@
 import React, { useContext, useEffect, useState } from "react"
 import styled from "@emotion/styled"
 import ContentForm from "../../components/layouts/ContentForm"
-import { Button } from "antd"
+import { Button, Empty } from "antd"
 import Link from "next/link"
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
-import { AppContext } from "../_app"
 import AppContents from "../../components/layouts/AppContents"
 import AppSider from "../../components/layouts/AppSider"
 import axios from "axios"
 import { Categories } from "../[categories]"
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next"
+import { Post } from ".."
+import { AppContext } from "../_app"
+import { getCate } from "../../fetch"
 
 const Content = styled.section`
     width: 100%;
@@ -20,13 +23,13 @@ const ContentEditBtn = styled.div`
     width: 120px;
 `
 
-const getCate = async () => {
-    return await axios.get("/category")
+interface Props {
+    post: Post
 }
 
-const Contents = () => {
-    const { showSider } = useContext(AppContext)
+const Contents = ({ post }: Props) => {
     const [categories, setCategories] = useState<Categories[]>()
+    const { showSider } = useContext(AppContext)
 
     useEffect(() => {
         if (categories) {
@@ -37,6 +40,10 @@ const Contents = () => {
             getCate().then((res) => setCategories(res.data))
         }
     }, [showSider])
+
+    if (!post) {
+        return <Empty>없음</Empty>
+    }
 
     // TODO: 에딧, 삭제 등은 고유 아이디로 이동~
     return (
@@ -54,9 +61,10 @@ const Contents = () => {
                         </Button>
                     </ContentEditBtn>
                     <ContentForm
-                        date={new Date().toDateString()}
-                        title={"드디어 오픈 리뉴얼..!"}
-                        p={"<div> gg</div> <div>mfmfm</div>"}
+                        tags={post.tags}
+                        date={post.createDate}
+                        title={post.title}
+                        p={post.description}
                     />
                 </Content>
                 {categories && showSider && (
@@ -68,3 +76,34 @@ const Contents = () => {
 }
 
 export default Contents
+
+interface AllTitles {
+    title: string
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    const allTitles: AllTitles[] = await axios
+        .get("/api/all")
+        .then((res) => res.data.postTitleList)
+
+    const paths = allTitles.map((list) => {
+        return { params: { title: encodeURIComponent(list.title) } }
+    })
+
+    return {
+        paths,
+        fallback: true,
+    }
+}
+
+export const getStaticProps: GetStaticProps = async (
+    ctx: GetStaticPropsContext
+) => {
+    const { params } = ctx
+    console.log(ctx)
+    const post = await axios
+        .get(`/api/${encodeURIComponent(params?.title as string)}`)
+        .then((res) => res.data)
+
+    return { props: { post } }
+}

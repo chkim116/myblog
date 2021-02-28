@@ -23,8 +23,8 @@ export interface Post {
     preview: string
     description: string
     createDate: string
-    updated: string
-    creator: string
+    updated?: string
+    creator?: string
     tags: string[]
     category: string
 }
@@ -59,7 +59,7 @@ export default function Home({ post, postCount, categories }: Props) {
 export const getStaticProps: GetStaticProps = async () => {
     const post: Props = await axios.get("/api").then((res) => res.data)
     const categories: Categories[] = await axios
-        .get("/category")
+        .get("/category", { method: "get" })
         .then((res) => res.data)
 
     return {

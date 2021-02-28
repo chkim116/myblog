@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 import Sider from "antd/lib/layout/Sider"
-import { useRouter } from "next/router"
 import Link from "next/link"
 import { Categories } from "../../pages/[categories]"
 

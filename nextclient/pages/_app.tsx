@@ -49,9 +49,8 @@ function reducer(state: { showSider: boolean }, action: any) {
 }
 
 function MyApp({ Component, pageProps, user }: AppProps) {
-    const [showSider, setShowSider] = useState(false)
-
     const [state, dispatch] = useReducer(reducer, showing)
+
     const handleShowSider = useCallback(() => {
         dispatch({ type: "SHOWING" })
     }, [])
