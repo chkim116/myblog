@@ -156,7 +156,7 @@ export const getStaticPaths: GetStaticPaths<{
         .get("/post/all")
         .then((res) => res.data.postTitleList)
 
-    const paths = allTitles.map((list) => {
+    const paths = allTitles?.map((list) => {
         return { params: { title: encodeURIComponent(list.title) } }
     })
 

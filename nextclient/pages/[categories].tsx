@@ -89,7 +89,7 @@ export const getStaticPaths: GetStaticPaths<{
         .get("/category")
         .then((res) => res.data)
 
-    const paths = categories.map((list) => ({
+    const paths = categories?.map((list) => ({
         params: { categories: list.category },
     }))
     return {
