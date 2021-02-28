@@ -79,14 +79,11 @@ const AppSider = ({
         }
         postCategory(`/category/create`, { category })
         notification.info({
-            message: `${category}가 생성되었습니다. 새로고침 합니다.`,
+            message: `${category}가 생성되었습니다. 새로고침하던가 하세요~.`,
             placement: "bottomLeft",
         })
         setCategory(() => "")
         setAdd((prev) => !prev)
-        setTimeout(() => {
-            window.location.reload()
-        }, 1000)
     }, [category])
 
     const handleChangeCategory = useCallback((e: any) => {
@@ -101,11 +98,8 @@ const AppSider = ({
             onOk: () => {
                 delCategory(`/category/del/${id}`)
                 notification.success({
-                    message: `${cate} 제거 성공, 새로고침 합니다.`,
+                    message: `${cate} 제거 성공, 새로고침하면 아마 사라질걸요?!.`,
                 })
-                setTimeout(() => {
-                    window.location.reload()
-                }, 1000)
             },
         })
     }, [])

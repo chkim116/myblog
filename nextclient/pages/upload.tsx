@@ -125,10 +125,9 @@ const Upload = () => {
                 )
                     .then(() => {
                         notification.success({
-                            message: "수정 완료",
+                            message: "수정 완료, 반영은 몇초 뒤에.",
                             placement: "bottomLeft",
                         })
-                        /// window.location.href = `/contents/${form?.title}`
                         router.push(`/contents/${form?.title}`)
                     })
                     .catch((e) => {
@@ -145,11 +144,9 @@ const Upload = () => {
             postFetcher(data as Post)
                 .then(() => {
                     notification.success({
-                        message: "게시 완료",
+                        message: "게시 완료, 반영은 몇초 뒤에.",
                         placement: "bottomLeft",
                     })
-                    // window.location.href = `/contents/${form?.title}`
-
                     router.push(`/contents/${form?.title}`)
                 })
                 .catch((e) => {
