@@ -34,7 +34,7 @@ const Contents = ({ post }: Props) => {
     const router = useRouter()
 
     const handleEdit = useCallback(() => {
-        router.push(`/upload/?title=${post?.title}&edit=true`)
+        router.push(`/upload?title=${post?.title}&edit=true`)
     }, [post])
 
     const handleDelete = useCallback(() => {

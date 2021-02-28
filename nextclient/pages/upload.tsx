@@ -7,6 +7,8 @@ import { useRouter } from "next/router"
 import { getCate, postFetcher } from "../fetch"
 import { Categories } from "./[categories]"
 import { Post } from "."
+import axios from "axios"
+
 const { Item } = Form
 
 const Container = styled.div`
@@ -63,10 +65,12 @@ const Upload = () => {
     const [form, setForm] = useState<FormValues>()
     const [desc, setDesc] = useState<string>("")
     const [tags, setTags] = useState<string[]>([])
-
     const tagInput = useRef<any>()
     const [loading, setLoading] = useState(false)
     const [categories, setCategories] = useState<Categories[]>([])
+    const [prevDesc, setPrevDesc] = useState<string>()
+    // 여긴 에디터일때
+    const [editPost, setEditPost] = useState<Post>()
 
     const handleFormChange = useCallback((_: any, all: any) => {
         setForm(() => all)
@@ -93,53 +97,102 @@ const Upload = () => {
         [tags]
     )
 
-    const handleFinish = useCallback(() => {
-        setLoading(() => true)
+    const handleFinish = useCallback(
+        (e) => {
+            setLoading(() => true)
 
-        if (!form?.title && !form?.category && desc === "") {
-            setLoading(() => false)
-            return notification.error({
-                message: "다 입력해 주세요",
-                placement: "bottomLeft",
-            })
-        }
+            const { id } = e.currentTarget.dataset
 
-        const data = {
-            ...form,
-            tags,
-            description: desc,
-            createDate: new Date().toDateString(),
-        }
-
-        postFetcher(data as Post)
-            .then(() => {
-                setLoading(() => false)
-                notification.success({
-                    message: "게시완료",
-                    placement: "bottomLeft",
-                })
-                router.push(`/${form?.category}`)
-            })
-            .catch((e) => {
-                console.error(e)
+            if (!form?.title && !form?.category && desc === "") {
                 setLoading(() => false)
                 return notification.error({
                     message: "다 입력해 주세요",
                     placement: "bottomLeft",
                 })
-            })
-    }, [desc, form])
+            }
+
+            const data = {
+                ...form,
+                tags,
+                description: desc,
+                createDate: new Date().toDateString(),
+            }
+
+            if (id) {
+                postFetcher(
+                    { ...data, updated: new Date().toDateString() } as Post,
+                    id
+                )
+                    .then(() => {
+                        notification.success({
+                            message: "수정완료",
+                            placement: "bottomLeft",
+                        })
+                        router.push(`/${form?.category}`)
+                    })
+                    .catch((e) => {
+                        console.error(e)
+                        setLoading(() => false)
+                        return notification.error({
+                            message: "다 입력해 주세요",
+                            placement: "bottomLeft",
+                        })
+                    })
+                return
+            }
+
+            postFetcher(data as Post)
+                .then(() => {
+                    notification.success({
+                        message: "게시완료",
+                        placement: "bottomLeft",
+                    })
+                    router.push(`/${form?.category}`)
+                })
+                .catch((e) => {
+                    console.error(e)
+                    setLoading(() => false)
+                    return notification.error({
+                        message: "다 입력해 주세요",
+                        placement: "bottomLeft",
+                    })
+                })
+        },
+        [desc, form]
+    )
 
     useEffect(() => {
         getCate().then((res) => setCategories(res.data || []))
     }, [])
+
+    //  여기부턴 수정 시~
+    useEffect(() => {
+        if (router.query.edit) {
+            const { title } = router.query
+            const post = async () =>
+                await axios
+                    .get(`/api/${encodeURIComponent(title as string)}`)
+                    .then((res) => setEditPost(() => res.data))
+            post()
+        }
+    }, [router.query])
+
+    useEffect(() => {
+        if (editPost) {
+            const { title, description, tags, category, preview } = editPost
+            uploadForm.setFieldsValue({ title, category, preview })
+            setForm(() => ({ title, category, preview, tags: "" }))
+            setPrevDesc(() => description)
+            setTags(() => tags)
+        }
+    }, [uploadForm, editPost])
 
     return (
         <Container>
             <Form
                 size="large"
                 form={uploadForm}
-                name="form"
+                name="uploadForm"
                 layout="horizontal"
                 onValuesChange={handleFormChange}
             >
@@ -171,7 +224,10 @@ const Upload = () => {
                     <TextArea placeholder="미리보기 텍스트를 적어주세요." />
                 </Item>
 
-                <QuillEditor handleQuillChange={handleQuillChange} />
+                <QuillEditor
+                    value={prevDesc}
+                    handleQuillChange={handleQuillChange}
+                />
 
                 {tags.map((tag) => (
                     <Tag key={tag} onClick={handleDeleteTags}>
@@ -200,6 +256,7 @@ const Upload = () => {
             </Form>
 
             <Button
+                data-id={editPost?._id}
                 onClick={handleFinish}
                 loading={loading}
                 type="primary"

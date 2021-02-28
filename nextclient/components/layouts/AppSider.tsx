@@ -50,7 +50,7 @@ const AppSider = ({
     categories: Categories[]
 }) => {
     const allPost = useState(getAllLength(categories) || 0)
-    console.log(categories)
+
     return (
         <App show={showSider?.toString()}>
             <ul>
