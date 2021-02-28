@@ -22,7 +22,10 @@ const AppLayouts = styled(Layout)`
     background-color: #ffffff;
 `
 
-axios.defaults.baseURL = "http://localhost:4000"
+axios.defaults.baseURL =
+    process.env.NODE_ENV === "production"
+        ? "https://kormelon.cf"
+        : "http://localhost:4000"
 axios.defaults.withCredentials = true
 
 export const AppContext = createContext(initial)
