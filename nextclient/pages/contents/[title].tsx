@@ -149,7 +149,9 @@ interface AllTitles {
     title: string
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths<{
+    title: string
+}> = async () => {
     const allTitles: AllTitles[] = await axios
         .get("/api/all")
         .then((res) => res.data.postTitleList)

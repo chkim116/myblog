@@ -82,7 +82,9 @@ export interface Categories {
     post: any[]
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths<{
+    categories: string
+}> = async () => {
     const categories: Categories[] = await axios
         .get("/category")
         .then((res) => res.data)
