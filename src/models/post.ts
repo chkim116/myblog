@@ -1,22 +1,26 @@
-import mongoose, { Document } from "mongoose";
-import { CommentType } from "./Comments";
+import mongoose, { Document } from "mongoose"
+import { CommentType } from "./Comments"
 
 export interface PostType extends Document {
-    _id?: string;
-    title: string;
-    description: string;
-    createDate: string;
-    updated: string;
-    creator: string;
-    tags: string[];
-    category: string;
-    comment?: CommentType[];
+    _id?: string
+    title: string
+    preview: string
+    description: string
+    createDate: string
+    updated: string
+    creator: string
+    tags: string[]
+    category: string
+    comment?: CommentType[]
 }
 
 const PostSchema = new mongoose.Schema({
     title: {
         type: String,
         required: "title is required",
+    },
+    preview: {
+        type: String,
     },
     description: {
         type: String,
@@ -38,8 +42,8 @@ const PostSchema = new mongoose.Schema({
             ref: "Comments",
         },
     ],
-});
+})
 
-const model = mongoose.model<PostType>("Post", PostSchema);
+const model = mongoose.model<PostType>("Post", PostSchema)
 
-export default model;
+export default model

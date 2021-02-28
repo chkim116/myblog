@@ -1,29 +1,29 @@
-import express from "express";
+import express from "express"
 import {
     createCategory,
     delCategory,
     editCategory,
     getCategory,
-} from "../controller/categoryController";
+} from "../controller/categoryController"
 
-const categoryRouter = express.Router();
+const categoryRouter = express.Router()
 
 //  /category ~~
 
 // create
 
-categoryRouter.post("/create", createCategory);
+categoryRouter.post("/create", createCategory)
 
 // read
 
-categoryRouter.get("/", getCategory);
+categoryRouter.get("/", getCategory)
 
 // edit
 
-categoryRouter.post("/edit", editCategory);
+categoryRouter.post("/edit", editCategory)
 
 // delete
 
-categoryRouter.get("/del/:id", delCategory);
+categoryRouter.delete("/del/:id", delCategory)
 
-export default categoryRouter;
+export default categoryRouter

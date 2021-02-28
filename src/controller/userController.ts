@@ -1,11 +1,11 @@
-import User, { UserType } from "../models/User";
-import passport from "passport";
-import bcrypt from "bcrypt";
-import Joi from "@hapi/joi";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-import { CookieOptions, NextFunction, Request, Response } from "express";
-dotenv.config();
+import User, { UserType } from "../models/User"
+import passport from "passport"
+import bcrypt from "bcrypt"
+import Joi from "@hapi/joi"
+import jwt from "jsonwebtoken"
+import dotenv from "dotenv"
+import { CookieOptions, NextFunction, Request, Response } from "express"
+dotenv.config()
 
 const options = (login: boolean) => {
     const option: CookieOptions = {
@@ -16,9 +16,9 @@ const options = (login: boolean) => {
         httpOnly: process.env.NODE_ENV === "production",
         secure: process.env.NODE_ENV === "production",
         sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    };
-    return option;
-};
+    }
+    return option
+}
 
 export const postRegister = async (
     req: Request,
@@ -27,7 +27,7 @@ export const postRegister = async (
 ) => {
     const {
         body: { username, email, password, password2 },
-    } = req;
+    } = req
     const schema = Joi.object().keys({
         username: Joi.string().min(5).alphanum().required().messages({
             "string.min": "아이디는 5자 이상입니다.",
@@ -41,69 +41,74 @@ export const postRegister = async (
             "string.min": "비밀번호는 6자 이상입니다.",
         }),
         email: Joi.string().required().email(),
-    });
+    })
 
     if (password !== password2) {
-        return res.status(400).send({ message: "비밀번호의 정보가 다릅니다." });
+        return res.status(400).send({ message: "비밀번호의 정보가 다릅니다." })
     }
-    const result = schema.validate(req.body);
+    const result = schema.validate(req.body)
     if (result.error) {
-        return res.status(400).send(result.error.details[0]);
+        return res.status(400).send(result.error.details[0])
     }
-    const salt = await bcrypt.genSalt(10); // hash
-    const hashPassword = await bcrypt.hash(password, salt);
-    console.log(hashPassword, password);
+    const salt = await bcrypt.genSalt(10) // hash
+    const hashPassword = await bcrypt.hash(password, salt)
+
     try {
         const user = await new User({
             username,
             email,
             password: hashPassword,
             admin: false,
-        });
-        await User.register(user, password);
-        next();
+        })
+        await User.register(user, password)
+        next()
     } catch (err) {
-        console.log(err);
-        res.status(400).send(err);
+        console.log(err)
+        res.status(400).send(err)
     }
-};
+}
 
 export const postlogin = (req: Request, res: Response, next: NextFunction) => {
     passport.authenticate("local", (err, user, info) => {
-        if (err) return res.send("message: error");
+        if (err) return res.send("message: error")
         if (!user) {
             res.status(400).send({
                 message: "아이디나 비밀번호를 다시 입력해 주세요.",
-            });
-            return;
+            })
+            return
         } else {
             req.logIn(user, (err) => {
                 if (err) {
-                    return next(err);
+                    return next(err)
                 }
                 const token = jwt.sign(
                     { userID: user._id },
                     process.env.JWT_SECRET as string
-                );
-                user.token = token;
+                )
+                user.token = token
                 user.save((err: any, user: UserType) => {
                     if (err) {
-                        return res.status(400).json(err);
+                        return res.status(400).json(err)
                     }
                     return res
                         .cookie("x_auth", user.token, options(true))
                         .status(200)
-                        .json({ id: user._id, token: user.token });
-                });
-            });
+                        .json({
+                            id: user._id,
+                            username: user.username,
+                            token: user.token,
+                        })
+                })
+            })
         }
-    })(req, res, next);
-};
+    })(req, res, next)
+}
 
 export const auth = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.cookies.x_auth;
+    const token = req.cookies.x_auth
+
     if (token === undefined || token === "") {
-        return next();
+        return res.send({ message: "없음" })
     }
 
     jwt.verify(
@@ -111,32 +116,32 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
         process.env.JWT_SECRET as string,
         (err: any, decoded: any) => {
             if (err) {
-                return res.status(500).json("token decode 실패");
+                return res.status(500).json("token decode 실패")
             }
             User.findOne(
                 { _id: decoded.userID },
                 (err: any, user: UserType) => {
                     if (err) {
-                        return res.json("Not found");
+                        return res.json("Not found")
                     }
                     if (!user) {
-                        return res.status(400).json("token의 유저가 없습니다.");
+                        return res.status(400).json("token의 유저가 없습니다.")
                     }
                     if (user) {
-                        (req as any).token = token;
-                        req.user = user;
+                        ;(req as any).token = token
+                        req.user = user
                     }
-                    next();
+                    next()
                 }
-            );
+            )
         }
-    );
-};
+    )
+}
 
 export const logout = (req: Request, res: Response) => {
-    (req as any).token = "";
+    ;(req as any).token = ""
     return res
         .cookie("x_auth", "", options(false))
         .status(200)
-        .send((req as any).token);
-};
+        .send((req as any).token)
+}
