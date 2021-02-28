@@ -1,8 +1,9 @@
-import { Button, Form, Input } from "antd"
+import { Button, Form, Input, notification } from "antd"
 import React, { useCallback, useState } from "react"
 import styled from "@emotion/styled"
 import axios from "axios"
 import { useRouter } from "next/router"
+import AppLoading from "../components/layouts/AppLoading"
 
 const FormLayout = styled(Form)`
     display: flex;
@@ -27,6 +28,7 @@ const loginFetcher = async (url: string, data: any) => {
 
 const Login = () => {
     const [form, setForm] = useState({ username: "", password: "" })
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
 
     const handleChange = useCallback((_, all: any) => {
@@ -37,12 +39,25 @@ const Login = () => {
         const { username, password } = form
 
         if (username && password) {
-            loginFetcher("/auth/login", form).then((res) => {
-                localStorage.setItem("token", JSON.stringify(res.data.id))
-            })
-            router.push("/")
+            setLoading(() => true)
+            loginFetcher("/auth/login", form)
+                .then((res) => {
+                    localStorage.setItem("token", JSON.stringify(res.data.id))
+                    router.push("/")
+                })
+                .catch(({ response }) => {
+                    setLoading(() => false)
+                    notification.error({
+                        message: `${response.data.message}`,
+                        placement: "bottomLeft",
+                    })
+                })
         }
     }, [form])
+
+    if (loading) {
+        return <AppLoading />
+    }
 
     return (
         <FormLayout
