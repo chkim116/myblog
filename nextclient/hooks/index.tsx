@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 interface Props {
     viewPort: any
@@ -33,4 +33,10 @@ export const useInfiniteScroll = ({ viewPort, isLoading, limit }: Props) => {
     )
 
     return [lastElement, page]
+}
+
+export const useScrollTop = () => {
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }, [])
 }

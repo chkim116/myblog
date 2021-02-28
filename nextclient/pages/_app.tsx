@@ -14,6 +14,8 @@ import AppHeader from "../components/layouts/AppHeader"
 import axios from "axios"
 import { initial, reducer } from "../reducer"
 import { DefaultSeo } from "next-seo"
+import { useScrollTop } from "../hooks"
+import AppTop from "../components/layouts/AppTop"
 
 const AppLayouts = styled(Layout)`
     width: 100%;
@@ -75,6 +77,8 @@ function MyApp({ Component, pageProps, user }: AppProps) {
         }
     }, [user])
 
+    useScrollTop()
+
     return (
         <>
             <DefaultSeo
@@ -115,6 +119,7 @@ function MyApp({ Component, pageProps, user }: AppProps) {
                         <div>KimChanghoe &copy; 2021</div>
                     </AppFooter>
                 </AppLayouts>
+                <AppTop></AppTop>
             </AppContext.Provider>
         </>
     )
