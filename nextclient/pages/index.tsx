@@ -39,7 +39,7 @@ export interface Props {
 }
 
 const pagePost = async (page: number) => {
-    return await axios.get(`/api?page=${page}`)
+    return await axios.get(`/post?page=${page}`)
 }
 
 export default function Home({ post, postCount, categories }: Props) {
@@ -86,7 +86,7 @@ export default function Home({ post, postCount, categories }: Props) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const post: Props = await axios.get("/api").then((res) => res.data)
+    const post: Props = await axios.get("/post").then((res) => res.data)
     const categories: Categories[] = await axios
         .get("/category")
         .then((res) => res.data)

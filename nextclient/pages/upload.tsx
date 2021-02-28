@@ -171,7 +171,7 @@ const Upload = () => {
             const { title } = router.query
             const post = async () =>
                 await axios
-                    .get(`/api/${encodeURIComponent(title as string)}`)
+                    .get(`/post/${encodeURIComponent(title as string)}`)
                     .then((res) => setEditPost(() => res.data))
             post()
         }

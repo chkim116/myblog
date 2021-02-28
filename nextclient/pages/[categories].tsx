@@ -17,7 +17,7 @@ interface Props {
 }
 
 const pagePost = async (filter: string, page: number) => {
-    return await axios.get(`/api?filter=${filter}&page=${page}`)
+    return await axios.get(`/post?filter=${filter}&page=${page}`)
 }
 
 const Category = ({ post, postCount, categories }: Props) => {
@@ -104,7 +104,7 @@ export const getStaticProps: GetStaticProps = async (
     const category = ctx.params?.categories
 
     const post: Props = await axios
-        .get(`/api?filter=${encodeURI(category as string)}`)
+        .get(`/post?filter=${encodeURI(category as string)}`)
         .then((res) => res.data)
 
     const categories: Categories[] = await axios

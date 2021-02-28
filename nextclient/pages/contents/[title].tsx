@@ -153,7 +153,7 @@ export const getStaticPaths: GetStaticPaths<{
     title: string
 }> = async () => {
     const allTitles: AllTitles[] = await axios
-        .get("/api/all")
+        .get("/post/all")
         .then((res) => res.data.postTitleList)
 
     const paths = allTitles.map((list) => {
@@ -172,7 +172,7 @@ export const getStaticProps: GetStaticProps = async (
     const { params } = ctx
 
     const post = await axios
-        .get(`/api/${encodeURIComponent(params?.title as string)}`)
+        .get(`/post/${encodeURIComponent(params?.title as string)}`)
         .then((res) => res.data)
 
     return { props: { post }, revalidate: 1 }

@@ -51,7 +51,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use("/", homeRouter)
-app.use("/api", postRouter)
+app.use("/post", postRouter)
 app.use("/port", guestRouter)
 app.use("/auth", userRouter)
 app.use("/tag", tagRouter)
