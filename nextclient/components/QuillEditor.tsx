@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react"
 import "../node_modules/quill/dist/quill.snow.css"
 import styled from "@emotion/styled"
 import Quill from "quill"
+import axios from "axios"
 
 const QuillContainer = styled.div`
     width: 100%;
@@ -26,9 +27,10 @@ const QuillContainer = styled.div`
 
 type Props = {
     value?: string
+    handleQuillChange: (value: any) => void
 }
 
-const QuillEditor = ({ value }: Props) => {
+const QuillEditor = ({ value, handleQuillChange }: Props) => {
     const Quill = typeof window === "object" ? require("quill") : () => false
     const quillElement = useRef(null)
     const quillInstance = useRef<any>(null)
@@ -85,28 +87,24 @@ const QuillEditor = ({ value }: Props) => {
 
                     // 현재 커서 위치 저장
                     const range: any = quill.getSelection(true)
-                    // 현재 위치에 이미지 놓기
-                    quill.insertEmbed(
-                        range.index,
-                        "image",
-                        "https://bookthumb-phinf.pstatic.net/cover/163/634/16363411.jpg?type=m1&udate=20200603"
-                    )
+
                     // 다음 위치에 커서 옮기기
                     quill.setSelection(range.index + 1)
 
                     // 이미지 api
                     const postImg = () => {
-                        // return Axios.post("/review/img", formData, {
-                        //     headers: {
-                        //         "Content-Type": "multipart/form-data",
-                        //     },
-                        // }).then((res) => res.data);
+                        return axios
+                            .post("/api/img", formData, {
+                                headers: {
+                                    "Content-Type": "multipart/form-data",
+                                },
+                            })
+                            .then((res) => res.data)
                     }
-                    // 등록된 이미지 삭제
-                    quill.deleteText(range.index, 1)
 
                     // api로 받아온 이미지 추가
                     const img = await postImg()
+
                     quill.insertEmbed(range.index, "image", img)
 
                     // 다음 위치에 커서 옮기기
@@ -117,6 +115,7 @@ const QuillEditor = ({ value }: Props) => {
             const quill: Quill = quillInstance.current
             quill.on("text-change", (_: any, __: any, source: string) => {
                 if (source === "user") {
+                    handleQuillChange(quill.root.innerHTML)
                 }
             })
             quill.getModule("toolbar").addHandler("image", onClickImg)
