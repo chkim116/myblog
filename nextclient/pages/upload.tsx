@@ -124,11 +124,13 @@ const Upload = () => {
                     id
                 )
                     .then(() => {
-                        notification.success({
-                            message: "수정완료",
-                            placement: "bottomLeft",
-                        })
                         router.push(`/${form?.category}`)
+                        router.events.on("routeChangeComplete", (_) =>
+                            notification.success({
+                                message: "수정 완료",
+                                placement: "bottomLeft",
+                            })
+                        )
                     })
                     .catch((e) => {
                         console.error(e)
@@ -143,11 +145,13 @@ const Upload = () => {
 
             postFetcher(data as Post)
                 .then(() => {
-                    notification.success({
-                        message: "게시완료",
-                        placement: "bottomLeft",
-                    })
                     router.push(`/${form?.category}`)
+                    router.events.on("routeChangeComplete", (_) =>
+                        notification.success({
+                            message: "게시 완료",
+                            placement: "bottomLeft",
+                        })
+                    )
                 })
                 .catch((e) => {
                     console.error(e)

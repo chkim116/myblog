@@ -6,6 +6,7 @@ import Layout from "antd/lib/layout/layout"
 import AppFooter from "../components/layouts/AppFooter"
 import AppHeader from "../components/layouts/AppHeader"
 import axios from "axios"
+import { useRouter } from "next/router"
 
 const AppLayouts = styled(Layout)`
     width: 100%;
@@ -44,7 +45,7 @@ function reducer(state: { showSider: boolean }, action: any) {
 
 function MyApp({ Component, pageProps, user }: AppProps) {
     const [state, dispatch] = useReducer(reducer, showing)
-
+    const router = useRouter()
     const handleShowSider = useCallback(() => {
         dispatch({ type: "SHOWING" })
     }, [])

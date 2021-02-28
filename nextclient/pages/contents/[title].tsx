@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from "react"
 import styled from "@emotion/styled"
 import ContentForm from "../../components/layouts/ContentForm"
-import { Button, Empty, Modal, Skeleton, Spin } from "antd"
+import { Button, Empty, Modal, notification, Skeleton, Spin } from "antd"
 import Link from "next/link"
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import AppContents from "../../components/layouts/AppContents"
@@ -32,6 +32,7 @@ interface Props {
 
 const Contents = ({ post }: Props) => {
     const [categories, setCategories] = useState<Categories[]>()
+    const [loading, setLoading] = useState(false)
     const { showSider } = useContext(AppContext)
     const router = useRouter()
 
@@ -44,9 +45,14 @@ const Contents = ({ post }: Props) => {
             title: "삭제여부",
             content: "게시글을 삭제합니다?",
             onOk: () =>
-                postDeleteFetcher(post._id, post.category).then(() =>
+                postDeleteFetcher(post._id, post.category).then(() => {
                     router.push(`/${post.category}`)
-                ),
+                    setLoading(() => true)
+                    notification.success({
+                        message: "삭제 완료 되었습니다.",
+                        placement: "bottomLeft",
+                    })
+                }),
         })
     }, [post])
 
@@ -59,6 +65,10 @@ const Contents = ({ post }: Props) => {
             getCate().then((res) => setCategories(res.data))
         }
     }, [showSider])
+
+    if (loading) {
+        return <AppLoading />
+    }
 
     if (router.isFallback) {
         return <AppLoading text={true} />
