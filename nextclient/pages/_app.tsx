@@ -72,7 +72,7 @@ MyApp.getInitialProps = async (app: any) => {
 
     let cookie = ""
     if (request) {
-        cookie = request.headers?.cookie
+        cookie = request.headers.cookie || ""
     }
 
     const user = await axios

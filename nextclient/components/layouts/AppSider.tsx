@@ -78,13 +78,15 @@ const AppSider = ({
             })
         }
         postCategory(`/category/create`, { category })
-        setCategory(() => "")
         notification.info({
             message: `${category}가 생성되었습니다. 새로고침 합니다.`,
             placement: "bottomLeft",
         })
-        window.location.reload()
+        setCategory(() => "")
         setAdd((prev) => !prev)
+        setTimeout(() => {
+            window.location.reload()
+        }, 1000)
     }, [category])
 
     const handleChangeCategory = useCallback((e: any) => {
@@ -101,7 +103,9 @@ const AppSider = ({
                 notification.success({
                     message: `${cate} 제거 성공, 새로고침 합니다.`,
                 })
-                window.location.reload()
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1000)
             },
         })
     }, [])

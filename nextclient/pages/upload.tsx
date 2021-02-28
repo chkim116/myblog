@@ -87,7 +87,7 @@ const Upload = () => {
             setTags(() => [...tags, tag])
             uploadForm.setFieldsValue({ tags: "" })
         }
-    }, [form])
+    }, [form, tags])
 
     const handleDeleteTags = useCallback(
         (e) => {
@@ -99,6 +99,7 @@ const Upload = () => {
     const handleFinish = useCallback(
         (e) => {
             setLoading(() => true)
+            router.prefetch(`/contents/${form?.title}`)
 
             const { id } = e.currentTarget.dataset
 
@@ -112,7 +113,7 @@ const Upload = () => {
 
             const data = {
                 ...form,
-                tags,
+                tags: tags,
                 description: desc,
                 createDate: new Date().toDateString(),
             }
@@ -123,13 +124,12 @@ const Upload = () => {
                     id
                 )
                     .then(() => {
-                        router.push(`/${form?.category}`)
-                        router.events.on("routeChangeComplete", (_) =>
-                            notification.success({
-                                message: "수정 완료",
-                                placement: "bottomLeft",
-                            })
-                        )
+                        notification.success({
+                            message: "수정 완료",
+                            placement: "bottomLeft",
+                        })
+                        /// window.location.href = `/contents/${form?.title}`
+                        router.push(`/contents/${form?.title}`)
                     })
                     .catch((e) => {
                         console.error(e)
@@ -144,13 +144,13 @@ const Upload = () => {
 
             postFetcher(data as Post)
                 .then(() => {
-                    router.push(`/${form?.category}`)
-                    router.events.on("routeChangeComplete", (_) =>
-                        notification.success({
-                            message: "게시 완료",
-                            placement: "bottomLeft",
-                        })
-                    )
+                    notification.success({
+                        message: "게시 완료",
+                        placement: "bottomLeft",
+                    })
+                    // window.location.href = `/contents/${form?.title}`
+
+                    router.push(`/contents/${form?.title}`)
                 })
                 .catch((e) => {
                     console.error(e)
@@ -161,7 +161,7 @@ const Upload = () => {
                     })
                 })
         },
-        [desc, form]
+        [desc, form, tags, router]
     )
 
     useEffect(() => {

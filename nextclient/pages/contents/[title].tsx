@@ -36,12 +36,12 @@ const Contents = ({ post }: Props) => {
         showSider,
         user: { admin },
     } = useContext(AppContext)
-    console.log(admin)
+
     const router = useRouter()
 
     const handleEdit = useCallback(() => {
         router.push(`/upload?title=${post?.title}&edit=true`)
-    }, [post])
+    }, [post, router])
 
     const handleDelete = useCallback(() => {
         Modal.confirm({
@@ -49,15 +49,11 @@ const Contents = ({ post }: Props) => {
             content: "게시글을 삭제합니다?",
             onOk: () =>
                 postDeleteFetcher(post._id, post.category).then(() => {
-                    router.push(`/${post.category}`)
                     setLoading(() => true)
-                    notification.success({
-                        message: "삭제 완료 되었습니다.",
-                        placement: "bottomLeft",
-                    })
+                    window.location.href = `/${post.category}`
                 }),
         })
-    }, [post])
+    }, [post, router])
 
     useEffect(() => {
         if (categories) {
@@ -88,15 +84,13 @@ const Contents = ({ post }: Props) => {
                 <Content>
                     {admin && (
                         <ContentEditBtn>
-                            <Link href="/upload/?edit=true">
-                                <Button
-                                    type="link"
-                                    size="large"
-                                    onClick={handleEdit}
-                                >
-                                    <EditOutlined />
-                                </Button>
-                            </Link>
+                            <Button
+                                type="link"
+                                size="large"
+                                onClick={handleEdit}
+                            >
+                                <EditOutlined />
+                            </Button>
                             <Button
                                 type="link"
                                 size="large"
