@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useCallback, useContext, useEffect, useState } from "react"
 import styled from "@emotion/styled"
 import ContentForm from "../../components/layouts/ContentForm"
-import { Button, Empty } from "antd"
+import { Button, Empty, Modal } from "antd"
 import Link from "next/link"
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import AppContents from "../../components/layouts/AppContents"
@@ -11,7 +11,8 @@ import { Categories } from "../[categories]"
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next"
 import { Post } from ".."
 import { AppContext } from "../_app"
-import { getCate } from "../../fetch"
+import { getCate, postDeleteFetcher } from "../../fetch"
+import { useRouter } from "next/router"
 
 const Content = styled.section`
     width: 100%;
@@ -30,6 +31,22 @@ interface Props {
 const Contents = ({ post }: Props) => {
     const [categories, setCategories] = useState<Categories[]>()
     const { showSider } = useContext(AppContext)
+    const router = useRouter()
+
+    const handleEdit = useCallback(() => {
+        router.push(`/upload/?title=${post?.title}&edit=true`)
+    }, [post])
+
+    const handleDelete = useCallback(() => {
+        Modal.confirm({
+            title: "삭제여부",
+            content: "게시글을 삭제합니다?",
+            onOk: () =>
+                postDeleteFetcher(post._id, post.category).then(() =>
+                    router.push(`/${post.category}`)
+                ),
+        })
+    }, [post])
 
     useEffect(() => {
         if (categories) {
@@ -52,11 +69,15 @@ const Contents = ({ post }: Props) => {
                 <Content>
                     <ContentEditBtn>
                         <Link href="/upload/?edit=true">
-                            <Button type="link" size="large">
+                            <Button
+                                type="link"
+                                size="large"
+                                onClick={handleEdit}
+                            >
                                 <EditOutlined />
                             </Button>
                         </Link>
-                        <Button type="link" size="large">
+                        <Button type="link" size="large" onClick={handleDelete}>
                             <DeleteOutlined />
                         </Button>
                     </ContentEditBtn>
@@ -100,10 +121,10 @@ export const getStaticProps: GetStaticProps = async (
     ctx: GetStaticPropsContext
 ) => {
     const { params } = ctx
-    console.log(ctx)
+
     const post = await axios
         .get(`/api/${encodeURIComponent(params?.title as string)}`)
         .then((res) => res.data)
 
-    return { props: { post } }
+    return { props: { post }, revalidate: 1 }
 }

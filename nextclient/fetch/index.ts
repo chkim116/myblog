@@ -8,3 +8,7 @@ export const getCate = async () => {
 export const postFetcher = async (data: Post) => {
     await axios.post("/api/post", data)
 }
+
+export const postDeleteFetcher = async (id: string, category: string) => {
+    await axios.get(`/api/del/${id}/${category}`)
+}

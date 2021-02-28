@@ -21,7 +21,6 @@ const Category = ({ post, postCount, categories }: Props) => {
             <AppContents categories={categories}>
                 <>
                     <ContentList postList={post}></ContentList>
-                    <AppSider categories={categories} />
                 </>
             </AppContents>
         </>
@@ -65,5 +64,6 @@ export const getStaticProps: GetStaticProps = async (
 
     return {
         props: { post: post.post, postCount: post.postCount, categories },
+        revalidate: 1,
     }
 }

@@ -39,8 +39,6 @@ export default function Home({ post, postCount, categories }: Props) {
     const [postList, setPostList] = useState<Post[]>([])
     const [page, setPage] = useState(0)
 
-    // TODO: 모든 리스트 가지고 오기
-    //  TODO: 이동 링크는? title로 합니다.
     useEffect(() => {
         setPostList(post || [])
         setPage(postCount || 0)
@@ -59,7 +57,7 @@ export default function Home({ post, postCount, categories }: Props) {
 export const getStaticProps: GetStaticProps = async () => {
     const post: Props = await axios.get("/api").then((res) => res.data)
     const categories: Categories[] = await axios
-        .get("/category", { method: "get" })
+        .get("/category")
         .then((res) => res.data)
 
     return {
@@ -68,5 +66,6 @@ export const getStaticProps: GetStaticProps = async () => {
             postCount: post.postCount,
             categories,
         },
+        revalidate: 1,
     }
 }

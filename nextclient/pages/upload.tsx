@@ -118,7 +118,7 @@ const Upload = () => {
                     message: "게시완료",
                     placement: "bottomLeft",
                 })
-                return router.push(`/${form?.category}`)
+                router.push(`/${form?.category}`)
             })
             .catch((e) => {
                 console.error(e)
