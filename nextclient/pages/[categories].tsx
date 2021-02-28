@@ -82,14 +82,13 @@ export interface Categories {
     post: any[]
 }
 
-export const getStaticPaths: GetStaticPaths<{
-    categories: string
-}> = async () => {
+export const getStaticPaths: GetStaticPaths = async (): Promise<any> => {
     const categories: Categories[] = await axios
         .get("/category")
         .then((res) => res.data)
+    const category = categories.map((list) => ({ ...list }))
 
-    const paths = categories?.map((list) => ({
+    const paths = category.map((list) => ({
         params: { categories: list.category },
     }))
     return {
