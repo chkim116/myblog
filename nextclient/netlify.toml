@@ -2,3 +2,17 @@
   command   = "npm run build"
   functions = "out_functions"
   publish   = "out_publish"
+
+[[plugins]]
+  package = "netlify-plugin-cache-nextjs"
+  package = "@netlify/plugin-lighthouse"
+
+[plugins.inputs]
+	custom_build_dir_name = "out_publish"
+
+[plugins.inputs.thresholds]
+  performance = 0.9
+  accessibility = 0.9
+  best-practices = 0.9
+  seo = 0.9
+  pwa = 0.9
