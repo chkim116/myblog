@@ -1,10 +1,4 @@
-import React, {
-    useCallback,
-    useContext,
-    useEffect,
-    useReducer,
-    useState,
-} from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import styled from "@emotion/styled"
 import { Header } from "antd/lib/layout/layout"
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons"
@@ -12,7 +6,6 @@ import { Button } from "antd"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import axios from "axios"
-import { AppContext } from "../../pages/_app"
 
 const App = styled(Header)<{ scaleheight: string }>`
     position: fixed;
@@ -25,8 +18,12 @@ const App = styled(Header)<{ scaleheight: string }>`
     font-size: 1.25rem;
     z-index: 300;
     justify-content: space-between;
-
     transition: all 200ms;
+
+    @media all and (max-width: 540px) {
+        padding: 0;
+        padding-left: 12px;
+    }
 
     .header__container {
         max-width: 1000px;
@@ -42,7 +39,20 @@ const App = styled(Header)<{ scaleheight: string }>`
     .header__login {
         margin-right: 15px;
     }
+    @media all and (max-width: 540px) {
+        font-size: 14px;
+    }
 `
+
+const NavBtn = styled(Button)`
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    @media all and (max-width: 540px) {
+        top: 80px;
+    }
+`
+
 interface Props {
     handleLogout: () => void
     handleShowSider: () => void
@@ -100,13 +110,13 @@ const AppHeader = ({ handleLogout, handleShowSider, showSider }: Props) => {
                     {isToken ? (
                         <>
                             <Link href="/upload">
-                                <Button type="link" size="large">
+                                <Button type="link" size="middle">
                                     Upload
                                 </Button>
                             </Link>
                             <Button
                                 type="link"
-                                size="large"
+                                size="middle"
                                 onClick={handleLogOut}
                             >
                                 Logout
@@ -114,26 +124,15 @@ const AppHeader = ({ handleLogout, handleShowSider, showSider }: Props) => {
                         </>
                     ) : (
                         <Link href="/login">
-                            <Button type="link" size="large">
+                            <Button type="link" size="middle">
                                 Login
                             </Button>
                         </Link>
                     )}
                 </div>
-                {router.pathname !== "/" && router.route !== "/[categories]" && (
-                    <Button
-                        type="ghost"
-                        style={{
-                            position: "absolute",
-                            right: "20px",
-                            top: "10px",
-                        }}
-                        size="large"
-                        onClick={handleShowSider}
-                    >
-                        {showSider ? <CloseOutlined /> : <MenuOutlined />}
-                    </Button>
-                )}
+                <NavBtn type="ghost" size="large" onClick={handleShowSider}>
+                    {showSider ? <CloseOutlined /> : <MenuOutlined />}
+                </NavBtn>
             </div>
         </App>
     )

@@ -29,11 +29,29 @@ const App = styled(Sider)<{ show?: string }>`
             list-style: none;
             line-height: 38px;
             color: #828282;
-
+            @media all and (max-width: 540px) {
+                font-size: 16px !important;
+                line-height: 34px;
+            }
             &:hover {
                 text-decoration: underline;
             }
         }
+    }
+
+    @media all and (max-width: 540px) {
+        ${({ show }) =>
+            show === "true"
+                ? css`
+                      display: block;
+                      position: fixed;
+                      right: 0;
+                      top: 0;
+                      margin-top: 90px;
+                  `
+                : css`
+                      display: none;
+                  `};
     }
 `
 
@@ -51,15 +69,10 @@ const getAllLength = (category: Categories[]): number => {
     return res
 }
 
-const AppSider = ({
-    showSider,
-    categories = [],
-}: {
-    showSider?: boolean
-    categories: Categories[]
-}) => {
+const AppSider = ({ categories = [] }: { categories: Categories[] }) => {
     const allPost = useState(getAllLength(categories) || 0)
     const {
+        showSider,
         user: { admin },
     } = useContext(AppContext)
     const [category, setCategory] = useState("")
@@ -109,62 +122,68 @@ const AppSider = ({
     }, [])
 
     return (
-        <App show={showSider?.toString()}>
-            <ul>
-                <Link href="/">
-                    <li>All ({allPost})</li>
-                </Link>
-                {categories.map((list) => (
-                    <div key={list._id}>
-                        {delCategories ? (
-                            <li>
-                                <DeleteOutlined
-                                    data-id={list._id}
-                                    data-cate={list.category}
-                                    onClick={handleSelectForDel}
-                                    style={{
-                                        marginRight: "3px",
-                                        color: "red",
-                                    }}
-                                ></DeleteOutlined>
-                                {list.category} ({list.post.length})
-                            </li>
-                        ) : (
-                            <Link href={`/${list.category}`} key={list._id}>
+        <>
+            <App show={showSider?.toString()}>
+                <ul>
+                    <Link href="/">
+                        <li>All ({allPost})</li>
+                    </Link>
+                    {categories.map((list) => (
+                        <div key={list._id}>
+                            {delCategories ? (
                                 <li>
+                                    <DeleteOutlined
+                                        data-id={list._id}
+                                        data-cate={list.category}
+                                        onClick={handleSelectForDel}
+                                        style={{
+                                            marginRight: "3px",
+                                            color: "red",
+                                        }}
+                                    ></DeleteOutlined>
                                     {list.category} ({list.post.length})
                                 </li>
-                            </Link>
-                        )}
+                            ) : (
+                                <Link href={`/${list.category}`} key={list._id}>
+                                    <li>
+                                        {list.category} ({list.post.length})
+                                    </li>
+                                </Link>
+                            )}
+                        </div>
+                    ))}
+                </ul>
+                {add && (
+                    <div style={{ display: "flex" }}>
+                        <Input
+                            onChange={handleChangeCategory}
+                            placeholder="새로 추가할 카테고리 입력"
+                        />
+                        <Button type="primary" onClick={handleAddCategory}>
+                            확인
+                        </Button>
                     </div>
-                ))}
-            </ul>
-            {add && (
-                <div style={{ display: "flex" }}>
-                    <Input
-                        onChange={handleChangeCategory}
-                        placeholder="새로 추가할 카테고리 입력"
-                    />
-                    <Button type="primary" onClick={handleAddCategory}>
-                        확인
-                    </Button>
-                </div>
-            )}
-            {admin && (
-                <ContentEditBtn>
-                    <Button
-                        type="link"
-                        size="middle"
-                        onClick={handleShowingAdd}
-                    >
-                        <FileAddOutlined />
-                    </Button>
-                    <Button type="link" size="middle" onClick={handleDelete}>
-                        <DeleteOutlined />
-                    </Button>
-                </ContentEditBtn>
-            )}
-        </App>
+                )}
+                {admin && (
+                    <ContentEditBtn>
+                        <Button
+                            type="link"
+                            size="middle"
+                            onClick={handleShowingAdd}
+                        >
+                            <FileAddOutlined />
+                        </Button>
+                        <Button
+                            type="link"
+                            size="middle"
+                            onClick={handleDelete}
+                        >
+                            <DeleteOutlined />
+                        </Button>
+                    </ContentEditBtn>
+                )}
+            </App>
+        </>
     )
 }
 

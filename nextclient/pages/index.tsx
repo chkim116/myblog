@@ -46,7 +46,6 @@ export default function Home({ post, postCount, categories }: Props) {
     const [postList, setPostList] = useState<Post[]>(post)
     const [isLoading, setIsLoading] = useState(false)
     const viewPort = useRef<any>(null)
-
     const data = {
         viewPort: viewPort.current,
         isLoading,
