@@ -33,9 +33,7 @@ const AppContents = ({
         <AppContentLayout>
             <AppContent>{children}</AppContent>
             {categories && <AppSider categories={categories} />}
-            {showSider && categories && (
-                <AppSider categories={categories} showSider={showSider} />
-            )}
+            {showSider && categories && <AppSider categories={categories} />}
         </AppContentLayout>
     )
 }

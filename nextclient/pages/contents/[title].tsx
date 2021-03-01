@@ -132,10 +132,7 @@ const Contents = ({ post }: Props) => {
                         />
                     </Content>
                     {categories && showSider && (
-                        <AppSider
-                            showSider={showSider}
-                            categories={categories}
-                        />
+                        <AppSider categories={categories} />
                     )}
                 </>
             </AppContents>
