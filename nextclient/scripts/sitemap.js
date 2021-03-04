@@ -3,7 +3,7 @@ const axios = require("axios")
 const globby = require("globby")
 
 const fetchUrl = "https://api.kormelon.cf/post/all"
-const YOUR_URL = "https://kormelone.cf"
+const YOUR_URL = "https://kormelon.cf"
 const getDate = new Date().toISOString()
 
 async function generateSiteMap() {
@@ -27,10 +27,10 @@ async function generateSiteMap() {
     const postList = `
         ${posts
             .map((post) => {
-                let title = post.title.replace(/ /g, "")
+                let title = post.title
                 return `
               <url>
-                <loc>${`${YOUR_URL}/post/${title}`}</loc>
+                <loc>${`${YOUR_URL}/contents/${title}`}</loc>
                 <lastmod>${getDate}</lastmod>
               </url>`
             })
