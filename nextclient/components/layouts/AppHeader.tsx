@@ -11,11 +11,11 @@ const App = styled(Header)<{ scaleheight: string }>`
     position: fixed;
     width: 100%;
     background-color: #ffffff;
-    height: ${({ scaleheight }) => (scaleheight === "true" ? "75px" : "65px")};
+    height: ${({ scaleheight }) => (scaleheight === "true" ? "65px" : "55px")};
     border-bottom: 1px solid #dbdbdb;
     display: flex;
     align-items: center;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     z-index: 300;
     justify-content: space-between;
     transition: all 200ms;
@@ -49,7 +49,7 @@ const NavBtn = styled(Button)`
     right: 20px;
     top: 10px;
     @media all and (max-width: 540px) {
-        top: 80px;
+        top: 70px;
     }
 `
 

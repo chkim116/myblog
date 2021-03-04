@@ -3,16 +3,33 @@
 body {
     padding: 0;
     margin: 0;
-
     box-sizing: border-box;
+    font-family: -apple-system, "Noto Sans KR", Sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #212729;
+    line-height: 1.65em;
+    letter-spacing: -0.02em;
+    word-break: keep-all;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 h1 {
     font-size: 30px !important;
 }
 
+p {
+    font-size: 1.125rem;
+    line-height: 1.65em;
+}
+
 @media all and (max-width: 540px) {
     h1 {
         font-size: 24px !important;
+    }
+
+    p {
+        font-size: 1.125rem;
     }
 }
