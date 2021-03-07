@@ -50,8 +50,11 @@ const QuillEditor = ({ value, handleQuillChange }: Props) => {
                 [{ align: [] }],
                 ["link"],
                 ["image"],
+                ["code-block"],
             ],
         },
+        clipboard: { matchVisual: false },
+        syntax: true,
     }
 
     const formats = [
@@ -68,6 +71,7 @@ const QuillEditor = ({ value, handleQuillChange }: Props) => {
         "align",
         "direction",
         "link",
+        "code-block",
         "image",
     ]
 

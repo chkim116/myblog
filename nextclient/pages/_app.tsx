@@ -16,6 +16,7 @@ import { initial, reducer } from "../reducer"
 import { DefaultSeo } from "next-seo"
 import { useScrollTop } from "../hooks"
 import AppTop from "../components/layouts/AppTop"
+import Head from "next/head"
 
 const AppLayouts = styled(Layout)`
     width: 100%;
@@ -100,6 +101,13 @@ function MyApp({ Component, pageProps, user }: AppProps) {
                     cardType: "summary_large_image",
                 }}
             />
+            <Head>
+                <link
+                    rel="stylesheet"
+                    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css"
+                />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+            </Head>
             <AppContext.Provider value={state}>
                 <div
                     style={{
