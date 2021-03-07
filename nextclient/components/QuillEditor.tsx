@@ -99,7 +99,7 @@ const QuillEditor = ({ value, handleQuillChange }: Props) => {
                     // 이미지 api
                     const postImg = () => {
                         return axios
-                            .post("/api/img", formData, {
+                            .post("/post/img", formData, {
                                 headers: {
                                     "Content-Type": "multipart/form-data",
                                 },
