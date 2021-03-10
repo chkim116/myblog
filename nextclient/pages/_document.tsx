@@ -7,7 +7,7 @@ export default class MyDocument extends Document {
                 <Head>
                     <meta
                         name="google-site-verification"
-                        content="MPhQP-08gK_1FBW1Emlawk5ntSUn7TeX0o1vDtTITAw"
+                        content="7RYJ0wuUw2CvBgx03RveUFDeeCfoqRZNBSfTYnSabx8"
                     />
                 </Head>
                 <body>
