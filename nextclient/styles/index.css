@@ -24,6 +24,10 @@ p {
     line-height: 1.65em;
 }
 
+.hljs-string {
+    color: #b97b00;
+}
+
 @media all and (max-width: 540px) {
     h1 {
         font-size: 24px !important;
