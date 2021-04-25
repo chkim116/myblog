@@ -28,6 +28,22 @@ p {
     color: #b97b00;
 }
 
+.hljs-variable {
+    color: #b93d3d;
+}
+
+.hljs-built_in {
+    color: #6b6860;
+}
+
+.hljs-comment {
+    color: rgba(117, 117, 117, 0.7);
+}
+
+.hljs-attribute {
+    color: #00bce2;
+}
+
 @media all and (max-width: 540px) {
     h1 {
         font-size: 24px !important;
