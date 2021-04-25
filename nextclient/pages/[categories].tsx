@@ -13,14 +13,13 @@ import { NextSeo } from "next-seo"
 interface Props {
     post: Post[]
     postCount: number
-    categories: Categories[]
 }
 
 const pagePost = async (filter: string, page: number) => {
     return await axios.get(`/post?filter=${filter}&page=${page}`)
 }
 
-const Category = ({ post, postCount, categories }: Props) => {
+const Category = ({ post, postCount }: Props) => {
     const router = useRouter()
     const [postList, setPostList] = useState(post)
     const [isLoading, setIsLoading] = useState(false)
@@ -32,6 +31,14 @@ const Category = ({ post, postCount, categories }: Props) => {
         limit: Math.ceil(postCount / 6),
     }
     const [lastElement, page] = useInfiniteScroll(data)
+    const [categories, setCategories] = useState()
+
+    useEffect(() => {
+        ;(async () =>
+            await axios
+                .get("/category")
+                .then((res) => setCategories(res.data)))()
+    })
 
     useEffect(() => {
         if (page <= 1) return
@@ -106,12 +113,8 @@ export const getStaticProps: GetStaticProps = async (
         .get(`/post?filter=${encodeURI(category as string)}`)
         .then((res) => res.data)
 
-    const categories: Categories[] = await axios
-        .get("/category")
-        .then((res) => res.data)
-
     return {
-        props: { post: post.post, postCount: post.postCount, categories },
+        props: { post: post.post, postCount: post.postCount },
         revalidate: 1,
     }
 }
